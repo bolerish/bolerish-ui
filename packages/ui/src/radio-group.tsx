@@ -20,14 +20,18 @@ const styles = stylex.create({
   item: {
     alignItems: "center",
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: {
+      default: colorVars.strokeDefault,
+      ":is([data-checked])": colorVars.strokeAction,
+    },
     borderRadius: radiusVars.full,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
-    cursor: "pointer",
+    cursor: { default: "pointer", ":is([data-disabled])": "not-allowed" },
     display: "inline-flex",
     height: sizeVars.controlXs,
     justifyContent: "center",
+    opacity: { default: 1, ":is([data-disabled])": opacityVars.disabled },
     outline: "none",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "border-color, opacity",
@@ -39,9 +43,7 @@ const styles = stylex.create({
       outlineStyle: "solid",
       outlineWidth: sizeVars.focusRing,
     },
-    ":disabled": { cursor: "not-allowed", opacity: opacityVars.disabled },
   },
-  checked: { borderColor: colorVars.strokeAction },
   indicator: { alignItems: "center", display: "inline-flex", justifyContent: "center" },
   dot: {
     backgroundColor: colorVars.bgActionPrimary,
@@ -70,15 +72,8 @@ export type RadioGroupItemProps = Omit<
 };
 
 export function RadioGroupItem({ xstyle, ...props }: RadioGroupItemProps) {
-  function getRootStyles(state: RadioPrimitive.Root.State) {
-    return stylex.props(styles.item, state.checked && styles.checked, xstyle);
-  }
   return (
-    <RadioPrimitive.Root
-      {...props}
-      className={(state) => getRootStyles(state).className}
-      style={(state) => getRootStyles(state).style}
-    >
+    <RadioPrimitive.Root {...props} {...stylex.props(styles.item, xstyle)}>
       <RadioPrimitive.Indicator {...stylex.props(styles.indicator)}>
         <span {...stylex.props(styles.dot)} />
       </RadioPrimitive.Indicator>

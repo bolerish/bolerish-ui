@@ -18,13 +18,19 @@ import type { ControlPlacementStyles } from "./control-layout";
 const styles = stylex.create({
   root: {
     alignItems: "center",
-    backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    backgroundColor: {
+      default: colorVars.bgSurface,
+      ":is([data-checked])": colorVars.bgActionPrimary,
+    },
+    borderColor: {
+      default: colorVars.strokeDefault,
+      ":is([data-checked])": colorVars.bgActionPrimary,
+    },
     borderRadius: radiusVars.sm,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     color: colorVars.fgOnActionPrimary,
-    cursor: "pointer",
+    cursor: { default: "pointer", ":is([data-disabled])": "not-allowed" },
     display: "inline-flex",
     flexShrink: 0,
     fontFamily: typographyVars.fontFamilyBody,
@@ -35,6 +41,7 @@ const styles = stylex.create({
     justifyContent: "center",
     minHeight: sizeVars.iconLg,
     minWidth: sizeVars.iconLg,
+    opacity: { default: 1, ":is([data-disabled])": opacityVars.disabled },
     outline: "none",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "background-color, border-color, opacity",
@@ -48,13 +55,6 @@ const styles = stylex.create({
       outlineStyle: "solid",
       outlineWidth: sizeVars.focusRing,
     },
-    ":disabled": { cursor: "not-allowed" },
-  },
-  checked: { backgroundColor: colorVars.bgActionPrimary, borderColor: colorVars.bgActionPrimary },
-  disabled: {
-    cursor: "not-allowed",
-    opacity: opacityVars.disabled,
-    ":hover": { backgroundColor: colorVars.bgSurface },
   },
   indicator: {
     alignItems: "center",
@@ -73,20 +73,8 @@ export type CheckboxProps = Omit<
 };
 
 export function Checkbox({ xstyle, ...props }: CheckboxProps) {
-  function getRootStyles(state: CheckboxPrimitive.Root.State) {
-    return stylex.props(
-      styles.root,
-      xstyle,
-      state.checked && styles.checked,
-      state.disabled && styles.disabled,
-    );
-  }
   return (
-    <CheckboxPrimitive.Root
-      {...props}
-      className={(state) => getRootStyles(state).className}
-      style={(state) => getRootStyles(state).style}
-    >
+    <CheckboxPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)}>
       <CheckboxPrimitive.Indicator {...stylex.props(styles.indicator)}>
         <CheckIcon aria-hidden="true" weight="bold" />
       </CheckboxPrimitive.Indicator>

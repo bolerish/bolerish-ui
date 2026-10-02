@@ -17,11 +17,15 @@ const styles = stylex.create({
   root: {
     alignItems: "center",
     appearance: "none",
-    backgroundColor: colorVars.interactionDisabled,
+    backgroundColor: {
+      default: colorVars.interactionDisabled,
+      ":is([data-checked])": colorVars.bgActionPrimary,
+      ":is([data-disabled])": colorVars.interactionDisabled,
+    },
     borderStyle: "none",
     borderWidth: 0,
     borderRadius: radiusVars.full,
-    cursor: "pointer",
+    cursor: { default: "pointer", ":is([data-disabled])": "not-allowed" },
     display: "inline-flex",
     flexShrink: 0,
     outline: "none",
@@ -35,17 +39,14 @@ const styles = stylex.create({
       outlineStyle: "solid",
       outlineWidth: sizeVars.focusRing,
     },
-    ":disabled": { cursor: "not-allowed" },
   },
-
-  checked: { backgroundColor: colorVars.bgActionPrimary },
-  disabled: { backgroundColor: colorVars.interactionDisabled, cursor: "not-allowed" },
-  disabledThumb: { backgroundColor: colorVars.fgDisabled },
   thumb: {
-    backgroundColor: colorVars.bgSurface,
+    backgroundColor: {
+      default: colorVars.bgSurface,
+      ":is([data-disabled] *)": colorVars.fgDisabled,
+    },
     borderRadius: radiusVars.full,
     display: "block",
-    transform: "translateX(0)",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "background-color, transform",
     transitionTimingFunction: motionVars.easingStandard,
@@ -61,13 +62,22 @@ const sizeStyles = stylex.create({
 });
 
 const thumbSizeStyles = stylex.create({
-  sm: { height: sizeVars.iconMd, width: sizeVars.iconMd },
-  md: { height: sizeVars.iconLg, width: sizeVars.iconLg },
-});
-
-const thumbCheckedStyles = stylex.create({
-  sm: { transform: `translateX(${spacingVars.space3})` },
-  md: { transform: `translateX(${spacingVars.space4})` },
+  sm: {
+    height: sizeVars.iconMd,
+    transform: {
+      default: "translateX(0)",
+      ":is([data-checked] *)": `translateX(${spacingVars.space3})`,
+    },
+    width: sizeVars.iconMd,
+  },
+  md: {
+    height: sizeVars.iconLg,
+    transform: {
+      default: "translateX(0)",
+      ":is([data-checked] *)": `translateX(${spacingVars.space4})`,
+    },
+    width: sizeVars.iconLg,
+  },
 });
 
 export type SwitchProps = Omit<
@@ -79,31 +89,9 @@ export type SwitchProps = Omit<
 };
 
 export function Switch({ size = "md", xstyle, ...props }: SwitchProps) {
-  function getRootStyles(state: SwitchPrimitive.Root.State) {
-    return stylex.props(
-      styles.root,
-      sizeStyles[size],
-      state.checked && styles.checked,
-      state.disabled && styles.disabled,
-      xstyle,
-    );
-  }
   return (
-    <SwitchPrimitive.Root
-      {...props}
-      className={(state) => getRootStyles(state).className}
-      style={(state) => getRootStyles(state).style}
-    >
-      <SwitchPrimitive.Thumb
-        className={(state) =>
-          stylex.props(
-            styles.thumb,
-            thumbSizeStyles[size],
-            state.checked && thumbCheckedStyles[size],
-            state.disabled && styles.disabledThumb,
-          ).className
-        }
-      />
+    <SwitchPrimitive.Root {...props} {...stylex.props(styles.root, sizeStyles[size], xstyle)}>
+      <SwitchPrimitive.Thumb {...stylex.props(styles.thumb, thumbSizeStyles[size])} />
     </SwitchPrimitive.Root>
   );
 }
