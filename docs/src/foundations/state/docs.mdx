@@ -1,4 +1,6 @@
 import { ComponentPreview } from "../../documentation/ComponentPreview";
+import rolesSource from "./RolesExample.tsx?raw";
+import dragSource from "./DragExample.tsx?raw";
 import source from "./InteractionExample.tsx?raw";
 import { Interaction, FeedbackColors } from "../color/Reference";
 import { Opacity } from "./Reference";
@@ -13,6 +15,10 @@ import english from "./guidelines.en.md?raw";
 <Guideline content={guidelines} english={english} />
 
 <ComponentPreview name="state--InteractionExample" source={source} />
+
+<ComponentPreview name="state--RolesExample" source={rolesSource} />
+
+<ComponentPreview name="state--DragExample" source={dragSource} />
 
 <LocalizedMarkdown text={"## Token reference"} />
 

@@ -33,3 +33,5 @@ Emphasis follows the task, not the number of available controls. A page can have
 ## Guidelines and implementation
 
 These recommendations are starting points for new screens. Preserve the typography and alignment already defined by components. Document the reason and scope of any exception.
+
+Start with the [State role composition contracts](?path=/docs/foundations-state--docs) when choosing visual hierarchy and states. They define selection surfaces, drop areas, insertion positions and overlapping states in one place.

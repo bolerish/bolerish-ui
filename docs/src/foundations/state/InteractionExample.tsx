@@ -50,7 +50,7 @@ const styles = stylex.create({
       },
     },
   },
-  selected: { backgroundColor: colorVars.interactionSelected, borderColor: colorVars.strokeStrong },
+  selected: { backgroundColor: colorVars.bgSelected, borderColor: colorVars.strokeStrong },
   content: { position: "relative" },
 });
 

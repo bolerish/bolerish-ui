@@ -9,12 +9,12 @@ Distinguishing availability from persistent selection helps people tell what the
 | Pointer enters the control           | `interactionHover`; `interactionSolidHover` for filled action buttons     | `backgroundColor: colorVars.interactionHover`           |
 | While pressing the control           | `interactionPressed`; `interactionSolidPressed` for filled action buttons | `backgroundColor: colorVars.interactionPressed`         |
 | Show the current keyboard position   | `strokeFocus` with a focus outline                                        | `outlineColor: colorVars.strokeFocus`                   |
-| Keep a selected item identifiable    | `interactionSelected` with a selection indicator                          | `backgroundColor: colorVars.interactionSelected`        |
+| Keep a selected item identifiable    | `bgSelected` with a selection indicator                                   | `backgroundColor: colorVars.bgSelected`                 |
 | The control is currently unavailable | `fgDisabled` with the control’s `disabled` attribute                      | `color: colorVars.fgDisabled`                           |
 | Waiting for a request                | Status text and `Spinner`                                                 | `<Spinner />`                                           |
 | An input value needs correction      | `FieldError` and an explanation beside the input                          | `<FieldError>Enter a valid email address.</FieldError>` |
 
-Use `interactionPressed` only while pressing. Use `interactionSelected` for persistent selection. Combining them makes selection and input feedback hard to distinguish.
+Use `interactionPressed` only while pressing. Use `bgSelected` for flat selection and `interactionSelected` for a raised selection within a group. Combining them makes selection and input feedback hard to distinguish.
 
 ### Implementation
 
@@ -41,3 +41,43 @@ A selected item should keep its selection treatment when focus returns. The focu
 Start with `Button` for an action and `Toggle` for persistent selection. The example shows how CSS properties connect to state when building a new control. Hover over **Pin project**, press, and release. The selected background, border, and check mark remain while the pressed layer disappears. Tab to the control to add focus without losing selection.
 
 > Hover and pressed colors are translucent layers. This example combines selection and pointer layers over `bgSubtle`, with a border and check mark to distinguish selection. Use `interactionSolidHover` and `interactionSolidPressed` over a filled primary-action background. Color alone does not provide HTML state or behavior.
+
+## Role composition contracts
+
+Choose tokens by role, not by a preferred color. Selection and drop targets are distinct roles
+even when their values match. The existing `interactionSelected` name and values remain supported.
+
+| Role                            | Background            | Content and boundary                                  | Additional cue                                              |
+| ------------------------------- | --------------------- | ----------------------------------------------------- | ----------------------------------------------------------- |
+| Content                         | `bgSurface`           | `fgPrimary`, optional `strokeDefault`                 | Content structure and heading                               |
+| Quiet group                     | `bgSubtle`            | `fgPrimary` / `fgSecondary`, optional `strokeDefault` | Group label; no selection meaning                           |
+| Floating popup                  | `bgRaised`            | `fgPrimary`, `strokeDefault`                          | `shadowVars.floating`; component owns positioning and focus |
+| Flat selection                  | `bgSelected`          | `fgPrimary`, optional `strokeStrong`                  | Check or selection boundary and semantic selection state    |
+| Raised selection within a group | `interactionSelected` | `fgPrimary`, `shadowVars.subtle`                      | Place inside a `bgSubtle` container                         |
+| Drop receiving area             | `bgDropTarget`        | `fgPrimary`, `strokeDropIndicator` boundary           | Describe the result, such as “Move into this folder”        |
+| Exact insertion position        | None                  | `strokeDropIndicator`, `sizeVars.focusRing` thickness | Line and “Move before this item” label                      |
+
+Segmented Tabs and soft Toggle Groups share the raised selection surface. Tabs switch panels;
+Toggle Groups choose values. Keep their distinct semantics and keyboard behavior.
+A standalone soft Toggle uses `bgSelected`; a regular Toggle also keeps a selection boundary.
+
+### Overlapping states
+
+1. Keep the selected background and indicator through hover and press.
+2. Add translucent hover and press layers without replacing the background. Press wins over hover.
+3. Draw focus as a separate outline without removing an error border or selection indicator.
+4. Disabled controls block input and hover/press feedback but retain the stored selection.
+   Use `fgDisabled` without reducing the entire control's opacity again.
+5. A forbidden drop removes receiving highlights and insertion lines. Show a prohibition cue and
+   explanation; the application must also reject the operation.
+
+### Drag states
+
+Keep the source slot and name visible with a dashed `strokeDefault` boundary and a “Moving” label.
+Use an area for a receiving target and a line for the exact insertion position. Do not mark all
+eligible targets as active insertion positions or reuse the keyboard focus ring for the source.
+
+The application owns drag eligibility, ordering and persistence. Provide equivalent buttons or
+menus for keyboard and touch users. Clear temporary indicators on cancel and completion.
+The example below moves real items and offers equivalent “Move before” buttons. It ignores external
+files and drags from outside the list; dropping on the source does not change the order.

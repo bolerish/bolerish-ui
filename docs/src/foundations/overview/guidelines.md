@@ -79,3 +79,5 @@ Accordion은 Header와 Panel을 내부에서 구성합니다. `AccordionTrigger`
 
 Drawer는 Popup을 내부에서 구성합니다. `DrawerContent`의 `xstyle`은 자식을 직접
 감싸는 콘텐츠 영역에 적용하고, 방향과 스와이프·오버레이는 `Drawer`에서 설정합니다.
+
+상태와 시각적 위계를 정할 때는 [상태의 역할별 조합 계약](?path=/docs/foundations-state--docs)을 먼저 확인합니다. 선택 면, 드롭 영역, 삽입 위치와 상태 중첩 규칙을 한곳에서 정의합니다.

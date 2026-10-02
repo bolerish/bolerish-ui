@@ -23,3 +23,5 @@ Describe the correction, such as “Include @ in the email address.” For long 
 Validation and server requests belong to the application. Prevent duplicate requests while submitting. Preserve values and offer a retry after failure.
 
 > Show rejected values in their `Field` and network failures with the form's submission status. Do not put errors that block completion only in a Toast.
+
+Combine the normal input surface, an error border and `FieldError`. Use `FieldError match` to show an externally determined error, such as a server validation message. `invalid` sets the invalid state separately from the message matching condition. Keep input values and use Banner for a form-level request failure.
