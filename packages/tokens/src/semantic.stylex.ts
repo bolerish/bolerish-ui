@@ -7,9 +7,14 @@ export const colorVars = stylex.defineVars({
   bgSurface: colorPalette.neutral0,
   bgSurfacePressed: "oklch(97% 0 0)",
   bgInverse: colorPalette.neutral950,
+  /** Neutral grouping surface; does not indicate selection. */
   bgSubtle: colorPalette.neutral50,
   bgRaised: colorPalette.neutral0,
   bgRaisedPressed: "oklch(97% 0 0)",
+  /** Flat persistent selection. Pair with fgPrimary and a check or boundary. */
+  bgSelected: colorPalette.blueWeak,
+  /** Area that will receive a dragged item; not an insertion marker. */
+  bgDropTarget: colorPalette.blueWeak,
   bgCurrent: colorPalette.alphaBlack6,
   bgOverlay: colorPalette.alphaBlack40,
   bgSkeleton: colorPalette.neutral200,
@@ -34,7 +39,10 @@ export const colorVars = stylex.defineVars({
   fgFeedbackWarning: colorPalette.yellowFeedback,
   fgFeedbackError: colorPalette.redFeedback,
   strokeDefault: colorPalette.neutral200,
+  /** Emphasized grouping boundary, including menu separators. */
   strokeStrong: colorPalette.neutral300,
+  /** Exact insertion position during drag; pair with a position label. */
+  strokeDropIndicator: colorPalette.blueSolid,
   strokeFocus: colorPalette.blueBadge,
   strokeAction: colorPalette.primarySolid,
   strokeFeedbackInfo: colorPalette.blueMuted,
@@ -47,7 +55,7 @@ export const colorVars = stylex.defineVars({
   interactionPressed: colorPalette.alphaBlack10,
   interactionSolidHover: colorPalette.alphaWhite10,
   interactionSolidPressed: colorPalette.alphaWhite20,
-  // Persistent selected surface for segmented controls, matching the explicit light theme.
+  /** Raised selection inside bgSubtle; pair with fgPrimary and shadowVars.subtle. */
   interactionSelected: colorPalette.neutral0,
   interactionDisabled: colorPalette.alphaBlack8,
   interactionFocus: colorPalette.blueBadge,
