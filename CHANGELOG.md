@@ -1,3 +1,20 @@
+## Version v0.9.0
+
+Released on 2026-10-02.
+
+- Group generated token definitions under styles/tokens and shared control
+    placement types under styles. Existing flat tokens remain readable; rerun
+    init --force to copy them into the new structure while preserving edits.
+
+- Let app users choose system, on or off motion at runtime. Only their explicit
+    on choice overrides OS reduced motion; JSON defaults remain system or off.
+    The legacy respectReducedMotion field no longer removes OS motion rules.
+
+- Use @nuee/ui consistently as the product name in documentation and CLI output.
+- Configuration now uses .nuee.json with a local schema for editor suggestions.
+    Rename an existing nuee.json to .nuee.json and run nuee init --force.
+    Motion defaults remain in JSON with system and off choices.
+
 ## Version v0.8.1
 
 Released on 2026-10-02.
