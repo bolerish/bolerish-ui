@@ -25,6 +25,10 @@ export default function Variants() {
         <ToggleGroupItem value="left">Left</ToggleGroupItem>
         <ToggleGroupItem value="right">Right</ToggleGroupItem>
       </ToggleGroup>
+      <ToggleGroup aria-label="Soft alignment" defaultValue={["left"]} variant="soft">
+        <ToggleGroupItem value="left">Left</ToggleGroupItem>
+        <ToggleGroupItem value="right">Right</ToggleGroupItem>
+      </ToggleGroup>
     </div>
   );
 }
