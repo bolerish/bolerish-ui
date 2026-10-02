@@ -17,6 +17,11 @@ When layout expresses relationships, people can see what to read and where to ac
 
 Consider `sizeVars.contentSm` for a short input group and `contentMd` for reading areas. Keep the layout within the available width on narrow screens. Follow Spacing for gaps that communicate relationships.
 
+For page content, combine `width: 100%`, `maxWidth: layoutVars.contentMaxWidth`, and
+`marginInline: auto`. Start with `space4` inline padding on narrow screens and `space6` on
+wider screens. Reserve `sizeVars.content*` for component widths such as popovers, panels,
+and dialogs instead of stretching them into page-width tokens.
+
 ### First-line alignment
 
 Align Content Row titles and actions on their first baseline. Align `Checkbox` to the first title line when paired with `FieldContent`. A wrapping description should not require manual top or bottom padding.

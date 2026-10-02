@@ -1,5 +1,6 @@
 import {
   colorVars,
+  layoutVars,
   sizeVars,
   spacingVars,
   typographyVars,
@@ -181,6 +182,13 @@ export function Size() {
           <div {...stylex.props(styles.contentSample(value))}>{usage}</div>
         </TokenRow>
       ))}
+      <TokenRow
+        name="layoutVars.contentMaxWidth"
+        usage="Maximum width for centered page content"
+        value={layoutVars.contentMaxWidth}
+      >
+        <div {...stylex.props(styles.contentSample(layoutVars.contentMaxWidth))}>Page content</div>
+      </TokenRow>
       <TokenRow
         name="sizeVars.stroke"
         usage="Default border for controls and surfaces"

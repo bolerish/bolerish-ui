@@ -17,6 +17,11 @@
 
 짧은 입력 묶음에는 `sizeVars.contentSm`, 읽기 영역에는 `contentMd` 등을 시작점으로 검토합니다. 고정 폭을 강제하지 않고 좁은 화면에서 사용 가능한 폭을 넘지 않게 합니다. 관계에 따른 간격은 Spacing 문서를 따릅니다.
 
+페이지 본문은 `width: 100%`, `maxWidth: layoutVars.contentMaxWidth`,
+`marginInline: auto`를 조합합니다. 좁은 화면의 좌우 여백은 `space4`, 넓은 화면은
+`space6`을 시작점으로 사용합니다. `sizeVars.content*`는 팝오버·패널·다이얼로그 같은
+컴포넌트 폭에 사용하고 페이지 최대 폭으로 확장하지 않습니다.
+
 ### 첫 줄 정렬
 
 Content Row의 제목과 행동 버튼은 첫 줄 기준선에 맞춥니다. `Checkbox`와 `FieldContent`가 함께 있으면 제목 첫 줄에 정렬합니다. 설명의 줄 수가 바뀌어도 사용자가 보정용 위·아래 여백을 추가하지 않게 합니다.
