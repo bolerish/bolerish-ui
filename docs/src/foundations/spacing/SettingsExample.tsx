@@ -48,7 +48,7 @@ export default function SettingsExample() {
           </Field>
           <Field>
             <FieldLabel>Project</FieldLabel>
-            <Input placeholder="Nuee" />
+            <Input placeholder="@nuee/ui" />
           </Field>
         </FieldGroup>
         <div {...stylex.props(styles.row)}>

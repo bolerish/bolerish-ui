@@ -28,7 +28,7 @@ export default function Default() {
         <HoverCardContent align="start">
           <ContentRow size="sm">
             <ContentRowContent>
-              <ContentRowTitle>nuée</ContentRowTitle>
+              <ContentRowTitle>@nuee/ui</ContentRowTitle>
               <ContentRowDescription>
                 A calm, consistent design system for product experiences
               </ContentRowDescription>

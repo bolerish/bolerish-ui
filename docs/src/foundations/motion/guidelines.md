@@ -15,7 +15,7 @@
 
 ### 모션 줄임
 
-사용자의 `prefers-reduced-motion` 설정에 맞춰 움직임을 줄입니다. 회전이나 이동을 줄여도 진행 중이라는 텍스트와 상태는 남깁니다. 모션 줄임을 적용하지 않는 설치 옵션은 제품 요구사항을 확인한 뒤 선택합니다.
+사용자의 `prefers-reduced-motion` 설정에 맞춰 움직임을 줄입니다. 회전이나 이동을 줄여도 진행 중이라는 텍스트와 상태는 남깁니다. OS 설정을 덮어쓰는 동작은 최종 사용자의 명시적인 런타임 선택에만 적용합니다.
 
 > 단순한 강조를 위해 반복 애니메이션을 붙이지 않습니다. 크기 변환 때문에 텍스트와 테두리가 흐려지면 이동·영역 크기·불투명도 등 더 적절한 표현을 검토합니다. 로딩이 끝난 뒤 장식 애니메이션을 기다리게 하지 않습니다.
 
@@ -27,8 +27,23 @@
 
 ## 설치 기본값과 실제 사용자 선택
 
-`theme.motion`의 `system`은 OS 설정을 따르고, `off`는 움직임을 끕니다. 생성된
-`preferences.css`를 로드하면 모션을 켠 앱에서도 OS 감소 모션을 존중합니다.
-루트의 `data-nuee-motion`으로 실제 사용자 선택을 반영합니다. 처리 중 문구와
-열린 상태는 계속 표시하고 JavaScript 스크롤·View Transition에도 같은 결정을
-사용합니다. 기존 `respectReducedMotion: false`는 모션 off 설정이 아닙니다.
+`.nuee.json`의 `theme.motion`은 앱 초기 기본값으로 `system` 또는 `off`를
+사용합니다. 생성된 `preferences.css`를 로드합니다.
+
+앱을 사용하는 최종 사용자는 루트 `data-nuee-motion`으로 `system`, `on`,
+`off`를 선택할 수 있습니다. 사용자가 명시적으로 선택한 `on`만 OS의 움직임
+줄이기를 덮어씁니다. 앱 개발자는 설정 화면과 저장을 맡고, 개발자 기본값으로
+`on`을 자동 적용하지 않습니다. 속성을 제거하면 JSON 기본값으로 돌아갑니다.
+명시적인 `system`은 JSON이 `off`여도 OS 설정을 따릅니다.
+
+```ts
+import type { MotionPreference } from "@/styles/settings.stylex";
+
+// 앱의 최종 사용자 설정 컨트롤에서 호출합니다.
+function setMotionPreference(preference: MotionPreference) {
+  document.documentElement.dataset.nueeMotion = preference;
+}
+```
+
+처리 중 문구와 열린 상태는 계속 표시하고 JavaScript 스크롤·View Transition에도
+같은 결정을 사용합니다. 기존 `respectReducedMotion: false`는 모션 off 설정이 아닙니다.

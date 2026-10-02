@@ -45,14 +45,16 @@ export function Typography() {
         usage="Body text, form controls, and product UI"
         value={typo.fontFamilyBody}
       >
-        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyBody))}>nuée Aa Bb</span>
+        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyBody))}>@nuee/ui Aa Bb</span>
       </TokenRow>
       <TokenRow
         name="typo.fontFamilyHeading"
         usage="Display, title, and heading text"
         value={typo.fontFamilyHeading}
       >
-        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyHeading))}>nuée Aa Bb</span>
+        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyHeading))}>
+          @nuee/ui Aa Bb
+        </span>
       </TokenRow>
       {fontSizeTokens.map(([name, value, usage]) => (
         <TokenRow key={name} name={`typo.${name}`} usage={usage} value={value}>
@@ -61,7 +63,7 @@ export function Typography() {
               styles.typeSample(value, typo.fontWeightRegular, typo.lineHeightNormal),
             )}
           >
-            nuée Aa Bb
+            @nuee/ui Aa Bb
           </span>
         </TokenRow>
       ))}
@@ -79,7 +81,7 @@ export function Typography() {
       {fontWeightTokens.map(([name, value, usage]) => (
         <TokenRow key={name} name={`typo.${name}`} usage={usage} value={value}>
           <span {...stylex.props(styles.typeSample(typo.fontSizeSm, value, typo.lineHeightNormal))}>
-            nuée Aa Bb
+            @nuee/ui Aa Bb
           </span>
         </TokenRow>
       ))}

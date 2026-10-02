@@ -31,7 +31,7 @@
 
 ```tsx
 import * as stylex from "@stylexjs/stylex";
-import { colorVars, spacingVars } from "@/styles/semantic.stylex";
+import { colorVars, spacingVars } from "@/styles/tokens/semantic.stylex";
 
 const styles = stylex.create({
   panel: {
@@ -42,7 +42,7 @@ const styles = stylex.create({
 });
 ```
 
-복사 설치한 프로젝트는 `nuee.json`의 스타일 별칭을 사용합니다. 이 저장소의 예제는 토큰 패키지를 직접 참조할 수 있습니다. 화면을 작성하기 전에 실제 토큰 파일에서 이름을 확인하고 존재하지 않는 토큰을 만들지 않습니다.
+복사 설치한 프로젝트는 `.nuee.json`의 스타일 별칭을 사용합니다. 이 저장소의 예제는 토큰 패키지를 직접 참조할 수 있습니다. 화면을 작성하기 전에 실제 토큰 파일에서 이름을 확인하고 존재하지 않는 토큰을 만들지 않습니다.
 
 ## 토큰 값과 예시
 

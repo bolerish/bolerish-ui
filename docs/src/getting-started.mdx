@@ -22,7 +22,7 @@ pnpm dlx @nuee/ui init --vite
 <LocalizedMarkdown text={"## 2. Import alias"} />
 
 <LocalizedMarkdown
-  text={"The component and local style aliases entered during init are saved to `nuee.json`."}
+  text={"The component and local style aliases entered during init are saved to `.nuee.json`."}
 />
 
 ```json
@@ -40,7 +40,7 @@ pnpm dlx @nuee/ui init --vite
 
 <LocalizedMarkdown
   text={
-    "| Setting                              | Purpose                                                                                                                          |\n| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |\n| `aliases.ui` / `aliases.styles`      | The aliases used to import added components and their local StyleX tokens.                                                       |\n| `accessibility.respectReducedMotion` | Keeps reduced-motion media queries in copied components. Set it to `false` before adding components to always keep their motion. |"
+    "| Setting                              | Purpose                                                                                                                          |\n| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |\n| `aliases.ui` / `aliases.styles`      | The aliases used to import added components and their local StyleX tokens.                                                       |\n| `accessibility.respectReducedMotion` | Deprecated compatibility field. Copied components retain OS reduced-motion rules; only the app end user can override them at runtime. |"
   }
 />
 
@@ -94,7 +94,7 @@ export function SaveButton() {
 
 <LocalizedMarkdown
   text={
-    "Start your application with its existing development command. Confirm that the button appears with nuée styling and shows a focus indicator when reached with Tab. If it appears unstyled, check the StyleX build integration and reset stylesheet import."
+    "Start your application with its existing development command. Confirm that the button appears with @nuee/ui styling and shows a focus indicator when reached with Tab. If it appears unstyled, check the StyleX build integration and reset stylesheet import."
   }
 />
 
@@ -102,7 +102,7 @@ export function SaveButton() {
 
 <LocalizedMarkdown
   text={
-    "`nuee.json` records the source versions copied into your project. `version` identifies the local foundation; `components` records each component installed by `add`, including registry dependencies. These values describe the installed source release, not later manual edits. Running `add` does not update the foundation version."
+    "`.nuee.json` records the source versions copied into your project. `version` identifies the local foundation; `components` records each component installed by `add`, including registry dependencies. These values describe the installed source release, not later manual edits. Running `add` does not update the foundation version."
   }
 />
 

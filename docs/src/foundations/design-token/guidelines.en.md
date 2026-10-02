@@ -33,7 +33,7 @@ Use role-based tokens for a panel’s background, text, and padding.
 
 ```tsx
 import * as stylex from "@stylexjs/stylex";
-import { colorVars, spacingVars } from "@/styles/semantic.stylex";
+import { colorVars, spacingVars } from "@/styles/tokens/semantic.stylex";
 
 const styles = stylex.create({
   panel: {
@@ -44,7 +44,7 @@ const styles = stylex.create({
 });
 ```
 
-Source-installed projects use the style alias in `nuee.json`; this repository's examples may import the token package. Check names in the actual token file before writing a screen. Do not invent tokens.
+Source-installed projects use the style alias in `.nuee.json`; this repository's examples may import the token package. Check names in the actual token file before writing a screen. Do not invent tokens.
 
 ## Token values and previews
 

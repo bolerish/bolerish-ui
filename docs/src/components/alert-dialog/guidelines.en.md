@@ -8,7 +8,7 @@ Use Alert `Dialog` when users must decide whether to proceed with a consequentia
 
 Identify what will be deleted in `AlertDialogTitle`. Add only decision-relevant details, such as the scope of deletion or whether recovery is possible, in `AlertDialogDescription`. Use an action label such as “Delete project”, paired with Cancel. Do not use a vague “OK” to confirm data loss.
 
-`AlertDialogAction` uses destructive `Button` styling in nuée. It is not a general-purpose primary confirmation button. Both `AlertDialogAction` and `AlertDialogCancel` are close controls; neither implements persistence or request handling.
+`AlertDialogAction` uses destructive `Button` styling in @nuee/ui. It is not a general-purpose primary confirmation button. Both `AlertDialogAction` and `AlertDialogCancel` are close controls; neither implements persistence or request handling.
 
 ### Request and recovery
 

@@ -8,7 +8,7 @@
 
 삭제할 대상을 `AlertDialogTitle`에 명시하고, 삭제 범위나 복구 가능 여부처럼 결정에 필요한 정보만 `AlertDialogDescription`에 덧붙입니다. 취소와 함께 “프로젝트 삭제”처럼 구체적인 행동을 제공합니다. 데이터 손실을 모호한 “확인”으로 확정하게 하지 않습니다.
 
-nuée의 `AlertDialogAction`은 파괴적 행동의 `Button` 스타일을 사용합니다. 일반적인 주요 확인 버튼이 아닙니다. `AlertDialogAction`과 `AlertDialogCancel`은 모두 닫기 컨트롤이며 저장이나 요청 처리를 구현하지 않습니다.
+@nuee/ui의 `AlertDialogAction`은 파괴적 행동의 `Button` 스타일을 사용합니다. 일반적인 주요 확인 버튼이 아닙니다. `AlertDialogAction`과 `AlertDialogCancel`은 모두 닫기 컨트롤이며 저장이나 요청 처리를 구현하지 않습니다.
 
 ### 요청과 복구
 

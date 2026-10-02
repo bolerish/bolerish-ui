@@ -1,4 +1,4 @@
-# nuée documentation
+# @nuee/ui documentation
 
 ## Component examples
 

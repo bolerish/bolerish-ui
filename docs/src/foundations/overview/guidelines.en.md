@@ -1,6 +1,6 @@
-# nuée Foundations
+# @nuee/ui Foundations
 
-nuée shares recurring interface decisions so people can predict what to do next. Compose components and tokens around a consistent view of task priority, information relationships, and recovery from failure.
+@nuee/ui shares recurring interface decisions so people can predict what to do next. Compose components and tokens around a consistent view of task priority, information relationships, and recovery from failure.
 
 ## Work in this order
 

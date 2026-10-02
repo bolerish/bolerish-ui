@@ -15,7 +15,7 @@ Consider `easingStandard` for state changes and `easingEnter` and `easingExit` f
 
 ### Reduced motion
 
-Respect `prefers-reduced-motion`. Retain progress text and state when reducing rotation or movement. Disabling reduced-motion support during installation must be a deliberate product decision.
+Respect `prefers-reduced-motion`. Retain progress text and state when reducing rotation or movement. Only an explicit end-user runtime choice may override the OS preference.
 
 > Do not add looping animation just for emphasis. If scaling blurs text and borders, consider translation, dimensions, or opacity instead. Do not make people wait for decoration after loading completes.
 
@@ -27,8 +27,24 @@ Consider `easingEnter` for arrival and `easingExit` for departure. Use `duration
 
 ## Installation defaults and user preferences
 
-`theme.motion` uses `system` to follow the OS and `off` to suppress motion. Load
-the generated `preferences.css`; even enabled motion respects OS reduction.
-Use root `data-nuee-motion` for the end user's choice. Keep loading copy and open
-states visible, and apply the same decision to JavaScript scrolling and View
-Transitions. Legacy `respectReducedMotion: false` does not mean motion off.
+`theme.motion` in `.nuee.json` accepts `system` (follow the OS) or `off` as the
+app's initial default. Load the generated `preferences.css`.
+
+The app end user can choose `system`, `on` or `off` at runtime through root
+`data-nuee-motion`. Only the end user's explicit `on` overrides OS reduced
+motion. The app owns the settings UI and persistence; developers must not apply
+`on` automatically as their default. Remove the attribute to restore the JSON
+default. Explicit `system` follows the OS even when JSON defaults to `off`.
+
+```ts
+import type { MotionPreference } from "@/styles/settings.stylex";
+
+// Call from the app's end-user settings control.
+function setMotionPreference(preference: MotionPreference) {
+  document.documentElement.dataset.nueeMotion = preference;
+}
+```
+
+Keep loading copy and open states visible, and apply the same resolved choice
+to JavaScript scrolling and View Transitions. Legacy
+`respectReducedMotion: false` does not mean motion off.

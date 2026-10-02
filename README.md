@@ -1,4 +1,4 @@
-# nuée
+# @nuee/ui
 
 A design system built with React and StyleX.
 
@@ -25,12 +25,16 @@ export function SaveButton() {
 
 ## LLM guide
 
-See [the nuée usage guide for LLMs](docs/README.md#ai-coding-agent-references) for local imports,
+See [the @nuee/ui usage guide for LLMs](docs/README.md#ai-coding-agent-references) for local imports,
 StyleX conventions, theme setup, and component API checks.
 
 ### Generated appearance defaults
 
-`nuee.json` can configure initial appearance without editing each component:
+`.nuee.json` can configure initial appearance without editing each component:
+
+`init` also creates `.nuee.schema.json` and links it with `$schema` for editor
+completions and validation. Rename an existing `nuee.json` to `.nuee.json`,
+then run `nuee init --force` to add the schema while preserving configuration.
 
 ```json
 {
@@ -50,21 +54,43 @@ from your CSS entry (Vite initialization adds the import), and apply
 styles on `html` when overlays portal to `body`. Compact density keeps 24px icon
 controls, touch targets and focus strokes independent of the scale.
 
+Generated files group shared styles by responsibility:
+
+```text
+src/styles/
+  tokens/                 # color-palette, semantic, themes, density
+  control-layout.ts       # shared control placement types, copied when needed
+  settings.stylex.ts
+  preferences.css
+  reset.css
+```
+
+`aliases.styles` points to `styles`, and token imports use its `tokens` child.
+Existing flat token files remain usable. Run `nuee init --force` to copy them
+into `tokens` without deleting the originals or overwriting customized tokens.
+
 JSON is an installation default, not a live user-settings store. Runtime font
 choices override `--nuee-font-body` and `--nuee-font-heading` on the root; removing
-an override restores the generated default. Fonts are CSS family lists; Nuee
-does not download font files. Set `data-nuee-motion="off"` or `"system"` on the
-root for a runtime motion preference. `off` suppresses animation, transitions and
-smooth scrolling; OS reduced-motion is always respected by this stylesheet.
+an override restores the generated default. Fonts are CSS family lists; @nuee/ui
+does not download font files. JSON accepts `system` or `off` as the app default.
+Set `data-nuee-motion="system"`, `"on"` or `"off"` on `html` for the app end
+user's runtime choice. `system` follows OS reduced motion; `off` suppresses
+animation, transitions and smooth scrolling. Only an explicit end-user `on`
+choice overrides OS reduction. The app owns the settings UI and persistence;
+do not set `on` automatically from a developer default.
 App-controlled View Transitions and JavaScript scrolling must use the same
-resolved preference. The generated `motionDefault` can initialize app settings.
+resolved preference. Generated `MotionPreference` and `motionDefault` provide
+the runtime type and initial default. Remove the attribute to restore JSON's
+default; selecting `system` explicitly follows the OS even if JSON uses `off`.
+Package consumers can import `MotionPreference` from `@nuee/ui` and load
+`@nuee/ui/global.css`. Existing copied components need the updated motion
+selectors from `add --force`, or a manual merge if their source was edited.
 
 Existing aliases, accessibility settings and edited source files are retained.
 Unedited generated settings files can refresh when JSON changes. If you edited
 those files, merge the new defaults yourself. Older
-`accessibility.respectReducedMotion` configurations remain readable; with the new
-`theme` configuration, reduced-motion rules are retained regardless of that
-legacy value. Do not use `respectReducedMotion: false` to turn motion off.
+`accessibility.respectReducedMotion` configurations remain readable, but the field is deprecated and no longer
+removes reduced-motion rules from copied components. Do not use `respectReducedMotion: false` to turn motion off.
 
 ### AI coding-agent entry points
 
