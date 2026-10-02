@@ -24,3 +24,11 @@
 ### 패널을 열고 닫을 때
 
 패널이 나타날 때는 `easingEnter`, 사라질 때는 `easingExit`를 검토합니다. 버튼의 짧은 색상 변화에는 `durationFast`를 사용합니다. 움직임을 줄인 환경에서도 열린 패널과 처리 중 상태는 분명하게 보여야 합니다.
+
+## 설치 기본값과 실제 사용자 선택
+
+`theme.motion`의 `system`은 OS 설정을 따르고, `off`는 움직임을 끕니다. 생성된
+`preferences.css`를 로드하면 모션을 켠 앱에서도 OS 감소 모션을 존중합니다.
+루트의 `data-nuee-motion`으로 실제 사용자 선택을 반영합니다. 처리 중 문구와
+열린 상태는 계속 표시하고 JavaScript 스크롤·View Transition에도 같은 결정을
+사용합니다. 기존 `respectReducedMotion: false`는 모션 off 설정이 아닙니다.

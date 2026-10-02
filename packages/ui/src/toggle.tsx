@@ -7,7 +7,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -24,15 +24,19 @@ const styles = stylex.create({
     color: colorVars.fgPrimary,
     cursor: "pointer",
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space1,
     justifyContent: "center",
     outline: "none",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "background-color, border-color, color, opacity",
     transitionTimingFunction: motionVars.easingStandard,
-    ":hover": { backgroundColor: colorVars.interactionHover },
+    backgroundImage: {
+      default: "none",
+      ":not(:disabled):hover": `linear-gradient(${colorVars.interactionHover}, ${colorVars.interactionHover})`,
+      ":not(:disabled):active": `linear-gradient(${colorVars.interactionPressed}, ${colorVars.interactionPressed})`,
+    },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,
       outlineOffset: sizeVars.focusRing,
@@ -42,13 +46,19 @@ const styles = stylex.create({
     ":disabled": { cursor: "not-allowed" },
   },
 
-  pressed: { backgroundColor: colorVars.interactionSelected, color: colorVars.fgPrimary },
+  softPressed: {
+    backgroundColor: colorVars.bgCurrent,
+  },
+  pressed: {
+    backgroundColor: colorVars.bgCurrent,
+    color: colorVars.fgPrimary,
+    boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeStrong}`,
+  },
+  unavailable: { backgroundColor: colorVars.interactionDisabled },
   disabled: {
-    backgroundColor: colorVars.interactionDisabled,
     borderColor: colorVars.strokeDefault,
     color: colorVars.fgDisabled,
     cursor: "not-allowed",
-    ":hover": { backgroundColor: colorVars.interactionDisabled },
   },
 });
 
@@ -72,11 +82,12 @@ const sizeStyles = stylex.create({
 
 const variantStyles = stylex.create({
   default: { backgroundColor: "transparent" },
+  soft: { backgroundColor: "transparent" },
   outline: { backgroundColor: colorVars.bgSurface, borderColor: colorVars.strokeDefault },
 });
 
 export type ToggleSize = "lg" | "md" | "sm";
-export type ToggleVariant = "default" | "outline";
+export type ToggleVariant = "default" | "outline" | "soft";
 
 export type ToggleProps = Omit<ComponentProps<typeof TogglePrimitive>, "className" | "style"> & {
   size?: ToggleSize;
@@ -91,6 +102,8 @@ export function Toggle({ size = "md", variant = "default", xstyle, ...props }: T
       sizeStyles[size],
       variantStyles[variant],
       state.pressed && styles.pressed,
+      state.pressed && variant === "soft" && styles.softPressed,
+      state.disabled && !state.pressed && styles.unavailable,
       state.disabled && styles.disabled,
       xstyle,
     );

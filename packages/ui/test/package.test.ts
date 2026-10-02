@@ -69,6 +69,30 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
       "--cwd",
       projectDirectory,
     ]);
+    const configPath = join(projectDirectory, "nuee.json");
+    const installedConfig = JSON.parse(await readFile(configPath, "utf8"));
+    await writeFile(
+      configPath,
+      JSON.stringify({
+        ...installedConfig,
+        theme: {
+          density: 0.875,
+          unit: "px",
+          motion: "off",
+          fonts: { body: "Arial, sans-serif", heading: "Georgia, serif" },
+        },
+      }),
+    );
+    await execFile(process.execPath, [
+      cliPath,
+      "init",
+      "--force",
+      "--defaults",
+      "--vite",
+      "--skip-dependencies",
+      "--cwd",
+      projectDirectory,
+    ]);
     const packageJson = JSON.parse(await readFile(join(projectDirectory, "package.json"), "utf8"));
     assert.equal(packageJson.dependencies?.["@nuee/ui"], undefined);
     assert.equal(packageJson.devDependencies?.["@nuee/ui"], undefined);
@@ -88,6 +112,12 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
       join(projectDirectory, "src/main.tsx"),
       [
         'import "./index.css";',
+        'import * as stylex from "@stylexjs/stylex";',
+        'import { themeStyles } from "./styles/settings.stylex";',
+        'import { typo, typographyVars, spacingRoleVars } from "./styles/semantic.stylex";',
+        "const tokenUsage = stylex.create({ root: { fontSize: typo.fontSizeMd, gap: spacingRoleVars.fieldGap }, legacy: { fontSize: typographyVars.fontSizeMd } });",
+        "console.log(stylex.props(tokenUsage.root), stylex.props(tokenUsage.legacy));",
+        'document.documentElement.className = stylex.props(...themeStyles).className ?? "";',
         ...componentFileNames
           .filter((fileName) => fileName.endsWith(".tsx"))
           .map((fileName) => `import "./components/ui/${fileName.replace(/\.tsx$/, "")}";`),
@@ -136,6 +166,17 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
 
     await build({ configFile: join(projectDirectory, "vite.config.ts"), root: projectDirectory });
     await access(join(projectDirectory, "dist/index.html"));
+    const assetDirectory = join(projectDirectory, "dist/assets");
+    const cssFiles = (await readdir(assetDirectory)).filter((file) => file.endsWith(".css"));
+    const compiledCss = (
+      await Promise.all(cssFiles.map((file) => readFile(join(assetDirectory, file), "utf8")))
+    ).join("\n");
+    assert.match(compiledCss, /--nuee-density:\s*0?\.875/);
+    assert.match(compiledCss, /--nuee-font-body:\s*Arial/);
+    assert.match(compiledCss, /prefers-reduced-motion/);
+    assert.match(compiledCss, /data-nuee-motion/);
+    assert.match(compiledCss, /--nuee-unit:\s*16px/);
+    assert.match(compiledCss, /var\(--nuee-unit,\s*1rem\)/);
   } finally {
     await rm(projectDirectory, { recursive: true, force: true });
   }

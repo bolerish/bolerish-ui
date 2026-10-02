@@ -103,7 +103,7 @@ export async function add(
     for (const file of resolved.files) {
       const isScript = /\.[cm]?[jt]sx?$/.test(file.path);
       let source = replaceTokenImport(file.content, config.aliases.styles);
-      if (isScript && !config.accessibility.respectReducedMotion) {
+      if (isScript && !config.accessibility.respectReducedMotion && !config.theme) {
         source = removeReducedMotionStyles(source);
       }
       if (isScript) parseSource(source);

@@ -1,6 +1,6 @@
 {
   "name": "@nuee/tokens",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": false,
   "repository": {
     "type": "git",
@@ -10,6 +10,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./color-palette": "./src/color-palette.stylex.ts",
+    "./density.stylex": "./src/density.stylex.ts",
     "./themes.stylex": "./src/themes.stylex.ts",
     "./semantic.stylex": "./src/semantic.stylex.ts",
     "./tokens.stylex": "./src/semantic.stylex.ts"

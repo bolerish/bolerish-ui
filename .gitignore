@@ -34,3 +34,8 @@ docs/public/llms.txt
 docs/public/llms-full.txt
 
 /docs/public/llms-full.en.txt
+
+# Generated canonical agent references
+docs/public/api/
+docs/public/agent/
+docs/public/installation.md

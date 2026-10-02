@@ -6,9 +6,10 @@ import {
   colorVars,
   motionVars,
   radiusVars,
+  shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext, type ComponentProps, type ReactNode } from "react";
@@ -33,15 +34,19 @@ const styles = stylex.create({
     color: colorVars.fgPrimary,
     cursor: "pointer",
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space1,
     justifyContent: "center",
     outline: "none",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "background-color, border-color, color, opacity",
     transitionTimingFunction: motionVars.easingStandard,
-    ":hover": { backgroundColor: colorVars.interactionHover },
+    backgroundImage: {
+      default: "none",
+      ":not(:disabled):hover": `linear-gradient(${colorVars.interactionHover}, ${colorVars.interactionHover})`,
+      ":not(:disabled):active": `linear-gradient(${colorVars.interactionPressed}, ${colorVars.interactionPressed})`,
+    },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,
       outlineOffset: sizeVars.focusRing,
@@ -51,18 +56,34 @@ const styles = stylex.create({
     ":disabled": { cursor: "not-allowed" },
   },
 
-  itemPressed: { backgroundColor: colorVars.interactionSelected, color: colorVars.fgPrimary },
+  softPressed: {
+    backgroundColor: colorVars.interactionSelected,
+    boxShadow: shadowVars.subtle,
+  },
+  itemPressed: {
+    backgroundColor: colorVars.bgCurrent,
+    color: colorVars.fgPrimary,
+    boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeStrong}`,
+  },
+  unavailable: { backgroundColor: colorVars.interactionDisabled },
   itemDisabled: {
-    backgroundColor: colorVars.interactionDisabled,
     borderColor: colorVars.strokeDefault,
     color: colorVars.fgDisabled,
     cursor: "not-allowed",
-    ":hover": { backgroundColor: colorVars.interactionDisabled },
   },
 });
 
 const variantStyles = stylex.create({
   default: { gap: spacingVars.space1 },
+  soft: {
+    gap: spacingVars.space0_5,
+    padding: spacingVars.space0_5,
+    backgroundColor: colorVars.bgSubtle,
+    borderColor: colorVars.strokeDefault,
+    borderStyle: "solid",
+    borderWidth: sizeVars.stroke,
+    borderRadius: radiusVars.sm,
+  },
   outline: {
     backgroundColor: colorVars.bgSurface,
     borderColor: colorVars.strokeDefault,
@@ -94,6 +115,7 @@ const itemSizeStyles = stylex.create({
 
 const itemVariantStyles = stylex.create({
   default: { backgroundColor: "transparent" },
+  soft: { backgroundColor: "transparent" },
   outline: { backgroundColor: colorVars.bgSurface, borderColor: colorVars.strokeDefault },
 });
 
@@ -146,6 +168,8 @@ export function ToggleGroupItem({ size, variant, xstyle, ...props }: ToggleGroup
       itemSizeStyles[finalSize],
       itemVariantStyles[finalVariant],
       state.pressed && styles.itemPressed,
+      state.pressed && finalVariant === "soft" && styles.softPressed,
+      state.disabled && !state.pressed && styles.unavailable,
       state.disabled && styles.itemDisabled,
       finalVariant === "outline" && styles.outlineItem,
       xstyle,

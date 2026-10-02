@@ -20,3 +20,11 @@ DrawerContent includes the portal, backdrop, popup, and content region. Do not
 wrap it in DrawerPopup. Its `xstyle` applies directly around children for gap
 and inner layout. Other props and `ref` apply to the popup. Configure the
 backdrop and swipe handle through Drawer `overlay` and `showSwipeHandle`.
+
+### Screen transitions and focus
+
+Check that closing returns focus to the trigger. If navigation removes the trigger,
+use `DrawerContent`'s `finalFocus` to target a heading or appropriate control on the
+new screen. Do not apply `aria-hidden` to an app region that still contains focus.
+Let Base UI manage the modal background; move focus into a visible region before
+hiding a screen separately in application code.

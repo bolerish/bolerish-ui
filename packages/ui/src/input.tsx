@@ -24,6 +24,7 @@ const styles = stylex.create({
     borderWidth: sizeVars.stroke,
     color: colorVars.fgPrimary,
     fontSize: typographyVars.fontSizeSm,
+    fontFamily: typographyVars.fontFamilyBody,
     height: sizeVars.controlMd,
     lineHeight: typographyVars.lineHeightNormal,
     minWidth: 0,
@@ -59,6 +60,23 @@ const styles = stylex.create({
       },
     },
   },
+  inline: {
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 0,
+    paddingInline: spacingVars.space1,
+    paddingBlock: 0,
+    fontSize: "inherit",
+    fontWeight: "inherit",
+    lineHeight: "inherit",
+    color: "inherit",
+    ":focus-visible": {
+      outlineColor: colorVars.strokeFocus,
+      outlineStyle: "solid",
+      outlineWidth: sizeVars.focusRing,
+      outlineOffset: sizeVars.stroke,
+    },
+  },
   invalid: {
     borderColor: colorVars.strokeFeedbackError,
     ":focus-visible": {
@@ -69,15 +87,26 @@ const styles = stylex.create({
 
 export type InputProps = Omit<ComponentProps<typeof InputPrimitive>, "className" | "style"> & {
   xstyle?: ControlLayoutStyles;
+  variant?: "outline" | "inline";
 };
 
-export function Input({ "aria-invalid": ariaInvalid, xstyle, ...props }: InputProps) {
+export function Input({
+  "aria-invalid": ariaInvalid,
+  variant = "outline",
+  xstyle,
+  ...props
+}: InputProps) {
   const isInvalid = ariaInvalid === true || ariaInvalid === "true";
   return (
     <InputPrimitive
       {...props}
       aria-invalid={ariaInvalid}
-      {...stylex.props(styles.root, isInvalid && styles.invalid, xstyle)}
+      {...stylex.props(
+        styles.root,
+        variant === "inline" && styles.inline,
+        isInvalid && styles.invalid,
+        xstyle,
+      )}
     />
   );
 }

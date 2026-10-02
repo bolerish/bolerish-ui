@@ -55,33 +55,54 @@ export const colorVars = stylex.defineVars({
 
 export const spacingVars = stylex.defineVars({
   space0: "0",
-  space0_5: "0.125rem",
-  space1: "0.25rem",
-  space2: "0.5rem",
-  space3: "0.75rem",
-  space4: "1rem",
-  space5: "1.25rem",
-  space6: "1.5rem",
-  space8: "2rem",
-  space10: "2.5rem",
-  space12: "3rem",
+  space0_5: "calc(0.125 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space1: "calc(0.25 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space2: "calc(0.5 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space3: "calc(0.75 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space4: "calc(1 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space5: "calc(1.25 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space6: "calc(1.5 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space8: "calc(2 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space10: "calc(2.5 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  space12: "calc(3 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+});
+
+export const spacingRoleVars = stylex.defineVars({
+  /** Page inline padding; safe-area insets belong to the app. */
+  pageGutter: spacingVars.space4,
+  /** Padding inside a card or panel. */
+  panelPadding: spacingVars.space4,
+  /** Independent sections. */
+  sectionGap: spacingVars.space8,
+  /** Related fields. */
+  fieldGap: spacingVars.space4,
+  /** A label and its control, or help text. */
+  labelGap: spacingVars.space2,
+  /** Related elements in one row. */
+  inlineGap: spacingVars.space2,
+  /** A title and its description. */
+  textGap: spacingVars.space1,
+});
+
+export const layoutVars = stylex.defineVars({
+  contentMaxWidth: "calc(65 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
 });
 
 export const sizeVars = stylex.defineVars({
   controlXs: "1.5rem",
-  controlSm: "2rem",
-  controlMd: "2.25rem",
-  controlLg: "2.5rem",
-  controlXl: "3rem",
-  iconXs: "0.75rem",
-  iconSm: "0.875rem",
-  iconMd: "1rem",
-  iconLg: "1.25rem",
-  contentXs: "18rem",
-  contentSm: "24rem",
-  contentMd: "32rem",
-  trackSm: "0.375rem",
-  trackMd: "0.5rem",
+  controlSm: "calc(2 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  controlMd: "calc(2.25 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  controlLg: "calc(2.5 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  controlXl: "calc(3 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  iconXs: "calc(0.75 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  iconSm: "calc(0.875 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  iconMd: "calc(1 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  iconLg: "calc(1.25 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  contentXs: "calc(18 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  contentSm: "calc(24 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  contentMd: "calc(32 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  trackSm: "calc(0.375 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  trackMd: "calc(0.5 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
   touchTarget: "2.75rem",
   stroke: "0.0625rem",
   focusRing: "0.125rem",
@@ -108,18 +129,19 @@ export const layerVars = stylex.defineVars({
   notification: "70",
 });
 
-export const typographyVars = stylex.defineVars({
+export const typo = stylex.defineVars({
   /** @deprecated Use fontFamilyBody or fontFamilyHeading instead. */
-  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+  fontFamily:
+    'var(--nuee-font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif)',
   fontFamilyBody:
-    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+    'var(--nuee-font-body, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif)',
   fontFamilyHeading:
-    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-  fontSizeXs: "0.75rem",
-  fontSizeSm: "0.875rem",
-  fontSizeMd: "1rem",
-  fontSizeLg: "1.125rem",
-  fontSizeXl: "1.5rem",
+    'var(--nuee-font-heading, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif)',
+  fontSizeXs: "calc(0.75 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  fontSizeSm: "calc(0.875 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  fontSizeMd: "calc(1 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  fontSizeLg: "calc(1.125 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
+  fontSizeXl: "calc(1.5 * var(--nuee-unit, 1rem) * var(--nuee-density, 1))",
   lineHeightTight: "1.25",
   lineHeightNormal: "1.5",
   fontWeightRegular: "400",
@@ -142,3 +164,6 @@ export const motionVars = stylex.defineVars({
   easingEnter: "cubic-bezier(0.16, 1, 0.3, 1)",
   easingExit: "cubic-bezier(0.4, 0, 1, 1)",
 });
+
+/** Compatibility export; new code uses typo. */
+export { typo as typographyVars };

@@ -18,7 +18,7 @@ const layout = stylex.create({
 });
 export default function Default() {
   return (
-    <Timeline {...stylex.props(layout.componentWidth)}>
+    <Timeline xstyle={layout.componentWidth}>
       <TimelineItem>
         <TimelineIndicator variant="complete">
           <CheckIcon aria-hidden="true" />

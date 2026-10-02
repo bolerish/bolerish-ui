@@ -13,3 +13,10 @@ Distinguish the text being typed from the selected value. Do not promise that ar
 Use `ComboboxEmpty` for a completed search with no matches. If results come from a server, manage loading, failures, and stale responses in the application; an empty list does not explain all three. Preserve the query after a failure so the user can retry.
 
 > Keep the input's accessible name separate from its placeholder. Verify keyboard selection and clearing as well as pointer selection. See [Search and Filter](?path=/docs/patterns-search-and-filter--docs) for results-page behavior.
+
+### App search and supporting elements
+
+Use `ComboboxInput variant="inline"` for search that blends into the surrounding
+screen. `startAddon` and `endAddon` can replace the default search icon and open
+button with an engine picker or shortcut hint. Retain an input label, keyboard
+option selection and accessible names for addon buttons.

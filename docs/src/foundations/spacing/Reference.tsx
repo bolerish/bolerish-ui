@@ -1,4 +1,10 @@
-import { colorVars, sizeVars, spacingVars, radiusVars } from "@nuee/tokens/semantic.stylex";
+import {
+  colorVars,
+  sizeVars,
+  spacingRoleVars,
+  spacingVars,
+  radiusVars,
+} from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { TokenRow } from "../../documentation/TokenRow";
@@ -26,13 +32,27 @@ const spacingTokens = [
   ["space4", spacingVars.space4, "Between default elements"],
   ["space5", spacingVars.space5, "Inside spacious controls"],
   ["space6", spacingVars.space6, "Inside cards and section groups"],
-  ["space8", spacingVars.space8, "Page padding"],
+  ["space8", spacingVars.space8, "Independent sections"],
   ["space10", spacingVars.space10, "Between large sections"],
   ["space12", spacingVars.space12, "Screen-level separation"],
+] as const;
+const spacingRoles = [
+  ["pageGutter", spacingRoleVars.pageGutter, "Page inline padding"],
+  ["panelPadding", spacingRoleVars.panelPadding, "Card or panel padding"],
+  ["sectionGap", spacingRoleVars.sectionGap, "Independent sections"],
+  ["fieldGap", spacingRoleVars.fieldGap, "Related fields"],
+  ["labelGap", spacingRoleVars.labelGap, "Label, control and help text"],
+  ["inlineGap", spacingRoleVars.inlineGap, "Related elements in one row"],
+  ["textGap", spacingRoleVars.textGap, "Title and description"],
 ] as const;
 export function Spacing() {
   return (
     <div {...stylex.props(styles.list)}>
+      {spacingRoles.map(([name, value, usage]) => (
+        <TokenRow key={name} name={`spacingRoleVars.${name}`} usage={usage} value={value}>
+          <div {...stylex.props(styles.measure(value))} />
+        </TokenRow>
+      ))}
       {spacingTokens.map(([name, value, usage]) => (
         <TokenRow key={name} name={`spacingVars.${name}`} usage={usage} value={value}>
           <div {...stylex.props(styles.measure(value))} />

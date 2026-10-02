@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { GLOBALS_UPDATED, UPDATE_GLOBALS } from "storybook/internal/core-events";
 
 export type DocumentationGlobals = {
+  unit: "rem" | "px";
+  density: "default" | "compact" | "spacious";
+  fontPreset: "default" | "serif-heading";
   locale: "ko" | "en";
   colorMode: "system" | "light" | "dark";
   motionPreference: "system" | "reduce" | "no-preference";
@@ -20,9 +23,12 @@ export function useDocumentationGlobals(context: DocsContextProps) {
         : context.channel.last(GLOBALS_UPDATED)?.[0]?.globals);
     const latest = context.channel.last(UPDATE_GLOBALS)?.[0]?.globals;
     return {
+      unit: latest?.unit ?? initial?.unit ?? "rem",
+      density: latest?.density ?? initial?.density ?? "default",
+      fontPreset: latest?.fontPreset ?? initial?.fontPreset ?? "default",
       locale: latest?.locale ?? initial?.locale ?? "ko",
       colorMode: latest?.colorMode ?? initial?.colorMode ?? "light",
-      motionPreference: latest?.motionPreference ?? initial?.motionPreference ?? "no-preference",
+      motionPreference: latest?.motionPreference ?? initial?.motionPreference ?? "system",
     };
   });
 

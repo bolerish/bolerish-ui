@@ -8,9 +8,9 @@
 | ---------------------- | ----------------------------------- | ----------------------------------------------- |
 | 페이지 제목            | `fontSizeXl` + `fontWeightSemibold` | `<Heading level={1} size="page">…</Heading>`    |
 | 섹션 제목              | `fontSizeLg` + `fontWeightSemibold` | `<Heading level={2} size="section">…</Heading>` |
-| 긴 설명·읽기 중심 본문 | `fontSizeMd` + `lineHeightNormal`   | `fontSize: typographyVars.fontSizeMd`           |
-| 컨트롤 주변 설명       | `fontSizeSm` + `lineHeightNormal`   | `fontSize: typographyVars.fontSizeSm`           |
-| 보조 정보              | `fontSizeXs`                        | `fontSize: typographyVars.fontSizeXs`           |
+| 긴 설명·읽기 중심 본문 | `fontSizeMd` + `lineHeightNormal`   | `fontSize: typo.fontSizeMd`                     |
+| 컨트롤 주변 설명       | `fontSizeSm` + `lineHeightNormal`   | `fontSize: typo.fontSizeSm`                     |
+| 보조 정보              | `fontSizeXs`                        | `fontSize: typo.fontSizeXs`                     |
 
 짧은 제목은 `lineHeightTight`, 여러 줄을 읽는 본문은 `lineHeightNormal`을 기본으로 합니다. 위 조합은 새 화면의 시작점이며 기존 `Button`, Toast, `Field`의 내부 글자 크기를 일괄 변경하는 규칙이 아닙니다.
 
@@ -22,7 +22,7 @@
 
 ### 자간과 행간
 
-현재 `typographyVars`에는 자간 토큰이 없습니다. 기본 자간은 글꼴과 브라우저 설정을 따릅니다. 문서를 촘촘하게 보이게 하려고 본문 자간을 일괄 축소하지 않습니다.
+현재 `typo`에는 자간 토큰이 없습니다. 기본 자간은 글꼴과 브라우저 설정을 따릅니다. 문서를 촘촘하게 보이게 하려고 본문 자간을 일괄 축소하지 않습니다.
 
 행간은 짧은 제목의 `lineHeightTight`(1.25)와 여러 줄 본문의 `lineHeightNormal`(1.5)을 구분합니다. 이 값은 글자 크기에 곱해지는 비율입니다. 정보 밀도는 먼저 항목 간 간격과 배치로 조정하고, 사용자가 자간·행간을 넓혀도 내용이 잘리지 않게 합니다. 확인 방법은 [Accessibility](?path=/docs/foundations-accessibility--docs)를 참고합니다.
 
@@ -37,3 +37,8 @@
 본문과 설명은 `p`나 `span`에 필요한 스타일을 적용합니다. 아래 예제처럼 `fontSize`, `fontWeight`, `lineHeight`에 토큰을 지정하고 색상은 정보의 역할에 맞게 별도로 정합니다. 컴포넌트 내부에서 반복되는 조합은 공통 타이포 스타일로 관리합니다.
 
 제목은 [Heading](?path=/docs/components-heading--docs)을 사용해 HTML 단계와 시각적 크기를 따로 정할 수 있습니다.
+
+글자 토큰의 새 이름은 `typo`입니다. 기존 `typographyVars`는 같은 변수 그룹을 가리키는
+호환 export로 유지합니다. 새 예제에서는 `typo.fontSizeMd`처럼 사용합니다. 동일한 그룹에
+이름별로 두 theme을 적용하지 않습니다. 단위·배율은 [간격](?path=/docs/foundations-spacing--docs)의
+공통 설정을 사용하고, 실제 사용자 폰트 선택은 설치 기본값보다 우선합니다.

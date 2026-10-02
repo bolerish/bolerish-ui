@@ -82,6 +82,7 @@ const styles = stylex.create({
   input: {
     color: colorVars.fgPrimary,
     fontSize: typographyVars.fontSizeSm,
+    fontFamily: typographyVars.fontFamilyBody,
     height: sizeVars.controlMd,
     lineHeight: typographyVars.lineHeightNormal,
     paddingInline: spacingVars.space3,
@@ -161,7 +162,7 @@ export function InputGroupAddon({
   );
 }
 
-export function InputGroupInput({ xstyle, ...props }: InputProps) {
+export function InputGroupInput({ xstyle, ...props }: Omit<InputProps, "variant">) {
   return <InputPrimitive {...props} {...stylex.props(styles.input, styles.control, xstyle)} />;
 }
 

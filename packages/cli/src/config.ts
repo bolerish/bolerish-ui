@@ -6,7 +6,15 @@ import { parse, type ParseError } from "jsonc-parser";
 
 export const configFileName = "nuee.json";
 
+export type NueeTheme = {
+  density?: "default" | "compact" | number;
+  unit?: "rem" | "px";
+  motion?: "system" | "off";
+  fonts?: { body?: string; heading?: string };
+};
+
 export type NueeConfig = {
+  theme?: NueeTheme;
   version?: string;
   components?: Record<string, string | null>;
   accessibility: {
@@ -72,6 +80,7 @@ export function validateConfig(config: unknown): NueeConfig {
     components?: unknown;
     paths?: { ui?: unknown; tokens?: unknown };
     tokens?: unknown;
+    theme?: unknown;
   };
   if (candidate.paths || candidate.tokens) {
     throw new Error(
@@ -114,6 +123,56 @@ export function validateConfig(config: unknown): NueeConfig {
   ) {
     throw new Error("Configure components as component names mapped to versions or null.");
   }
+  let theme: NueeTheme | undefined;
+  if (candidate.theme !== undefined) {
+    if (!candidate.theme || typeof candidate.theme !== "object" || Array.isArray(candidate.theme)) {
+      throw new Error("Configure theme as an object.");
+    }
+    const value = candidate.theme as Record<string, unknown>;
+    if (
+      value.density !== undefined &&
+      value.density !== "default" &&
+      value.density !== "compact" &&
+      !(
+        typeof value.density === "number" &&
+        Number.isFinite(value.density) &&
+        value.density > 0 &&
+        value.density <= 2
+      )
+    ) {
+      throw new Error(
+        "Configure theme.density as default, compact or a number greater than 0 and at most 2.",
+      );
+    }
+    if (value.unit !== undefined && value.unit !== "rem" && value.unit !== "px") {
+      throw new Error("Configure theme.unit as rem or px.");
+    }
+    if (value.motion !== undefined && value.motion !== "system" && value.motion !== "off") {
+      throw new Error("Configure theme.motion as system or off.");
+    }
+    let fonts: NueeTheme["fonts"];
+    if (value.fonts !== undefined) {
+      if (!value.fonts || typeof value.fonts !== "object" || Array.isArray(value.fonts)) {
+        throw new Error("Configure theme.fonts as an object.");
+      }
+      fonts = {};
+      const entries = value.fonts as Record<string, unknown>;
+      for (const role of ["body", "heading"] as const) {
+        const font = entries[role];
+        if (font === undefined) continue;
+        if (typeof font !== "string" || !font.trim() || /(?:[{};\n\r]|\/\*|\*\/)/.test(font)) {
+          throw new Error(`Configure theme.fonts.${role} as a CSS font-family list.`);
+        }
+        fonts[role] = font.trim();
+      }
+    }
+    theme = {
+      ...(value.unit !== undefined ? { unit: value.unit as NueeTheme["unit"] } : {}),
+      ...(value.density !== undefined ? { density: value.density as NueeTheme["density"] } : {}),
+      ...(value.motion !== undefined ? { motion: value.motion as NueeTheme["motion"] } : {}),
+      ...(fonts !== undefined ? { fonts } : {}),
+    };
+  }
   const respectReducedMotion =
     typeof candidate.accessibility?.respectReducedMotion === "boolean"
       ? candidate.accessibility.respectReducedMotion
@@ -124,6 +183,7 @@ export function validateConfig(config: unknown): NueeConfig {
     ...(candidate.components !== undefined
       ? { components: candidate.components as Record<string, string | null> }
       : {}),
+    ...(theme !== undefined ? { theme } : {}),
     accessibility: {
       respectReducedMotion,
     },

@@ -1,3 +1,5 @@
+import SettingsSource from "./SettingsExample.tsx?raw";
+import { ComponentPreview } from "../../documentation/ComponentPreview";
 import { Spacing } from "./Reference";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
 import { Meta } from "@storybook/addon-docs/blocks";
@@ -8,6 +10,10 @@ import english from "./guidelines.en.md?raw";
 <Meta title="Foundations/Spacing" />
 
 <Guideline content={guidelines} english={english} />
+
+<LocalizedMarkdown text={"## Shared settings"} />
+
+<ComponentPreview name="spacing--SettingsExample" source={SettingsSource} />
 
 <LocalizedMarkdown text={"## Token reference"} />
 

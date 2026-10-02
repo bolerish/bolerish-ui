@@ -75,7 +75,7 @@ export function ComponentPreview({
     id: "internal-preview--example",
     viewMode: "story",
     args: `example:${name}`,
-    globals: `colorMode:${initialGlobals.colorMode};motionPreference:${initialGlobals.motionPreference};locale:${initialGlobals.locale}`,
+    globals: `colorMode:${initialGlobals.colorMode};motionPreference:${initialGlobals.motionPreference};locale:${initialGlobals.locale};unit:${initialGlobals.unit};density:${initialGlobals.density};fontPreset:${initialGlobals.fontPreset}`,
   });
 
   return (

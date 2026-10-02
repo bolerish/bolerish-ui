@@ -1,6 +1,8 @@
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+import { registryVersion } from "@nuee/registry";
+
 import { hasConfig, readConfig, resolveConfigAlias } from "./config.js";
 import { inspectViteConfig } from "./source.js";
 
@@ -120,7 +122,21 @@ async function inspectLocalConfiguration(projectDirectory: string): Promise<Chec
           status: "warn",
         };
 
+    const versions = [
+      ["Foundation", config.version],
+      ...Object.entries(config.components ?? {}),
+    ] as const;
+    const versionChecks: Check[] = versions.map(([name, version]) => ({
+      name: `Installed source (${name})`,
+      status: version === registryVersion ? "pass" : "warn",
+      detail:
+        version === undefined || version === null
+          ? "Version unknown. Compare local sources before updating; preserve local edits."
+          : `Recorded ${version}; bundled registry ${registryVersion}. Metadata does not verify local edits.`,
+    }));
+
     return [
+      ...versionChecks,
       {
         detail: `${config.aliases.ui} → ${uiDirectory}`,
         name: "UI path",

@@ -1,4 +1,4 @@
-import { colorVars, spacingVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, spacingVars, typo } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Heading } from "@/components/ui/heading";
@@ -6,18 +6,18 @@ import { Heading } from "@/components/ui/heading";
 const styles = stylex.create({
   section: { display: "flex", flexDirection: "column", gap: spacingVars.space3 },
   body: {
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeMd,
-    fontWeight: typographyVars.fontWeightRegular,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeMd,
+    fontWeight: typo.fontWeightRegular,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   description: {
     color: colorVars.fgSecondary,
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightRegular,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightRegular,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
 });

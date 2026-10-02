@@ -40,6 +40,14 @@ const styles = stylex.create({
       outlineWidth: sizeVars.focusRing,
     },
   },
+  inline: {
+    width: "100%",
+    backgroundColor: "transparent",
+    borderWidth: 0,
+    borderBottomWidth: sizeVars.stroke,
+    borderRadius: 0,
+    paddingInlineStart: 0,
+  },
   searchIcon: { color: colorVars.fgSecondary, flexShrink: 0 },
   input: {
     appearance: "none",
@@ -176,9 +184,15 @@ export function ComboboxGroup({
 
 export function ComboboxInput({
   xstyle,
+  variant = "outline",
+  startAddon,
+  endAddon,
   ...props
 }: Omit<ComponentProps<typeof ComboboxPrimitive.Input>, "className" | "style"> & {
   xstyle?: ControlLayoutStyles;
+  variant?: "outline" | "inline";
+  startAddon?: ReactNode;
+  endAddon?: ReactNode;
 }) {
   function getInputStyles(state: ComboboxPrimitive.Input.State) {
     return stylex.props(styles.input, state.disabled && styles.inputDisabled);
@@ -188,20 +202,26 @@ export function ComboboxInput({
   }
 
   return (
-    <ComboboxPrimitive.InputGroup {...stylex.props(styles.inputGroup, xstyle)}>
-      <MagnifyingGlassIcon aria-hidden="true" {...stylex.props(styles.searchIcon)} />
+    <ComboboxPrimitive.InputGroup
+      {...stylex.props(styles.inputGroup, variant === "inline" && styles.inline, xstyle)}
+    >
+      {startAddon ?? (
+        <MagnifyingGlassIcon aria-hidden="true" {...stylex.props(styles.searchIcon)} />
+      )}
       <ComboboxPrimitive.Input
         {...props}
         className={(state) => getInputStyles(state).className}
         style={(state) => getInputStyles(state).style}
       />
-      <ComboboxPrimitive.Trigger
-        aria-label="Open options"
-        className={(state) => getTriggerStyles(state).className ?? ""}
-        style={(state) => getTriggerStyles(state).style}
-      >
-        <CaretDownIcon aria-hidden="true" />
-      </ComboboxPrimitive.Trigger>
+      {endAddon ?? (
+        <ComboboxPrimitive.Trigger
+          aria-label="Open options"
+          className={(state) => getTriggerStyles(state).className ?? ""}
+          style={(state) => getTriggerStyles(state).style}
+        >
+          <CaretDownIcon aria-hidden="true" />
+        </ComboboxPrimitive.Trigger>
+      )}
     </ComboboxPrimitive.InputGroup>
   );
 }

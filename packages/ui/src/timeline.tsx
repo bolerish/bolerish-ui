@@ -1,11 +1,4 @@
-import {
-  colorVars,
-  radiusVars,
-  shadowVars,
-  sizeVars,
-  spacingVars,
-  typographyVars,
-} from "@nuee/tokens/semantic.stylex";
+import { colorVars, radiusVars, sizeVars, spacingVars, typo } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
@@ -53,7 +46,7 @@ const styles = stylex.create({
     position: "relative",
     width: sizeVars.controlXs,
     zIndex: 1,
-    boxShadow: shadowVars.floating,
+    boxShadow: "none",
     borderColor: colorVars.strokeDefault,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
@@ -69,20 +62,20 @@ const styles = stylex.create({
   },
   title: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
-    lineHeight: typographyVars.lineHeightTight,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
+    lineHeight: typo.lineHeightTight,
   },
   description: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   time: {
     color: colorVars.fgTertiary,
-    fontSize: typographyVars.fontSizeXs,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeXs,
+    lineHeight: typo.lineHeightNormal,
   },
 });
 const indicatorVariantStyles = stylex.create({
@@ -92,8 +85,8 @@ const indicatorVariantStyles = stylex.create({
     color: colorVars.fgPrimary,
   },
   complete: {
-    backgroundColor: colorVars.bgFeedbackSuccess,
-    color: colorVars.fgFeedbackSuccess,
+    backgroundColor: colorVars.bgCurrent,
+    color: colorVars.fgPrimary,
   },
   error: {
     backgroundColor: colorVars.bgFeedbackError,
@@ -121,7 +114,7 @@ export function TimelineItem({ xstyle, ...props }: TimelineItemProps) {
 
 export type TimelineIndicatorProps = Omit<ComponentProps<"span">, "className" | "style"> & {
   variant?: TimelineIndicatorVariant;
-  xstyle?: ControlPlacementStyles;
+  xstyle?: stylex.StyleXStyles;
 };
 
 export function TimelineIndicator({

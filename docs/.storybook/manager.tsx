@@ -52,8 +52,33 @@ function DocumentationTools() {
         <option value="dark">{ui.dark}</option>
       </select>
       <select
+        aria-label="Token unit"
+        value={globals.unit ?? "rem"}
+        onChange={(event) => updateGlobals({ unit: event.target.value })}
+      >
+        <option value="rem">rem</option>
+        <option value="px">px</option>
+      </select>
+      <select
+        aria-label="Density"
+        value={globals.density ?? "default"}
+        onChange={(event) => updateGlobals({ density: event.target.value })}
+      >
+        <option value="default">Default (1)</option>
+        <option value="compact">Compact (0.875)</option>
+        <option value="spacious">Spacious (1.125)</option>
+      </select>
+      <select
+        aria-label="Heading font"
+        value={globals.fontPreset ?? "default"}
+        onChange={(event) => updateGlobals({ fontPreset: event.target.value })}
+      >
+        <option value="default">Default font</option>
+        <option value="serif-heading">Serif heading</option>
+      </select>
+      <select
         aria-label={ui.motion}
-        value={globals.motionPreference ?? "no-preference"}
+        value={globals.motionPreference ?? "system"}
         onChange={(event) => updateGlobals({ motionPreference: event.target.value })}
       >
         <option value="system">{ui.system}</option>

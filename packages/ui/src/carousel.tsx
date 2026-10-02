@@ -1,6 +1,6 @@
 "use client";
 
-import { sizeVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars, spacingRoleVars } from "@nuee/tokens/semantic.stylex";
 import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import useEmblaCarousel from "embla-carousel-react";
@@ -20,8 +20,17 @@ import { Button } from "./button";
 const styles = stylex.create({
   root: { position: "relative", width: "100%" },
   viewport: { overflow: "hidden", width: "100%" },
-  content: { display: "flex" },
-  item: { flex: "0 0 100%", minWidth: 0 },
+  content: { display: "flex", gap: "var(--nuee-carousel-gap, 0px)" },
+  ratioRoot: { "--nuee-carousel-gap": spacingRoleVars.inlineGap },
+  ratioItem: (share: number) => ({
+    "--nuee-carousel-basis": `calc((100% - var(--nuee-carousel-gap, 0px)) * ${share})`,
+  }),
+  item: {
+    boxSizing: "border-box",
+    flex: "0 0 100%",
+    flexBasis: "var(--nuee-carousel-basis, 100%)",
+    minWidth: 0,
+  },
   control: {
     position: "absolute",
     top: `calc(50% - ${sizeVars.controlSm} / 2)`,
@@ -34,6 +43,7 @@ type CarouselApi = ReturnType<typeof useEmblaCarousel>[1];
 type CarouselOptions = Parameters<typeof useEmblaCarousel>[0];
 type CarouselPlugins = Parameters<typeof useEmblaCarousel>[1];
 type CarouselContextValue = {
+  slideShare?: number;
   canScrollNext: boolean;
   canScrollPrevious: boolean;
   scrollNext: () => void;
@@ -57,6 +67,8 @@ export type CarouselProps = Omit<ComponentProps<"section">, "className" | "style
   options?: CarouselOptions;
   plugins?: CarouselPlugins;
   setApi?: (api: NonNullable<CarouselApi>) => void;
+  /** Current slide : visible neighboring portion, e.g. [70, 20]. Gap is excluded. */
+  slideRatio?: readonly [number, number];
   xstyle?: stylex.StyleXStyles;
 };
 
@@ -66,10 +78,27 @@ export function Carousel({
   options,
   plugins,
   setApi,
+  slideRatio,
   xstyle,
   ...props
 }: CarouselProps) {
-  const [viewportRef, api] = useEmblaCarousel(options, plugins);
+  let slideShare: number | undefined;
+  if (slideRatio !== undefined) {
+    if (
+      slideRatio.length !== 2 ||
+      slideRatio.some((value) => !Number.isFinite(value) || value <= 0) ||
+      !Number.isFinite(slideRatio[0] + slideRatio[1])
+    ) {
+      throw new Error("Carousel slideRatio requires two finite positive numbers.");
+    }
+    if (options?.axis === "y")
+      throw new Error("Carousel slideRatio currently supports horizontal carousels.");
+    slideShare = slideRatio[0] / (slideRatio[0] + slideRatio[1]);
+  }
+  const [viewportRef, api] = useEmblaCarousel(
+    slideRatio ? { align: "start", ...options } : options,
+    plugins,
+  );
   const [canScrollPrevious, setCanScrollPrevious] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
 
@@ -108,6 +137,7 @@ export function Carousel({
   return (
     <CarouselContext.Provider
       value={{
+        slideShare,
         canScrollNext,
         canScrollPrevious,
         scrollNext,
@@ -115,7 +145,11 @@ export function Carousel({
         viewportRef,
       }}
     >
-      <section {...props} {...stylex.props(styles.root, xstyle)}>
+      <section
+        aria-roledescription="carousel"
+        {...props}
+        {...stylex.props(styles.root, slideShare !== undefined && styles.ratioRoot, xstyle)}
+      >
         {children}
       </section>
     </CarouselContext.Provider>
@@ -143,7 +177,17 @@ export type CarouselItemProps = Omit<ComponentProps<"div">, "className" | "style
 };
 
 export function CarouselItem({ xstyle, ...props }: CarouselItemProps) {
-  return <div {...props} {...stylex.props(styles.item, xstyle)} />;
+  const { slideShare } = useCarousel();
+  return (
+    <div
+      {...props}
+      {...stylex.props(
+        styles.item,
+        slideShare !== undefined && styles.ratioItem(slideShare),
+        xstyle,
+      )}
+    />
+  );
 }
 
 type CarouselControlProps = Omit<

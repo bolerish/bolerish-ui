@@ -1,14 +1,14 @@
 "use client";
 
 import { Field as FieldPrimitive } from "@base-ui/react/field";
-import { colorVars, spacingVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, spacingRoleVars, spacingVars, typo } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import { typographyStyles } from "./typography";
 
 const styles = stylex.create({
-  root: { display: "flex", gap: spacingVars.space2, width: "100%" },
+  root: { display: "flex", gap: spacingRoleVars.labelGap, width: "100%" },
 
   label: {
     color: colorVars.fgPrimary,
@@ -26,24 +26,24 @@ const styles = stylex.create({
     borderWidth: 0,
     display: "flex",
     flexDirection: "column",
-    gap: spacingVars.space6,
+    gap: spacingRoleVars.fieldGap,
     margin: 0,
     minWidth: 0,
     padding: 0,
   },
   legend: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeMd,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeMd,
+    fontWeight: typo.fontWeightMedium,
     marginBottom: spacingVars.space3,
     padding: 0,
   },
-  group: { display: "flex", flexDirection: "column", gap: spacingVars.space6, width: "100%" },
+  group: { display: "flex", flexDirection: "column", gap: spacingRoleVars.fieldGap, width: "100%" },
   content: {
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    gap: spacingVars.space1,
+    gap: spacingRoleVars.textGap,
     minWidth: 0,
   },
   title: {
@@ -52,7 +52,7 @@ const styles = stylex.create({
 });
 
 const orientationStyles = stylex.create({
-  horizontal: { alignItems: "baseline", flexDirection: "row", gap: spacingVars.space4 },
+  horizontal: { alignItems: "baseline", flexDirection: "row", gap: spacingRoleVars.fieldGap },
   vertical: { flexDirection: "column" },
 });
 

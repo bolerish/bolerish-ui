@@ -4,7 +4,7 @@ import {
   lightColorTheme,
   lightShadowTheme,
 } from "@nuee/tokens/themes.stylex";
-import { colorVars, spacingVars, typographyVars } from "@nuee/tokens/tokens.stylex";
+import { colorVars, spacingVars, typo } from "@nuee/tokens/tokens.stylex";
 import {
   DocsContainer,
   TableOfContents,
@@ -62,7 +62,7 @@ function setMotionPreference(preference: MotionPreference) {
     originalMotionMediaQueries.set(rule, originalQuery);
 
     let query = originalQuery;
-    if (preference !== "system") {
+    if (preference === "reduce") {
       query = originalQuery.replace(
         /\(prefers-reduced-motion:\s*(reduce|no-preference)\)/g,
         (_, value: string) => (value === preference ? "(min-width: 0px)" : "(max-width: -1px)"),
@@ -72,10 +72,10 @@ function setMotionPreference(preference: MotionPreference) {
   }
 }
 
-const typographyTheme = stylex.createTheme(typographyVars, {
+const typographyTheme = stylex.createTheme(typo, {
   fontFamily: "var(--nuee-font-body)",
   fontFamilyBody: "var(--nuee-font-body)",
-  fontFamilyHeading: "var(--nuee-font-body)",
+  fontFamilyHeading: "var(--nuee-font-heading, var(--nuee-font-body))",
 });
 
 const styles = stylex.create({
@@ -96,7 +96,7 @@ const styles = stylex.create({
   root: {
     backgroundColor: colorVars.bgSurface,
     color: colorVars.fgPrimary,
-    fontFamily: typographyVars.fontFamilyBody,
+    fontFamily: typo.fontFamilyBody,
     minHeight: `calc(100vh - ${spacingVars.space4} * 2)`,
     display: "flex",
     flexDirection: "column",
@@ -176,48 +176,89 @@ function MotionPreferenceScope({
   return children;
 }
 
+function TokenPreferenceScope({
+  children,
+  settings,
+}: {
+  children: ReactNode;
+  settings: DocumentationGlobals;
+}) {
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const values = {
+      "--nuee-unit": settings.unit === "px" ? "16px" : "1rem",
+      "--nuee-density":
+        settings.density === "compact" ? "0.875" : settings.density === "spacious" ? "1.125" : "1",
+      "--nuee-font-heading":
+        settings.fontPreset === "serif-heading" ? "Georgia, serif" : "var(--nuee-font-body)",
+    };
+    const previous = Object.entries(values).map(([name]) => [
+      name,
+      root.style.getPropertyValue(name),
+    ]);
+    const motion = root.getAttribute("data-nuee-motion");
+    for (const [name, value] of Object.entries(values)) root.style.setProperty(name, value);
+    root.setAttribute(
+      "data-nuee-motion",
+      settings.motionPreference === "reduce" ? "off" : "system",
+    );
+    return () => {
+      for (const [name, value] of previous) {
+        if (value) root.style.setProperty(name, value);
+        else root.style.removeProperty(name);
+      }
+      if (motion === null) root.removeAttribute("data-nuee-motion");
+      else root.setAttribute("data-nuee-motion", motion);
+    };
+  }, [settings.unit, settings.density, settings.fontPreset, settings.motionPreference]);
+  return children;
+}
+
 function DocumentationContainer({
   children,
   context,
 }: DocsContainerProps & { children?: ReactNode }) {
-  const { colorMode, motionPreference, locale } = useDocumentationGlobals(context);
+  const settings = useDocumentationGlobals(context);
+  const { colorMode, motionPreference, locale } = settings;
   const mode = useColorMode(colorMode);
 
   return (
     <LocaleContext.Provider value={locale}>
-      <ThemeScope mode={mode} compact>
-        <MotionPreferenceScope preference={motionPreference}>
-          <DocsContainer
-            context={context}
-            theme={{
-              ...themes[mode],
-              appContentBg: "transparent",
-              colorSecondary: "currentColor",
-              fontBase: "var(--nuee-font-body)",
-              fontCode: "var(--nuee-font-code)",
-            }}
-          >
-            <div {...stylex.props(styles.document)}>
-              <div
-                className={`sb-unstyled ${stylex.props(styles.article).className}`}
-                data-document-locale={locale}
-                lang={locale}
-              >
-                {children}
+      <TokenPreferenceScope settings={settings}>
+        <ThemeScope mode={mode} compact>
+          <MotionPreferenceScope preference={motionPreference}>
+            <DocsContainer
+              context={context}
+              theme={{
+                ...themes[mode],
+                appContentBg: "transparent",
+                colorSecondary: "currentColor",
+                fontBase: "var(--nuee-font-body)",
+                fontCode: "var(--nuee-font-code)",
+              }}
+            >
+              <div {...stylex.props(styles.document)}>
+                <div
+                  className={`sb-unstyled ${stylex.props(styles.article).className}`}
+                  data-document-locale={locale}
+                  lang={locale}
+                >
+                  {children}
+                </div>
+                <aside {...stylex.props(styles.toc)}>
+                  <TableOfContents
+                    contentsSelector={`[data-document-locale="${locale}"]`}
+                    title={ui.onThisPage}
+                    channel={context.channel}
+                    headingSelector="h2, h3"
+                    ignoreSelector=".nuee-example h2, .nuee-example h3, #table-of-contents"
+                  />
+                </aside>
               </div>
-              <aside {...stylex.props(styles.toc)}>
-                <TableOfContents
-                  contentsSelector={`[data-document-locale="${locale}"]`}
-                  title={ui.onThisPage}
-                  channel={context.channel}
-                  headingSelector="h2, h3"
-                  ignoreSelector=".nuee-example h2, .nuee-example h3, #table-of-contents"
-                />
-              </aside>
-            </div>
-          </DocsContainer>
-        </MotionPreferenceScope>
-      </ThemeScope>
+            </DocsContainer>
+          </MotionPreferenceScope>
+        </ThemeScope>
+      </TokenPreferenceScope>
     </LocaleContext.Provider>
   );
 }
@@ -241,14 +282,24 @@ function StoryPreview({
         event.data?.type !== "nuee-preview-globals"
       )
         return;
-      const { colorMode, motionPreference, locale } = event.data.globals ?? {};
+      const {
+        colorMode,
+        motionPreference,
+        locale,
+        unit = "rem",
+        density = "default",
+        fontPreset = "default",
+      } = event.data.globals ?? {};
       if (
         !["system", "light", "dark"].includes(colorMode) ||
         !["system", "reduce", "no-preference"].includes(motionPreference) ||
-        !["ko", "en"].includes(locale)
+        !["ko", "en"].includes(locale) ||
+        !["rem", "px"].includes(unit) ||
+        !["default", "compact", "spacious"].includes(density) ||
+        !["default", "serif-heading"].includes(fontPreset)
       )
         return;
-      setSettings({ colorMode, motionPreference, locale });
+      setSettings({ colorMode, motionPreference, locale, unit, density, fontPreset });
     };
     window.addEventListener("message", update);
     window.parent.postMessage({ type: "nuee-preview-ready" }, window.location.origin);
@@ -257,11 +308,13 @@ function StoryPreview({
   const current = settings ?? globals;
   return (
     <LocaleContext.Provider value={current.locale}>
-      <MotionPreferenceScope preference={current.motionPreference}>
-        <ThemeScope mode={current.colorMode} compact={isolated}>
-          {children}
-        </ThemeScope>
-      </MotionPreferenceScope>
+      <TokenPreferenceScope settings={current}>
+        <MotionPreferenceScope preference={current.motionPreference}>
+          <ThemeScope mode={current.colorMode} compact={isolated}>
+            {children}
+          </ThemeScope>
+        </MotionPreferenceScope>
+      </TokenPreferenceScope>
     </LocaleContext.Provider>
   );
 }
@@ -278,14 +331,20 @@ const preview: Preview = {
     ),
   ],
   globalTypes: {
+    unit: { description: "Token unit" },
+    density: { description: "Shared density" },
+    fontPreset: { description: "Heading font" },
     locale: { description: "Language" },
     colorMode: { description: "Color mode" },
     motionPreference: { description: "Motion" },
   },
   initialGlobals: {
+    unit: "rem",
+    density: "default",
+    fontPreset: "default",
     locale: "ko",
     colorMode: "light",
-    motionPreference: "no-preference",
+    motionPreference: "system",
   },
   parameters: {
     docs: {

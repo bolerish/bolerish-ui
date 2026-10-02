@@ -1,3 +1,25 @@
+## Version v0.8.0
+
+Released on 2026-10-02.
+
+- Choose purpose-based spacing roles, rem or px units, and a shared density for
+    typography, controls, icons and content widths. Existing numeric spacing and
+    typographyVars remain compatible; new code can use typo.
+- Configure body and heading font defaults and system/off motion in nuee.json.
+    Runtime user choices override defaults, and OS reduced motion stays respected.
+    Existing edited source and generated files are preserved during initialization.
+- Use supported inline Input and Combobox layouts with supporting addons and
+    visible focus. Related Field groups now share a consistent spacing role.
+- Preview neighboring carousel slides with slideRatio, excluding the gap from
+    the ratio calculation. Existing full-width slides remain the default.
+- Toggle selection uses neutral surfaces and boundaries, including disabled
+    selections. Timeline decorations and completed events are neutral; meaningful
+    error colors and explicit indicator overrides remain available.
+- Compare shared preferences in Storybook and discover canonical API, token,
+    configuration and installation references through generated agent guidance.
+- Doctor compares recorded installed versions with its registry. Drawer guidance
+    explains restoring focus across screen transitions.
+
 ## Version v0.7.0
 
 Released on September 14, 2026.

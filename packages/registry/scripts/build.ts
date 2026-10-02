@@ -48,7 +48,12 @@ for (const [name, item] of Object.entries(registryItems)) {
   );
 }
 
-for (const name of ["color-palette.stylex.ts", "semantic.stylex.ts", "themes.stylex.ts"]) {
+for (const name of [
+  "color-palette.stylex.ts",
+  "semantic.stylex.ts",
+  "themes.stylex.ts",
+  "density.stylex.ts",
+]) {
   await writeFile(
     join(tokenOutputDirectory, name),
     await readFile(join(tokenSourceDirectory, name), "utf8"),

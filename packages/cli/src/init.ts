@@ -16,6 +16,7 @@ import {
 } from "./config.js";
 import { getMissingDependencies, installDependencies } from "./dependencies.js";
 import { configureVite } from "./source.js";
+import { prepareThemeFiles } from "./theme.js";
 
 async function ask(
   question: string,
@@ -100,6 +101,7 @@ async function prepareResetImport(
 ): Promise<PlannedFile | undefined> {
   const path = join(projectDirectory, "src/index.css");
   const resetImport = `@import "${getRelativeImportPath(path, join(tokenDirectory, "reset.css"))}";`;
+  const preferencesImport = `@import "${getRelativeImportPath(path, join(tokenDirectory, "preferences.css"))}";`;
   let source: string;
   try {
     source = await readFile(path, "utf8");
@@ -111,10 +113,11 @@ async function prepareResetImport(
       error.code !== "ENOENT"
     )
       throw error;
-    return { path, source: `${resetImport}\n`, flag: "wx" };
+    return { path, source: `${resetImport}\n${preferencesImport}\n`, flag: "wx" };
   }
-  if (source.includes(resetImport)) return undefined;
-  return { path, source: `${resetImport}\n\n${source}`, flag: "w" };
+  const missing = [resetImport, preferencesImport].filter((line) => !source.includes(line));
+  if (!missing.length) return undefined;
+  return { path, source: `${missing.join("\n")}\n\n${source}`, flag: "w" };
 }
 
 export async function prepareInitialization(projectDirectory: string, options: CliOptions) {
@@ -140,11 +143,13 @@ export async function prepareInitialization(projectDirectory: string, options: C
     const defaultAliases = await getDefaultAliases(projectDirectory);
     const uiAlias =
       options.ui ??
+      previousConfig?.aliases.ui ??
       (readline
         ? await ask("Enter the UI import alias.", defaultAliases.ui, readline)
         : defaultAliases.ui);
     const stylesAlias =
       options.styles ??
+      previousConfig?.aliases.styles ??
       options.tokens ??
       (readline
         ? await ask("Enter the styles import alias.", defaultAliases.styles, readline)
@@ -161,7 +166,10 @@ export async function prepareInitialization(projectDirectory: string, options: C
     }
     const configuredVite = viteConfig ? configureVite(viteConfig.source) : undefined;
     const foundation = await prepareFoundationFiles(tokenDirectory, Boolean(options.force));
-    const files = [...foundation.files];
+    const files = [
+      ...foundation.files,
+      ...(await prepareThemeFiles(tokenDirectory, previousConfig?.theme)),
+    ];
     let version: string | undefined;
     if (foundation.isCurrentVersion) {
       version = registryVersion;
@@ -188,7 +196,8 @@ export async function prepareInitialization(projectDirectory: string, options: C
         ...(previousConfig?.aliases.ui === uiAlias && previousConfig.components
           ? { components: previousConfig.components }
           : {}),
-        accessibility: defaultConfig.accessibility,
+        ...(previousConfig?.theme ? { theme: previousConfig.theme } : {}),
+        accessibility: previousConfig?.accessibility ?? defaultConfig.accessibility,
         aliases: { ui: uiAlias, styles: stylesAlias },
       },
     };

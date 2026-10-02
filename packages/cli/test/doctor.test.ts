@@ -1,9 +1,12 @@
 import assert from "node:assert/strict";
-import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
+import { registryVersion } from "@nuee/registry";
+
+import { defaultConfig, writeConfig } from "../dist/config.js";
 import { doctor } from "../dist/doctor.js";
 import { init } from "../dist/init.js";
 import { writeTsconfig } from "./helpers.ts";
@@ -33,3 +36,34 @@ test("doctor verifies local StyleX sources, the compiler, and a CSS entry point"
     await rm(projectDirectory, { recursive: true });
   }
 });
+
+for (const version of [registryVersion, "0.0.0", undefined, null]) {
+  test(`doctor reports recorded source version ${version} without editing config`, async (t) => {
+    const directory = await mkdtemp(join(tmpdir(), "nuee-doctor-"));
+    try {
+      await writeTsconfig(directory);
+      await writeConfig(directory, {
+        ...defaultConfig,
+        components: { button: version ?? null },
+      });
+      const configPath = join(directory, "nuee.json");
+      const before = await readFile(configPath, "utf8");
+      const messages: string[] = [];
+      t.mock.method(console, "log", (message: string) => messages.push(message));
+      await doctor(directory);
+      const message = messages.find((line) => line.includes("Installed source (button)"));
+      assert.ok(message);
+      assert.ok(message.startsWith(version === registryVersion ? "✓" : "!"));
+      assert.match(
+        message,
+        version == null ? /Version unknown/ : /Metadata does not verify local edits/,
+      );
+      assert.ok(
+        messages.some((line) => line.includes("Installed source (Foundation): Version unknown")),
+      );
+      assert.equal(await readFile(configPath, "utf8"), before);
+    } finally {
+      await rm(directory, { recursive: true, force: true });
+    }
+  });
+}

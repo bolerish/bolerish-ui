@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, sizeVars, typo } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { TokenRow } from "../../documentation/TokenRow";
@@ -22,51 +22,43 @@ const styles = stylex.create({
   }),
 });
 const fontSizeTokens = [
-  ["fontSizeXs", typographyVars.fontSizeXs, "Supporting information and token values"],
-  ["fontSizeSm", typographyVars.fontSizeSm, "Body text and form labels"],
-  ["fontSizeMd", typographyVars.fontSizeMd, "Emphasized body text"],
-  ["fontSizeLg", typographyVars.fontSizeLg, "Section headings"],
-  ["fontSizeXl", typographyVars.fontSizeXl, "Page titles"],
+  ["fontSizeXs", typo.fontSizeXs, "Supporting information and token values"],
+  ["fontSizeSm", typo.fontSizeSm, "Body text and form labels"],
+  ["fontSizeMd", typo.fontSizeMd, "Emphasized body text"],
+  ["fontSizeLg", typo.fontSizeLg, "Section headings"],
+  ["fontSizeXl", typo.fontSizeXl, "Page titles"],
 ] as const;
 const lineHeightTokens = [
-  ["lineHeightTight", typographyVars.lineHeightTight, "Headings and single-line text"],
-  ["lineHeightNormal", typographyVars.lineHeightNormal, "Body text and multi-line text"],
+  ["lineHeightTight", typo.lineHeightTight, "Headings and single-line text"],
+  ["lineHeightNormal", typo.lineHeightNormal, "Body text and multi-line text"],
 ] as const;
 const fontWeightTokens = [
-  ["fontWeightRegular", typographyVars.fontWeightRegular, "Default body text"],
-  ["fontWeightMedium", typographyVars.fontWeightMedium, "Labels and subtle emphasis"],
-  ["fontWeightSemibold", typographyVars.fontWeightSemibold, "Headings and strong emphasis"],
+  ["fontWeightRegular", typo.fontWeightRegular, "Default body text"],
+  ["fontWeightMedium", typo.fontWeightMedium, "Labels and subtle emphasis"],
+  ["fontWeightSemibold", typo.fontWeightSemibold, "Headings and strong emphasis"],
 ] as const;
 export function Typography() {
   return (
     <div {...stylex.props(styles.list)}>
       <TokenRow
-        name="typographyVars.fontFamilyBody"
+        name="typo.fontFamilyBody"
         usage="Body text, form controls, and product UI"
-        value={typographyVars.fontFamilyBody}
+        value={typo.fontFamilyBody}
       >
-        <span {...stylex.props(styles.fontFamilySample(typographyVars.fontFamilyBody))}>
-          nuée Aa Bb
-        </span>
+        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyBody))}>nuée Aa Bb</span>
       </TokenRow>
       <TokenRow
-        name="typographyVars.fontFamilyHeading"
+        name="typo.fontFamilyHeading"
         usage="Display, title, and heading text"
-        value={typographyVars.fontFamilyHeading}
+        value={typo.fontFamilyHeading}
       >
-        <span {...stylex.props(styles.fontFamilySample(typographyVars.fontFamilyHeading))}>
-          nuée Aa Bb
-        </span>
+        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyHeading))}>nuée Aa Bb</span>
       </TokenRow>
       {fontSizeTokens.map(([name, value, usage]) => (
-        <TokenRow key={name} name={`typographyVars.${name}`} usage={usage} value={value}>
+        <TokenRow key={name} name={`typo.${name}`} usage={usage} value={value}>
           <span
             {...stylex.props(
-              styles.typeSample(
-                value,
-                typographyVars.fontWeightRegular,
-                typographyVars.lineHeightNormal,
-              ),
+              styles.typeSample(value, typo.fontWeightRegular, typo.lineHeightNormal),
             )}
           >
             nuée Aa Bb
@@ -74,11 +66,9 @@ export function Typography() {
         </TokenRow>
       ))}
       {lineHeightTokens.map(([name, value, usage]) => (
-        <TokenRow key={name} name={`typographyVars.${name}`} usage={usage} value={value}>
+        <TokenRow key={name} name={`typo.${name}`} usage={usage} value={value}>
           <span
-            {...stylex.props(
-              styles.typeSample(typographyVars.fontSizeSm, typographyVars.fontWeightRegular, value),
-            )}
+            {...stylex.props(styles.typeSample(typo.fontSizeSm, typo.fontWeightRegular, value))}
           >
             Line height for
             <br />
@@ -87,12 +77,8 @@ export function Typography() {
         </TokenRow>
       ))}
       {fontWeightTokens.map(([name, value, usage]) => (
-        <TokenRow key={name} name={`typographyVars.${name}`} usage={usage} value={value}>
-          <span
-            {...stylex.props(
-              styles.typeSample(typographyVars.fontSizeSm, value, typographyVars.lineHeightNormal),
-            )}
-          >
+        <TokenRow key={name} name={`typo.${name}`} usage={usage} value={value}>
+          <span {...stylex.props(styles.typeSample(typo.fontSizeSm, value, typo.lineHeightNormal))}>
             nuée Aa Bb
           </span>
         </TokenRow>

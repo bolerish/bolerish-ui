@@ -6,6 +6,7 @@
   "scripts": {
     "build-storybook": "node scripts/build-guidelines.mjs && pnpm --filter @nuee/ui build && storybook build",
     "storybook": "node scripts/build-guidelines.mjs && pnpm --filter @nuee/ui build && storybook dev -p 6006",
+    "test:agent": "node scripts/build-guidelines.mjs --check && node --test scripts/agent.test.mjs",
     "typecheck": "pnpm --filter @nuee/ui build && tsc --noEmit"
   },
   "dependencies": {

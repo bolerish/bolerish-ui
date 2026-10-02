@@ -107,7 +107,12 @@ export async function getRegistryItem(name: string): Promise<RegistryItem> {
 }
 
 export async function getTokenFiles(): Promise<TokenFile[]> {
-  const names = ["color-palette.stylex.ts", "semantic.stylex.ts", "themes.stylex.ts"];
+  const names = [
+    "color-palette.stylex.ts",
+    "semantic.stylex.ts",
+    "themes.stylex.ts",
+    "density.stylex.ts",
+  ];
 
   return Promise.all(
     names.map(async (name) => ({

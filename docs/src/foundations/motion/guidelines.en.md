@@ -24,3 +24,11 @@ Respect `prefers-reduced-motion`. Retain progress text and state when reducing r
 ### When a panel opens and closes
 
 Consider `easingEnter` for arrival and `easingExit` for departure. Use `durationFast` for a brief button color change. The open panel and any pending state must remain clear when motion is reduced.
+
+## Installation defaults and user preferences
+
+`theme.motion` uses `system` to follow the OS and `off` to suppress motion. Load
+the generated `preferences.css`; even enabled motion respects OS reduction.
+Use root `data-nuee-motion` for the end user's choice. Keep loading copy and open
+states visible, and apply the same decision to JavaScript scrolling and View
+Transitions. Legacy `respectReducedMotion: false` does not mean motion off.
