@@ -1,3 +1,8 @@
+## Unreleased
+
+- Coding-agent indexes and full guidelines now use canonical English sources.
+    Localized Korean user documentation remains available.
+
 ## Version v0.8.0
 
 Released on 2026-10-02.

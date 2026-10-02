@@ -33,3 +33,23 @@ test("input reference and configuration source contain the current canonical dec
   const reference = await readFile(new URL("api/input.en.md", root), "utf8");
   assert.match(reference, /variant\?: "outline" \| "inline"/);
 });
+
+test("canonical agent entry points use English and link English references", async () => {
+  for (const name of [
+    "llms.txt",
+    "llms-full.txt",
+    "llms-full.en.txt",
+    "agent/SKILL.md",
+    "nuee-for-llms.md",
+    "installation.md",
+  ]) {
+    const content = await readFile(new URL(name, root), "utf8");
+    assert.doesNotMatch(content, /[가-힣]/, name);
+  }
+  const index = await readFile(new URL("llms.txt", root), "utf8");
+  assert.doesNotMatch(index, /\.\/guidelines\/[^)]+(?<!\.en)\.md\)/);
+  assert.equal(
+    await readFile(new URL("llms-full.txt", root), "utf8"),
+    await readFile(new URL("llms-full.en.txt", root), "utf8"),
+  );
+});

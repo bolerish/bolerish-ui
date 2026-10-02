@@ -9,10 +9,13 @@ Use `isolated height={360}` for examples that need an overlay boundary.
 ## Foundations
 
 Edit `src/foundations/{topic}/guidelines.md` and `guidelines.en.md` together.
-These files supply both the documentation and LLM guidance.
+These files supply localized user documentation. Agent entry points, API links
+and full LLM guidelines use the canonical `*.en.md` sources exclusively.
 
 The development and build scripts generate `public/llms.txt`, `llms-full.txt`,
-`llms-full.en.txt`, and per-topic Markdown. To regenerate them during development,
+`llms-full.en.txt`, `nuee-for-llms.md`, and per-topic Markdown. Both full LLM
+files contain identical English content; Korean per-topic files remain available
+for the user documentation. To regenerate them during development,
 run this from `docs/`:
 
 ```sh

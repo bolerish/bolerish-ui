@@ -62,7 +62,7 @@ for (const locale of ["ko", "en"]) {
     const content = await readFile(new URL(`${slug}/guidelines${suffix}.md`, source), "utf8");
     const title = content.split("\n")[0].slice(2);
     entries.push(content);
-    links.push(`- [${title} (${locale})](./guidelines/${slug}${suffix}.md)`);
+    if (locale === "en") links.push(`- [${title}](./guidelines/${slug}${suffix}.md)`);
     await emitFile(new URL(`guidelines/${slug}${suffix}.md`, output), content);
   }
   for (const { slug } of patternOrder) {
@@ -71,7 +71,7 @@ for (const locale of ["ko", "en"]) {
     const content = `${overview.trim()}\n\n${detail}`;
     const title = content.split("\n")[0].slice(2);
     entries.push(content);
-    links.push(`- [${title} (${locale})](./guidelines/pattern-${slug}${suffix}.md)`);
+    if (locale === "en") links.push(`- [${title}](./guidelines/pattern-${slug}${suffix}.md)`);
     await emitFile(new URL(`guidelines/pattern-${slug}${suffix}.md`, output), content);
   }
   for (const slug of componentNames) {
@@ -90,7 +90,7 @@ for (const locale of ["ko", "en"]) {
     const apiFile = `${slug}${suffix}.md`;
     const reference = `${content}\n## Installed API reference\n\nThis source is exported from the current checkout. Read your installed local props before using it; imports are rewritten by the CLI.\n\n\`\`\`tsx\n${componentSource}\`\`\`\n`;
     await emitFile(new URL(apiFile, apiOutput), reference);
-    sourceLinks.push(`- [${title} API (${locale})](./api/${apiFile})`);
+    if (locale === "en") sourceLinks.push(`- [${title} API](./api/${apiFile})`);
     if (locale === "en")
       catalog.push(
         `- [${slug}](../api/${apiFile}): ${
@@ -101,10 +101,14 @@ for (const locale of ["ko", "en"]) {
         }`,
       );
     entries.push(content);
-    links.push(`- [${title} (${locale})](./guidelines/${slug}${suffix}.md)`);
+    if (locale === "en") links.push(`- [${title}](./guidelines/${slug}${suffix}.md)`);
     await emitFile(new URL(`guidelines/${slug}${suffix}.md`, output), content);
   }
-  await emitFile(new URL(`llms-full${suffix}.txt`, output), entries.join("\n\n---\n\n"));
+  if (locale === "en") {
+    const full = entries.join("\n\n---\n\n");
+    await emitFile(new URL("llms-full.txt", output), full);
+    await emitFile(new URL("llms-full.en.txt", output), full);
+  }
 }
 await emitFile(
   new URL("llms.txt", output),
@@ -115,8 +119,8 @@ await emitFile(
     "",
     "- [Installation and appearance defaults](./installation.md)",
     "- [Generated agent skill](./agent/SKILL.md)",
-    "- [전체 규칙 (한국어)](./llms-full.txt)",
-    "- [Complete guidelines (English)](./llms-full.en.txt)",
+    "- [Complete guidelines](./llms-full.txt)",
+    "- [LLM usage guide](./nuee-for-llms.md)",
     ...links,
     "",
     "## Exact API, token and configuration source",
@@ -150,8 +154,12 @@ await emitFile(
     "",
   ].join("\n"),
 );
+await emitFile(
+  new URL("nuee-for-llms.md", output),
+  `# Nuée usage guide for coding agents\n\nGenerated from canonical English documentation and current source.\n\nRead the [agent workflow](./agent/SKILL.md), [installation guide](./installation.md) and [complete guidelines](./llms-full.txt). Check the installed source before using any props; the CLI copies React and StyleX source into the app. Local edits and runtime user preferences take precedence over generated defaults.\n\nUse the [spacing roles](./guidelines/spacing.en.md), [configuration source](./api/configuration-config.ts.md) and exact component API references linked from [the index](./llms.txt). Preserve keyboard access, focus, disabled boundaries and OS reduced motion.\n`,
+);
 console.log(
   checking
     ? "Generated Nuée documentation is current."
-    : "Exported nuée guidelines in Korean and English.",
+    : "Exported localized user guidelines and canonical English agent references.",
 );

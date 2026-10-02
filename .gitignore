@@ -39,3 +39,6 @@ docs/public/llms-full.txt
 docs/public/api/
 docs/public/agent/
 docs/public/installation.md
+
+# Generated English coding-agent entry point
+docs/public/nuee-for-llms.md
