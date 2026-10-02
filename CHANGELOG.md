@@ -1,6 +1,17 @@
-## Unreleased
+## Version v0.8.1
 
-- Coding-agent indexes and full guidelines now use canonical English sources.
+Released on 2026-10-02.
+
+- Distinguish persistent selection, drop destinations, and insertion positions
+    with explicit color roles in both themes and accessible movement examples.
+- Follow the selection and feedback contracts when composing controls and fields.
+    Page-width guidance now demonstrates the centered content token.
+- Use the responsive Drawer example to reserve panel space on wide screens while
+    retaining the overlay layout on narrow screens.
+- Checkbox, Radio and Switch follow their checked and disabled states directly,
+    preserving keyboard interaction and disabled appearance. Menu separators use
+    an emphasized boundary, and the soft Toggle Group has a matching example.
+- Coding-agent indexes and full guidelines use canonical English sources.
     Localized Korean user documentation remains available.
 
 ## Version v0.8.0
