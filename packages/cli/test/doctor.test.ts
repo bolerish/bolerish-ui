@@ -46,7 +46,7 @@ for (const version of [registryVersion, "0.0.0", undefined, null]) {
         ...defaultConfig,
         components: { button: version ?? null },
       });
-      const configPath = join(directory, "nuee.json");
+      const configPath = join(directory, ".nuee.json");
       const before = await readFile(configPath, "utf8");
       const messages: string[] = [];
       t.mock.method(console, "log", (message: string) => messages.push(message));

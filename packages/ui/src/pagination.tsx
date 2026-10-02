@@ -12,7 +12,7 @@ import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles, ControlPlacementStyles } from "./control-layout";
+import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: { display: "flex", justifyContent: "center", width: "100%" },

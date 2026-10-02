@@ -12,7 +12,7 @@ async function readRegistryItem(name: string): Promise<RegistryItem> {
   if (!response.ok) throw new Error(`Could not load the registry: ${response.status}`);
   const value: unknown = await response.json();
   if (!value || typeof value !== "object" || Array.isArray(value)) {
-    throw new Error("This is not a valid Nuee registry item.");
+    throw new Error("This is not a valid @nuee/ui registry item.");
   }
   const candidate = value as Record<string, unknown>;
   const item = {

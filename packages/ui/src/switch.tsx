@@ -11,7 +11,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {
@@ -51,7 +51,9 @@ const styles = stylex.create({
     transitionProperty: "background-color, transform",
     transitionTimingFunction: motionVars.easingStandard,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
 });

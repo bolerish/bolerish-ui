@@ -13,7 +13,7 @@ import { ArrowsDownUpIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles } from "./control-layout";
+import type { ControlLayoutStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {
@@ -76,7 +76,9 @@ const styles = stylex.create({
     transitionTimingFunction: motionVars.easingStandard,
     width: "100%",
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   panelTransitioning: { height: 0, opacity: 0 },

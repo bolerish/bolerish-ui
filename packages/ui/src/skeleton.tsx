@@ -12,7 +12,9 @@ const styles = stylex.create({
     animationTimingFunction: "ease-in-out",
     backgroundColor: colorVars.bgSkeleton,
     borderRadius: radiusVars.sm,
-    "@media (prefers-reduced-motion: reduce)": { animationName: "none" },
+    "@media (prefers-reduced-motion: reduce)": {
+      ":not(:root[data-nuee-motion='on'] *)": { animationName: "none" },
+    },
   },
 });
 

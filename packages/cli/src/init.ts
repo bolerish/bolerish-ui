@@ -78,12 +78,34 @@ async function prepareFoundationFiles(tokenDirectory: string, refreshLegacyToken
         error.code !== "ENOENT"
       )
         throw error;
-      files.push({ path, source: file.content, flag: "wx" });
+      let source = file.content;
+      if (file.name.startsWith("tokens/")) {
+        try {
+          source = await readFile(join(tokenDirectory, file.name.slice("tokens/".length)), "utf8");
+          if (
+            refreshLegacyTokens &&
+            file.name === "tokens/semantic.stylex.ts" &&
+            source.includes('bgCanvas: "initial"') &&
+            source.includes('overlay: "initial"')
+          )
+            source = file.content;
+          if (source !== file.content) isCurrentVersion = false;
+        } catch (legacyError) {
+          if (
+            typeof legacyError !== "object" ||
+            legacyError === null ||
+            !("code" in legacyError) ||
+            legacyError.code !== "ENOENT"
+          )
+            throw legacyError;
+        }
+      }
+      files.push({ path, source, flag: "wx" });
       continue;
     }
     if (
       refreshLegacyTokens &&
-      file.name === "semantic.stylex.ts" &&
+      file.name === "tokens/semantic.stylex.ts" &&
       currentSource.includes('bgCanvas: "initial"') &&
       currentSource.includes('overlay: "initial"')
     ) {
@@ -122,7 +144,7 @@ async function prepareResetImport(
 
 export async function prepareInitialization(projectDirectory: string, options: CliOptions) {
   if ((await hasConfig(projectDirectory)) && !options.force) {
-    throw new Error("nuee.json already exists. Use --force to create it again.");
+    throw new Error(".nuee.json already exists. Use --force to create it again.");
   }
 
   let previousConfig: NueeConfig | undefined;
@@ -222,5 +244,5 @@ export async function applyInitialization(
 export async function init(projectDirectory: string, options: CliOptions, shouldLog = true) {
   const plan = await prepareInitialization(projectDirectory, options);
   await applyInitialization(projectDirectory, plan);
-  if (shouldLog) console.log("✔ Initialized Nuee.");
+  if (shouldLog) console.log("✔ Initialized @nuee/ui.");
 }

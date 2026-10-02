@@ -3,7 +3,7 @@ import { colorVars, spacingVars } from "@nuee/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 import { typographyStyles } from "./typography";
 
 const styles = stylex.create({

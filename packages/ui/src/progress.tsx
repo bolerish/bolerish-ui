@@ -5,7 +5,7 @@ import { colorVars, motionVars, radiusVars, sizeVars } from "@nuee/tokens/semant
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles } from "./control-layout";
+import type { ControlLayoutStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {
@@ -22,7 +22,9 @@ const styles = stylex.create({
     transitionProperty: "width",
     transitionTimingFunction: motionVars.easingStandard,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
 });

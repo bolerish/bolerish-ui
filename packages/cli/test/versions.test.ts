@@ -42,12 +42,12 @@ test("add preserves foundation and other component versions and records dependen
     for (const name of resolved.components)
       assert.equal(config.components?.[name], registryVersion);
     if (!resolved.components.includes("button")) assert.equal(config.components?.button, "0.5.1");
-    const before = await readFile(join(directory, "nuee.json"), "utf8");
+    const before = await readFile(join(directory, ".nuee.json"), "utf8");
     await add(directory, "card", { "dry-run": true, "skip-dependencies": true });
-    assert.equal(await readFile(join(directory, "nuee.json"), "utf8"), before);
+    assert.equal(await readFile(join(directory, ".nuee.json"), "utf8"), before);
     await writeFile(join(directory, "src/components/ui/alert-dialog.tsx"), "// user edit");
     await assert.rejects(add(directory, "alert-dialog", { "skip-dependencies": true }), /canceled/);
-    assert.equal(await readFile(join(directory, "nuee.json"), "utf8"), before);
+    assert.equal(await readFile(join(directory, ".nuee.json"), "utf8"), before);
   } finally {
     await rm(directory, { recursive: true, force: true });
   }

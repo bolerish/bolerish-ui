@@ -15,7 +15,7 @@ import { XIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   backdrop: {
@@ -34,8 +34,10 @@ const styles = stylex.create({
       transitionTimingFunction: motionVars.easingExit,
     },
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
-      ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+        ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+      },
     },
   },
   viewport: {
@@ -76,9 +78,11 @@ const styles = stylex.create({
       transitionTimingFunction: motionVars.easingExit,
     },
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
-      ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
-      ":is([data-starting-style], [data-ending-style])": { transform: "scale(0.99)" },
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+        ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+        ":is([data-starting-style], [data-ending-style])": { transform: "scale(0.99)" },
+      },
     },
   },
   close: {

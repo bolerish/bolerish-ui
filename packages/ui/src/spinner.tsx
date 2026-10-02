@@ -2,7 +2,7 @@ import { colorVars, motionVars, radiusVars, sizeVars } from "@nuee/tokens/semant
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const spin = stylex.keyframes({ to: { transform: "rotate(360deg)" } });
 
@@ -21,7 +21,9 @@ const styles = stylex.create({
     height: sizeVars.iconMd,
     width: sizeVars.iconMd,
     "@media (prefers-reduced-motion: reduce)": {
-      animationDuration: motionVars.durationLoadingReduced,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        animationDuration: motionVars.durationLoadingReduced,
+      },
     },
   },
 });

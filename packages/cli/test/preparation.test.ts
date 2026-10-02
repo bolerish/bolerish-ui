@@ -27,7 +27,7 @@ test("dry-run validates the same Vite initialization plan as add", async () => {
         /Could not find a Vite config file/,
       );
     }
-    await assert.rejects(access(join(directory, "nuee.json")));
+    await assert.rejects(access(join(directory, ".nuee.json")));
     await assert.rejects(access(join(directory, "src")));
   } finally {
     await rm(directory, { recursive: true, force: true });

@@ -1,0 +1,16 @@
+/* Global styles are composed by the package build. */
+
+:root[data-nuee-motion="off"],
+:root[data-nuee-motion="off"] *,
+:root[data-nuee-motion="off"] *::before,
+:root[data-nuee-motion="off"] *::after {
+  animation-duration: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0s !important;
+  scroll-behavior: auto !important;
+}
+
+::selection {
+  background-color: Highlight;
+  color: HighlightText;
+}

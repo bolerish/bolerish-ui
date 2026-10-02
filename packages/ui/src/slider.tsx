@@ -11,7 +11,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles } from "./control-layout";
+import type { ControlLayoutStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {

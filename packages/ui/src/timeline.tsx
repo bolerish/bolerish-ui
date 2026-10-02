@@ -2,7 +2,7 @@ import { colorVars, radiusVars, sizeVars, spacingVars, typo } from "@nuee/tokens
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {

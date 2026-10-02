@@ -13,7 +13,6 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles } from "./control-layout";
 import {
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -28,6 +27,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "./dropdown-menu";
+import type { ControlLayoutStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {

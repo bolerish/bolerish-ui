@@ -14,7 +14,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   positioner: { zIndex: layerVars.popup },
@@ -36,8 +36,10 @@ const styles = stylex.create({
     transitionTimingFunction: motionVars.easingEnter,
     width: sizeVars.contentXs,
     "@media (prefers-reduced-motion: reduce)": {
-      transform: "none",
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transform: "none",
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   popupTransitioning: { opacity: 0, transform: "scale(0.98)" },
@@ -45,7 +47,9 @@ const styles = stylex.create({
     transitionDuration: motionVars.durationFast,
     transitionTimingFunction: motionVars.easingExit,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   header: { display: "flex", flexDirection: "column", gap: spacingVars.space1 },

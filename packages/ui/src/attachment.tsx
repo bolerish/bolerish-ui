@@ -12,7 +12,7 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import { Button, type ButtonProps } from "./button";
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {

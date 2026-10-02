@@ -123,7 +123,7 @@ for (const [key, value] of [
 test("invalid component names cannot initialize a project", () =>
   fixture(async (directory) => {
     await assert.rejects(add(directory, "not-a-real-component", { "skip-dependencies": true }));
-    await assert.rejects(access(join(directory, "nuee.json")));
+    await assert.rejects(access(join(directory, ".nuee.json")));
     await assert.rejects(access(join(directory, "src/styles")));
   }));
 test("invalid package manifest cannot create component files", () =>
@@ -138,8 +138,8 @@ test(
   { skip: process.getuid?.() === 0 },
   () =>
     fixture(async (directory) => {
-      await mkdir(join(directory, "src/styles"), { recursive: true });
-      const path = join(directory, "src/styles/semantic.stylex.ts");
+      await mkdir(join(directory, "src/styles/tokens"), { recursive: true });
+      const path = join(directory, "src/styles/tokens/semantic.stylex.ts");
       await writeFile(path, "/* user data */");
       await chmod(path, 0o200);
       try {
@@ -148,10 +148,10 @@ test(
         await chmod(path, 0o600);
       }
       assert.equal(await readFile(path, "utf8"), "/* user data */");
-      await assert.rejects(access(join(directory, "src/styles/color-palette.stylex.ts")));
+      await assert.rejects(access(join(directory, "src/styles/tokens/color-palette.stylex.ts")));
     }),
 );
-test("single-line motion removal preserves sibling styles and braces in strings", () =>
+test("legacy configuration preserves remote motion rules and sibling styles", () =>
   fixture(async (directory) => {
     await writeConfig(directory, {
       ...defaultConfig,
@@ -167,7 +167,7 @@ test("single-line motion removal preserves sibling styles and braces in strings"
     assert.match(result, /const styles = stylex\.create/);
     assert.match(result, /color: 'red'/);
     assert.match(result, /opacity: 1/);
-    assert.doesNotMatch(result, /prefers-reduced-motion/);
+    assert.match(result, /prefers-reduced-motion/);
   }));
 test("doctor failure becomes a failing command result", () =>
   fixture(async (directory) => {

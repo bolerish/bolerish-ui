@@ -8,7 +8,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   group: { display: "flex", flexDirection: "column", gap: spacingVars.space2, minWidth: 0 },

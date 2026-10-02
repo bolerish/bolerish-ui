@@ -9,7 +9,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlFieldStyles } from "./control-layout";
+import type { ControlFieldStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {

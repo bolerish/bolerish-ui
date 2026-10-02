@@ -13,7 +13,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import { createContext, type ComponentProps, useContext } from "react";
 
-import type { ControlLayoutStyles } from "./control-layout";
+import type { ControlLayoutStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: { minWidth: 0, width: "100%" },
@@ -72,7 +72,9 @@ const styles = stylex.create({
     width: "var(--active-tab-width)",
     zIndex: 0,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
 

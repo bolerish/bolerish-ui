@@ -13,7 +13,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles, ControlPlacementStyles } from "./control-layout";
+import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: { alignItems: "center", display: "flex", gap: spacingVars.space2 },

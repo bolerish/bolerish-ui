@@ -38,11 +38,12 @@ ${
 
 const density = stylex.create({ root: { "--nuee-density": ${defaults.density} } });
 export const themeStyles = [density.root];`
-    : `import { densityStyles } from "./density.stylex";
+    : `import { densityStyles } from "./tokens/density.stylex";
 
 export const themeStyles = [densityStyles.${defaults.density}];`
 }
-export const motionDefault = ${JSON.stringify(defaults.motion)};
+export type MotionPreference = "system" | "on" | "off";
+export const motionDefault: Exclude<MotionPreference, "on"> = ${JSON.stringify(defaults.motion)};
 `,
     },
     {
@@ -57,7 +58,10 @@ ${suppress}
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root, :root *, :root *::before, :root *::after {
+  :root:not([data-nuee-motion="on"]),
+  :root:not([data-nuee-motion="on"]) *,
+  :root:not([data-nuee-motion="on"]) *::before,
+  :root:not([data-nuee-motion="on"]) *::after {
 ${suppress}
   }
 }
@@ -84,7 +88,20 @@ export async function prepareThemeFiles(directory: string, theme: NueeTheme | un
         continue;
       }
       const original = getThemeFiles(previous).find((entry) => entry.name === file.name)!;
-      if (current === original.content && current !== file.content) {
+      const legacy = original.content
+        .replace(
+          'export type MotionPreference = "system" | "on" | "off";\nexport const motionDefault: Exclude<MotionPreference, "on">',
+          "export const motionDefault",
+        )
+        .replace(
+          '  :root:not([data-nuee-motion="on"]),\n  :root:not([data-nuee-motion="on"]) *,\n  :root:not([data-nuee-motion="on"]) *::before,\n  :root:not([data-nuee-motion="on"]) *::after',
+          "  :root, :root *, :root *::before, :root *::after",
+        );
+      const normalized = current.replace(
+        'from "./density.stylex"',
+        'from "./tokens/density.stylex"',
+      );
+      if ((normalized === original.content || normalized === legacy) && current !== file.content) {
         files.push({ path, source: file.content, flag: "w" });
       }
     } catch (error) {

@@ -15,7 +15,7 @@ import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext } from "react";
 import type { ComponentProps } from "react";
 
-import type { ControlPlacementStyles } from "./control-layout";
+import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   overlay: {
@@ -34,8 +34,10 @@ const styles = stylex.create({
       transitionTimingFunction: motionVars.easingExit,
     },
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
-      ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+        ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+      },
     },
   },
   overlayTransparent: { backdropFilter: "none", backgroundColor: "transparent" },
@@ -62,8 +64,10 @@ const styles = stylex.create({
       transitionTimingFunction: motionVars.easingExit,
     },
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
-      ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+        ":is([data-ending-style])": { transitionDuration: motionVars.durationInstant },
+      },
     },
   },
   verticalPopup: {
@@ -148,8 +152,10 @@ const popupDirectionStyles = stylex.create({
       transform: "translate3d(0, 100%, 0)",
     },
     "@media (prefers-reduced-motion: reduce)": {
-      ":is([data-starting-style], [data-ending-style])": {
-        transform: "translate3d(0, 24%, 0)",
+      ":not(:root[data-nuee-motion='on'] *)": {
+        ":is([data-starting-style], [data-ending-style])": {
+          transform: "translate3d(0, 24%, 0)",
+        },
       },
     },
   },
@@ -164,8 +170,10 @@ const popupDirectionStyles = stylex.create({
       transform: "translate3d(0, -100%, 0)",
     },
     "@media (prefers-reduced-motion: reduce)": {
-      ":is([data-starting-style], [data-ending-style])": {
-        transform: "translate3d(0, -24%, 0)",
+      ":not(:root[data-nuee-motion='on'] *)": {
+        ":is([data-starting-style], [data-ending-style])": {
+          transform: "translate3d(0, -24%, 0)",
+        },
       },
     },
   },
@@ -179,8 +187,10 @@ const popupDirectionStyles = stylex.create({
       transform: "translate3d(-100%, 0, 0)",
     },
     "@media (prefers-reduced-motion: reduce)": {
-      ":is([data-starting-style], [data-ending-style])": {
-        transform: "translate3d(-24%, 0, 0)",
+      ":not(:root[data-nuee-motion='on'] *)": {
+        ":is([data-starting-style], [data-ending-style])": {
+          transform: "translate3d(-24%, 0, 0)",
+        },
       },
     },
   },
@@ -194,8 +204,10 @@ const popupDirectionStyles = stylex.create({
       transform: "translate3d(100%, 0, 0)",
     },
     "@media (prefers-reduced-motion: reduce)": {
-      ":is([data-starting-style], [data-ending-style])": {
-        transform: "translate3d(24%, 0, 0)",
+      ":not(:root[data-nuee-motion='on'] *)": {
+        ":is([data-starting-style], [data-ending-style])": {
+          transform: "translate3d(24%, 0, 0)",
+        },
       },
     },
   },

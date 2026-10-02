@@ -29,7 +29,7 @@ test("add creates the default config and copies a component with its foundation"
       "utf8",
     );
     assert.match(buttonSource, /export function Button/);
-    assert.match(buttonSource, /from "@\/styles\/semantic\.stylex"/);
+    assert.match(buttonSource, /from "@\/styles\/tokens\/semantic\.stylex"/);
   } finally {
     await rm(projectDirectory, { recursive: true });
   }
@@ -66,14 +66,14 @@ test("add uses the configured local token directory", async () => {
 
     assert.match(
       await readFile(join(projectDirectory, "src/design/ui/card.tsx"), "utf8"),
-      /from "@\/design-system\/nuee\/semantic\.stylex"/,
+      /from "@\/design-system\/nuee\/tokens\/semantic\.stylex"/,
     );
   } finally {
     await rm(projectDirectory, { recursive: true });
   }
 });
 
-test("add omits reduced-motion rules when accessibility config disables them", async () => {
+test("add retains OS reduced-motion rules despite legacy developer configuration", async () => {
   const projectDirectory = await mkdtemp(join(tmpdir(), "nuee-cli-"));
 
   try {
@@ -91,7 +91,7 @@ test("add omits reduced-motion rules when accessibility config disables them", a
       join(projectDirectory, "src/components/ui/dialog.tsx"),
       "utf8",
     );
-    assert.doesNotMatch(dialogSource, /prefers-reduced-motion/);
+    assert.match(dialogSource, /prefers-reduced-motion/);
     assert.match(dialogSource, /transform: "scale\(0\.95\)"/);
   } finally {
     await rm(projectDirectory, { recursive: true });
@@ -125,7 +125,7 @@ test("add resolves aliases from tsconfig paths", async () => {
     await access(join(projectDirectory, "src/shared/ui/card.tsx"));
     assert.match(
       await readFile(join(projectDirectory, "src/shared/ui/card.tsx"), "utf8"),
-      /from "~shared\/styles\/semantic\.stylex"/,
+      /from "~shared\/styles\/tokens\/semantic\.stylex"/,
     );
   } finally {
     await rm(projectDirectory, { recursive: true });

@@ -71,8 +71,8 @@ await build({
   target: "es2022",
 });
 
-const globalCss = await readFile(join(sourceDirectory, "global.css"), "utf8");
-const resetCss = await readFile(join(sourceDirectory, "reset.css"), "utf8");
+const globalCss = await readFile(join(sourceDirectory, "styles/global.css"), "utf8");
+const resetCss = await readFile(join(sourceDirectory, "styles/reset.css"), "utf8");
 await writeFile(
   join(outputDirectory, "global.css"),
   `@import "./reset.css";\n@import "./stylex.css";\n\n${globalCss}`,

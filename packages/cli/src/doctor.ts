@@ -96,7 +96,7 @@ async function inspectLocalConfiguration(projectDirectory: string): Promise<Chec
     return [
       {
         detail: "Run `nuee init` to configure UI and styles aliases.",
-        name: "nuee.json",
+        name: ".nuee.json",
         status: "warn",
       },
     ];
@@ -110,17 +110,19 @@ async function inspectLocalConfiguration(projectDirectory: string): Promise<Chec
       config.aliases.styles,
       "aliases.styles",
     );
-    const tokenCheck: Check = (await hasTokenFiles(tokenDirectory))
-      ? {
-          detail: `${config.aliases.styles} contains local token sources.`,
-          name: "Local tokens",
-          status: "pass",
-        }
-      : {
-          detail: `Create local token sources in ${config.aliases.styles} with \`nuee init --force\`.`,
-          name: "Local tokens",
-          status: "warn",
-        };
+    const tokenCheck: Check =
+      (await hasTokenFiles(resolve(tokenDirectory, "tokens"))) ||
+      (await hasTokenFiles(tokenDirectory))
+        ? {
+            detail: `${config.aliases.styles} contains local token sources.`,
+            name: "Local tokens",
+            status: "pass",
+          }
+        : {
+            detail: `Create local token sources in ${config.aliases.styles} with \`nuee init --force\`.`,
+            name: "Local tokens",
+            status: "warn",
+          };
 
     const versions = [
       ["Foundation", config.version],

@@ -7,7 +7,7 @@ import test from "node:test";
 import { add } from "../dist/add.js";
 import { defaultConfig, readConfig, validateConfig, writeConfig } from "../dist/config.js";
 import { init } from "../dist/init.js";
-import { getThemeFiles } from "../dist/theme.js";
+import { getThemeFiles, prepareThemeFiles } from "../dist/theme.js";
 
 test("theme configuration validates modes and font-family lists, retaining legacy values", () => {
   assert.equal(validateConfig(defaultConfig).theme, undefined);
@@ -22,6 +22,7 @@ test("theme configuration validates modes and font-family lists, retaining legac
     [],
     { density: "tiny" },
     { motion: true },
+    { motion: "on" },
     { fonts: null },
     { fonts: { body: "" } },
     { fonts: { heading: "x; color:red" } },
@@ -93,4 +94,38 @@ test("length units and numeric density validate and generate without changing le
     assert.throws(() => validateConfig({ ...defaultConfig, theme }));
   }
   assert.doesNotMatch(getThemeFiles()[1].content, /--nuee-unit/);
+});
+
+test("runtime on stays out of JSON and untouched legacy preferences upgrade without overwriting edits", async () => {
+  assert.throws(() => validateConfig({ ...defaultConfig, theme: { motion: "on" } }));
+  const directory = await mkdtemp(join(tmpdir(), "nuee-motion-upgrade-"));
+  try {
+    const files = getThemeFiles({ motion: "off" });
+    for (const file of files) {
+      const legacy = file.content
+        .replace(
+          'export type MotionPreference = "system" | "on" | "off";\nexport const motionDefault: Exclude<MotionPreference, "on">',
+          "export const motionDefault",
+        )
+        .replace(
+          '  :root:not([data-nuee-motion="on"]),\n  :root:not([data-nuee-motion="on"]) *,\n  :root:not([data-nuee-motion="on"]) *::before,\n  :root:not([data-nuee-motion="on"]) *::after',
+          "  :root, :root *, :root *::before, :root *::after",
+        );
+      await writeFile(join(directory, file.name), legacy);
+    }
+    const plan = await prepareThemeFiles(directory, { motion: "off" });
+    assert.equal(plan.length, 2);
+    for (const file of files)
+      assert.equal(plan.find((entry) => entry.path.endsWith(file.name))?.source, file.content);
+    const css = files.find((file) => file.name === "preferences.css")!;
+    await writeFile(join(directory, css.name), css.content + "/* user edit */\n");
+    assert.equal(
+      (await prepareThemeFiles(directory, { motion: "system" })).some((file) =>
+        file.path.endsWith(css.name),
+      ),
+      false,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });

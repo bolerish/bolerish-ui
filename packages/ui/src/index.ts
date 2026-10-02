@@ -1,3 +1,6 @@
+/** An app end user's explicit runtime choice; installation defaults exclude on. */
+export type MotionPreference = "system" | "on" | "off";
+
 export { Button } from "./button";
 export type { ButtonProps } from "./button";
 export {

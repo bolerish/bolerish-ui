@@ -116,9 +116,11 @@ const styles = stylex.create({
       transform: `translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(calc((var(--toast-offset-y) * -1) - (var(--toast-index) * ${spacingVars.space3}) + var(--toast-swipe-movement-y)))`,
     },
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
-      ":is([data-starting-style])": { transform: "translateY(24%)" },
-      ":is([data-ending-style])": { transform: "translateY(24%)" },
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+        ":is([data-starting-style])": { transform: "translateY(24%)" },
+        ":is([data-ending-style])": { transform: "translateY(24%)" },
+      },
     },
   },
   rootTop: {
@@ -138,8 +140,10 @@ const styles = stylex.create({
       transform: `translateX(calc(var(--toast-swipe-movement-x) + 150%)) translateY(calc(var(--toast-offset-y) + (var(--toast-index) * ${spacingVars.space3}) + var(--toast-swipe-movement-y)))`,
     },
     "@media (prefers-reduced-motion: reduce)": {
-      ":is([data-starting-style])": { transform: "translateY(-24%)" },
-      ":is([data-ending-style])": { transform: "translateY(-24%)" },
+      ":not(:root[data-nuee-motion='on'] *)": {
+        ":is([data-starting-style])": { transform: "translateY(-24%)" },
+        ":is([data-ending-style])": { transform: "translateY(-24%)" },
+      },
     },
   },
   content: {
@@ -197,7 +201,9 @@ const styles = stylex.create({
     height: sizeVars.iconMd,
     width: sizeVars.iconMd,
     "@media (prefers-reduced-motion: reduce)": {
-      animationDuration: motionVars.durationLoadingReduced,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        animationDuration: motionVars.durationLoadingReduced,
+      },
     },
   },
   action: {

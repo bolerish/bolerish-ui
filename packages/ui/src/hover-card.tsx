@@ -34,8 +34,10 @@ const styles = stylex.create({
     transitionTimingFunction: motionVars.easingEnter,
     zIndex: layerVars.popup,
     "@media (prefers-reduced-motion: reduce)": {
-      transform: "none",
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transform: "none",
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   transitioning: { opacity: 0, transform: "translateY(0.25rem) scale(0.98)" },

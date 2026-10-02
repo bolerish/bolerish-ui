@@ -4,7 +4,9 @@ import { isAbsolute, join, relative, resolve } from "node:path";
 import { createPathsMatcher, parseTsconfig } from "get-tsconfig";
 import { parse, type ParseError } from "jsonc-parser";
 
-export const configFileName = "nuee.json";
+import { configSchema } from "./schema.js";
+
+export const configFileName = ".nuee.json";
 
 export type NueeTheme = {
   density?: "default" | "compact" | number;
@@ -57,7 +59,15 @@ export async function hasConfig(projectDirectory: string) {
     return true;
   } catch (error) {
     if (!isNotFoundError(error)) throw error;
-    return false;
+    try {
+      await access(resolve(projectDirectory, "nuee.json"));
+    } catch (legacyError) {
+      if (!isNotFoundError(legacyError)) throw legacyError;
+      return false;
+    }
+    throw new Error(
+      "Rename nuee.json to .nuee.json, then run `nuee init --force` to enable completions.",
+    );
   }
 }
 
@@ -71,7 +81,7 @@ function ensureRelativePath(projectDirectory: string, path: string, name: string
 
 export function validateConfig(config: unknown): NueeConfig {
   if (typeof config !== "object" || config === null || Array.isArray(config)) {
-    throw new Error("Configure nuee.json as an object.");
+    throw new Error("Configure .nuee.json as an object.");
   }
   const candidate = config as {
     accessibility?: { respectReducedMotion?: unknown };
@@ -84,7 +94,7 @@ export function validateConfig(config: unknown): NueeConfig {
   };
   if (candidate.paths || candidate.tokens) {
     throw new Error(
-      "This nuee.json uses an older format. Run `nuee init --force` to create alias-based configuration.",
+      "This .nuee.json uses an older format. Run `nuee init --force` to create alias-based configuration.",
     );
   }
   if (!candidate.aliases || typeof candidate.aliases !== "object") {
@@ -199,6 +209,7 @@ function isNotFoundError(error: unknown) {
 }
 
 export async function readConfig(projectDirectory: string) {
+  await hasConfig(projectDirectory);
   const configPath = resolve(projectDirectory, configFileName);
 
   try {
@@ -206,7 +217,7 @@ export async function readConfig(projectDirectory: string) {
     return validateConfig(config);
   } catch (error) {
     if (isNotFoundError(error)) {
-      throw new Error("nuee.json was not found. Run `nuee init` first.");
+      throw new Error(".nuee.json was not found. Run `nuee init` first.");
     }
     throw error;
   }
@@ -215,7 +226,16 @@ export async function readConfig(projectDirectory: string) {
 export async function writeConfig(projectDirectory: string, config: NueeConfig) {
   const validatedConfig = validateConfig(config);
   const configPath = resolve(projectDirectory, configFileName);
-  await writeFile(configPath, `${JSON.stringify(validatedConfig, null, 2)}\n`, "utf8");
+  await writeFile(
+    resolve(projectDirectory, ".nuee.schema.json"),
+    `${JSON.stringify(configSchema, null, 2)}\n`,
+    "utf8",
+  );
+  await writeFile(
+    configPath,
+    `${JSON.stringify({ $schema: "./.nuee.schema.json", ...validatedConfig }, null, 2)}\n`,
+    "utf8",
+  );
   return configPath;
 }
 
@@ -275,4 +295,17 @@ export async function resolveConfigAlias(projectDirectory: string, alias: string
   throw new Error(
     `Could not resolve ${name} (${alias}). Add it to tsconfig.json or jsconfig.json compilerOptions.paths.`,
   );
+}
+
+export async function resolveTokenAlias(projectDirectory: string, stylesAlias: string) {
+  const directory = await resolveConfigAlias(projectDirectory, stylesAlias, "aliases.styles");
+  for (const child of ["tokens", ""]) {
+    try {
+      await access(join(directory, child, "semantic.stylex.ts"));
+      return child ? `${stylesAlias}/${child}` : stylesAlias;
+    } catch (error) {
+      if (!isNotFoundError(error)) throw error;
+    }
+  }
+  return `${stylesAlias}/tokens`;
 }

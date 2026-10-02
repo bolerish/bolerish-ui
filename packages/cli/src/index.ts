@@ -31,7 +31,7 @@ export async function run(arguments_ = process.argv.slice(2)) {
         await newComponent(projectDirectory, positionals[0]);
         break;
       default:
-        console.log(`Nuee CLI
+        console.log(`@nuee/ui CLI
 
 Usage:
   nuee init [--ui <path>] [--styles <path>] [--vite]

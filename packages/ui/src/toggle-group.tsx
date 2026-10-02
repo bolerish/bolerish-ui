@@ -14,7 +14,7 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext, type ComponentProps, type ReactNode } from "react";
 
-import type { ControlLayoutStyles, ControlPlacementStyles } from "./control-layout";
+import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
 import type { ToggleSize, ToggleVariant } from "./toggle";
 
 const styles = stylex.create({

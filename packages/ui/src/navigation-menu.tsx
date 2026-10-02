@@ -15,7 +15,7 @@ import { CaretDownIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
-import type { ControlLayoutStyles } from "./control-layout";
+import type { ControlLayoutStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   root: {
@@ -88,7 +88,9 @@ const styles = stylex.create({
     transitionProperty: "opacity, transform",
     transitionTimingFunction: motionVars.easingStandard,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
     width: "auto",
   },
@@ -120,7 +122,9 @@ const styles = stylex.create({
     transitionProperty: "inset, width, height",
     transitionTimingFunction: motionVars.easingStandard,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
     width: "var(--positioner-width)",
     zIndex: layerVars.popup,
@@ -143,7 +147,9 @@ const styles = stylex.create({
     transitionTimingFunction: motionVars.easingEnter,
     width: "var(--popup-width)",
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   popupTransitioning: { opacity: 0, transform: "scale(0.9)" },

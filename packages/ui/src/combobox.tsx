@@ -15,7 +15,7 @@ import { CaretDownIcon, CheckIcon, MagnifyingGlassIcon } from "@phosphor-icons/r
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
-import type { ControlLayoutStyles, ControlPlacementStyles } from "./control-layout";
+import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   inputGroup: {
@@ -109,8 +109,10 @@ const styles = stylex.create({
     transitionProperty: "opacity, transform",
     transitionTimingFunction: motionVars.easingEnter,
     "@media (prefers-reduced-motion: reduce)": {
-      transform: "none",
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transform: "none",
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   popupTransitioning: { opacity: 0, transform: "scale(0.98)" },
@@ -118,7 +120,9 @@ const styles = stylex.create({
     transitionDuration: motionVars.durationFast,
     transitionTimingFunction: motionVars.easingExit,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   list: { overflowY: "auto", overscrollBehavior: "contain" },

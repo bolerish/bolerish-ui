@@ -129,7 +129,7 @@ export async function getFoundationFiles(): Promise<FoundationFile[]> {
     name: "reset.css",
   };
 
-  return [...tokenFiles, resetFile];
+  return [...tokenFiles.map((file) => ({ ...file, name: `tokens/${file.name}` })), resetFile];
 }
 
 export const dependencyVersions = {

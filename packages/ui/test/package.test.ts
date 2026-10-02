@@ -69,7 +69,7 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
       "--cwd",
       projectDirectory,
     ]);
-    const configPath = join(projectDirectory, "nuee.json");
+    const configPath = join(projectDirectory, ".nuee.json");
     const installedConfig = JSON.parse(await readFile(configPath, "utf8"));
     await writeFile(
       configPath,
@@ -114,7 +114,7 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
         'import "./index.css";',
         'import * as stylex from "@stylexjs/stylex";',
         'import { themeStyles } from "./styles/settings.stylex";',
-        'import { typo, typographyVars, spacingRoleVars } from "./styles/semantic.stylex";',
+        'import { typo, typographyVars, spacingRoleVars } from "./styles/tokens/semantic.stylex";',
         "const tokenUsage = stylex.create({ root: { fontSize: typo.fontSizeMd, gap: spacingRoleVars.fieldGap }, legacy: { fontSize: typographyVars.fontSizeMd } });",
         "console.log(stylex.props(tokenUsage.root), stylex.props(tokenUsage.legacy));",
         'document.documentElement.className = stylex.props(...themeStyles).className ?? "";',
@@ -276,10 +276,10 @@ test("@nuee/ui CLI initializes a project and adds a card", async () => {
       "--skip-dependencies",
     ]);
 
-    const config = JSON.parse(await readFile(join(projectDirectory, "nuee.json"), "utf8"));
+    const config = JSON.parse(await readFile(join(projectDirectory, ".nuee.json"), "utf8"));
     assert.equal(config.aliases.ui, "@/components/ui");
     assert.equal(config.aliases.styles, "@/styles");
-    await access(join(projectDirectory, "src/styles/semantic.stylex.ts"));
+    await access(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"));
     assert.match(
       await readFile(join(projectDirectory, "src/components/ui/card.tsx"), "utf8"),
       /Card/,

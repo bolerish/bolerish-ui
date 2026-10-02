@@ -62,5 +62,5 @@ for (const name of [
 
 await writeFile(
   join(styleOutputDirectory, "reset.css"),
-  await readFile(join(uiSourceDirectory, "reset.css"), "utf8"),
+  await readFile(join(uiSourceDirectory, "styles/reset.css"), "utf8"),
 );

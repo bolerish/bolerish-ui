@@ -6,7 +6,13 @@ import test from "node:test";
 
 import { registryVersion } from "@nuee/registry";
 
-import { configFileName, defaultConfig, getDefaultAliases, readConfig } from "../dist/config.js";
+import {
+  configFileName,
+  defaultConfig,
+  getDefaultAliases,
+  readConfig,
+  resolveTokenAlias,
+} from "../dist/config.js";
 import { init } from "../dist/init.js";
 
 test("init stores a custom UI path", async () => {
@@ -54,9 +60,9 @@ test("init creates local StyleX sources without changing an entry point", async 
     await writeFile(join(projectDirectory, "src/main.tsx"), "export {};\n");
     await init(projectDirectory, { defaults: true, "skip-dependencies": true });
 
-    await access(join(projectDirectory, "src/styles/color-palette.stylex.ts"));
-    await access(join(projectDirectory, "src/styles/semantic.stylex.ts"));
-    await access(join(projectDirectory, "src/styles/themes.stylex.ts"));
+    await access(join(projectDirectory, "src/styles/tokens/color-palette.stylex.ts"));
+    await access(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"));
+    await access(join(projectDirectory, "src/styles/tokens/themes.stylex.ts"));
     assert.equal(await readFile(join(projectDirectory, "src/main.tsx"), "utf8"), "export {};\n");
   } finally {
     await rm(projectDirectory, { recursive: true });
@@ -67,12 +73,15 @@ test("init keeps existing local token files", async () => {
   const projectDirectory = await mkdtemp(join(tmpdir(), "nuee-cli-"));
 
   try {
-    await mkdir(join(projectDirectory, "src/styles"), { recursive: true });
-    await writeFile(join(projectDirectory, "src/styles/semantic.stylex.ts"), "/* custom */\n");
+    await mkdir(join(projectDirectory, "src/styles/tokens"), { recursive: true });
+    await writeFile(
+      join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"),
+      "/* custom */\n",
+    );
     await init(projectDirectory, { defaults: true, "skip-dependencies": true });
 
     assert.equal(
-      await readFile(join(projectDirectory, "src/styles/semantic.stylex.ts"), "utf8"),
+      await readFile(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"), "utf8"),
       "/* custom */\n",
     );
   } finally {
@@ -80,19 +89,51 @@ test("init keeps existing local token files", async () => {
   }
 });
 
+test("init copies customized flat tokens into tokens while preserving legacy files", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "nuee-layout-"));
+  try {
+    await mkdir(join(directory, "src/styles"), { recursive: true });
+    const legacy = join(directory, "src/styles/semantic.stylex.ts");
+    await writeFile(legacy, "/* customized legacy tokens */\n");
+    assert.equal(await resolveTokenAlias(directory, "@/styles"), "@/styles");
+    await init(directory, { defaults: true, "skip-dependencies": true });
+    assert.equal(
+      await readFile(join(directory, "src/styles/tokens/semantic.stylex.ts"), "utf8"),
+      await readFile(legacy, "utf8"),
+    );
+    assert.equal(await resolveTokenAlias(directory, "@/styles"), "@/styles/tokens");
+    assert.match(
+      await readFile(join(directory, "src/styles/settings.stylex.ts"), "utf8"),
+      /from "\.\/tokens\/density\.stylex"/,
+    );
+    await writeFile(
+      join(directory, "src/styles/tokens/semantic.stylex.ts"),
+      "/* newer customization */\n",
+    );
+    await init(directory, { defaults: true, force: true, "skip-dependencies": true });
+    assert.equal(
+      await readFile(join(directory, "src/styles/tokens/semantic.stylex.ts"), "utf8"),
+      "/* newer customization */\n",
+    );
+    assert.equal(await readFile(legacy, "utf8"), "/* customized legacy tokens */\n");
+  } finally {
+    await rm(directory, { recursive: true });
+  }
+});
+
 test("init --force refreshes legacy semantic defaults", async () => {
   const projectDirectory = await mkdtemp(join(tmpdir(), "nuee-cli-"));
 
   try {
-    await mkdir(join(projectDirectory, "src/styles"), { recursive: true });
+    await mkdir(join(projectDirectory, "src/styles/tokens"), { recursive: true });
     await writeFile(
-      join(projectDirectory, "src/styles/semantic.stylex.ts"),
+      join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"),
       'export const colorVars = { bgCanvas: "initial" };\nexport const shadowVars = { overlay: "initial" };\n',
     );
     await init(projectDirectory, { defaults: true, force: true, "skip-dependencies": true });
 
     assert.doesNotMatch(
-      await readFile(join(projectDirectory, "src/styles/semantic.stylex.ts"), "utf8"),
+      await readFile(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"), "utf8"),
       /bgCanvas: "initial"/,
     );
   } finally {
@@ -126,7 +167,7 @@ test("init --vite configures a standard Vite project", async () => {
       '@import "./styles/reset.css";\n@import "./styles/preferences.css";\n\nbody { color: black; }\n',
     );
     await access(join(projectDirectory, "src/styles/reset.css"));
-    await access(join(projectDirectory, "src/styles/themes.stylex.ts"));
+    await access(join(projectDirectory, "src/styles/tokens/themes.stylex.ts"));
   } finally {
     await rm(projectDirectory, { recursive: true });
   }
@@ -208,7 +249,9 @@ test("init does not change a Vite project when its plugin array cannot be update
       /Could not safely update/,
     );
     assert.equal(await readFile(join(projectDirectory, "vite.config.ts"), "utf8"), configSource);
-    await assert.rejects(() => access(join(projectDirectory, "src/styles/semantic.stylex.ts")));
+    await assert.rejects(() =>
+      access(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts")),
+    );
   } finally {
     await rm(projectDirectory, { recursive: true });
   }
@@ -233,7 +276,7 @@ test("init derives aliases from a project root path mapping", async () => {
       ui: "~/components/ui",
       styles: "~/styles",
     });
-    await access(join(projectDirectory, "src/styles/semantic.stylex.ts"));
+    await access(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"));
   } finally {
     await rm(projectDirectory, { recursive: true });
   }
@@ -252,7 +295,7 @@ test("init writes tokens to a configured project-local directory", async () => {
 
     const config = await readConfig(projectDirectory);
     assert.equal(config.aliases.styles, "@/design-system/nuee");
-    await access(join(projectDirectory, "src/design-system/nuee/semantic.stylex.ts"));
+    await access(join(projectDirectory, "src/design-system/nuee/tokens/semantic.stylex.ts"));
   } finally {
     await rm(projectDirectory, { recursive: true });
   }

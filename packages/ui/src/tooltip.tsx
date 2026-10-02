@@ -32,8 +32,10 @@ const styles = stylex.create({
     transitionProperty: "opacity, transform",
     transitionTimingFunction: motionVars.easingEnter,
     "@media (prefers-reduced-motion: reduce)": {
-      transform: "none",
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transform: "none",
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   popupTransitioning: { opacity: 0, transform: "scale(0.98)" },
@@ -41,7 +43,9 @@ const styles = stylex.create({
     transitionDuration: motionVars.durationFast,
     transitionTimingFunction: motionVars.easingExit,
     "@media (prefers-reduced-motion: reduce)": {
-      transitionDuration: motionVars.durationInstant,
+      ":not(:root[data-nuee-motion='on'] *)": {
+        transitionDuration: motionVars.durationInstant,
+      },
     },
   },
   arrow: { fill: colorVars.bgInverse, height: spacingVars.space2, width: spacingVars.space3 },

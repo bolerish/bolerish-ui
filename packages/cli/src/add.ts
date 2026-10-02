@@ -9,13 +9,14 @@ import {
   readConfig,
   writeConfig,
   resolveConfigAlias,
+  resolveTokenAlias,
 } from "./config.js";
 export { getMissingDependencies } from "./dependencies.js";
 import type { CliOptions } from "./arguments.js";
 import { getMissingDependencies, installDependencies } from "./dependencies.js";
 import { applyInitialization, prepareInitialization } from "./init.js";
 import { resolveComponent } from "./registry.js";
-import { parseSource, removeReducedMotionStyles } from "./source.js";
+import { parseSource } from "./source.js";
 
 export type AddOptions = CliOptions & {
   /** @deprecated Use skip-dependencies. */
@@ -65,8 +66,10 @@ function resolveTargetPath(uiDirectory: string, filePath: string) {
   return targetPath;
 }
 
-function replaceTokenImport(source: string, stylesAlias: string) {
-  return source.replaceAll("@nuee/tokens/semantic.stylex", `${stylesAlias}/semantic.stylex`);
+function replaceTokenImport(source: string, stylesAlias: string, tokenAlias: string) {
+  return source
+    .replaceAll("@nuee/tokens/semantic.stylex", `${tokenAlias}/semantic.stylex`)
+    .replaceAll('"./styles/control-layout"', JSON.stringify(`${stylesAlias}/control-layout`));
 }
 
 export async function add(
@@ -96,18 +99,28 @@ export async function add(
     config = await readConfig(projectDirectory);
   }
   const resolvedList = await Promise.all(componentNameList.map(resolveComponent));
-  await resolveConfigAlias(projectDirectory, config.aliases.styles, "aliases.styles");
+  const stylesDirectory = await resolveConfigAlias(
+    projectDirectory,
+    config.aliases.styles,
+    "aliases.styles",
+  );
+  const tokenAlias = shouldInitialize
+    ? `${config.aliases.styles}/tokens`
+    : await resolveTokenAlias(projectDirectory, config.aliases.styles);
   const uiDirectory = await resolveConfigAlias(projectDirectory, config.aliases.ui, "aliases.ui");
   const sources: { source: string; targetPath: string }[] = [];
   for (const resolved of resolvedList) {
     for (const file of resolved.files) {
       const isScript = /\.[cm]?[jt]sx?$/.test(file.path);
-      let source = replaceTokenImport(file.content, config.aliases.styles);
-      if (isScript && !config.accessibility.respectReducedMotion && !config.theme) {
-        source = removeReducedMotionStyles(source);
-      }
+      const source = replaceTokenImport(file.content, config.aliases.styles, tokenAlias);
       if (isScript) parseSource(source);
-      sources.push({ source, targetPath: resolveTargetPath(uiDirectory, file.path) });
+      sources.push({
+        source,
+        targetPath:
+          file.path === "styles/control-layout.ts"
+            ? resolveTargetPath(stylesDirectory, "control-layout.ts")
+            : resolveTargetPath(uiDirectory, file.path),
+      });
     }
   }
   const externalDependencies = await getMissingDependencies(projectDirectory, [
