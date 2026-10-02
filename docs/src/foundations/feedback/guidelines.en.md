@@ -47,3 +47,16 @@ Follow a saving state with success or failure. Preserve input and provide a retr
 ### After someone selects Save
 
 Show the pressed state while the button is held. Once the request starts, indicate progress and prevent duplicate submission. On success, confirm the result; on failure, preserve the input and offer a retry. Each stage answers a different question.
+
+## Color composition and scope
+
+| Role                                              | Composition rule                                                                                                                        |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Input error                                       | Keep the input's normal surface, use its error border and `FieldError`. Do not color the entire input foreground as the only error cue. |
+| Persistent information, success, warning or error | Apply matching `bgFeedback*` and `fgFeedback*` to Banner. Add matching `strokeFeedback*` only when a boundary is needed.                |
+| Supporting description                            | Use `fgSecondary`. A constraint is not an error before validation fails.                                                                |
+
+Not every message needs both a background and a border. Keep field errors near their input
+and request failures in a persistent form-level area. Long Banner body text may use `fgPrimary`
+while its heading, icon and background retain the same feedback meaning. Banner has no
+`variant` prop; apply these combinations with `xstyle`.

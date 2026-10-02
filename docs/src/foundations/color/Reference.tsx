@@ -182,6 +182,8 @@ export function Primitive() {
   );
 }
 const backgroundTokens = [
+  ["bgSelected", colorVars.bgSelected, colorVars.fgPrimary, "Flat persistent selection"],
+  ["bgDropTarget", colorVars.bgDropTarget, colorVars.fgPrimary, "Drop receiving area"],
   ["bgInverse", colorVars.bgInverse, colorVars.fgInverse, "Inverse surface"],
   ["bgOverlay", colorVars.bgOverlay, colorVars.fgPrimary, "Modal backdrop"],
   [
@@ -281,6 +283,7 @@ const foregroundTokens = [
   ],
 ] as const;
 const strokeTokens = [
+  ["strokeDropIndicator", colorVars.strokeDropIndicator, "Exact drop insertion position"],
   ["strokeDefault", colorVars.strokeDefault, "Default separator"],
   ["strokeStrong", colorVars.strokeStrong, "Emphasized separator"],
   ["strokeFocus", colorVars.strokeFocus, "Focus ring"],
@@ -306,7 +309,12 @@ const interactionTokens = [
     colorVars.fgPrimary,
     "Pressed state on filled surfaces",
   ],
-  ["interactionSelected", colorVars.interactionSelected, colorVars.fgPrimary, "Selected state"],
+  [
+    "interactionSelected",
+    colorVars.interactionSelected,
+    colorVars.fgPrimary,
+    "Raised selection inside a group",
+  ],
   ["interactionDisabled", colorVars.interactionDisabled, colorVars.fgPrimary, "Unavailable state"],
   ["interactionFocus", colorVars.interactionFocus, colorVars.fgInverse, "Keyboard focus state"],
 ] as const;
