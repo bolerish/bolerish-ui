@@ -76,7 +76,7 @@
   "### Modal behavior": "### 배경 조작",
   "Drawers are modal with a visible overlay by default. Use `overlay=\"transparent\"` to retain modal behavior without dimming the page. To keep the page interactive, use `modal={false}` with `overlay=\"none\"`.": "기본 상태에서는 배경을 어둡게 표시하고 배경 조작을 막습니다. `overlay=\"transparent\"`는 배경을 어둡게 하지 않고 조작만 막습니다. 배경도 조작할 수 있게 하려면 `modal={false}`와 `overlay=\"none\"`을 함께 사용합니다.",
   "### Pushing page content": "### 페이지 밀기",
-  "Drawer does not move the page automatically. Control `open` in the application, then move the layout region that should make space for the panel.": "Drawer는 페이지를 자동으로 밀지 않습니다. 앱에서 `open`을 제어하고 패널이 차지할 공간만큼 해당 레이아웃을 이동합니다.",
+  "Control `open` in the application and use StyleX to reserve space beside the panel. This example matches the left Drawer width with a left margin on wide screens; narrow screens keep the overlay layout. The Drawer remains modal. The layout follows open and closed states, not the swipe movement or animation progress.": "앱에서 `open`을 제어하고 StyleX로 패널 옆 공간을 확보합니다. 이 예제는 넓은 화면에서 왼쪽 Drawer 너비만큼 왼쪽 여백을 두며, 좁은 화면에서는 겹쳐 여는 배치를 유지합니다. Drawer는 모달로 동작합니다. 본문 배치는 열림·닫힘 상태에만 반응하며 스와이프 이동량이나 애니메이션 진행률에 연동되지는 않습니다.",
   "### Responsive layouts": "### 화면 크기에 따른 구성",
   "A Drawer is not a Dialog mode. For a responsive flow, render Drawer on narrow viewports and Dialog on wider viewports while sharing the form content and open state in the application.": "좁은 화면에는 Drawer, 넓은 화면에는 Dialog를 사용할 수 있습니다. 앱에서 폼 내용과 열림 상태를 공유하고 화면 크기에 따라 컴포넌트를 선택합니다.",
   "Open actions and settings for the current target from a button.": "버튼을 눌러 현재 대상의 작업과 설정을 엽니다.",

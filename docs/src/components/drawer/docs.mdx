@@ -5,6 +5,7 @@ import guidelines from "./guidelines.md?raw";
 import english from "./guidelines.en.md?raw";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
 import { CodeBlock } from "../../documentation/CodeBlock";
+import PushContentSource from "./PushContent.tsx?raw";
 import PositionSource from "./Position.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
@@ -78,23 +79,11 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 
 <LocalizedMarkdown
   text={
-    "Drawer does not move the page automatically. Control `open` in the application, then move the layout region that should make space for the panel."
+    "Control `open` in the application and use StyleX to reserve space beside the panel. This example matches the left Drawer width with a left margin on wide screens; narrow screens keep the overlay layout. The Drawer remains modal. The layout follows open and closed states, not the swipe movement or animation progress."
   }
 />
 
-```tsx
-const [open, setOpen] = useState(false)
-
-<>
-  <main className={open ? "content contentPushed" : "content"}>
-    <App />
-  </main>
-
-  <Drawer open={open} onOpenChange={setOpen} swipeDirection="left">
-    <DrawerContent>...</DrawerContent>
-  </Drawer>
-</>
-```
+<ComponentPreview name="drawer--PushContent" source={PushContentSource} isolated height={360} />
 
 <LocalizedMarkdown text={"### Responsive layouts"} />
 
