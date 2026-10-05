@@ -1,3 +1,11 @@
+## Version v0.9.1
+
+Released on 2026-10-05.
+
+- Read editor completion values from the installed @nuee/ui package, keeping
+    only .nuee.json in the project root. Rerun init --force to update the schema
+    reference, then remove the old .nuee.schema.json if present.
+
 ## Version v0.9.0
 
 Released on 2026-10-02.

@@ -4,8 +4,6 @@ import { isAbsolute, join, relative, resolve } from "node:path";
 import { createPathsMatcher, parseTsconfig } from "get-tsconfig";
 import { parse, type ParseError } from "jsonc-parser";
 
-import { configSchema } from "./schema.js";
-
 export const configFileName = ".nuee.json";
 
 export type NueeTheme = {
@@ -227,13 +225,8 @@ export async function writeConfig(projectDirectory: string, config: NueeConfig) 
   const validatedConfig = validateConfig(config);
   const configPath = resolve(projectDirectory, configFileName);
   await writeFile(
-    resolve(projectDirectory, ".nuee.schema.json"),
-    `${JSON.stringify(configSchema, null, 2)}\n`,
-    "utf8",
-  );
-  await writeFile(
     configPath,
-    `${JSON.stringify({ $schema: "./.nuee.schema.json", ...validatedConfig }, null, 2)}\n`,
+    `${JSON.stringify({ $schema: "./node_modules/@nuee/ui/configuration_schema.json", ...validatedConfig }, null, 2)}\n`,
     "utf8",
   );
   return configPath;

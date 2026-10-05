@@ -32,9 +32,11 @@ StyleX conventions, theme setup, and component API checks.
 
 `.nuee.json` can configure initial appearance without editing each component:
 
-`init` also creates `.nuee.schema.json` and links it with `$schema` for editor
-completions and validation. Rename an existing `nuee.json` to `.nuee.json`,
-then run `nuee init --force` to add the schema while preserving configuration.
+`init` links `./node_modules/@nuee/ui/configuration_schema.json` with `$schema`
+for editor completions and validation. Install `@nuee/ui` in the project to resolve
+the schema, even when running the CLI with `bunx`. No separate schema file is generated. Rename an existing `nuee.json` to `.nuee.json`,
+then run `nuee init --force` to update the schema reference while preserving
+configuration. An old `.nuee.schema.json` can then be removed.
 
 ```json
 {
