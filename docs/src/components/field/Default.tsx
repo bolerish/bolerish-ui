@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
+import { colorVars, sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Checkbox } from "@/components/ui/checkbox";
@@ -17,17 +17,17 @@ import { Input } from "@/components/ui/input";
 const layout = stylex.create({
   description: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   preview: {
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space3,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     justifyContent: "center",
     width: "100%",
   },

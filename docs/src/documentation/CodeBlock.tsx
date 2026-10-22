@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { Button } from "@bolerish/ui/button";
 import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
@@ -37,11 +37,11 @@ const styles = stylex.create({
   content: {
     paddingInline: spacingVars.space4,
     paddingBottom: spacingVars.space4,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     overflowX: "auto",
   },
-  status: { color: colorVars.fgSecondary, fontSize: typographyVars.fontSizeXs },
+  status: { color: colorVars.fgSecondary, fontSize: typo.fontSizeXs },
 });
 
 export function CodeBlock({

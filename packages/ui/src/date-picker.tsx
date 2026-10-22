@@ -6,7 +6,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useState } from "react";
@@ -27,9 +27,9 @@ const styles = stylex.create({
     color: colorVars.fgPrimary,
     cursor: "pointer",
     display: "inline-flex",
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightRegular,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightRegular,
     height: sizeVars.controlMd,
     outline: "none",
     paddingInline: spacingVars.space3,
@@ -55,7 +55,7 @@ const styles = stylex.create({
   },
   placeholder: { color: colorVars.fgSecondary },
   calendar: { padding: 0, width: "fit-content" },
-  value: { fontWeight: typographyVars.fontWeightRegular },
+  value: { fontWeight: typo.fontWeightRegular },
 });
 
 export type DatePickerProps = {

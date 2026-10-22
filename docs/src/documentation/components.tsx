@@ -3,8 +3,9 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
+import { P } from "@bolerish/ui/p";
 import * as stylex from "@stylexjs/stylex";
 import { isValidElement, type ReactNode } from "react";
 import type { Components } from "react-markdown";
@@ -14,18 +15,18 @@ import { CodeBlock } from "./CodeBlock";
 const styles = stylex.create({
   h1: {
     color: colorVars.fgPrimary,
-    fontFamily: typographyVars.fontFamilyHeading,
-    fontSize: typographyVars.fontSizeXl,
-    fontWeight: typographyVars.fontWeightSemibold,
-    lineHeight: typographyVars.lineHeightTight,
+    fontFamily: typo.fontFamilyHeading,
+    fontSize: typo.fontSizeXl,
+    fontWeight: typo.fontWeightSemibold,
+    lineHeight: typo.lineHeightTight,
     marginBlock: spacingVars.space6,
   },
   h2: {
     color: colorVars.fgPrimary,
-    fontFamily: typographyVars.fontFamilyHeading,
-    fontSize: typographyVars.fontSizeLg,
-    fontWeight: typographyVars.fontWeightSemibold,
-    lineHeight: typographyVars.lineHeightTight,
+    fontFamily: typo.fontFamilyHeading,
+    fontSize: typo.fontSizeLg,
+    fontWeight: typo.fontWeightSemibold,
+    lineHeight: typo.lineHeightTight,
     marginTop: spacingVars.space8,
     marginBottom: spacingVars.space4,
     paddingBottom: spacingVars.space2,
@@ -33,24 +34,18 @@ const styles = stylex.create({
   },
   h3: {
     color: colorVars.fgPrimary,
-    fontFamily: typographyVars.fontFamilyHeading,
-    fontSize: typographyVars.fontSizeMd,
-    fontWeight: typographyVars.fontWeightSemibold,
+    fontFamily: typo.fontFamilyHeading,
+    fontSize: typo.fontSizeMd,
+    fontWeight: typo.fontWeightSemibold,
     marginTop: spacingVars.space6,
     marginBottom: spacingVars.space3,
   },
-  p: {
-    color: colorVars.fgSecondary,
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
-    marginBlock: spacingVars.space3,
-  },
+  p: { marginBlock: spacingVars.space3 },
   list: {
     color: colorVars.fgSecondary,
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     paddingInlineStart: spacingVars.space6,
     marginBlock: spacingVars.space3,
   },
@@ -62,8 +57,8 @@ const styles = stylex.create({
   table: {
     borderCollapse: "collapse",
     width: "100%",
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
   },
   selectionTable: { tableLayout: "fixed" },
   situationColumn: { width: "30%" },
@@ -78,7 +73,7 @@ const styles = stylex.create({
     textAlign: "start",
     verticalAlign: "top",
   },
-  th: { backgroundColor: colorVars.bgSubtle, fontWeight: typographyVars.fontWeightSemibold },
+  th: { backgroundColor: colorVars.bgSubtle, fontWeight: typo.fontWeightSemibold },
   code: {
     fontFamily: "var(--nuee-font-code)",
     backgroundColor: colorVars.bgSubtle,
@@ -115,7 +110,7 @@ export const documentationComponents: Components = {
       {children}
     </h3>
   ),
-  p: ({ node: _node, ...props }) => <p {...props} {...stylex.props(styles.p)} />,
+  p: ({ node: _node, ...props }) => <P {...props} variant="description" xstyle={styles.p} />,
   ul: ({ node: _node, ...props }) => (
     <ul {...props} {...stylex.props(styles.list, styles.unordered)} />
   ),

@@ -6,7 +6,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
@@ -38,8 +38,8 @@ const styles = stylex.create({
     borderWidth: sizeVars.stroke,
     color: colorVars.fgPrimary,
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space1,
     justifyContent: "center",
     minHeight: sizeVars.controlMd,

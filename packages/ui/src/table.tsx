@@ -3,7 +3,7 @@ import {
   motionVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -14,7 +14,7 @@ const styles = stylex.create({
     borderCollapse: "collapse",
     captionSide: "bottom",
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     width: "100%",
   },
   header: {
@@ -28,7 +28,7 @@ const styles = stylex.create({
     borderTopColor: colorVars.strokeDefault,
     borderTopStyle: "solid",
     borderTopWidth: sizeVars.stroke,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontWeight: typo.fontWeightMedium,
   },
   row: {
     borderBottomColor: colorVars.strokeDefault,
@@ -44,7 +44,7 @@ const styles = stylex.create({
   },
   head: {
     color: colorVars.fgSecondary,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontWeight: typo.fontWeightMedium,
     height: sizeVars.controlLg,
     paddingInline: spacingVars.space3,
     textAlign: "left",
@@ -59,7 +59,7 @@ const styles = stylex.create({
   },
   caption: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     marginTop: spacingVars.space4,
     textAlign: "left",
     paddingInline: spacingVars.space1,

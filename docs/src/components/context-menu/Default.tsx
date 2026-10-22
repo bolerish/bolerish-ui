@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
@@ -20,9 +20,9 @@ const layout = stylex.create({
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space3,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     justifyContent: "center",
     width: "100%",
   },
@@ -38,7 +38,7 @@ const layout = stylex.create({
     borderWidth: sizeVars.stroke,
     color: colorVars.fgSecondary,
     display: "flex",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     height: "10rem",
     justifyContent: "center",
     maxWidth: "28rem",

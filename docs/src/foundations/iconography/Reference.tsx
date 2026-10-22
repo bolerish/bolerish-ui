@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import {
   XIcon,
@@ -106,7 +106,7 @@ const styles = stylex.create({
   },
   name: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
+    fontSize: typo.fontSizeXs,
   },
 });
 export function Icons() {

@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -20,9 +20,9 @@ const styles = stylex.create({
     borderWidth: sizeVars.stroke,
     color: colorVars.fgSecondary,
     display: "inline-flex",
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     justifyContent: "center",
     minHeight: sizeVars.iconLg,
     minWidth: sizeVars.iconLg,

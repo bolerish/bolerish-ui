@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
@@ -18,9 +18,9 @@ const layout = stylex.create({
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space3,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     justifyContent: "center",
     width: "100%",
   },
@@ -39,8 +39,8 @@ const styles = stylex.create({
   },
   title: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightSemibold,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightSemibold,
     margin: 0,
   },
   detail: {
@@ -49,7 +49,7 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     display: "flex",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     justifyContent: "space-between",
     paddingBlock: spacingVars.space2,
     paddingInline: spacingVars.space4,
@@ -64,7 +64,7 @@ const styles = stylex.create({
   },
   detailValue: {
     color: colorVars.fgPrimary,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontWeight: typo.fontWeightMedium,
   },
 });
 export default function Default() {

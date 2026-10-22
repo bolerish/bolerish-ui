@@ -9,7 +9,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { CaretDownIcon, CheckIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
@@ -29,8 +29,8 @@ const styles = stylex.create({
     color: colorVars.fgPrimary,
     cursor: "pointer",
     display: "inline-flex",
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space2,
     height: sizeVars.controlMd,
     justifyContent: "space-between",
@@ -106,7 +106,7 @@ const styles = stylex.create({
     color: colorVars.fgPrimary,
     cursor: "default",
     display: "flex",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space2,
     minHeight: sizeVars.controlSm,
     outline: "none",
@@ -130,8 +130,8 @@ const styles = stylex.create({
   },
   label: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeXs,
+    fontWeight: typo.fontWeightMedium,
     paddingBlock: spacingVars.space2,
     paddingInline: spacingVars.space2,
   },

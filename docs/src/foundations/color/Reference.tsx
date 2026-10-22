@@ -4,7 +4,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { DocsContext } from "@storybook/addon-docs/blocks";
 import * as stylex from "@stylexjs/stylex";
@@ -31,14 +31,14 @@ const styles = stylex.create({
     gap: spacingVars.space4,
   },
   sectionTitle: {
-    fontSize: typographyVars.fontSizeLg,
-    lineHeight: typographyVars.lineHeightTight,
+    fontSize: typo.fontSizeLg,
+    lineHeight: typo.lineHeightTight,
     margin: 0,
   },
   sectionDescription: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   grid: {
@@ -78,15 +78,15 @@ const styles = stylex.create({
   label: {
     display: "flex",
     flexDirection: "column",
-    fontSize: typographyVars.fontSizeXs,
+    fontSize: typo.fontSizeXs,
     gap: spacingVars.space1,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     overflowWrap: "anywhere",
     paddingBlockStart: spacingVars.space2,
   },
   tokenName: {
     color: colorVars.fgPrimary,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontWeight: typo.fontWeightMedium,
   },
   usage: {
     color: colorVars.fgSecondary,

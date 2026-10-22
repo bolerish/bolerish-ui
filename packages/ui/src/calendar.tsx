@@ -6,7 +6,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { DayButton, DayPicker, type DayButtonProps, type DayPickerProps } from "@daypicker/react";
 import * as stylex from "@stylexjs/stylex";
@@ -15,7 +15,7 @@ const styles = stylex.create({
   root: {
     color: colorVars.fgPrimary,
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     padding: spacingVars.space3,
     width: "fit-content",
   },
@@ -28,7 +28,7 @@ const styles = stylex.create({
     justifyContent: "center",
     paddingInline: sizeVars.controlSm,
   },
-  captionLabel: { fontWeight: typographyVars.fontWeightMedium },
+  captionLabel: { fontWeight: typo.fontWeightMedium },
   nav: {
     alignItems: "center",
     display: "flex",
@@ -70,8 +70,8 @@ const styles = stylex.create({
   monthGrid: { borderCollapse: "collapse", tableLayout: "fixed", width: "100%" },
   weekdays: { color: colorVars.fgSecondary },
   weekday: {
-    fontSize: typographyVars.fontSizeXs,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeXs,
+    fontWeight: typo.fontWeightMedium,
     height: sizeVars.controlSm,
     textAlign: "center",
   },
@@ -108,13 +108,13 @@ const styles = stylex.create({
     backgroundColor: colorVars.bgActionPrimary,
     borderRadius: radiusVars.sm,
     color: colorVars.fgOnActionPrimary,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontWeight: typo.fontWeightMedium,
     ":hover": { backgroundColor: colorVars.bgActionPrimary },
   },
   today: {
     backgroundColor: colorVars.bgCurrent,
     color: colorVars.fgAction,
-    fontWeight: typographyVars.fontWeightSemibold,
+    fontWeight: typo.fontWeightSemibold,
     ":hover": { backgroundColor: colorVars.interactionPressed },
   },
   outside: { color: colorVars.fgTertiary },

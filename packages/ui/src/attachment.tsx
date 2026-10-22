@@ -6,7 +6,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -53,17 +53,17 @@ const styles = stylex.create({
     paddingInlineStart: spacingVars.space2,
   },
   title: {
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
-    lineHeight: typographyVars.lineHeightTight,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
+    lineHeight: typo.lineHeightTight,
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
   description: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeXs,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   actions: {

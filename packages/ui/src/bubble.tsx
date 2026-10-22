@@ -3,15 +3,15 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 const styles = stylex.create({
   root: {
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     maxWidth: `min(${sizeVars.contentMd}, 100%)`,
     paddingBlock: spacingVars.space3,
     paddingInline: spacingVars.space4,

@@ -9,7 +9,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { createContext, useContext } from "react";
@@ -127,15 +127,15 @@ const styles = stylex.create({
   },
   title: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeLg,
-    fontWeight: typographyVars.fontWeightSemibold,
-    lineHeight: typographyVars.lineHeightTight,
+    fontSize: typo.fontSizeLg,
+    fontWeight: typo.fontWeightSemibold,
+    lineHeight: typo.lineHeightTight,
     margin: 0,
   },
   description: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
 });

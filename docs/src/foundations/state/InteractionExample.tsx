@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useState } from "react";
@@ -28,8 +28,8 @@ const styles = stylex.create({
     cursor: "pointer",
     minHeight: sizeVars.controlMd,
     paddingInline: spacingVars.space4,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,
       outlineStyle: "solid",

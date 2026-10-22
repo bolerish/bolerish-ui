@@ -2,11 +2,12 @@
   "Lowest screen background": "화면의 가장 아래 배경",
   "Default content background": "기본 콘텐츠 배경",
   "Pressed default surface": "누른 상태의 기본 표면",
-  "Inputs and subtle fills": "입력 영역과 은은한 채움",
+  "Grouping and subtle fills": "묶음과 은은한 채움",
   "Floating content background": "떠 있는 콘텐츠 배경",
   "Pressed floating surface": "누른 상태의 떠 있는 표면",
   "Current item indicator": "현재 항목 표시",
   "Loading placeholder": "불러오는 동안 표시할 자리",
+  "Primary action hover": "주요 행동 호버",
   "Primary action background": "주요 동작 배경",
   "Destructive action background": "삭제 등 되돌리기 어려운 동작의 배경",
   "Info message background": "안내 메시지 배경",
@@ -124,5 +125,6 @@
   "Default progress and slider tracks": "기본 진행률·슬라이더 트랙",
   "Loading animation cycle": "로딩 애니메이션 주기",
   "Reduced loading animation cycle": "모션 줄임 시 로딩 애니메이션 주기",
-  "Opacity of a layer; not a complete disabled state": "레이어의 불투명도. 비활성 상태는 색상과 동작을 함께 적용합니다."
+  "Opacity of a layer; not a complete disabled state": "레이어의 불투명도. 비활성 상태는 색상과 동작을 함께 적용합니다.",
+  "Essential control boundary": "식별에 필요한 컨트롤 경계"
 }

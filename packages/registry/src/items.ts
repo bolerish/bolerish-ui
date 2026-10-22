@@ -1,4 +1,9 @@
 export const registryItems = {
+  p: {
+    files: ["p.tsx", "typography.ts", "styles/control-layout.ts"],
+    dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
+    registryDependencies: [],
+  },
   heading: {
     files: ["heading.tsx", "typography.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],

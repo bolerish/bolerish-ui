@@ -4,7 +4,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useLayoutEffect, useRef, useState } from "react";
@@ -70,19 +70,19 @@ const styles = stylex.create({
   },
   label: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
   },
   description: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeXs,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   token: {
     color: colorVars.fgSecondary,
     fontFamily: "var(--nuee-font-code)",
-    fontSize: typographyVars.fontSizeXs,
+    fontSize: typo.fontSizeXs,
   },
   shadowPreview: (boxShadow: string) => ({
     backgroundColor: colorVars.bgRaised,

@@ -75,7 +75,8 @@
     "./toggle": "./dist/toggle.js",
     "./toggle-group": "./dist/toggle-group.js",
     "./tooltip": "./dist/tooltip.js",
-    "./heading": "./dist/heading.js"
+    "./heading": "./dist/heading.js",
+    "./p": "./dist/p.js"
   },
   "publishConfig": {
     "access": "public"

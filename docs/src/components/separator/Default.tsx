@@ -1,4 +1,4 @@
-import { typographyVars, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { typo, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Separator } from "@/components/ui/separator";
@@ -7,9 +7,9 @@ const layout = stylex.create({
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space3,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     justifyContent: "center",
     width: "100%",
   },

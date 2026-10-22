@@ -323,3 +323,5 @@ export { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./
 
 export { Heading } from "./heading";
 export type { HeadingProps } from "./heading";
+export { P } from "./p";
+export type { PProps } from "./p";

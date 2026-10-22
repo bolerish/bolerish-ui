@@ -8,7 +8,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -50,9 +50,9 @@ const styles = stylex.create({
     borderRadius: radiusVars.sm,
     color: colorVars.fgPrimary,
     cursor: "pointer",
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     height: sizeVars.controlSm,
     outline: "none",
     paddingInline: spacingVars.space3,

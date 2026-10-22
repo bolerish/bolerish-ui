@@ -9,7 +9,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -54,15 +54,15 @@ const styles = stylex.create({
   },
   header: { display: "flex", flexDirection: "column", gap: spacingVars.space1 },
   title: {
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
   description: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
 });

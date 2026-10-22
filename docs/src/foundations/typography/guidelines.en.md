@@ -8,9 +8,9 @@ Combining size, weight, and line height by role helps people scan headings and r
 | ------------------------------- | ----------------------------------- | ----------------------------------------------- |
 | Page title                      | `fontSizeXl` + `fontWeightSemibold` | `<Heading level={1} size="page">…</Heading>`    |
 | Section heading                 | `fontSizeLg` + `fontWeightSemibold` | `<Heading level={2} size="section">…</Heading>` |
-| Longer reading content          | `fontSizeMd` + `lineHeightNormal`   | `fontSize: typo.fontSizeMd`                     |
-| Supporting text beside controls | `fontSizeSm` + `lineHeightNormal`   | `fontSize: typo.fontSizeSm`                     |
-| Supporting metadata             | `fontSizeXs`                        | `fontSize: typo.fontSizeXs`                     |
+| Longer reading content          | `fontSizeMd` + `lineHeightNormal`   | `<P>…</P>`                                      |
+| Supporting text beside controls | `fontSizeSm` + `lineHeightNormal`   | `<P variant="description">…</P>`                |
+| Supporting metadata             | `fontSizeXs`                        | `<P variant="caption">…</P>`                    |
 
 Start with `lineHeightTight` for short headings and `lineHeightNormal` for multiline content. These combinations guide new screens; they do not replace typography already defined by `Button`, Toast, or `Field`.
 
@@ -34,7 +34,7 @@ Use `lineHeightTight` for the short heading and `lineHeightNormal` for the descr
 
 ### Apply styles to semantic elements
 
-Apply text styles to `p` or `span`. The example assigns tokens to `fontSize`, `fontWeight`, and `lineHeight`, with color chosen separately for the information's role. Repeated combinations inside components use shared typography styles.
+Use [P](?path=/docs/components-p--docs) for paragraphs. Its `body`, `description` and `caption` variants combine the corresponding size, line height and color roles. Inline text can use `span` with tokens; field descriptions and errors keep their dedicated Field components.
 
 Use [Heading](?path=/docs/components-heading--docs) to choose an HTML heading level independently from its visual size.
 

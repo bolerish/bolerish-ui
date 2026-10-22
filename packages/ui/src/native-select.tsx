@@ -6,7 +6,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { CaretDownIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
@@ -24,7 +24,7 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     minWidth: "10rem",
     outline: "none",
     paddingInlineStart: spacingVars.space3,

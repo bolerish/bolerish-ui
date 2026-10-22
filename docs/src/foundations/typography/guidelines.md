@@ -8,9 +8,9 @@
 | ---------------------- | ----------------------------------- | ----------------------------------------------- |
 | 페이지 제목            | `fontSizeXl` + `fontWeightSemibold` | `<Heading level={1} size="page">…</Heading>`    |
 | 섹션 제목              | `fontSizeLg` + `fontWeightSemibold` | `<Heading level={2} size="section">…</Heading>` |
-| 긴 설명·읽기 중심 본문 | `fontSizeMd` + `lineHeightNormal`   | `fontSize: typo.fontSizeMd`                     |
-| 컨트롤 주변 설명       | `fontSizeSm` + `lineHeightNormal`   | `fontSize: typo.fontSizeSm`                     |
-| 보조 정보              | `fontSizeXs`                        | `fontSize: typo.fontSizeXs`                     |
+| 긴 설명·읽기 중심 본문 | `fontSizeMd` + `lineHeightNormal`   | `<P>…</P>`                                      |
+| 컨트롤 주변 설명       | `fontSizeSm` + `lineHeightNormal`   | `<P variant="description">…</P>`                |
+| 보조 정보              | `fontSizeXs`                        | `<P variant="caption">…</P>`                    |
 
 짧은 제목은 `lineHeightTight`, 여러 줄을 읽는 본문은 `lineHeightNormal`을 기본으로 합니다. 위 조합은 새 화면의 시작점이며 기존 `Button`, Toast, `Field`의 내부 글자 크기를 일괄 변경하는 규칙이 아닙니다.
 
@@ -34,7 +34,7 @@
 
 ### 태그에 스타일 적용하기
 
-본문과 설명은 `p`나 `span`에 필요한 스타일을 적용합니다. 아래 예제처럼 `fontSize`, `fontWeight`, `lineHeight`에 토큰을 지정하고 색상은 정보의 역할에 맞게 별도로 정합니다. 컴포넌트 내부에서 반복되는 조합은 공통 타이포 스타일로 관리합니다.
+문단은 [P](?path=/docs/components-p--docs)를 사용합니다. `body`, `description`, `caption` 변형이 해당 역할의 크기·행간·색상을 조합합니다. 문장 안의 텍스트는 `span`에 토큰을 적용할 수 있으며, 입력 설명과 오류는 전용 Field 컴포넌트를 사용합니다.
 
 제목은 [Heading](?path=/docs/components-heading--docs)을 사용해 HTML 단계와 시각적 크기를 따로 정할 수 있습니다.
 

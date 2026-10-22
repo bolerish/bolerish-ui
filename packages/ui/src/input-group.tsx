@@ -7,7 +7,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, MouseEvent } from "react";
@@ -53,7 +53,7 @@ const styles = stylex.create({
     cursor: "text",
     display: "flex",
     flexShrink: 0,
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space2,
     minHeight: sizeVars.controlMd,
   },
@@ -81,10 +81,10 @@ const styles = stylex.create({
   textarea: { minHeight: "5rem" },
   input: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
-    fontFamily: typographyVars.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    fontFamily: typo.fontFamilyBody,
     height: sizeVars.controlMd,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     paddingInline: spacingVars.space3,
     width: "100%",
     "::placeholder": { color: colorVars.fgTertiary },
@@ -99,7 +99,7 @@ const styles = stylex.create({
     alignItems: "center",
     color: colorVars.fgSecondary,
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space2,
   },
 });

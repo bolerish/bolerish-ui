@@ -3,7 +3,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -17,11 +17,11 @@ const styles = stylex.create({
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeXs,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeXs,
+    fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space1,
     justifyContent: "center",
-    lineHeight: typographyVars.lineHeightTight,
+    lineHeight: typo.lineHeightTight,
     minHeight: sizeVars.iconMd,
     paddingBlock: spacingVars.space1,
     paddingInline: spacingVars.space2,

@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
+import { colorVars, sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useId, useState } from "react";
 
@@ -30,8 +30,8 @@ const styles = stylex.create({
   actions: { display: "flex", flexWrap: "wrap", gap: spacingVars.space2 },
   text: {
     margin: 0,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
   },
   secondary: { color: colorVars.fgSecondary },
   list: { listStyle: "none", margin: 0, padding: 0 },

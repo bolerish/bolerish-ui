@@ -7,7 +7,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
@@ -22,11 +22,11 @@ const styles = stylex.create({
     borderWidth: sizeVars.stroke,
     cursor: "pointer",
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space2,
     isolation: "isolate",
-    lineHeight: typographyVars.lineHeightTight,
+    lineHeight: typo.lineHeightTight,
     outline: "none",
     overflow: "hidden",
     position: "relative",

@@ -187,7 +187,7 @@
   "## 1. Initialize": "## 1. 초기 설정",
   "Run this once from the project root.": "프로젝트 루트에서 한 번 실행합니다.",
   "## 2. Import alias": "## 2. 가져오기 별칭",
-  "The component and local style aliases entered during init are saved to `.nuee.json`.": "초기 설정에서 입력한 컴포넌트와 스타일 경로는 `.nuee.json`에 저장됩니다.",
+  "The component and local style aliases entered during init are saved to `.bolerish.json`.": "초기 설정에서 입력한 컴포넌트와 스타일 경로는 `.bolerish.json`에 저장됩니다.",
   "| Setting                              | Purpose                                                                                                                          |\n| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |\n| `aliases.ui` / `aliases.styles`      | The aliases used to import added components and their local StyleX tokens.                                                       |\n| `accessibility.respectReducedMotion` | Deprecated compatibility field. Copied components retain OS reduced-motion rules; only the app end user can override them at runtime. |": "| 설정 | 용도 |\n| --- | --- |\n| `aliases.ui` / `aliases.styles` | 추가한 컴포넌트와 로컬 StyleX 토큰을 가져오는 경로입니다. |\n| `accessibility.respectReducedMotion` | 이전 설정과의 호환을 위한 필드입니다. OS 모션 줄임 규칙은 유지되며 앱의 최종 사용자만 런타임에 덮어쓸 수 있습니다. |",
   "Define the actual file locations in `tsconfig.json` or `jsconfig.json`.": "실제 파일 위치는 `tsconfig.json`이나 `jsconfig.json`에 지정합니다.",
   "## 3. File location": "## 3. 저장 위치",

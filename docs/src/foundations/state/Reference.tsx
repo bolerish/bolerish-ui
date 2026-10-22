@@ -4,7 +4,7 @@ import {
   radiusVars,
   spacingVars,
   opacityVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
@@ -29,8 +29,8 @@ const styles = stylex.create({
   },
   label: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeXs,
+    lineHeight: typo.lineHeightNormal,
   },
   swatch: {
     backgroundColor: colorVars.fgPrimary,

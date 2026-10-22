@@ -8,7 +8,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { createContext, type ComponentProps, useContext } from "react";
@@ -35,9 +35,9 @@ const styles = stylex.create({
     cursor: "pointer",
     display: "inline-flex",
     flexShrink: 0,
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     justifyContent: "center",
     outline: "none",
     position: "relative",
@@ -80,8 +80,8 @@ const styles = stylex.create({
 
   panel: {
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     marginTop: spacingVars.space3,
     minWidth: 0,
     outline: "none",

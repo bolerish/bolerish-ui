@@ -5,7 +5,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import {
@@ -42,8 +42,8 @@ const styles = stylex.create({
     borderWidth: sizeVars.stroke,
     color: colorVars.fgSecondary,
     display: "inline-flex",
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
     justifyContent: "center",
     minHeight: sizeVars.controlMd,
     paddingInline: spacingVars.space3,

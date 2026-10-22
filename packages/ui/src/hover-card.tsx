@@ -9,7 +9,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -23,7 +23,7 @@ const styles = stylex.create({
     borderWidth: sizeVars.stroke,
     boxShadow: shadowVars.floating,
     color: colorVars.fgPrimary,
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     maxWidth: "20rem",
     outline: "none",
     padding: spacingVars.space4,

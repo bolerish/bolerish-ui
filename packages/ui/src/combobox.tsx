@@ -9,7 +9,7 @@ import {
   shadowVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { CaretDownIcon, CheckIcon, MagnifyingGlassIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
@@ -57,8 +57,8 @@ const styles = stylex.create({
     boxShadow: "none",
     color: colorVars.fgPrimary,
     flex: 1,
-    fontFamily: typographyVars.fontFamilyBody,
-    fontSize: typographyVars.fontSizeSm,
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeSm,
     height: "100%",
     minWidth: 0,
     outline: "none",
@@ -131,7 +131,7 @@ const styles = stylex.create({
     borderRadius: radiusVars.sm,
     cursor: "default",
     display: "flex",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space2,
     minHeight: sizeVars.controlSm,
     outline: "none",
@@ -155,15 +155,15 @@ const styles = stylex.create({
   },
   empty: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     padding: spacingVars.space4,
     textAlign: "center",
     ":empty": { padding: 0 },
   },
   label: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeXs,
+    fontWeight: typo.fontWeightMedium,
     paddingBlock: spacingVars.space2,
     paddingInline: spacingVars.space2,
   },

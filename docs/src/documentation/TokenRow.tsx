@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
+import { colorVars, sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 
@@ -29,17 +29,17 @@ const styles = stylex.create({
   tokenName: {
     color: colorVars.fgPrimary,
     fontFamily: "var(--nuee-font-code)",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
   },
   usage: {
     color: colorVars.fgSecondary,
-    fontSize: typographyVars.fontSizeXs,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeXs,
+    lineHeight: typo.lineHeightNormal,
   },
   value: {
     color: colorVars.fgTertiary,
     fontFamily: "var(--nuee-font-code)",
-    fontSize: typographyVars.fontSizeXs,
+    fontSize: typo.fontSizeXs,
   },
   preview: {
     color: colorVars.fgPrimary,

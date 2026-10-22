@@ -6,7 +6,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-  typographyVars,
+  typo,
 } from "@bolerish/tokens/semantic.stylex";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
@@ -21,9 +21,9 @@ const styles = stylex.create({
     color: colorVars.fgSecondary,
     display: "flex",
     flexWrap: "wrap",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space2,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     listStyle: "none",
     margin: 0,
     padding: 0,
@@ -45,7 +45,7 @@ const styles = stylex.create({
       outlineWidth: sizeVars.focusRing,
     },
   },
-  page: { color: colorVars.fgPrimary, fontWeight: typographyVars.fontWeightMedium },
+  page: { color: colorVars.fgPrimary, fontWeight: typo.fontWeightMedium },
   separator: { alignItems: "center", color: colorVars.fgTertiary, display: "inline-flex" },
   ellipsis: {
     alignItems: "center",

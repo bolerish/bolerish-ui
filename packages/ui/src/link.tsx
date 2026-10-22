@@ -1,7 +1,7 @@
 "use client";
 
 import { useRender } from "@base-ui/react/use-render";
-import { colorVars, motionVars, sizeVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
+import { colorVars, motionVars, sizeVars, typo } from "@bolerish/tokens/semantic.stylex";
 import { ArrowSquareOutIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
@@ -13,7 +13,7 @@ const styles = stylex.create({
     alignItems: "center",
     borderRadius: "0.125rem",
     display: "inline-flex",
-    fontFamily: typographyVars.fontFamilyBody,
+    fontFamily: typo.fontFamilyBody,
     gap: "0.1875em",
     outline: "none",
     transitionDuration: motionVars.durationFast,

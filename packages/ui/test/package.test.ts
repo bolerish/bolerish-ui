@@ -69,7 +69,7 @@ test("@bolerish/ui CLI builds every added component in a Vite app", async () => 
       "--cwd",
       projectDirectory,
     ]);
-    const configPath = join(projectDirectory, ".nuee.json");
+    const configPath = join(projectDirectory, ".bolerish.json");
     const installedConfig = JSON.parse(await readFile(configPath, "utf8"));
     await writeFile(
       configPath,
@@ -115,8 +115,8 @@ test("@bolerish/ui CLI builds every added component in a Vite app", async () => 
         'import * as stylex from "@stylexjs/stylex";',
         'import { themeStyles } from "./styles/settings.stylex";',
         'import { typo, typographyVars, spacingRoleVars } from "./styles/tokens/semantic.stylex";',
-        "const tokenUsage = stylex.create({ root: { fontSize: typo.fontSizeMd, gap: spacingRoleVars.fieldGap }, legacy: { fontSize: typographyVars.fontSizeMd } });",
-        "console.log(stylex.props(tokenUsage.root), stylex.props(tokenUsage.legacy));",
+        "const tokenUsage = stylex.create({ root: { fontSize: typo.fontSizeMd, gap: spacingRoleVars.fieldGap } });",
+        "console.log(stylex.props(tokenUsage.root), typographyVars.fontSizeMd);",
         'document.documentElement.className = stylex.props(...themeStyles).className ?? "";',
         ...componentFileNames
           .filter((fileName) => fileName.endsWith(".tsx"))
@@ -171,6 +171,16 @@ test("@bolerish/ui CLI builds every added component in a Vite app", async () => 
     const compiledCss = (
       await Promise.all(cssFiles.map((file) => readFile(join(assetDirectory, file), "utf8")))
     ).join("\n");
+    const typographyReferences = [
+      ...compiledCss.matchAll(/(?:font-size|font-weight|line-height):\s*var\((--[^,)]+)/g),
+    ];
+    assert.ok(typographyReferences.length > 0);
+    for (const [, variable] of typographyReferences) {
+      assert.ok(
+        compiledCss.includes(`${variable}:`),
+        `Undefined typography token in the consumer app: ${variable}`,
+      );
+    }
     assert.match(compiledCss, /--nuee-density:\s*0?\.875/);
     assert.match(compiledCss, /--nuee-font-body:\s*Arial/);
     assert.match(compiledCss, /prefers-reduced-motion/);
@@ -252,7 +262,7 @@ test("@bolerish/ui CLI keeps the UI package out of a generated Vite app", async 
 });
 
 test("@bolerish/ui CLI initializes a project and adds a card", async () => {
-  const projectDirectory = await mkdtemp(join(tmpdir(), "bolerish-ui-cli-"));
+  const projectDirectory = await mkdtemp(join(tmpdir(), "nuee-ui-cli-"));
 
   try {
     await writeFile(
@@ -276,7 +286,7 @@ test("@bolerish/ui CLI initializes a project and adds a card", async () => {
       "--skip-dependencies",
     ]);
 
-    const config = JSON.parse(await readFile(join(projectDirectory, ".nuee.json"), "utf8"));
+    const config = JSON.parse(await readFile(join(projectDirectory, ".bolerish.json"), "utf8"));
     assert.equal(config.aliases.ui, "@/components/ui");
     assert.equal(config.aliases.styles, "@/styles");
     await access(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"));

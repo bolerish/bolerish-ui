@@ -1,25 +1,11 @@
-import { colorVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Heading } from "@/components/ui/heading";
+import { P } from "@/components/ui/p";
 
 const styles = stylex.create({
   section: { display: "flex", flexDirection: "column", gap: spacingVars.space3 },
-  body: {
-    fontFamily: typo.fontFamilyBody,
-    fontSize: typo.fontSizeMd,
-    fontWeight: typo.fontWeightRegular,
-    lineHeight: typo.lineHeightNormal,
-    margin: 0,
-  },
-  description: {
-    color: colorVars.fgSecondary,
-    fontFamily: typo.fontFamilyBody,
-    fontSize: typo.fontSizeSm,
-    fontWeight: typo.fontWeightRegular,
-    lineHeight: typo.lineHeightNormal,
-    margin: 0,
-  },
 });
 
 export default function TypographyExample() {
@@ -28,8 +14,9 @@ export default function TypographyExample() {
       <Heading level={2} size="section">
         Notifications
       </Heading>
-      <p {...stylex.props(styles.body)}>Choose which project updates you receive.</p>
-      <p {...stylex.props(styles.description)}>You can change these preferences at any time.</p>
+      <P>Choose which project updates you receive.</P>
+      <P variant="description">You can change these preferences at any time.</P>
+      <P variant="caption">Last updated today</P>
     </section>
   );
 }

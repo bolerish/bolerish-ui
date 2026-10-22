@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Add P for body, description and caption paragraphs. Heading examples now show
+  every HTML level from h1 to h6, independently of visual size.
+- Correct generated typography variables so component text uses its intended
+  size, weight and line height.
+
 - Rename the product to bolerish/ui, packages to @bolerish/* and the command to
   bolerish. New configuration uses .bolerish.json; existing .nuee.json and
   nuee.json remain readable. Run bolerish init --force to migrate the name and

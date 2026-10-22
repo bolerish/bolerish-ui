@@ -1,4 +1,4 @@
-import { colorVars, spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
+import { colorVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ReactNode } from "react";
 
@@ -16,9 +16,9 @@ const layout = stylex.create({
     alignItems: "center",
     display: "flex",
     flexWrap: "wrap",
-    fontSize: typographyVars.fontSizeSm,
+    fontSize: typo.fontSizeSm,
     gap: spacingVars.space3,
-    lineHeight: typographyVars.lineHeightNormal,
+    lineHeight: typo.lineHeightNormal,
     justifyContent: "center",
     width: "100%",
   },
@@ -40,14 +40,14 @@ const layout = stylex.create({
   },
   navigationTitle: {
     display: "block",
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightMedium,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightMedium,
   },
   navigationDescription: {
     color: colorVars.fgSecondary,
     display: "block",
-    fontSize: typographyVars.fontSizeXs,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeXs,
+    lineHeight: typo.lineHeightNormal,
     marginTop: spacingVars.space1,
   },
 });

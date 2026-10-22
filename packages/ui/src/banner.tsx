@@ -1,9 +1,4 @@
-import {
-  colorVars,
-  radiusVars,
-  spacingVars,
-  typographyVars,
-} from "@bolerish/tokens/semantic.stylex";
+import { colorVars, radiusVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
@@ -20,14 +15,14 @@ const styles = stylex.create({
   content: { display: "grid", gap: spacingVars.space1, minWidth: 0 },
   action: { alignItems: "center", display: "flex", gap: spacingVars.space2 },
   title: {
-    fontSize: typographyVars.fontSizeSm,
-    fontWeight: typographyVars.fontWeightSemibold,
-    lineHeight: typographyVars.lineHeightTight,
+    fontSize: typo.fontSizeSm,
+    fontWeight: typo.fontWeightSemibold,
+    lineHeight: typo.lineHeightTight,
   },
   description: {
     color: "currentColor",
-    fontSize: typographyVars.fontSizeSm,
-    lineHeight: typographyVars.lineHeightNormal,
+    fontSize: typo.fontSizeSm,
+    lineHeight: typo.lineHeightNormal,
     opacity: 0.82,
   },
 });
