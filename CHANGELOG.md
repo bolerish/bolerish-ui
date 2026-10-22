@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Allow Motion now plays component transitions even when the OS requests reduced
+    motion. System follows the OS, and Reduce Motion disables transitions.
+
 - Keep sidebar action menus in the same neutral surface as their row on hover.
     Keyboard focus remains visible without the bright background or glow.
 

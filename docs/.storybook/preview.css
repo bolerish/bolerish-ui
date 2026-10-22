@@ -1,22 +1,8 @@
-::selection {
-  background-color: Highlight;
-  color: HighlightText;
-}
-
-:root[data-nuee-motion="off"],
-:root[data-nuee-motion="off"] *,
-:root[data-nuee-motion="off"] *::before,
-:root[data-nuee-motion="off"] *::after {
-  animation-duration: 0s !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0s !important;
-  scroll-behavior: auto !important;
-}
 @media (prefers-reduced-motion: reduce) {
-  :root,
-  :root *,
-  :root *::before,
-  :root *::after {
+  :root:not([data-nuee-motion="on"]),
+  :root:not([data-nuee-motion="on"]) *,
+  :root:not([data-nuee-motion="on"]) *::before,
+  :root:not([data-nuee-motion="on"]) *::after {
     animation-duration: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0s !important;

@@ -25,53 +25,6 @@ import type { DocumentationGlobals } from "../src/documentation/useDocumentation
 import { useDocumentationGlobals } from "../src/documentation/useDocumentationGlobals";
 
 type ColorMode = "system" | "light" | "dark";
-type MotionPreference = "system" | "reduce" | "no-preference";
-
-const originalMotionMediaQueries = new WeakMap<CSSMediaRule, string>();
-
-function collectMotionMediaRules(rules: CSSRuleList, mediaRules: CSSMediaRule[]) {
-  for (const rule of Array.from(rules)) {
-    if (rule instanceof CSSMediaRule) {
-      if (
-        originalMotionMediaQueries.has(rule) ||
-        rule.conditionText.includes("prefers-reduced-motion")
-      ) {
-        mediaRules.push(rule);
-      }
-    }
-
-    if (rule instanceof CSSGroupingRule) {
-      collectMotionMediaRules(rule.cssRules, mediaRules);
-    }
-  }
-}
-
-function setMotionPreference(preference: MotionPreference) {
-  const motionMediaRules: CSSMediaRule[] = [];
-
-  for (const styleSheet of Array.from(document.styleSheets)) {
-    try {
-      collectMotionMediaRules(styleSheet.cssRules, motionMediaRules);
-    } catch {
-      // Ignore stylesheets that the browser does not allow Storybook to inspect.
-    }
-  }
-
-  for (const rule of motionMediaRules) {
-    const originalQuery = originalMotionMediaQueries.get(rule) ?? rule.media.mediaText;
-    originalMotionMediaQueries.set(rule, originalQuery);
-
-    let query = originalQuery;
-    if (preference === "reduce") {
-      query = originalQuery.replace(
-        /\(prefers-reduced-motion:\s*(reduce|no-preference)\)/g,
-        (_, value: string) => (value === preference ? "(min-width: 0px)" : "(max-width: -1px)"),
-      );
-    }
-    rule.media.mediaText = query;
-  }
-}
-
 const typographyTheme = stylex.createTheme(typo, {
   fontFamily: "var(--nuee-font-body)",
   fontFamilyBody: "var(--nuee-font-body)",
@@ -151,31 +104,6 @@ function ThemeScope({
   );
 }
 
-function MotionPreferenceScope({
-  children,
-  preference,
-}: {
-  children: ReactNode;
-  preference: MotionPreference;
-}) {
-  useLayoutEffect(() => {
-    const applyMotionPreference = () => setMotionPreference(preference);
-    const styleSheetObserver = new MutationObserver(applyMotionPreference);
-
-    applyMotionPreference();
-    styleSheetObserver.observe(document.head, { childList: true, subtree: true });
-    document.head.addEventListener("load", applyMotionPreference, true);
-
-    return () => {
-      styleSheetObserver.disconnect();
-      document.head.removeEventListener("load", applyMotionPreference, true);
-      setMotionPreference("system");
-    };
-  }, [preference]);
-
-  return children;
-}
-
 function TokenPreferenceScope({
   children,
   settings,
@@ -200,7 +128,7 @@ function TokenPreferenceScope({
     for (const [name, value] of Object.entries(values)) root.style.setProperty(name, value);
     root.setAttribute(
       "data-nuee-motion",
-      settings.motionPreference === "reduce" ? "off" : "system",
+      { system: "system", reduce: "off", "no-preference": "on" }[settings.motionPreference],
     );
     return () => {
       for (const [name, value] of previous) {
@@ -219,44 +147,42 @@ function DocumentationContainer({
   context,
 }: DocsContainerProps & { children?: ReactNode }) {
   const settings = useDocumentationGlobals(context);
-  const { colorMode, motionPreference, locale } = settings;
+  const { colorMode, locale } = settings;
   const mode = useColorMode(colorMode);
 
   return (
     <LocaleContext.Provider value={locale}>
       <TokenPreferenceScope settings={settings}>
         <ThemeScope mode={mode} compact>
-          <MotionPreferenceScope preference={motionPreference}>
-            <DocsContainer
-              context={context}
-              theme={{
-                ...themes[mode],
-                appContentBg: "transparent",
-                colorSecondary: "currentColor",
-                fontBase: "var(--nuee-font-body)",
-                fontCode: "var(--nuee-font-code)",
-              }}
-            >
-              <div {...stylex.props(styles.document)}>
-                <div
-                  className={`sb-unstyled ${stylex.props(styles.article).className}`}
-                  data-document-locale={locale}
-                  lang={locale}
-                >
-                  {children}
-                </div>
-                <aside {...stylex.props(styles.toc)}>
-                  <TableOfContents
-                    contentsSelector={`[data-document-locale="${locale}"]`}
-                    title={ui.onThisPage}
-                    channel={context.channel}
-                    headingSelector="h2, h3"
-                    ignoreSelector=".nuee-example h2, .nuee-example h3, #table-of-contents"
-                  />
-                </aside>
+          <DocsContainer
+            context={context}
+            theme={{
+              ...themes[mode],
+              appContentBg: "transparent",
+              colorSecondary: "currentColor",
+              fontBase: "var(--nuee-font-body)",
+              fontCode: "var(--nuee-font-code)",
+            }}
+          >
+            <div {...stylex.props(styles.document)}>
+              <div
+                className={`sb-unstyled ${stylex.props(styles.article).className}`}
+                data-document-locale={locale}
+                lang={locale}
+              >
+                {children}
               </div>
-            </DocsContainer>
-          </MotionPreferenceScope>
+              <aside {...stylex.props(styles.toc)}>
+                <TableOfContents
+                  contentsSelector={`[data-document-locale="${locale}"]`}
+                  title={ui.onThisPage}
+                  channel={context.channel}
+                  headingSelector="h2, h3"
+                  ignoreSelector=".nuee-example h2, .nuee-example h3, #table-of-contents"
+                />
+              </aside>
+            </div>
+          </DocsContainer>
         </ThemeScope>
       </TokenPreferenceScope>
     </LocaleContext.Provider>
@@ -309,11 +235,9 @@ function StoryPreview({
   return (
     <LocaleContext.Provider value={current.locale}>
       <TokenPreferenceScope settings={current}>
-        <MotionPreferenceScope preference={current.motionPreference}>
-          <ThemeScope mode={current.colorMode} compact={isolated}>
-            {children}
-          </ThemeScope>
-        </MotionPreferenceScope>
+        <ThemeScope mode={current.colorMode} compact={isolated}>
+          {children}
+        </ThemeScope>
       </TokenPreferenceScope>
     </LocaleContext.Provider>
   );
