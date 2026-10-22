@@ -19,7 +19,7 @@ const styles = stylex.create({
   select: {
     appearance: "none",
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     borderRadius: radiusVars.sm,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
@@ -33,7 +33,9 @@ const styles = stylex.create({
     transitionProperty: "background-color, border-color, color",
     transitionTimingFunction: motionVars.easingStandard,
     width: "100%",
-    ":hover": { borderColor: colorVars.strokeStrong },
+    ":hover:not(:disabled):not(:user-invalid):not(:focus-visible)": {
+      borderColor: colorVars.strokeAction,
+    },
     ":focus-visible": {
       borderColor: colorVars.strokeFocus,
       outlineColor: colorVars.strokeFocus,

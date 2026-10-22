@@ -15,7 +15,7 @@ Use tokens for color, typography, spacing, corners, shadows, target sizes, and m
 | Surface, text, boundary, state                | `colorVars`                             |
 | Gaps and padding                              | `spacingVars`                           |
 | Controls, icons, content width, touch targets | `sizeVars`                              |
-| Font, size, weight, line height               | `typographyVars`                        |
+| Font, size, weight, line height               | `typo`                                  |
 | Corners, shadows, stacking                    | `radiusVars`, `shadowVars`, `layerVars` |
 | Duration, easing, disabled opacity            | `motionVars`, `opacityVars`             |
 
@@ -44,7 +44,7 @@ const styles = stylex.create({
 });
 ```
 
-Source-installed projects use the style alias in `.nuee.json`; this repository's examples may import the token package. Check names in the actual token file before writing a screen. Do not invent tokens.
+Source-installed projects use the style alias in `.bolerish.json`; this repository's examples may import the token package. Check names in the actual token file before writing a screen. Do not invent tokens.
 
 ## Token values and previews
 

@@ -45,7 +45,7 @@
 ## 역할별 조합 계약
 
 토큰은 색상 취향이 아니라 아래 역할로 고릅니다. 같은 색상 값을 쓰더라도 선택과
-드롭 대상은 별도 역할입니다. 기존 `interactionSelected`의 값과 이름은 유지합니다.
+드롭 대상은 별도 역할입니다. `interactionSelected`는 묶음 안의 선택 면을 나타냅니다.
 
 | 역할                      | 배경                  | 전경·경계                                            | 함께 제공할 표시                                   |
 | ------------------------- | --------------------- | ---------------------------------------------------- | -------------------------------------------------- |
@@ -57,7 +57,8 @@
 | 드롭을 받을 영역          | `bgDropTarget`        | `fgPrimary`, `strokeDropIndicator` 경계              | “이 폴더로 이동”처럼 결과를 설명                   |
 | 정확한 삽입 위치          | 배경 없음             | `strokeDropIndicator`, `sizeVars.focusRing` 두께     | 선과 “항목 앞에 이동” 설명                         |
 
-Tabs의 `segmented`와 Toggle Group의 `soft`는 같은 떠 있는 선택 면을 사용합니다.
+Tabs의 `segmented`와 Toggle Group의 `soft`는 같은 선택 면 색상을 사용합니다.
+`segmented`는 그림자로 높이를 더하고, `soft`는 선택 경계만 유지합니다.
 Tabs는 연결된 패널을 전환하고 Toggle Group은 값을 선택합니다. 스타일을 공유해도
 역할과 키보드 동작을 서로 바꾸지 않습니다. 단독 Toggle의 `soft`는 `bgSelected`를
 사용하며, 일반 Toggle은 선택 경계를 함께 유지합니다.
@@ -84,3 +85,5 @@ Tabs는 연결된 패널을 전환하고 Toggle Group은 값을 선택합니다.
 
 아래 예제는 실제 목록 이동과 동일한 “앞에 이동” 버튼을 제공합니다. 외부 파일과
 목록 밖의 드래그는 받지 않으며, 원래 항목에 놓으면 순서가 바뀌지 않습니다.
+
+주요 버튼은 모노크롬 호버에 `bgActionPrimaryHover`를 사용합니다. Segmented Tabs와 soft Toggle Group은 선택 면에 `strokeAction` 경계를 더해 묶음 배경과 반전 표면에서도 선택을 구별합니다.

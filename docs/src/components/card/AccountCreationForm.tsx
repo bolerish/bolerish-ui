@@ -1,4 +1,4 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Button } from "@/components/ui/button";
@@ -32,11 +32,12 @@ const layout = stylex.create({
     flexDirection: "column",
     gap: spacingVars.space3,
   },
+  form: { maxWidth: sizeVars.contentSm },
 });
 export default function AccountCreationForm() {
   return (
     <div {...stylex.props(layout.preview)}>
-      <Card>
+      <Card xstyle={layout.form}>
         <CardHeader>
           <CardTitle>Create account</CardTitle>
           <CardDescription>Enter the name and email you’ll use for the service.</CardDescription>

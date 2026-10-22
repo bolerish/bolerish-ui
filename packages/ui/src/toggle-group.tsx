@@ -6,7 +6,6 @@ import {
   colorVars,
   motionVars,
   radiusVars,
-  shadowVars,
   sizeVars,
   spacingVars,
   typo,
@@ -24,6 +23,14 @@ const styles = stylex.create({
     borderColor: "transparent",
     borderRadius: 0,
     marginInlineStart: -1,
+    ":first-child": {
+      borderStartStartRadius: radiusVars.sm,
+      borderEndStartRadius: radiusVars.sm,
+    },
+    ":last-child": {
+      borderStartEndRadius: radiusVars.sm,
+      borderEndEndRadius: radiusVars.sm,
+    },
   },
   item: {
     alignItems: "center",
@@ -38,14 +45,27 @@ const styles = stylex.create({
     fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space1,
     justifyContent: "center",
+    isolation: "isolate",
     outline: "none",
+    position: "relative",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "background-color, border-color, color, opacity",
     transitionTimingFunction: motionVars.easingStandard,
-    backgroundImage: {
-      default: "none",
-      ":not(:disabled):hover": `linear-gradient(${colorVars.interactionHover}, ${colorVars.interactionHover})`,
-      ":not(:disabled):active": `linear-gradient(${colorVars.interactionPressed}, ${colorVars.interactionPressed})`,
+    "::after": {
+      backgroundColor: {
+        default: colorVars.interactionDefault,
+        ":not(:disabled):hover": colorVars.interactionHover,
+        ":not(:disabled):active": colorVars.interactionPressed,
+      },
+      borderRadius: "inherit",
+      content: '""',
+      inset: 0,
+      pointerEvents: "none",
+      position: "absolute",
+      transitionDuration: motionVars.durationFast,
+      transitionProperty: "background-color",
+      transitionTimingFunction: motionVars.easingStandard,
+      zIndex: -1,
     },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,
@@ -58,10 +78,10 @@ const styles = stylex.create({
 
   softPressed: {
     backgroundColor: colorVars.interactionSelected,
-    boxShadow: shadowVars.subtle,
+    boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeAction}`,
   },
   itemPressed: {
-    backgroundColor: colorVars.bgCurrent,
+    backgroundColor: colorVars.bgSelected,
     color: colorVars.fgPrimary,
     boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeStrong}`,
   },
@@ -91,7 +111,6 @@ const variantStyles = stylex.create({
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     gap: 0,
-    overflow: "hidden",
   },
 });
 

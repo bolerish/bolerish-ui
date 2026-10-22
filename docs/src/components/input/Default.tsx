@@ -32,7 +32,7 @@ export default function Default() {
     <div {...stylex.props(layout.preview, layout.column)}>
       <div {...stylex.props(layout.stack, layout.formWidth)}>
         <Input aria-label="Name" placeholder="Jordan Lee" />
-        <Input aria-label="Email" defaultValue="hello@nuee.dev" />
+        <Input aria-label="Email" defaultValue="hello@example.com" />
       </div>
     </div>
   );

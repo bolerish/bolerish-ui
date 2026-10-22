@@ -18,8 +18,9 @@
     "pack:check": "node --experimental-strip-types scripts/verify-packages.ts",
     "prepare": "lefthook install",
     "release": "pnpm check && pnpm test && pnpm build:ui && pnpm pack:check && pnpm build:docs && node --experimental-strip-types scripts/publish.ts",
-    "test": "pnpm test:cli && pnpm test:ui",
+    "test": "pnpm test:tokens && pnpm test:cli && pnpm test:ui",
     "test:cli": "pnpm --filter @bolerish/cli test",
+    "test:tokens": "node --experimental-vm-modules --test scripts/theme-contrast.test.mjs",
     "test:ui": "pnpm --filter @bolerish/ui test",
     "typecheck": "pnpm --filter @bolerish/tokens typecheck && pnpm --filter @bolerish/registry build && pnpm --filter @bolerish/cli typecheck && pnpm --filter @bolerish/ui typecheck && pnpm --filter @bolerish/docs typecheck"
   },

@@ -2,6 +2,7 @@ import { layoutVars, spacingRoleVars, typo } from "@bolerish/tokens/semantic.sty
 import * as stylex from "@stylexjs/stylex";
 
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { Field, FieldLabel, FieldDescription, FieldGroup } from "@/components/ui/field";
 import { Heading } from "@/components/ui/heading";
 import { Input } from "@/components/ui/input";
@@ -27,7 +28,7 @@ const styles = stylex.create({
     lineHeight: typo.lineHeightNormal,
     margin: 0,
   },
-  row: { display: "flex", alignItems: "center", gap: spacingRoleVars.inlineGap },
+  row: { display: "flex", flexWrap: "wrap", alignItems: "center", gap: spacingRoleVars.inlineGap },
 });
 
 export default function SettingsExample() {
@@ -39,7 +40,7 @@ export default function SettingsExample() {
       <p {...stylex.props(styles.text)}>
         Use the unit, density, heading font and motion toolbar controls to compare shared tokens.
       </p>
-      <div {...stylex.props(styles.panel)}>
+      <Card xstyle={styles.panel}>
         <FieldGroup>
           <Field>
             <FieldLabel>Display name</FieldLabel>
@@ -58,7 +59,7 @@ export default function SettingsExample() {
             Saving status stays visible when motion is reduced.
           </span>
         </div>
-      </div>
+      </Card>
     </section>
   );
 }

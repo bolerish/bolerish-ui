@@ -13,7 +13,7 @@
 | 제목·필수 본문            | `colorVars.fgPrimary`     | `color: colorVars.fgPrimary`           |
 | 설명·보조 정보            | `colorVars.fgSecondary`   | `color: colorVars.fgSecondary`         |
 | 일반 구분선               | `colorVars.strokeDefault` | `borderColor: colorVars.strokeDefault` |
-| 반드시 구별해야 하는 경계 | `colorVars.strokeStrong`  | `borderColor: colorVars.strokeStrong`  |
+| 반드시 구별해야 하는 경계 | `colorVars.strokeControl` | `borderColor: colorVars.strokeControl` |
 
 주요 행동이나 파괴적 행동의 배경에는 대응하는 `fgOnActionPrimary` 또는 `fgOnActionDestructive`를 사용합니다. 오류는 `fgFeedbackError` 같은 상태 토큰과 구체적인 설명을 함께 사용합니다.
 
@@ -37,3 +37,22 @@
 
 선택과 드롭의 배경·전경·경계 조합은 [상태](?path=/docs/foundations-state--docs)의
 역할별 조합 계약을 따릅니다. `bgSubtle`만으로 선택을 표시하지 않습니다.
+
+## 채택한 팔레트
+
+미세하게 차가운 Zinc 계열의 회색을 사용합니다. 기존 토큰 이름과 라이트·다크 역할을 유지하며, 배경·글자·테두리·주요 행동에 같은 계열을 적용합니다. 정보·성공·경고·오류 색과 글자·간격·모서리 배율은 유지합니다.
+
+| 팔레트   | 값      | 역할                                 |
+| -------- | ------- | ------------------------------------ |
+| White    | #FFFFFF | 라이트 콘텐츠 표면, 주요 행동 글자   |
+| Chalk    | #F4F4F5 | 라이트 캔버스, 반전 표면 글자와 행동 |
+| Fog      | #E4E4E7 | 라이트 묶음과 장식 구분선            |
+| Silver   | #A1A1AA | 반전 표면 설명                       |
+| Steel    | #71717A | 컨트롤 경계, 비활성 글자             |
+| Iron     | #52525B | 라이트 설명, 반전 표면 구분선        |
+| Graphite | #27272A | 주요 행동 호버, 반전 표면            |
+| Carbon   | #09090B | 라이트 본문과 주요 행동              |
+
+White나 Chalk 위 입력에는 `strokeControl`(Steel)을 사용합니다. Fog 위 선택 경계에는 `strokeAction`을 사용합니다. `strokeDefault`는 장식용 구분선입니다. 검사한 조합에서 글자는 4.5:1, 필수 컨트롤·포커스 경계는 3:1을 기준으로 확인합니다.
+
+다크 캔버스는 Zinc 900(`#18181B`), 표면은 Graphite(`#27272A`)를 사용해 밝기 차이를 완만하게 합니다. 기존 정보·성공·경고·오류 색은 유지합니다. 주요 버튼은 호버에 `bgActionPrimaryHover`를 사용하고 나머지 상태 레이어는 기존 역할을 유지합니다.

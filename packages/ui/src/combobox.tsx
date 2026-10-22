@@ -21,7 +21,7 @@ const styles = stylex.create({
   inputGroup: {
     alignItems: "center",
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     borderRadius: radiusVars.sm,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
@@ -93,7 +93,7 @@ const styles = stylex.create({
   popup: {
     backgroundColor: colorVars.bgRaised,
     borderColor: colorVars.strokeDefault,
-    borderRadius: radiusVars.sm,
+    borderRadius: radiusVars.md,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     boxShadow: shadowVars.floating,

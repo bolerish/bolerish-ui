@@ -13,6 +13,10 @@
   color: currentColor;
 }
 
+#storybook-explorer-tree .sidebar-item[data-selected="true"] {
+  background-color: #09090b;
+}
+
 .nuee-doc-tools {
   display: flex;
   align-items: center;
@@ -23,19 +27,19 @@
 .nuee-doc-tools select {
   height: 32px;
   padding-inline: 10px;
-  border: 1px solid #e5e5e5;
-  border-radius: 6px;
+  border: 1px solid #71717a;
+  border-radius: 8px;
   background-color: #ffffff;
-  color: #171717;
+  color: #09090b;
   font-family: inherit;
   font-size: 13px;
   line-height: 1.4;
   cursor: pointer;
 }
 .nuee-doc-tools select:hover {
-  background-color: #f5f5f5;
+  background-color: #f4f4f5;
 }
 .nuee-doc-tools select:focus-visible {
-  outline: 2px solid #737373;
+  outline: 2px solid #09090b;
   outline-offset: 2px;
 }

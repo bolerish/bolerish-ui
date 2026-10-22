@@ -21,7 +21,7 @@ const styles = stylex.create({
   popup: {
     backgroundColor: colorVars.bgRaised,
     borderColor: colorVars.strokeDefault,
-    borderRadius: radiusVars.sm,
+    borderRadius: radiusVars.md,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     boxShadow: shadowVars.floating,

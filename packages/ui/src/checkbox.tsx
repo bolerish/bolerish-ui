@@ -23,7 +23,7 @@ const styles = stylex.create({
       ":is([data-checked])": colorVars.bgActionPrimary,
     },
     borderColor: {
-      default: colorVars.strokeDefault,
+      default: colorVars.strokeControl,
       ":is([data-checked])": colorVars.bgActionPrimary,
     },
     borderRadius: radiusVars.sm,

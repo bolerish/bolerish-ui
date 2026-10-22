@@ -195,7 +195,7 @@ const backgroundTokens = [
   ["bgCanvas", colorVars.bgCanvas, colorVars.fgPrimary, "Lowest screen background"],
   ["bgSurface", colorVars.bgSurface, colorVars.fgPrimary, "Default content background"],
   ["bgSurfacePressed", colorVars.bgSurfacePressed, colorVars.fgPrimary, "Pressed default surface"],
-  ["bgSubtle", colorVars.bgSubtle, colorVars.fgPrimary, "Inputs and subtle fills"],
+  ["bgSubtle", colorVars.bgSubtle, colorVars.fgPrimary, "Grouping and subtle fills"],
   ["bgRaised", colorVars.bgRaised, colorVars.fgPrimary, "Floating content background"],
   ["bgRaisedPressed", colorVars.bgRaisedPressed, colorVars.fgPrimary, "Pressed floating surface"],
   ["bgCurrent", colorVars.bgCurrent, colorVars.fgPrimary, "Current item indicator"],
@@ -205,6 +205,12 @@ const backgroundTokens = [
     colorVars.bgActionPrimary,
     colorVars.fgOnActionPrimary,
     "Primary action background",
+  ],
+  [
+    "bgActionPrimaryHover",
+    colorVars.bgActionPrimaryHover,
+    colorVars.fgOnActionPrimary,
+    "Primary action hover",
   ],
   [
     "bgActionDestructive",
@@ -243,12 +249,7 @@ const foregroundTokens = [
   ["fgSecondary", colorVars.fgSecondary, colorVars.bgSurface, "Secondary text and icons"],
   ["fgTertiary", colorVars.fgTertiary, colorVars.bgSurface, "Placeholders and subtle information"],
   ["fgDisabled", colorVars.fgDisabled, colorVars.bgSurface, "Disabled content"],
-  [
-    "fgInverse",
-    colorVars.fgInverse,
-    colorVars.bgActionPrimary,
-    "Content on emphasized backgrounds",
-  ],
+  ["fgInverse", colorVars.fgInverse, colorVars.bgInverse, "Content on emphasized backgrounds"],
   [
     "fgOnActionPrimary",
     colorVars.fgOnActionPrimary,
@@ -286,6 +287,7 @@ const strokeTokens = [
   ["strokeDropIndicator", colorVars.strokeDropIndicator, "Exact drop insertion position"],
   ["strokeDefault", colorVars.strokeDefault, "Default separator"],
   ["strokeStrong", colorVars.strokeStrong, "Emphasized separator"],
+  ["strokeControl", colorVars.strokeControl, "Essential control boundary"],
   ["strokeFocus", colorVars.strokeFocus, "Focus ring"],
   ["strokeAction", colorVars.strokeAction, "Primary action border"],
   ["strokeFeedbackInfo", colorVars.strokeFeedbackInfo, "Info message border"],
@@ -316,7 +318,12 @@ const interactionTokens = [
     "Raised selection inside a group",
   ],
   ["interactionDisabled", colorVars.interactionDisabled, colorVars.fgPrimary, "Unavailable state"],
-  ["interactionFocus", colorVars.interactionFocus, colorVars.fgInverse, "Keyboard focus state"],
+  [
+    "interactionFocus",
+    colorVars.interactionFocus,
+    colorVars.fgOnActionPrimary,
+    "Keyboard focus state",
+  ],
 ] as const;
 export function Semantic() {
   return (

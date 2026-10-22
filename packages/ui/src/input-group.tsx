@@ -20,7 +20,7 @@ const styles = stylex.create({
   root: {
     alignItems: "center",
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     borderRadius: radiusVars.sm,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,

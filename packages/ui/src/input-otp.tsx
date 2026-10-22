@@ -21,7 +21,7 @@ const styles = stylex.create({
   slot: {
     appearance: "none",
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     borderRadius: 0,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
@@ -42,7 +42,7 @@ const styles = stylex.create({
       marginInlineStart: 0,
     },
     ":last-child": { borderBottomRightRadius: radiusVars.sm, borderTopRightRadius: radiusVars.sm },
-    ":hover:not(:disabled)": { borderColor: colorVars.strokeStrong },
+    ":hover:not(:disabled)": { borderColor: colorVars.strokeControl },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,
       outlineOffset: sizeVars.stroke,

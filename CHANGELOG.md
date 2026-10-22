@@ -1,5 +1,18 @@
 ## Unreleased
 
+- Use subtly cool Zinc grays for light and dark surfaces, actions and text.
+  Inputs have clear boundaries; feedback colors and existing font,
+  spacing and corner scales remain available. Merge updated tokens and copied
+  components together if you customized their source.
+- Refine component shapes with crisper controls and softer panel corners.
+  Cards use readable body text and wrap their actions on narrow screens;
+  inputs respond on hover while preserving error and focus indicators.
+  Selected toggles are clearer, and modal backdrops use a flat dimming layer.
+- Keep keyboard focus visible in outlined toggle groups. Soft toggle selections
+  use a flat boundary, and dark canvases have a gentler contrast with panels.
+- Give documentation previews their own canvas background, separate from code
+  blocks, including examples with transparent component backgrounds.
+
 - Add P for body, description and caption paragraphs. Heading examples now show
   every HTML level from h1 to h6, independently of visual size.
 - Correct generated typography variables so component text uses its intended

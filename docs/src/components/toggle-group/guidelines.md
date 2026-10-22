@@ -4,8 +4,10 @@
 
 > 익숙하지 않은 옵션을 아이콘 모양만으로 설명하지 않습니다.
 
-`soft`는 `bgSubtle` 컨테이너 안에 `interactionSelected`와 `shadowVars.subtle`로 선택된 면을 띄웁니다. `default`·`outline`은 중립 `bgCurrent`와 선택 경계를 사용합니다. 호버·누름·비활성 상태에서도 선택은 유지됩니다. 연결된 패널을 바꾸려면 Tabs를 사용합니다.
+`soft`는 `bgSubtle` 컨테이너 안에서 `interactionSelected`와 선택 경계를 사용하며 바깥 그림자는 더하지 않습니다. `default`·`outline`은 중립 `bgSelected`와 선택 경계를 사용합니다. 호버·누름·비활성 상태에서도 선택은 유지됩니다. 연결된 패널을 바꾸려면 Tabs를 사용합니다.
 
 선택은 강조색 대신 중립 `bgCurrent`와 안쪽 경계로 표시합니다. `soft` 그룹은 기존 중립
 raised 면과 그림자로 구분합니다. 체크 아이콘을 일괄 추가하지 않으며 `aria-pressed`는
 primitive가 전달합니다. 비활성화되어도 선택 면·경계를 지우지 않고 포커스 표시는 유지합니다.
+
+묶음 안의 선택 면은 `strokeAction` 안쪽 경계도 사용해 Fog와 반전 배경에서 구별됩니다.

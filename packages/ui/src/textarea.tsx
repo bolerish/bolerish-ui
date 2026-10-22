@@ -14,7 +14,7 @@ import type { ControlFieldStyles } from "./styles/control-layout";
 const styles = stylex.create({
   root: {
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     borderRadius: radiusVars.sm,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
@@ -31,7 +31,9 @@ const styles = stylex.create({
     transitionTimingFunction: motionVars.easingStandard,
     width: "100%",
     "::placeholder": { color: colorVars.fgTertiary },
-    ":hover": { borderColor: colorVars.strokeStrong },
+    ":hover:not(:disabled):not([aria-invalid='true']):not(:user-invalid):not(:focus-visible)": {
+      borderColor: colorVars.strokeAction,
+    },
     ":focus-visible": {
       borderColor: colorVars.strokeFocus,
       outlineColor: colorVars.strokeFocus,

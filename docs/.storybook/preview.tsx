@@ -1,10 +1,10 @@
+import { colorVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import {
   darkColorTheme,
   darkShadowTheme,
   lightColorTheme,
   lightShadowTheme,
 } from "@bolerish/tokens/themes.stylex";
-import { colorVars, spacingVars, typo } from "@bolerish/tokens/tokens.stylex";
 import {
   DocsContainer,
   TableOfContents,
@@ -94,7 +94,7 @@ const styles = stylex.create({
   },
   compact: { minHeight: 0, display: "block" },
   root: {
-    backgroundColor: colorVars.bgSurface,
+    backgroundColor: colorVars.bgCanvas,
     color: colorVars.fgPrimary,
     fontFamily: typo.fontFamilyBody,
     minHeight: `calc(100vh - ${spacingVars.space4} * 2)`,

@@ -18,7 +18,7 @@ const styles = stylex.create({
   root: {
     appearance: "none",
     backgroundColor: colorVars.bgSurface,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     borderRadius: radiusVars.sm,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
@@ -37,8 +37,8 @@ const styles = stylex.create({
     "::placeholder": {
       color: colorVars.fgTertiary,
     },
-    ":hover": {
-      borderColor: colorVars.strokeStrong,
+    ":hover:not(:disabled):not([aria-invalid='true']):not(:user-invalid):not(:focus-visible)": {
+      borderColor: colorVars.strokeAction,
     },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,

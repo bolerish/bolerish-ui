@@ -3,7 +3,6 @@
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
-
 export {
   DropdownMenuCheckboxItem as ContextMenuCheckboxItem,
   DropdownMenuContent as ContextMenuContent,
@@ -18,7 +17,6 @@ export {
   DropdownMenuSubContent as ContextMenuSubContent,
   DropdownMenuSubTrigger as ContextMenuSubTrigger,
 } from "./dropdown-menu";
-
 export const ContextMenu = ContextMenuPrimitive.Root;
 export function ContextMenuTrigger({
   xstyle,

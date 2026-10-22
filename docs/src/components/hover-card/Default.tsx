@@ -24,7 +24,7 @@ export default function Default() {
   return (
     <div {...stylex.props(layout.preview)}>
       <HoverCard>
-        <HoverCardTrigger href="#">@nuee</HoverCardTrigger>
+        <HoverCardTrigger href="#">@bolerish</HoverCardTrigger>
         <HoverCardContent align="start">
           <ContentRow size="sm">
             <ContentRowContent>

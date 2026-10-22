@@ -17,7 +17,7 @@ function declaration(html: string, property: string) {
   });
 }
 
-test("completed timeline and selected toggle share a neutral surface, while errors stay distinct", () => {
+test("timeline progress, persistent selection and errors keep distinct surfaces", () => {
   const complete = renderToStaticMarkup(
     createElement(TimelineIndicator, { variant: "complete" }, "Done"),
   );
@@ -32,7 +32,7 @@ test("completed timeline and selected toggle share a neutral surface, while erro
     declaration(complete, "background-color"),
     declaration(active, "background-color"),
   );
-  assert.deepEqual(
+  assert.notDeepEqual(
     declaration(complete, "background-color"),
     declaration(toggle, "background-color"),
   );

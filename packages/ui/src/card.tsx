@@ -12,12 +12,16 @@ const styles = stylex.create({
   card: {
     backgroundColor: colorVars.bgSurface,
     borderColor: colorVars.strokeDefault,
-    borderRadius: radiusVars.sm,
+    borderRadius: radiusVars.md,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     color: colorVars.fgPrimary,
     display: "flex",
     flexDirection: "column",
+    fontFamily: typo.fontFamilyBody,
+    fontSize: typo.fontSizeMd,
+    lineHeight: typo.lineHeightNormal,
+    minWidth: 0,
     width: "100%",
   },
   header: {
@@ -46,7 +50,9 @@ const styles = stylex.create({
   footer: {
     alignItems: "center",
     display: "flex",
+    flexWrap: "wrap",
     gap: spacingVars.space3,
+    justifyContent: "flex-end",
     paddingBlockEnd: spacingVars.space6,
     paddingInline: spacingVars.space6,
   },

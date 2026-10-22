@@ -28,14 +28,27 @@ const styles = stylex.create({
     fontWeight: typo.fontWeightMedium,
     gap: spacingVars.space1,
     justifyContent: "center",
+    isolation: "isolate",
     outline: "none",
+    position: "relative",
     transitionDuration: motionVars.durationFast,
     transitionProperty: "background-color, border-color, color, opacity",
     transitionTimingFunction: motionVars.easingStandard,
-    backgroundImage: {
-      default: "none",
-      ":not(:disabled):hover": `linear-gradient(${colorVars.interactionHover}, ${colorVars.interactionHover})`,
-      ":not(:disabled):active": `linear-gradient(${colorVars.interactionPressed}, ${colorVars.interactionPressed})`,
+    "::after": {
+      backgroundColor: {
+        default: colorVars.interactionDefault,
+        ":not(:disabled):hover": colorVars.interactionHover,
+        ":not(:disabled):active": colorVars.interactionPressed,
+      },
+      borderRadius: "inherit",
+      content: '""',
+      inset: 0,
+      pointerEvents: "none",
+      position: "absolute",
+      transitionDuration: motionVars.durationFast,
+      transitionProperty: "background-color",
+      transitionTimingFunction: motionVars.easingStandard,
+      zIndex: -1,
     },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,
@@ -47,10 +60,10 @@ const styles = stylex.create({
   },
 
   softPressed: {
-    backgroundColor: colorVars.bgCurrent,
+    backgroundColor: colorVars.bgSelected,
   },
   pressed: {
-    backgroundColor: colorVars.bgCurrent,
+    backgroundColor: colorVars.bgSelected,
     color: colorVars.fgPrimary,
     boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeStrong}`,
   },

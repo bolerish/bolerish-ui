@@ -48,3 +48,19 @@ test("disabled toggles retain the selected surface in every variant", () => {
     }
   }
 });
+
+test("outlined toggle groups do not clip external keyboard focus rings", () => {
+  const html = renderToStaticMarkup(
+    createElement(ToggleGroup, {
+      variant: "outline",
+      // oxlint-disable-next-line react/no-children-prop -- Required children type in this non-JSX Node test.
+      children: createElement(ToggleGroupItem, { value: "choice" }, "Choice"),
+    }),
+  );
+  const classes = html.match(/class="([^"]+)"/)?.[1].split(" ") ?? [];
+  assert.ok(classes.length > 0);
+  for (const name of classes) {
+    const rule = css.match(new RegExp(`\\.${name}\\s*\\{([^}]+)\\}`))?.[1] ?? "";
+    assert.doesNotMatch(rule, /overflow(?:-[xy])?:\s*(hidden|clip)/);
+  }
+});

@@ -57,7 +57,7 @@ even when their values match. The existing `interactionSelected` name and values
 | Drop receiving area             | `bgDropTarget`        | `fgPrimary`, `strokeDropIndicator` boundary           | Describe the result, such as “Move into this folder”        |
 | Exact insertion position        | None                  | `strokeDropIndicator`, `sizeVars.focusRing` thickness | Line and “Move before this item” label                      |
 
-Segmented Tabs and soft Toggle Groups share the raised selection surface. Tabs switch panels;
+Segmented Tabs and soft Toggle Groups share the selection surface color. Segmented Tabs add a shadow; soft Toggle Groups retain only the selection boundary. Tabs switch panels;
 Toggle Groups choose values. Keep their distinct semantics and keyboard behavior.
 A standalone soft Toggle uses `bgSelected`; a regular Toggle also keeps a selection boundary.
 
@@ -81,3 +81,5 @@ The application owns drag eligibility, ordering and persistence. Provide equival
 menus for keyboard and touch users. Clear temporary indicators on cancel and completion.
 The example below moves real items and offers equivalent “Move before” buttons. It ignores external
 files and drags from outside the list; dropping on the source does not change the order.
+
+Primary buttons use `bgActionPrimaryHover` for their monochrome hover state. Segmented Tabs and soft Toggle Group add a `strokeAction` inset boundary to the selected surface so selection remains identifiable on grouped and inverse backgrounds.

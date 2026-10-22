@@ -56,6 +56,14 @@ const styles = stylex.create({
       zIndex: -1,
     },
   },
+  primaryInteraction: {
+    backgroundColor: {
+      default: colorVars.bgActionPrimary,
+      ":hover": colorVars.bgActionPrimaryHover,
+      ":active": colorVars.bgActionPrimary,
+    },
+    "::after": { backgroundColor: colorVars.interactionDefault },
+  },
   solidInteraction: {
     "::after": {
       backgroundColor: {
@@ -154,13 +162,13 @@ const variantStyles = stylex.create({
     color: colorVars.fgOnActionPrimary,
   },
   secondary: {
-    backgroundColor: colorVars.bgSubtle,
-    borderColor: colorVars.interactionDefault,
+    backgroundColor: colorVars.bgSurface,
+    borderColor: colorVars.strokeControl,
     color: colorVars.fgPrimary,
   },
   outline: {
     backgroundColor: colorVars.interactionDefault,
-    borderColor: colorVars.strokeDefault,
+    borderColor: colorVars.strokeControl,
     color: colorVars.fgPrimary,
   },
   ghost: {
@@ -227,6 +235,7 @@ export function Button({
         shapeStyles[shape],
         shapeWidth,
         hasSolidBackground ? styles.solidInteraction : styles.surfaceInteraction,
+        variant === "primary" && styles.primaryInteraction,
         disabled && styles.disabled,
         disabled && variant === "ghost" && styles.disabledGhost,
         xstyle,

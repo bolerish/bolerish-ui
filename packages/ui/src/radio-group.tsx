@@ -21,7 +21,7 @@ const styles = stylex.create({
     alignItems: "center",
     backgroundColor: colorVars.bgSurface,
     borderColor: {
-      default: colorVars.strokeDefault,
+      default: colorVars.strokeControl,
       ":is([data-checked])": colorVars.strokeAction,
     },
     borderRadius: radiusVars.full,

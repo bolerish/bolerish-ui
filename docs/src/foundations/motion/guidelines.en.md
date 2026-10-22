@@ -27,7 +27,7 @@ Consider `easingEnter` for arrival and `easingExit` for departure. Use `duration
 
 ## Installation defaults and user preferences
 
-`theme.motion` in `.nuee.json` accepts `system` (follow the OS) or `off` as the
+`theme.motion` in `.bolerish.json` accepts `system` (follow the OS) or `off` as the
 app's initial default. Load the generated `preferences.css`.
 
 The app end user can choose `system`, `on` or `off` at runtime through root

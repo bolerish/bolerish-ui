@@ -13,7 +13,7 @@ Consistent color roles help people distinguish essential content, supporting tex
 | Headings and essential content     | `colorVars.fgPrimary`     | `color: colorVars.fgPrimary`           |
 | Supporting information             | `colorVars.fgSecondary`   | `color: colorVars.fgSecondary`         |
 | Standard divider                   | `colorVars.strokeDefault` | `borderColor: colorVars.strokeDefault` |
-| Boundary that must remain distinct | `colorVars.strokeStrong`  | `borderColor: colorVars.strokeStrong`  |
+| Boundary that must remain distinct | `colorVars.strokeControl` | `borderColor: colorVars.strokeControl` |
 
 Pair strong action backgrounds with `fgOnActionPrimary` or `fgOnActionDestructive`. Pair feedback tokens such as `fgFeedbackError` with a specific explanation.
 
@@ -37,3 +37,22 @@ is not a substitute for selection, error or focus, and does not guarantee suffic
 
 Follow the role composition contracts in [State](?path=/docs/foundations-state--docs)
 for selection and drop backgrounds, foregrounds and borders. `bgSubtle` alone does not mean selected.
+
+## Adopted palette
+
+Use subtly cool Zinc grays for surfaces, text, boundaries and primary actions. Existing token names and light/dark roles remain intact. Feedback colors, typography, spacing and radius scales retain the existing rules.
+
+| Palette  | Value   | Role                                          |
+| -------- | ------- | --------------------------------------------- |
+| White    | #FFFFFF | Light content surfaces, primary action labels |
+| Chalk    | #F4F4F5 | Light canvas, inverse text and action         |
+| Fog      | #E4E4E7 | Light grouping and decorative dividers        |
+| Silver   | #A1A1AA | Inverse descriptions                          |
+| Steel    | #71717A | Control boundaries, unavailable text          |
+| Iron     | #52525B | Light descriptions, inverse dividers          |
+| Graphite | #27272A | Primary hover, inverse surfaces               |
+| Carbon   | #09090B | Light text and primary action                 |
+
+Use `strokeControl` (Steel) for inputs on White or Chalk. Use `strokeAction` for selected outlines on grouped Fog surfaces. `strokeDefault` is decorative. Text targets 4.5:1 and essential control/focus boundaries target 3:1 in the tested pairings.
+
+The dark canvas uses Zinc 900 (`#18181B`) with Graphite (`#27272A`) surfaces for a gentler tone step. Existing information/success/warning/error colors remain unchanged. Primary buttons use `bgActionPrimaryHover` on hover; other state layers retain their established roles.

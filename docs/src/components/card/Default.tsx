@@ -1,4 +1,4 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Button } from "@/components/ui/button";
@@ -25,7 +25,8 @@ const layout = stylex.create({
     alignItems: "start",
     display: "grid",
     gap: spacingVars.space4,
-    gridTemplateColumns: "repeat(auto-fit, minmax(18rem, 1fr))",
+    gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 18rem), 1fr))",
+    maxWidth: sizeVars.contentMd,
     width: "100%",
   },
 });

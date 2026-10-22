@@ -132,7 +132,7 @@ const indicatorVariantStyles = stylex.create({
   segmented: {
     backgroundColor: colorVars.interactionSelected,
     borderRadius: radiusVars.sm,
-    boxShadow: shadowVars.subtle,
+    boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeAction}, ${shadowVars.subtle}`,
     height: "var(--active-tab-height)",
     top: "var(--active-tab-top)",
   },

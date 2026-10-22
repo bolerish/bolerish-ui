@@ -27,7 +27,7 @@
 
 ## 설치 기본값과 실제 사용자 선택
 
-`.nuee.json`의 `theme.motion`은 앱 초기 기본값으로 `system` 또는 `off`를
+`.bolerish.json`의 `theme.motion`은 앱 초기 기본값으로 `system` 또는 `off`를
 사용합니다. 생성된 `preferences.css`를 로드합니다.
 
 앱을 사용하는 최종 사용자는 루트 `data-nuee-motion`으로 `system`, `on`,

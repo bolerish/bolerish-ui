@@ -19,7 +19,6 @@ import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   backdrop: {
-    backdropFilter: "blur(4px)",
     backgroundColor: colorVars.bgOverlay,
     inset: 0,
     position: "fixed",
@@ -52,7 +51,7 @@ const styles = stylex.create({
   popup: {
     backgroundColor: colorVars.bgRaised,
     borderColor: colorVars.strokeDefault,
-    borderRadius: radiusVars.sm,
+    borderRadius: radiusVars.md,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,
     boxShadow: shadowVars.overlay,

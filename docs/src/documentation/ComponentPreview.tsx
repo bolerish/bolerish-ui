@@ -25,7 +25,7 @@ const styles = stylex.create({
   frame: { borderWidth: 0, display: "block", height: "100%", width: "100%" },
   root: { marginBlock: spacingVars.space6, minWidth: 0 },
   preview: {
-    backgroundColor: colorVars.bgSurface,
+    backgroundColor: colorVars.bgCanvas,
     borderColor: colorVars.strokeDefault,
     borderStyle: "solid",
     borderWidth: sizeVars.stroke,

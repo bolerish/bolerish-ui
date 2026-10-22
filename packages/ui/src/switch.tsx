@@ -18,7 +18,7 @@ const styles = stylex.create({
     alignItems: "center",
     appearance: "none",
     backgroundColor: {
-      default: colorVars.interactionDisabled,
+      default: colorVars.strokeControl,
       ":is([data-checked])": colorVars.bgActionPrimary,
       ":is([data-disabled])": colorVars.interactionDisabled,
     },
@@ -42,7 +42,7 @@ const styles = stylex.create({
   },
   thumb: {
     backgroundColor: {
-      default: colorVars.bgSurface,
+      default: colorVars.fgOnActionPrimary,
       ":is([data-disabled] *)": colorVars.fgDisabled,
     },
     borderRadius: radiusVars.full,

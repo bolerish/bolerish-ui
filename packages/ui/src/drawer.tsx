@@ -19,7 +19,6 @@ import type { ControlPlacementStyles } from "./styles/control-layout";
 
 const styles = stylex.create({
   overlay: {
-    backdropFilter: "blur(4px)",
     backgroundColor: colorVars.bgOverlay,
     inset: 0,
     position: "fixed",
@@ -40,7 +39,7 @@ const styles = stylex.create({
       },
     },
   },
-  overlayTransparent: { backdropFilter: "none", backgroundColor: "transparent" },
+  overlayTransparent: { backgroundColor: "transparent" },
   viewport: { inset: 0, position: "fixed", zIndex: layerVars.modal },
   popup: {
     backgroundColor: colorVars.bgRaised,
