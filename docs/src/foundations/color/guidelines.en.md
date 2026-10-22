@@ -58,3 +58,14 @@ Use `strokeControl` (Zinc 450, #85858F) for inputs on White or Chalk. Use `strok
 The dark canvas uses Zinc 900 (`#18181B`) with Graphite (`#27272A`) surfaces for a gentler tone step. Existing information/success/warning/error colors remain unchanged. Primary buttons use `bgActionPrimaryHover` on hover; other state layers retain their established roles.
 
 Resting control boundaries use Zinc 450 in light mode and Steel in dark mode. Decorative dark dividers use Zinc 700. Hover uses `strokeStrong`; focus uses Iron/Silver, preserving contrast for essential boundaries, focus and errors.
+
+## Palette authoring and generation
+
+Author colors in OKLCH in `packages/tokens/palette.oklch.json`. Adjust lightness,
+chroma and hue, then run `pnpm palette:generate` to emit literal HEX StyleX tokens.
+Do not edit the palette values in generated `color-palette.stylex.ts` directly.
+Solid colors use six-digit HEX; translucent colors use eight-digit HEX with
+eight-bit alpha rounding. Generation rejects colors outside sRGB; reduce chroma
+and review them again. `pnpm palette:check` checks generated values against the
+source, and `pnpm test:tokens` checks conversion and contrast. Consumers receive
+generated tokens without runtime OKLCH conversion.

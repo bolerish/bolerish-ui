@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Keep palette authoring in OKLCH and ship generated HEX tokens. Existing Zinc
+    values and token names are retained; translucent colors use eight-bit alpha.
+
 - Remove Message and Bubble, their source-copy entries and outgoing-message color
     tokens. Compose conversation layouts in your app before upgrading.
 - Distinguish the current Timeline step with the primary Zinc surface while

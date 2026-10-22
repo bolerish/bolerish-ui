@@ -58,3 +58,13 @@ White나 Chalk 위 입력에는 `strokeControl`(Zinc 450, #85858F)을 사용합�
 다크 캔버스는 Zinc 900(`#18181B`), 표면은 Graphite(`#27272A`)를 사용해 밝기 차이를 완만하게 합니다. 기존 정보·성공·경고·오류 색은 유지합니다. 주요 버튼은 호버에 `bgActionPrimaryHover`를 사용하고 나머지 상태 레이어는 기존 역할을 유지합니다.
 
 평상시 컨트롤 경계는 라이트에서 Zinc 450, 다크에서 Steel을 사용합니다. 일반 다크 구분선은 Zinc 700입니다. 호버는 `strokeStrong`, 포커스는 Iron·Silver로 강도를 구분하며 포커스·오류·필수 경계의 대비는 유지합니다.
+
+## 팔레트 작성과 생성
+
+팔레트 원본은 `packages/tokens/palette.oklch.json`에서 OKLCH로 작성합니다.
+명도·채도·색상을 조정한 뒤 `pnpm palette:generate`로 StyleX 토큰의 HEX 값을 생성합니다.
+생성된 `color-palette.stylex.ts`의 팔레트 값은 직접 수정하지 않습니다.
+불투명 색은 6자리 HEX, 반투명 색은 8자리 HEX로 저장하며 알파는 8비트로 반올림됩니다.
+sRGB 범위를 벗어나면 생성을 중단하므로 채도를 줄여 다시 검토합니다.
+`pnpm palette:check`는 원본과 생성 결과의 일치를, `pnpm test:tokens`는 변환과 대비를 확인합니다.
+소비자에게는 생성된 토큰만 전달되며 OKLCH 변환을 런타임에서 실행하지 않습니다.

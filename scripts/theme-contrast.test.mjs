@@ -23,35 +23,11 @@ const module = await load(new URL("../packages/tokens/src/themes.stylex.ts", imp
 await module.evaluate();
 
 function rgba(value) {
-  if (value.startsWith("#")) {
-    const hex = value.slice(1);
-    return [0, 2, 4]
-      .map((offset) => parseInt(hex.slice(offset, offset + 2), 16) / 255)
-      .concat(hex.length === 8 ? parseInt(hex.slice(6), 16) / 255 : 1);
-  }
-  const match = value.match(/^oklch\(([\d.]+)% ([\d.]+) ([\d.]+)(?: \/ ([\d.]+)%)?\)$/);
-  assert.ok(match, `Unsupported color: ${value}`);
-  const lightness = Number(match[1]);
-  const chroma = Number(match[2]);
-  const hue = Number(match[3]);
-  const alpha = Number(match[4] ?? 100);
-  const a = chroma * Math.cos((hue * Math.PI) / 180);
-  const b = chroma * Math.sin((hue * Math.PI) / 180);
-  const l = (lightness / 100 + 0.3963377774 * a + 0.2158037573 * b) ** 3;
-  const m = (lightness / 100 - 0.1055613458 * a - 0.0638541728 * b) ** 3;
-  const s = (lightness / 100 - 0.0894841775 * a - 1.291485548 * b) ** 3;
-  return [
-    4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s,
-    -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s,
-    -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s,
-  ]
-    .map((channel) =>
-      Math.max(
-        0,
-        Math.min(1, channel <= 0.0031308 ? 12.92 * channel : 1.055 * channel ** (1 / 2.4) - 0.055),
-      ),
-    )
-    .concat(alpha / 100);
+  assert.match(value, /^#[0-9A-F]{6}([0-9A-F]{2})?$/i);
+  const hex = value.slice(1);
+  return [0, 2, 4]
+    .map((offset) => parseInt(hex.slice(offset, offset + 2), 16) / 255)
+    .concat(hex.length === 8 ? parseInt(hex.slice(6), 16) / 255 : 1);
 }
 function composite(foreground, background) {
   return foreground
