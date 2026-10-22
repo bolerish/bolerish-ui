@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Keep sidebar action menus in the same neutral surface as their row on hover.
+    Keyboard focus remains visible without the bright background or glow.
+
 - Read package usage examples and concise prop choices on component pages.
     Installation lives in Getting Started; duplicated source examples and old
     design proposals have been removed.
