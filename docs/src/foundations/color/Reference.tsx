@@ -186,12 +186,6 @@ const backgroundTokens = [
   ["bgDropTarget", colorVars.bgDropTarget, colorVars.fgPrimary, "Drop receiving area"],
   ["bgInverse", colorVars.bgInverse, colorVars.fgInverse, "Inverse surface"],
   ["bgOverlay", colorVars.bgOverlay, colorVars.fgPrimary, "Modal backdrop"],
-  [
-    "bgMessageOutgoing",
-    colorVars.bgMessageOutgoing,
-    colorVars.fgOnMessageOutgoing,
-    "Outgoing message background",
-  ],
   ["bgCanvas", colorVars.bgCanvas, colorVars.fgPrimary, "Lowest screen background"],
   ["bgSurface", colorVars.bgSurface, colorVars.fgPrimary, "Default content background"],
   ["bgSurfacePressed", colorVars.bgSurfacePressed, colorVars.fgPrimary, "Pressed default surface"],
@@ -239,12 +233,6 @@ const backgroundTokens = [
   ],
 ] as const;
 const foregroundTokens = [
-  [
-    "fgOnMessageOutgoing",
-    colorVars.fgOnMessageOutgoing,
-    colorVars.bgMessageOutgoing,
-    "Outgoing message content",
-  ],
   ["fgPrimary", colorVars.fgPrimary, colorVars.bgSurface, "Primary text and icons"],
   ["fgSecondary", colorVars.fgSecondary, colorVars.bgSurface, "Secondary text and icons"],
   ["fgTertiary", colorVars.fgTertiary, colorVars.bgSurface, "Placeholders and subtle information"],

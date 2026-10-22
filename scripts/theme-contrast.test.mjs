@@ -95,7 +95,6 @@ for (const mode of ["light", "dark"]) {
     for (const role of [
       "ActionPrimary",
       "ActionDestructive",
-      "MessageOutgoing",
       "FeedbackInfo",
       "FeedbackSuccess",
       "FeedbackWarning",

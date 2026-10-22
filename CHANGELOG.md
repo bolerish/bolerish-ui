@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Remove Message and Bubble, their source-copy entries and outgoing-message color
+    tokens. Compose conversation layouts in your app before upgrading.
+
 - Use Paragraph for body, description and caption text. P remains a compatible
     alias, including its existing package and source-copy paths.
 - Soften resting control borders, hover outlines and selected surfaces while

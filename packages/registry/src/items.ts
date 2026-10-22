@@ -59,11 +59,6 @@ export const registryItems = {
     dependencies: ["@bolerish/tokens", "@phosphor-icons/react", "@stylexjs/stylex"],
     registryDependencies: [],
   },
-  bubble: {
-    files: ["bubble.tsx"],
-    dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
-    registryDependencies: [],
-  },
   button: {
     files: ["button.tsx", "styles/control-layout.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
@@ -228,11 +223,6 @@ export const registryItems = {
     files: ["menubar.tsx"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["dropdown-menu"],
-  },
-  message: {
-    files: ["message.tsx"],
-    dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
-    registryDependencies: ["avatar", "bubble"],
   },
   "native-select": {
     files: ["native-select.tsx"],

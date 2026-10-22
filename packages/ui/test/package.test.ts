@@ -205,7 +205,7 @@ test("@bolerish/ui CLI keeps the UI package out of a generated Vite app", async 
       writeFile(join(projectDirectory, "src/index.css"), "body { margin: 0; }\n"),
       writeFile(
         join(projectDirectory, "src/main.tsx"),
-        'import "./index.css";\nimport { Message } from "@/components/ui/message";\nvoid Message;\n',
+        'import "./index.css";\nimport { InputGroup } from "@/components/ui/input-group";\nvoid InputGroup;\n',
       ),
     ]);
 
@@ -221,7 +221,7 @@ test("@bolerish/ui CLI keeps the UI package out of a generated Vite app", async 
     await execFile(process.execPath, [
       cliPath,
       "add",
-      "message",
+      "input-group",
       "--skip-dependencies",
       "--cwd",
       projectDirectory,
@@ -230,7 +230,7 @@ test("@bolerish/ui CLI keeps the UI package out of a generated Vite app", async 
     const packageJson = JSON.parse(await readFile(join(projectDirectory, "package.json"), "utf8"));
     assert.equal(packageJson.dependencies?.["@bolerish/ui"], undefined);
     assert.equal(packageJson.devDependencies?.["@bolerish/ui"], undefined);
-    await access(join(projectDirectory, "src/components/ui/message.tsx"));
+    await access(join(projectDirectory, "src/components/ui/input-group.tsx"));
     await build({ configFile: join(projectDirectory, "vite.config.ts"), root: projectDirectory });
     await access(join(projectDirectory, "dist/index.html"));
   } finally {
