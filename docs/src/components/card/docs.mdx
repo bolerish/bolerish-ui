@@ -1,8 +1,4 @@
-import guidelines from "./guidelines.md?raw";
-import usageEnglish from "./guidelines.en.md?raw";
-import overview from "./overview.md?raw";
-import overviewEnglish from "./overview.en.md?raw";
-import { Guideline } from "../../documentation/Guideline";
+import { LocaleContent } from "../../documentation/locale";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
 import AccountCreationFormSource from "./AccountCreationForm.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
@@ -11,13 +7,45 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 
 <Meta title="Components/Card" />
 
-<Guideline content={overview} english={overviewEnglish} />
+<LocaleContent locale="ko">
+
+# Card
+
+독립적인 항목 하나의 정보와 행동을 함께 살펴볼 수 있습니다.
+
+</LocaleContent>
+
+<LocaleContent locale="en">
+
+# Card
+
+Keep the information and actions for one independent item together.
+
+</LocaleContent>
 
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="card--Default" source={DefaultSource} />
 
-<Guideline content={guidelines} english={usageEnglish} />
+<LocaleContent locale="ko">
+
+## 사용 가이드
+
+프로젝트 요약처럼 항목 자체를 구분해야 할 때 사용합니다. 같은 폼의 관련 부분은 간격만으로 묶을 수 있습니다.
+
+> 모든 섹션을 카드로 감싸면 반복되는 경계 때문에 정보의 우선순위가 흐려질 수 있습니다.
+
+</LocaleContent>
+
+<LocaleContent locale="en">
+
+## Usage guidelines
+
+Use a card when the item has its own identity, such as a project summary. Use spacing alone for related parts of the same form.
+
+> Putting every section in a card can hide the hierarchy beneath repeated borders.
+
+</LocaleContent>
 
 <LocalizedMarkdown text={"## More examples"} />
 

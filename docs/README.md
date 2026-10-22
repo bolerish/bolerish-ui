@@ -3,6 +3,10 @@
 ## Component examples
 
 Keep `docs.mdx` and React examples together in `src/components/{component}/`.
+Write the overview and usage text directly in `docs.mdx`, inside
+`<LocaleContent locale="ko">` and `<LocaleContent locale="en">` blocks. Keep two
+static Markdown blocks per language: overview, then usage. Shared previews stay
+outside these blocks; the Markdown exports read the same text for coding agents.
 Pass the example's `?raw` import to `ComponentPreview` to display its usage code.
 Import components from `@bolerish/ui/{component}` so examples exercise the built package.
 Use `isolated height={360}` for examples that need an overlay boundary.
@@ -15,7 +19,7 @@ for examples that actually demonstrate StyleX customization.
 
 Edit `src/foundations/{topic}/guidelines.md` and `guidelines.en.md` together.
 These files supply localized user documentation. Agent entry points, API links
-and full LLM guidelines use the canonical `*.en.md` sources exclusively.
+and full LLM guidelines use the English foundation files and English MDX blocks.
 
 The development and build scripts generate `public/llms.txt`, `llms-full.txt`,
 `bolerish-for-llms.md`, and per-topic Markdown. The full LLM
@@ -72,3 +76,9 @@ MCP service. Consumers must still inspect their installed local source/version.
 Run `pnpm --filter @bolerish/docs test:agent` after generating docs to check freshness,
 registry coverage, reference links and canonical source contents. The UI consumer
 Vite test also compiles the README examples against the package APIs. A separate plugin-free Vite consumer checks components, CSS and both themes.
+
+## Motion preview
+
+The toolbar uses the package runtime attribute: System → `system`, Reduce Motion
+→ `off`, Allow Motion → `on`. Keep both inline and isolated examples on that
+contract instead of rewriting stylesheet media queries.

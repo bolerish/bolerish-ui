@@ -1,8 +1,4 @@
-import guidelines from "./guidelines.md?raw";
-import usageEnglish from "./guidelines.en.md?raw";
-import overview from "./overview.md?raw";
-import overviewEnglish from "./overview.en.md?raw";
-import { Guideline } from "../../documentation/Guideline";
+import { LocaleContent } from "../../documentation/locale";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
@@ -10,10 +6,42 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 
 <Meta title="Components/Table" />
 
-<Guideline content={overview} english={overviewEnglish} />
+<LocaleContent locale="ko">
+
+# Table
+
+여러 항목의 같은 속성을 나란히 비교할 수 있습니다.
+
+</LocaleContent>
+
+<LocaleContent locale="en">
+
+# Table
+
+Help people compare the same attributes across multiple items.
+
+</LocaleContent>
 
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="table--Default" source={DefaultSource} />
 
-<Guideline content={guidelines} english={usageEnglish} />
+<LocaleContent locale="ko">
+
+## 사용 가이드
+
+열에는 비교할 값을, 행에는 항목을 배치합니다. 항목을 독립적으로 읽는다면 Content Row를 사용합니다.
+
+> 화면이 좁아도 값을 이해하는 데 필요한 이름은 제거하지 않습니다.
+
+</LocaleContent>
+
+<LocaleContent locale="en">
+
+## Usage guidelines
+
+Use columns for comparable values and rows for items. Use Content Row when each item is read independently.
+
+> A narrow viewport does not justify removing the labels needed to understand each value.
+
+</LocaleContent>

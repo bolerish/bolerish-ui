@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Keep component overviews and usage guidance together in each MDX page, with
+    Korean and English text and the same downloadable references.
+
 - Allow Motion now plays component transitions even when the OS requests reduced
     motion. System follows the OS, and Reduce Motion disables transitions.
 

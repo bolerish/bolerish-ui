@@ -1,8 +1,12 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 
 export type Locale = "ko" | "en";
 export const LocaleContext = createContext<Locale>("ko");
 export const useLocale = () => useContext(LocaleContext);
+
+export function LocaleContent({ children, locale }: { children: ReactNode; locale: Locale }) {
+  return useLocale() === locale ? children : null;
+}
 
 export const ui = {
   preview: "Preview",

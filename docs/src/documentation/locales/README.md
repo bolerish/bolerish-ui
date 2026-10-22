@@ -6,8 +6,10 @@ controls, and example code stay in English. Korean is the default locale.
 - `content.ko.json`: Korean translations keyed by the Markdown passed to
   `LocalizedMarkdown`. Update the key and translation when the source changes.
 - `reference.ko.json`: descriptions in token reference tables.
-- `guidelines.md` and `guidelines.en.md` beside foundation, component, and pattern
-  pages: paired guidance rendered from the same files used for AI exports.
+- Component and pattern `docs.mdx`: overview and usage text in `LocaleContent`
+  blocks for `ko` and `en`. The same blocks supply AI exports.
+- Foundation `guidelines.md` and `guidelines.en.md`: paired guidance shared by
+  user documentation and AI exports.
 
 ## Terminology
 

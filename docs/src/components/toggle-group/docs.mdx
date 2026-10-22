@@ -1,8 +1,4 @@
-import guidelines from "./guidelines.md?raw";
-import usageEnglish from "./guidelines.en.md?raw";
-import overview from "./overview.md?raw";
-import overviewEnglish from "./overview.en.md?raw";
-import { Guideline } from "../../documentation/Guideline";
+import { LocaleContent } from "../../documentation/locale";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
 import StatesSource from "./States.tsx?raw";
 import SizesSource from "./Sizes.tsx?raw";
@@ -13,13 +9,76 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 
 <Meta title="Components/Toggle Group" />
 
-<Guideline content={overview} english={overviewEnglish} />
+<LocaleContent locale="ko">
+
+# Toggle Group
+
+관련 편집 옵션을 함께 보여 줘 선택 상태를 한눈에 이해할 수 있습니다.
+
+</LocaleContent>
+
+<LocaleContent locale="en">
+
+# Toggle Group
+
+Show related editing choices together so their selection can be understood at a glance.
+
+</LocaleContent>
 
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="toggle-group--Default" source={DefaultSource} />
 
-<Guideline content={guidelines} english={usageEnglish} />
+<LocaleContent locale="ko">
+
+## 사용 가이드
+
+### 주요 속성
+
+| 속성      | 기본값    | 값                           | 용도                                                                  |
+| --------- | --------- | ---------------------------- | --------------------------------------------------------------------- |
+| `variant` | `default` | `default`, `outline`, `soft` | 그룹의 기본·윤곽·은은한 선택 표현입니다. 항목은 그룹 값을 상속합니다. |
+| `size`    | `md`      | `sm`, `md`, `lg`             | 그룹 항목 크기를 선택합니다. 개별 항목에서 재정의할 수 있습니다.      |
+
+정렬이나 서식 같은 옵션을 묶습니다. 하나만 고를지 여러 개를 고를지 먼저 정합니다.
+
+> 익숙하지 않은 옵션을 아이콘 모양만으로 설명하지 않습니다.
+
+`soft`는 `bgSubtle` 컨테이너 안에서 `interactionSelected`와 선택 경계를 사용하며 바깥 그림자는 더하지 않습니다. `default`·`outline`은 중립 `bgSelected`와 선택 경계를 사용합니다. 호버·누름·비활성 상태에서도 선택은 유지됩니다. 연결된 패널을 바꾸려면 Tabs를 사용합니다.
+
+선택은 강조색 대신 중립 `bgCurrent`와 안쪽 경계로 표시합니다. `soft` 그룹은 기존 중립
+raised 면과 그림자로 구분합니다. 체크 아이콘을 일괄 추가하지 않으며 `aria-pressed`는
+primitive가 전달합니다. 비활성화되어도 선택 면·경계를 지우지 않고 포커스 표시는 유지합니다.
+
+묶음 안의 선택 면은 `strokeAction` 안쪽 경계도 사용해 Fog와 반전 배경에서 구별됩니다.
+
+</LocaleContent>
+
+<LocaleContent locale="en">
+
+## Usage guidelines
+
+### Props
+
+| Prop      | Default   | Values                       | Meaning                                                                    |
+| --------- | --------- | ---------------------------- | -------------------------------------------------------------------------- |
+| `variant` | `default` | `default`, `outline`, `soft` | Default, outlined, or soft group treatment. Items inherit the group value. |
+| `size`    | `md`      | `sm`, `md`, `lg`             | Sets item size; an item can override it.                                   |
+
+Group choices such as alignment or formatting. Decide whether one or several selections are valid before composing the group.
+
+> Do not rely only on an icon's appearance to explain an unfamiliar option.
+
+`soft` uses `interactionSelected` and a selection boundary inside a `bgSubtle` container, without a drop shadow. `default` and `outline` use `bgSelected` with a selection boundary. Hover, press and disabled states retain selection. Use Tabs to switch associated panels.
+
+Selection uses neutral bgCurrent and an inset boundary instead of an accent hue.
+Soft groups retain their neutral raised surface and shadow. No automatic check icon
+is added; the primitive exposes aria-pressed. Disabled selected items retain their
+selection cues, and focus remains visible.
+
+Selected grouped surfaces also use an inset `strokeAction` boundary for contrast on Fog and inverse backgrounds.
+
+</LocaleContent>
 
 <LocalizedMarkdown text={"## More examples"} />
 

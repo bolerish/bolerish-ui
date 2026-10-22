@@ -13,6 +13,23 @@ async function emitFile(path, content) {
   await writeFile(path, content);
 }
 
+async function readPage(directory, suffix) {
+  const page = await readFile(new URL("docs.mdx", directory), "utf8");
+  const locale = suffix ? "en" : "ko";
+  // shortcut: blocks contain static Markdown only; use an MDX parser if they gain expressions.
+  const sections = page
+    .split(`<LocaleContent locale="${locale}">\n`)
+    .slice(1)
+    .map((block) => {
+      const end = block.indexOf("\n</LocaleContent>");
+      if (end < 0) throw new Error(`Unclosed locale block: ${directory.pathname}`);
+      return block.slice(0, end).trim();
+    });
+  if (sections.length !== 2 || !sections[0].startsWith("# ") || !sections[1])
+    throw new Error(`Expected overview and usage blocks for ${locale}: ${directory.pathname}`);
+  return { overview: sections[0], content: `${sections.join("\n\n")}\n` };
+}
+
 const order = JSON.parse(await readFile(new URL("order.json", source), "utf8"));
 const patterns = new URL("../src/patterns/", import.meta.url);
 const patternOrder = JSON.parse(await readFile(new URL("order.json", patterns), "utf8"));
@@ -70,22 +87,14 @@ for (const locale of ["ko", "en"]) {
     await emitFile(new URL(`guidelines/${slug}${suffix}.md`, output), content);
   }
   for (const { slug } of patternOrder) {
-    const overview = await readFile(new URL(`${slug}/overview${suffix}.md`, patterns), "utf8");
-    const detail = await readFile(new URL(`${slug}/guidelines${suffix}.md`, patterns), "utf8");
-    const content = `${overview.trim()}\n\n${detail}`;
+    const { content } = await readPage(new URL(`${slug}/`, patterns), suffix);
     const title = content.split("\n")[0].slice(2);
     entries.push(content);
     if (locale === "en") links.push(`- [${title}](./guidelines/pattern-${slug}${suffix}.md)`);
     await emitFile(new URL(`guidelines/pattern-${slug}${suffix}.md`, output), content);
   }
   for (const slug of componentNames) {
-    const overview = await readFile(new URL(`${slug}/overview${suffix}.md`, components), "utf8");
-    const files = await readdir(new URL(`${slug}/`, components));
-    const detailName = `guidelines${suffix}.md`;
-    const detail = files.includes(detailName)
-      ? await readFile(new URL(`${slug}/${detailName}`, components), "utf8")
-      : "";
-    const content = [overview.trim(), detail.trim()].filter(Boolean).join("\n\n") + "\n";
+    const { overview, content } = await readPage(new URL(`${slug}/`, components), suffix);
     const title = overview.split("\n")[0].slice(2);
     const componentSource = await readFile(
       new URL(`../../packages/ui/src/${slug}.tsx`, import.meta.url),
