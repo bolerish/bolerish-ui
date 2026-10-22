@@ -69,6 +69,29 @@ for that app. This is optional for the prebuilt components and themes above.
 See [the @bolerish/ui usage guide for LLMs](docs/README.md#ai-coding-agent-references)
 for package imports, theme setup, StyleX extensions, and exact component APIs.
 
+## Upgrade to v0.10.0
+
+Versions v0.9.1 and earlier used `@nuee/*`. For installed-package usage, replace
+those dependencies and imports with `@bolerish/*`, install `@bolerish/ui@0.10.0`,
+and load `@bolerish/ui/global.css` once. Use the precompiled theme classes above
+instead of adding a StyleX compiler solely for built-in components.
+
+Message, Bubble, and outgoing-message color tokens have been removed. Replace
+those usages with conversation layouts owned by your app. Use `Paragraph` from
+`@bolerish/ui/paragraph` for body, description, and caption text; `P` and `PProps`
+remain compatibility aliases. `Heading` requires `level={1}` through `level={6}`,
+independently of its visual `size`.
+
+For locally copied components, a package upgrade does not replace source files.
+Keep local imports and merge updated components and tokens together. The CLI is
+now `bolerish`; run `bolerish init --force` to migrate configuration to
+`.bolerish.json` and the installed schema. Existing `.nuee.json` and `nuee.json`
+remain readable. Runtime `--nuee-*` variables and `data-nuee-motion` remain
+supported. JSON settings apply to the optional source-copy path, not precompiled
+package themes.
+
+See [the v0.10.0 release notes](CHANGELOG.md#version-v0100) for the full changes.
+
 ## Optional source ownership
 
 Use the CLI only when you want editable local component source:
@@ -187,17 +210,3 @@ export function InlineControls() {
 ```
 
 Typography tokens are exported as `typo`. The existing `typographyVars` name remains a compatibility export of the same variable group; do not apply two separate themes. `spacingRoleVars` provides purpose-based spacing. Configure `theme.unit` as `rem` (default) or `px`, and `theme.density` as `default`, `compact`, or a positive number up to 2. Pixel mode uses 1rem=16px and does not follow root font-size preferences.
-
-### Migration from Nuée
-
-Package imports now use `@bolerish/*`, and the executable is `bolerish`. The product
-name is **bolerish/ui**. Existing runtime `--nuee-*` variables and
-`data-nuee-motion` attributes remain supported so appearance preferences keep working.
-Merge updated tokens and copied components together if you customized their source.
-
-Use `Heading level={1}` through `level={6}` for headings; `size` remains independent
-of the HTML level. Use `Paragraph` from `@bolerish/ui/paragraph` for paragraphs with `variant="body"` (default),
-`"description"` or `"caption"`. Field labels and validation errors keep their own
-components and accessibility relationships.
-
-`P` and `PProps` remain compatibility aliases for `Paragraph` and `ParagraphProps`.

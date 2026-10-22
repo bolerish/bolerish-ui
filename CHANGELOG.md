@@ -1,72 +1,46 @@
-## Unreleased
+## Version v0.10.0
 
-- Match the dismiss-all button background to its toast surface.
+Released on 2026-10-22.
 
-- Keep component overviews and usage guidance together in each MDX page, with
-    Korean and English text and the same downloadable references.
-
-- Allow Motion now plays component transitions even when the OS requests reduced
-    motion. System follows the OS, and Reduce Motion disables transitions.
-
-- Keep sidebar action menus in the same neutral surface as their row on hover.
-    Keyboard focus remains visible without the bright background or glow.
-
-- Read package usage examples and concise prop choices on component pages.
-    Installation lives in Getting Started; duplicated source examples and old
-    design proposals have been removed.
-
+- Rename the product to bolerish/ui, packages to `@bolerish/*`, and the CLI to
+    `bolerish`. Versions v0.9.1 and earlier were released as `@nuee/ui`.
+    Update package imports when moving to the new package names.
+- Use installed components with one `@bolerish/ui/global.css` import and
+    precompiled light/dark themes. React 19 or later is required; basic usage
+    needs no StyleX build plugin. Editable source copying remains optional.
+- Keep existing copied components and configuration readable. New configuration
+    uses `.bolerish.json`; `.nuee.json` and `nuee.json` remain supported. Run
+    `bolerish init --force` to migrate the configuration name and schema while
+    retaining legacy files. Package upgrades do not update copied source;
+    merge updated tokens and components together if you customized them.
+- Remove Message, Bubble, their source-copy entries, and outgoing-message color
+    tokens. Replace these components with app-owned conversation layouts.
+- Add Paragraph for body, description, and caption text. `P` and `PProps` remain
+    compatibility aliases. Heading examples cover every HTML level independently
+    of visual size; generated typography uses the intended size and line height.
+- Customize styled components through `className` and inline `style` while
+    preserving built-in styles. Typed `xstyle` extensions remain available;
+    authoring StyleX styles still requires a compiler in the consuming app.
 - Use cool near-black dark surfaces and monochrome Zinc primary actions.
-    Primary buttons use dark fills in light mode and light fills in dark mode.
-    Control boundaries preserve contrast; feedback colors retain their meanings.
-
-- Customize styled components with className and inline style without losing
-    their built-in styles. Existing xstyle restrictions and styling targets
-    remain available. Check focus and state contrast when overriding appearance.
-
-- Keep palette authoring in OKLCH and ship generated HEX tokens. Existing Zinc
-    values and token names are retained; translucent colors use eight-bit alpha.
-
-- Remove Message and Bubble, their source-copy entries and outgoing-message color
-    tokens. Compose conversation layouts in your app before upgrading.
-- Distinguish the current Timeline step with the primary Zinc surface while
-    keeping completed steps subtle. Disabled textareas no longer offer resizing.
-
-- Use Paragraph for body, description and caption text. P remains a compatible
-    alias, including its existing package and source-copy paths.
-- Soften resting control borders, hover outlines and selected surfaces while
-    retaining visible keyboard focus and error indicators.
-- Match Storybook navigation and controls to the light/dark Zinc palette used
-    by component previews.
-
-The package is now named `@bolerish/ui`. Versions v0.9.1 and earlier below were
-released as `@nuee/ui`; their release notes remain part of this project history.
-
-- Use bolerish/ui directly from the installed package with one CSS import.
-    Light and dark themes are available without a StyleX build plugin.
-    Editable source copying remains optional; existing copied files are retained.
-
-- Keep keyboard focus visible in outlined toggle groups. Soft toggle selections
-    use a flat boundary, and dark canvases have a gentler contrast with panels.
-
-- Refine component shapes with crisper controls and softer panel corners.
-    Cards use readable body text and wrap their actions on narrow screens;
-    inputs respond on hover while preserving error and focus indicators.
-    Selected toggles are clearer, and modal backdrops use a flat dimming layer.
-    Merge updated tokens and component source together to adopt the changes.
-- Rename the product to bolerish/ui, packages to @bolerish/* and the command to
-    bolerish. New configuration uses .bolerish.json; existing .nuee.json and
-    nuee.json remain readable. Run bolerish init --force to migrate the name and
-    schema while preserving settings and legacy files.
-- Use subtly cool Zinc grays for light and dark surfaces, actions and text.
-    Inputs have clear boundaries; feedback colors and existing font,
-    spacing and corner scales remain available. Merge updated tokens and copied
-    components together if you customized their source.
-- Give documentation previews their own canvas background, separate from code
-    blocks, including examples with transparent component backgrounds.
-- Add P for body, description and caption paragraphs. Heading examples now show
-    every HTML level from h1 to h6, independently of visual size.
-- Correct generated typography variables so component text uses its intended
-    size, weight and line height.
+    Light-mode primary buttons use dark fills; dark-mode buttons use light fills.
+    Feedback colors retain their meanings, with visible control boundaries,
+    keyboard focus, and error indicators.
+- Refine control and panel corners, card action wrapping, input hover states,
+    toggle selection and focus, and modal backdrops. The current Timeline step
+    uses the primary surface; disabled textareas no longer offer resizing.
+- Match the Toast dismiss-all button background to its toast surface.
+- Author palette values in OKLCH and ship generated HEX tokens, retaining
+    existing token names. Translucent colors use eight-bit alpha.
+- Show installed-package usage examples and concise prop choices in component
+    documentation. Each MDX page contains its Korean and English overview and
+    usage guidance; examples remain executable React files. Downloadable
+    guidelines and API references remain available.
+- Match Storybook navigation, controls, and preview canvases to component themes.
+    Sidebar menu hover no longer adds a bright background or glow; keyboard
+    focus remains visible.
+- Honor Storybook motion choices in inline and isolated previews. Allow Motion
+    plays transitions even when the OS requests reduced motion, System follows
+    the OS, and Reduce Motion disables transitions.
 
 ## Version v0.9.1
 
