@@ -275,7 +275,7 @@ const styles = stylex.create({
   },
   clearAll: {
     appearance: "none",
-    backgroundColor: colorVars.bgSubtle,
+    backgroundColor: colorVars.bgRaised,
     borderColor: colorVars.strokeDefault,
     borderStyle: "solid",
     borderRadius: radiusVars.sm,

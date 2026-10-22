@@ -1,5 +1,7 @@
 ## Unreleased
 
+- Match the dismiss-all button background to its toast surface.
+
 - Keep component overviews and usage guidance together in each MDX page, with
     Korean and English text and the same downloadable references.
 
