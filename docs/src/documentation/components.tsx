@@ -30,7 +30,6 @@ const styles = stylex.create({
     marginTop: spacingVars.space8,
     marginBottom: spacingVars.space4,
     paddingBottom: spacingVars.space2,
-    borderBottom: `${sizeVars.stroke} solid ${colorVars.strokeDefault}`,
   },
   h3: {
     color: colorVars.fgPrimary,
@@ -66,7 +65,6 @@ const styles = stylex.create({
   codeColumn: { width: "40%" },
   cell: {
     overflowWrap: "anywhere",
-    borderBottom: `${sizeVars.stroke} solid ${colorVars.strokeDefault}`,
     color: colorVars.fgPrimary,
     paddingBlock: spacingVars.space3,
     paddingInline: spacingVars.space3,

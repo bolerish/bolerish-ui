@@ -1,3 +1,20 @@
+:root {
+  --docs-background: #f4f4f5;
+  --docs-surface: #ffffff;
+  --docs-selected: #e4e4e7;
+  --docs-foreground: #18181b;
+  --docs-control: #85858f;
+  --docs-focus: #52525b;
+}
+:root[data-color-mode="dark"] {
+  --docs-background: #18181b;
+  --docs-surface: #27272a;
+  --docs-selected: #27272a;
+  --docs-foreground: #f4f4f5;
+  --docs-control: #71717a;
+  --docs-focus: #a1a1aa;
+  color-scheme: dark;
+}
 /* Storybook 10 document nodes: hide only the built-in direct-child icon. */
 .sidebar-item[data-nodetype="document"] > a > div:has(> svg[type="document"]) {
   display: none;
@@ -14,7 +31,12 @@
 }
 
 #storybook-explorer-tree .sidebar-item[data-selected="true"] {
-  background-color: #09090b;
+  background-color: var(--docs-selected);
+  color: var(--docs-foreground);
+}
+
+#storybook-explorer-tree .sidebar-item[data-selected="true"] > a {
+  color: var(--docs-foreground);
 }
 
 .nuee-doc-tools {
@@ -27,19 +49,23 @@
 .nuee-doc-tools select {
   height: 32px;
   padding-inline: 10px;
-  border: 1px solid #71717a;
+  border: 1px solid var(--docs-control);
   border-radius: 8px;
-  background-color: #ffffff;
-  color: #09090b;
+  background-color: var(--docs-surface);
+  color: var(--docs-foreground);
   font-family: inherit;
   font-size: 13px;
   line-height: 1.4;
   cursor: pointer;
 }
 .nuee-doc-tools select:hover {
-  background-color: #f4f4f5;
+  background-color: var(--docs-background);
 }
 .nuee-doc-tools select:focus-visible {
-  outline: 2px solid #09090b;
+  outline: 2px solid var(--docs-focus);
   outline-offset: 2px;
+}
+
+#storybook-explorer-tree .sidebar-item[data-selected="true"] .nuee-sidebar-label > svg {
+  color: var(--docs-foreground);
 }

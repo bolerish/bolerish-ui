@@ -4,6 +4,8 @@
     alias, including its existing package and source-copy paths.
 - Soften resting control borders, hover outlines and selected surfaces while
     retaining visible keyboard focus and error indicators.
+- Match Storybook navigation and controls to the light/dark Zinc palette used
+    by component previews.
 
 The package is now named `@bolerish/ui`. Versions v0.9.1 and earlier below were
 released as `@nuee/ui`; their release notes remain part of this project history.

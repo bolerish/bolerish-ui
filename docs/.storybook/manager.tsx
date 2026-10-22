@@ -6,7 +6,7 @@ import {
   StackIcon,
   DiamondsFourIcon,
 } from "@phosphor-icons/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { addons, types, useGlobals } from "storybook/manager-api";
 
 import "./manager.css";
@@ -30,9 +30,39 @@ function SidebarLabel({ name, id, type }: { name: string; id: string; type: stri
   );
 }
 
+function getManagerTheme(mode: "light" | "dark") {
+  const dark = mode === "dark";
+  return create({
+    base: mode,
+    brandTitle: "bolerish/ui",
+    brandUrl: "?path=/docs/getting-started--docs",
+    colorPrimary: dark ? "#a1a1aa" : "#52525b",
+    colorSecondary: dark ? "#f4f4f5" : "#52525b",
+    appBg: dark ? "#18181b" : "#f4f4f5",
+    appContentBg: dark ? "#18181b" : "#f4f4f5",
+    appBorderColor: dark ? "#3f3f46" : "#e4e4e7",
+    textColor: dark ? "#f4f4f5" : "#18181b",
+    textMutedColor: dark ? "#a1a1aa" : "#52525b",
+    barBg: dark ? "#18181b" : "#f4f4f5",
+    barTextColor: dark ? "#a1a1aa" : "#52525b",
+    barSelectedColor: dark ? "#f4f4f5" : "#18181b",
+    inputBg: dark ? "#27272a" : "#ffffff",
+    inputBorder: dark ? "#71717a" : "#85858f",
+    inputTextColor: dark ? "#f4f4f5" : "#18181b",
+    appBorderRadius: 8,
+    fontBase: "var(--nuee-font-body)",
+    fontCode: "var(--nuee-font-code)",
+  });
+}
+
 function DocumentationTools() {
   const [globals, updateGlobals] = useGlobals();
   const locale = globals.locale === "en" ? "en" : "ko";
+  const mode = globals.colorMode === "dark" ? "dark" : "light";
+  useEffect(() => {
+    document.documentElement.dataset.colorMode = mode;
+    addons.setConfig({ theme: getManagerTheme(mode) });
+  }, [mode]);
   return (
     <div className="nuee-doc-tools">
       <select
@@ -101,25 +131,5 @@ addons.setConfig({
   sidebar: {
     renderLabel: (item) => <SidebarLabel name={item.name} id={item.id} type={item.type} />,
   },
-  theme: create({
-    base: "light",
-    brandTitle: "bolerish/ui",
-    brandUrl: "?path=/docs/getting-started--docs",
-    colorPrimary: "#09090b",
-    colorSecondary: "#09090b",
-    appBg: "#f4f4f5",
-    appContentBg: "#ffffff",
-    appBorderColor: "#e4e4e7",
-    textColor: "#09090b",
-    textMutedColor: "#52525b",
-    barBg: "#ffffff",
-    barTextColor: "#52525b",
-    barSelectedColor: "#09090b",
-    inputBg: "#ffffff",
-    inputBorder: "#71717a",
-    inputTextColor: "#09090b",
-    appBorderRadius: 8,
-    fontBase: "var(--nuee-font-body)",
-    fontCode: "var(--nuee-font-code)",
-  }),
+  theme: getManagerTheme("light"),
 });
