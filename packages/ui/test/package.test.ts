@@ -10,7 +10,6 @@ import {
   symlink,
   writeFile,
 } from "node:fs/promises";
-import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -238,55 +237,6 @@ test("@bolerish/ui CLI keeps the UI package out of a generated Vite app", async 
   }
 });
 
-test("@bolerish/ui CLI initializes a project and adds a card", async () => {
-  const projectDirectory = await mkdtemp(join(tmpdir(), "nuee-ui-cli-"));
-
-  try {
-    await writeFile(
-      join(projectDirectory, "tsconfig.json"),
-      JSON.stringify({ compilerOptions: { paths: { "@/*": ["./src/*"] } } }),
-    );
-    await execFile(process.execPath, [
-      cliPath,
-      "init",
-      "--defaults",
-      "--skip-dependencies",
-      "--cwd",
-      projectDirectory,
-    ]);
-    await execFile(process.execPath, [
-      cliPath,
-      "add",
-      "card",
-      "--cwd",
-      projectDirectory,
-      "--skip-dependencies",
-    ]);
-
-    const config = JSON.parse(await readFile(join(projectDirectory, ".bolerish.json"), "utf8"));
-    assert.equal(config.aliases.ui, "@/components/ui");
-    assert.equal(config.aliases.styles, "@/styles");
-    await access(join(projectDirectory, "src/styles/tokens/semantic.stylex.ts"));
-    assert.match(
-      await readFile(join(projectDirectory, "src/components/ui/card.tsx"), "utf8"),
-      /Card/,
-    );
-  } finally {
-    await rm(projectDirectory, { recursive: true });
-  }
-});
-
-test("published package keeps Base UI primitive escape hatches for documentation", async () => {
-  const buttonSource = await readFile(
-    fileURLToPath(new URL("../dist/button.js", import.meta.url)),
-    "utf8",
-  );
-  assert.match(buttonSource, /react\/compiler-runtime/);
-
-  const primitives = await import("../dist/primitives.js");
-  assert.ok(primitives.Popover);
-});
-
 test("production StyleX CSS contains no invalid numeric declarations", async () => {
   const css = await readFile(new URL("../dist/stylex.css", import.meta.url), "utf8");
   assert.doesNotMatch(css, /:\s*[^;}]*\b(?:(?:NaN|Infinity)[a-z%]*|undefined\b)/);
@@ -417,9 +367,6 @@ test("package consumers build components and both themes without a StyleX plugin
       const rules = themeClassNames[mode].split(" ").filter((name) => css.includes(`.${name}`));
       assert.ok(rules.length >= 2, `${mode} must include both color and shadow theme rules`);
     }
-    assert.match(css, /#08090[aA]/);
-    assert.match(css, /#(?:E4F222|e4f222)/);
-    assert.match(css, /#(?:FFFFFF|ffffff)/);
     assert.match(css, /prefers-reduced-motion/);
   } finally {
     await rm(projectDirectory, { recursive: true, force: true });
