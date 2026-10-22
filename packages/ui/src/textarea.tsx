@@ -46,6 +46,7 @@ const styles = stylex.create({
       borderColor: colorVars.strokeDefault,
       color: colorVars.fgDisabled,
       cursor: "not-allowed",
+      resize: "none",
       ":hover": { borderColor: colorVars.strokeDefault },
     },
     ":user-invalid": {

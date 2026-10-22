@@ -32,7 +32,7 @@ export default function Default() {
       <div {...stylex.props(layout.stack, layout.formWidth)}>
         <Textarea aria-label="Note" placeholder="Write down the decisions from the meeting." />
         <Textarea
-          aria-label="Read-only note"
+          aria-label="Unavailable note"
           disabled
           defaultValue="This note has been reviewed."
         />

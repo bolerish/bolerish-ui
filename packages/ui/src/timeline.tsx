@@ -87,8 +87,9 @@ const styles = stylex.create({
 const indicatorVariantStyles = stylex.create({
   default: {},
   active: {
-    backgroundColor: colorVars.bgCurrent,
-    color: colorVars.fgPrimary,
+    backgroundColor: colorVars.bgActionPrimary,
+    borderColor: colorVars.strokeAction,
+    color: colorVars.fgOnActionPrimary,
   },
   complete: {
     backgroundColor: colorVars.bgCurrent,

@@ -28,7 +28,7 @@ test("timeline progress, persistent selection and errors keep distinct surfaces"
     createElement(TimelineIndicator, { variant: "error" }, "Error"),
   );
   const toggle = renderToStaticMarkup(createElement(Toggle, { pressed: true }, "Selected"));
-  assert.deepEqual(
+  assert.notDeepEqual(
     declaration(complete, "background-color"),
     declaration(active, "background-color"),
   );

@@ -9,3 +9,6 @@ uses a neutral surface with a check or explicit title; error retains meaningful
 feedback colors and clear text. Do not encode status through color alone. Explicit
 consumer state colors remain available through TimelineIndicator xstyle. Decorative
 indicators stay hidden; titles and times describe the event sequence.
+
+The active step uses the primary Zinc surface and its contrasting foreground.
+Completed steps retain a subtle neutral surface and a check to distinguish them from the current step.

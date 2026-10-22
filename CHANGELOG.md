@@ -2,6 +2,8 @@
 
 - Remove Message and Bubble, their source-copy entries and outgoing-message color
     tokens. Compose conversation layouts in your app before upgrading.
+- Distinguish the current Timeline step with the primary Zinc surface while
+    keeping completed steps subtle. Disabled textareas no longer offer resizing.
 
 - Use Paragraph for body, description and caption text. P remains a compatible
     alias, including its existing package and source-copy paths.
