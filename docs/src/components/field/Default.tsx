@@ -1,7 +1,5 @@
 import { colorVars, sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@bolerish/ui/checkbox";
 import {
   Field,
   FieldContent,
@@ -12,8 +10,9 @@ import {
   FieldLegend,
   FieldSet,
   FieldTitle,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@bolerish/ui/field";
+import { Input } from "@bolerish/ui/input";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   description: {
     color: colorVars.fgSecondary,

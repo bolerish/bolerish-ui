@@ -31,6 +31,9 @@ async function getEntryPoints() {
     cli: join("bin", "cli.ts"),
     index: join(sourceDirectory, "index.ts"),
     primitives: join(sourceDirectory, "primitives.ts"),
+    theme: join(sourceDirectory, "theme.ts"),
+    // Include definitions even when StyleX inlines their references in components.
+    _tokens: resolve("../tokens/src/index.ts"),
   };
   const files = await readdir(sourceDirectory, { withFileTypes: true });
 
@@ -48,6 +51,9 @@ await rm(outputDirectory, { force: true, recursive: true });
 const componentModules: Plugin = {
   name: "component-modules",
   setup(builder) {
+    builder.onResolve({ filter: /^@bolerish\/tokens\/themes\.stylex$/ }, () => ({
+      path: resolve("../tokens/src/themes.stylex.ts"),
+    }));
     builder.onResolve({ filter: /^\.\// }, ({ path, importer }) => {
       if (!importer.startsWith(join(process.cwd(), sourceDirectory))) return;
       const name = basename(path).replace(/\.[jt]sx?$/, "");

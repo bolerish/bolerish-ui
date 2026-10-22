@@ -44,3 +44,7 @@ docs/public/installation.md
 docs/public/nuee-for-llms.md
 
 docs/public/bolerish-for-llms.md
+
+# Local build and design review artifacts
+.artifacts/
+.taste-skill/

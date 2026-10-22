@@ -1,7 +1,5 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
-import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
+import { Field, FieldDescription, FieldLabel } from "@bolerish/ui/field";
 import {
   Select,
   SelectPopup,
@@ -12,7 +10,8 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@bolerish/ui/select";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

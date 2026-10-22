@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Calendar } from "@bolerish/ui/calendar";
 import * as stylex from "@stylexjs/stylex";
-
-import { Calendar } from "@/components/ui/calendar";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

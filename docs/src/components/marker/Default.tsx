@@ -1,8 +1,7 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Marker, MarkerContent, MarkerIcon } from "@bolerish/ui/marker";
+import { Spinner } from "@bolerish/ui/spinner";
 import * as stylex from "@stylexjs/stylex";
-
-import { Marker, MarkerContent, MarkerIcon } from "@/components/ui/marker";
-import { Spinner } from "@/components/ui/spinner";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -1,7 +1,6 @@
 import { sizeVars, spacingVars, typo, colorVars } from "@bolerish/tokens/semantic.stylex";
+import { Checkbox } from "@bolerish/ui/checkbox";
 import * as stylex from "@stylexjs/stylex";
-
-import { Checkbox } from "@/components/ui/checkbox";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

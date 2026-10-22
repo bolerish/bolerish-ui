@@ -7,117 +7,75 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 <LocalizedMarkdown
   text={
-    "This guide adds a Button to an existing React project. Use `init --vite` for Vite; for other build tools, use `init` and configure StyleX for that build tool."
+    "This guide uses compiled components and CSS from the installed package. React 19 or later is required. No StyleX build plugin is needed for basic usage."
   }
 />
 
-<LocalizedMarkdown text={"## 1. Initialize"} />
-
-<LocalizedMarkdown text={"Run this once from the project root."} />
+<LocalizedMarkdown text={"## 1. Install the package"} />
 
 ```bash
-pnpm dlx @bolerish/ui init --vite
+pnpm add @bolerish/ui
 ```
 
-<LocalizedMarkdown text={"## 2. Import alias"} />
-
-<LocalizedMarkdown
-  text={"The component and local style aliases entered during init are saved to `.nuee.json`."}
-/>
-
-```json
-{
-  "version": "0.6.1",
-  "accessibility": {
-    "respectReducedMotion": true
-  },
-  "aliases": {
-    "ui": "@/components/ui",
-    "styles": "@/styles"
-  }
-}
-```
+<LocalizedMarkdown text={"## 2. Load the styles"} />
 
 <LocalizedMarkdown
   text={
-    "| Setting                              | Purpose                                                                                                                          |\n| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |\n| `aliases.ui` / `aliases.styles`      | The aliases used to import added components and their local StyleX tokens.                                                       |\n| `accessibility.respectReducedMotion` | Deprecated compatibility field. Copied components retain OS reduced-motion rules; only the app end user can override them at runtime. |"
+    "Import the stylesheet once in your app’s CSS entry, before app overrides. It includes the reset, component styles, tokens and both themes."
   }
 />
 
-<LocalizedMarkdown
-  text={"Define the actual file locations in `tsconfig.json` or `jsconfig.json`."}
-/>
-
-<LocalizedMarkdown text={"## 3. File location"} />
-
-<LocalizedMarkdown
-  text={"The add command reads the import alias and paths to find where to save components."}
-/>
-
-```json
-{
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
+```css
+@import "@bolerish/ui/global.css";
 ```
 
-<LocalizedMarkdown text={"`@/components/ui` → `src/components/ui`"} />
+<LocalizedMarkdown text={"## 3. Use a component"} />
 
 <LocalizedMarkdown
   text={
-    "> When changing an alias, also update `tsconfig.json` or `jsconfig.json`. Existing files are not moved automatically."
+    "Import components directly from the package. No local component files or import aliases need to be generated."
   }
-/>
-
-<LocalizedMarkdown text={"## 4. Add a component"} />
-
-<LocalizedMarkdown text={"Add Button using the paths configured above."} />
-
-```bash
-pnpm dlx @bolerish/ui add button
-```
-
-<LocalizedMarkdown
-  text={"Import the generated component into a page. This example uses the alias from step 2."}
 />
 
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 
 export function SaveButton() {
   return <Button>Save</Button>;
 }
 ```
 
-<LocalizedMarkdown
-  text={
-    "Start your application with its existing development command. Confirm that the button appears with @bolerish/ui styling and shows a focus indicator when reached with Tab. If it appears unstyled, check the StyleX build integration and reset stylesheet import."
-  }
-/>
-
-<LocalizedMarkdown text={"## Installed source versions"} />
+<LocalizedMarkdown text={"## 4. Choose a theme"} />
 
 <LocalizedMarkdown
   text={
-    "`.nuee.json` records the source versions copied into your project. `version` identifies the local foundation; `components` records each component installed by `add`, including registry dependencies. These values describe the installed source release, not later manual edits. Running `add` does not update the foundation version."
+    "Light is the default. Apply themeClassNames.light or themeClassNames.dark to html so portaled controls inherit the same theme. Your app owns system preference detection, saved preferences and the initial theme. Preserve unrelated html classes when switching, and set color-scheme to match."
   }
 />
 
-```json
-{
-  "version": "0.6.1",
-  "components": {
-    "accordion": "0.6.1",
-    "button": "0.6.0"
+```tsx
+import { themeClassNames } from "@bolerish/ui/theme";
+
+<html className={themeClassNames.dark}>
+  <body>{children}</body>
+</html>;
+```
+
+<LocalizedMarkdown text={"## Optional editable source"} />
+
+<LocalizedMarkdown
+  text={
+    "Use the CLI when you need to own and edit the component source. This path requires StyleX integration and uses .bolerish.json. It remains compatible with existing copied components. Package updates do not overwrite local edits."
   }
-}
+/>
+
+```bash
+pnpm dlx @bolerish/ui init --vite
+pnpm dlx @bolerish/ui add button
 ```
 
 <LocalizedMarkdown
   text={
-    "Older configuration files still work. Unknown foundation versions stay omitted, and external URL components are recorded as `null`. Initialization preserves existing foundation files; it only records the current release when all resulting foundation files match that release. Dry runs and canceled installations do not update the version records."
+    "If you author custom xstyle values with stylex.create(), configure StyleX for your build tool. Prebuilt components and theme classes work without it."
   }
 />

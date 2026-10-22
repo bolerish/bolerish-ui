@@ -20,7 +20,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Progress } from "@/components/ui/progress";
+import { Progress } from "@bolerish/ui/progress";
 
 <>
   <Progress aria-label="File upload progress" value={64} />
@@ -30,6 +30,6 @@ import { Progress } from "@/components/ui/progress";
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add progress" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

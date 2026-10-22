@@ -20,7 +20,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@bolerish/ui/checkbox";
 import {
   Field,
   FieldContent,
@@ -31,8 +31,8 @@ import {
   FieldLegend,
   FieldSet,
   FieldTitle,
-} from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@bolerish/ui/field";
+import { Input } from "@bolerish/ui/input";
 
 <FieldSet>
   <FieldLegend>Payment details</FieldLegend>
@@ -67,6 +67,6 @@ import { Input } from "@/components/ui/input";
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add field" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />

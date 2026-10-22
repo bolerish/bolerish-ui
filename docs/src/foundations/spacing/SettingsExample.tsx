@@ -1,12 +1,11 @@
 import { layoutVars, spacingRoleVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
+import { Card } from "@bolerish/ui/card";
+import { Field, FieldLabel, FieldDescription, FieldGroup } from "@bolerish/ui/field";
+import { Heading } from "@bolerish/ui/heading";
+import { Input } from "@bolerish/ui/input";
+import { Spinner } from "@bolerish/ui/spinner";
 import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Field, FieldLabel, FieldDescription, FieldGroup } from "@/components/ui/field";
-import { Heading } from "@/components/ui/heading";
-import { Input } from "@/components/ui/input";
-import { Spinner } from "@/components/ui/spinner";
 
 const styles = stylex.create({
   page: {

@@ -1,9 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import { DotsThreeIcon, FolderIcon } from "@phosphor-icons/react";
-import * as stylex from "@stylexjs/stylex";
-
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@bolerish/ui/avatar";
+import { Button } from "@bolerish/ui/button";
 import {
   ContentRow,
   ContentRowActions,
@@ -12,7 +9,9 @@ import {
   ContentRowGroup,
   ContentRowMedia,
   ContentRowTitle,
-} from "@/components/ui/content-row";
+} from "@bolerish/ui/content-row";
+import { DotsThreeIcon, FolderIcon } from "@phosphor-icons/react";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -5,14 +5,13 @@ import {
   spacingVars,
   typo,
 } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   Collapsible,
   CollapsiblePanel,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@bolerish/ui/collapsible";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

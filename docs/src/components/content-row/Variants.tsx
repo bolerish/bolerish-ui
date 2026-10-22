@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { ContentRow } from "@bolerish/ui/content-row";
 import * as stylex from "@stylexjs/stylex";
-
-import { ContentRow } from "@/components/ui/content-row";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

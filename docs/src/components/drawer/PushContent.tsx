@@ -1,8 +1,5 @@
 import { sizeVars } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-import { useState } from "react";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -12,7 +9,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from "@/components/ui/drawer";
+} from "@bolerish/ui/drawer";
+import * as stylex from "@stylexjs/stylex";
+import { useState } from "react";
 
 const styles = stylex.create({
   shifted: {

@@ -20,15 +20,15 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@bolerish/ui/avatar";
 import {
   ContentRow,
   ContentRowContent,
   ContentRowDescription,
   ContentRowMedia,
   ContentRowTitle,
-} from "@/components/ui/content-row";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+} from "@bolerish/ui/content-row";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@bolerish/ui/hover-card";
 
 <HoverCard>
   <HoverCardTrigger href="#">@bolerish</HoverCardTrigger>
@@ -52,6 +52,6 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add hover-card" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />

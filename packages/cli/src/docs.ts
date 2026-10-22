@@ -18,7 +18,10 @@ export function docs(componentName: string | undefined) {
   if (!item) throw new Error(`Unknown component: ${componentName}`);
 
   console.log(`${componentName}\n`);
-  console.log(`Install: pnpm dlx @bolerish/ui add ${componentName}`);
+  console.log("Install: pnpm add @bolerish/ui");
+  console.log(`Import: @bolerish/ui/${componentName}`);
+  console.log("Styles: @bolerish/ui/global.css");
+  console.log(`Optional editable source: pnpm dlx @bolerish/ui add ${componentName}`);
   console.log(`Files:\n${item.files.map((file) => `  ${file}`).join("\n")}`);
   console.log(
     `Dependencies:\n${item.dependencies.map((dependency) => `  ${dependency}`).join("\n")}`,

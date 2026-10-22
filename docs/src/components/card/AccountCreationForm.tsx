@@ -1,7 +1,5 @@
 import { sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   Card,
   CardContent,
@@ -9,8 +7,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+} from "@bolerish/ui/card";
+import { Input } from "@bolerish/ui/input";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

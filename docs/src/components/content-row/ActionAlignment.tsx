@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   ContentRow,
   ContentRowActions,
@@ -6,7 +6,7 @@ import {
   ContentRowDescription,
   ContentRowGroup,
   ContentRowTitle,
-} from "@/components/ui/content-row";
+} from "@bolerish/ui/content-row";
 export default function ActionAlignment() {
   return (
     <ContentRowGroup>

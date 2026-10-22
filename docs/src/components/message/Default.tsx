@@ -1,9 +1,8 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Avatar, AvatarFallback } from "@bolerish/ui/avatar";
+import { Bubble } from "@bolerish/ui/bubble";
+import { Message, MessageAvatar, MessageContent, MessageFooter } from "@bolerish/ui/message";
 import * as stylex from "@stylexjs/stylex";
-
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Bubble } from "@/components/ui/bubble";
-import { Message, MessageAvatar, MessageContent, MessageFooter } from "@/components/ui/message";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

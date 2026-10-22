@@ -20,7 +20,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   Popover,
   PopoverContent,
@@ -28,7 +28,7 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@bolerish/ui/popover";
 
 <Popover>
   <PopoverTrigger render={<Button variant="secondary">Align left</Button>} />
@@ -43,6 +43,6 @@ import {
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add popover" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />

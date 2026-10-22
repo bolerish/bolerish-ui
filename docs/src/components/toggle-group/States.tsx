@@ -1,4 +1,4 @@
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@bolerish/ui/toggle-group";
 export default function States() {
   return (
     <ToggleGroup aria-label="Text alignment" defaultValue={["left"]} variant="outline">

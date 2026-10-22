@@ -6,9 +6,8 @@ import {
   opacityVars,
   typo,
 } from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
 import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
 
 import { TokenRow } from "../../documentation/TokenRow";
 

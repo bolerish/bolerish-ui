@@ -1,13 +1,12 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   ContentRow,
   ContentRowContent,
   ContentRowDescription,
   ContentRowTitle,
-} from "@/components/ui/content-row";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+} from "@bolerish/ui/content-row";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@bolerish/ui/hover-card";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

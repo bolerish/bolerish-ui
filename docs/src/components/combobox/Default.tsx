@@ -1,6 +1,4 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   Combobox,
   ComboboxCollection,
@@ -9,8 +7,9 @@ import {
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
-} from "@/components/ui/combobox";
-import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
+} from "@bolerish/ui/combobox";
+import { Field, FieldDescription, FieldLabel } from "@bolerish/ui/field";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

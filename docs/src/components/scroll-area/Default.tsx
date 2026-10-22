@@ -1,8 +1,7 @@
 import { typo, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { ScrollArea, ScrollAreaViewport, ScrollAreaContent } from "@bolerish/ui/scroll-area";
+import { Separator } from "@bolerish/ui/separator";
 import * as stylex from "@stylexjs/stylex";
-
-import { ScrollArea, ScrollAreaViewport, ScrollAreaContent } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -23,8 +23,8 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Button } from "@/components/ui/button";
-import { toast, Toaster } from "@/components/ui/toast";
+import { Button } from "@bolerish/ui/button";
+import { toast, Toaster } from "@bolerish/ui/toast";
 
 export function ToastDemo() {
   return (
@@ -38,7 +38,7 @@ export function ToastDemo() {
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add toast" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <LocalizedMarkdown text={"Mount one `Toaster` near the root of your application."} />
 

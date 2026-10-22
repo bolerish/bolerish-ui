@@ -1,7 +1,4 @@
 import { colorVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-import type { ReactNode } from "react";
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,7 +7,9 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
+} from "@bolerish/ui/navigation-menu";
+import * as stylex from "@stylexjs/stylex";
+import type { ReactNode } from "react";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

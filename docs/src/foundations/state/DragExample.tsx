@@ -1,8 +1,7 @@
 import { colorVars, radiusVars, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
 import * as stylex from "@stylexjs/stylex";
 import { useRef, useState } from "react";
-
-import { Button } from "@/components/ui/button";
 
 const styles = stylex.create({
   list: { display: "grid", gap: spacingVars.space2, listStyleType: "none", padding: 0 },

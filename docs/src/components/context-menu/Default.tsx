@@ -5,8 +5,6 @@ import {
   spacingVars,
   typo,
 } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   ContextMenu,
   ContextMenuContent,
@@ -14,7 +12,8 @@ import {
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuTrigger,
-} from "@/components/ui/context-menu";
+} from "@bolerish/ui/context-menu";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

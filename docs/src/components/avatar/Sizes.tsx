@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Avatar, AvatarBadge, AvatarFallback } from "@bolerish/ui/avatar";
 import * as stylex from "@stylexjs/stylex";
-
-import { Avatar, AvatarBadge, AvatarFallback } from "@/components/ui/avatar";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

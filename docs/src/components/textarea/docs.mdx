@@ -20,7 +20,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@bolerish/ui/textarea";
 
 <>
   <Textarea aria-label="Note" placeholder="Write down the decisions from the meeting." />
@@ -30,6 +30,6 @@ import { Textarea } from "@/components/ui/textarea";
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add textarea" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

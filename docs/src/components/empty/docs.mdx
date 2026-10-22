@@ -20,7 +20,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -28,7 +28,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty";
+} from "@bolerish/ui/empty";
 import { FolderIcon } from "@phosphor-icons/react";
 
 <Empty>
@@ -47,6 +47,6 @@ import { FolderIcon } from "@phosphor-icons/react";
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add empty" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

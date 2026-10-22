@@ -1,8 +1,7 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { DatePicker } from "@bolerish/ui/date-picker";
 import * as stylex from "@stylexjs/stylex";
 import { useState } from "react";
-
-import { DatePicker } from "@/components/ui/date-picker";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

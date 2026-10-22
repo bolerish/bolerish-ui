@@ -1,6 +1,15 @@
 import assert from "node:assert/strict";
 import { execFile as execFileCallback } from "node:child_process";
-import { access, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import {
+  access,
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  rm,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
@@ -124,38 +133,6 @@ test("@bolerish/ui CLI builds every added component in a Vite app", async () => 
         "",
       ].join("\n"),
     );
-
-    const readme = await readFile(new URL("../../../README.md", import.meta.url), "utf8");
-    const examples = [...readme.matchAll(/```tsx\n([\s\S]*?)```/g)];
-    assert.ok(examples.length > 0, "README must contain a runnable TSX example.");
-    const mainPath = join(projectDirectory, "src/main.tsx");
-    let mainSource = await readFile(mainPath, "utf8");
-    for (const [index, example] of examples.entries()) {
-      await writeFile(join(projectDirectory, `src/readme-${index}.tsx`), example[1]);
-      mainSource += `import * as Example${index} from "./readme-${index}";\nconsole.log(Example${index});\n`;
-    }
-    await writeFile(mainPath, mainSource);
-    await writeFile(
-      join(projectDirectory, "tsconfig.readme.json"),
-      JSON.stringify({
-        compilerOptions: {
-          target: "ES2022",
-          module: "ESNext",
-          moduleResolution: "Bundler",
-          jsx: "react-jsx",
-          strict: true,
-          skipLibCheck: true,
-          noEmit: true,
-          paths: { "@/*": ["./src/*"] },
-        },
-        include: ["src/readme-*.tsx"],
-      }),
-    );
-    await execFile(process.execPath, [
-      fileURLToPath(new URL("../node_modules/typescript/bin/tsc", import.meta.url)),
-      "-p",
-      join(projectDirectory, "tsconfig.readme.json"),
-    ]);
 
     const viteConfig = await readFile(join(projectDirectory, "vite.config.ts"), "utf8");
     assert.ok(viteConfig.indexOf("stylex.vite") < viteConfig.indexOf("    react(),"));
@@ -362,4 +339,83 @@ test("published controls generate server HTML without browser globals", async ()
   );
   assert.match(stdout, /Server action/);
   assert.match(stdout, /role="switch"/);
+});
+
+test("package consumers build components and both themes without a StyleX plugin", async () => {
+  const projectDirectory = await mkdtemp(join(testDirectory, ".package-app-"));
+  try {
+    await mkdir(join(projectDirectory, "src"));
+    await mkdir(join(projectDirectory, "node_modules/@bolerish"), { recursive: true });
+    await symlink(
+      fileURLToPath(new URL("../", import.meta.url)),
+      join(projectDirectory, "node_modules/@bolerish/ui"),
+      "dir",
+    );
+    await writeFile(join(projectDirectory, "package.json"), JSON.stringify({ type: "module" }));
+    await writeFile(
+      join(projectDirectory, "index.html"),
+      '<div id="root"></div><script type="module" src="/src/main.tsx"></script>',
+    );
+    await writeFile(
+      join(projectDirectory, "src/main.tsx"),
+      [
+        'import React from "react";',
+        'import { createRoot } from "react-dom/client";',
+        'import { Button } from "@bolerish/ui/button";',
+        'import { themeClassNames } from "@bolerish/ui/theme";',
+        'import "@bolerish/ui/global.css";',
+        'document.documentElement.classList.add(...themeClassNames.dark.split(" "));',
+        'createRoot(document.getElementById("root")!).render(<Button>Save</Button>);',
+      ].join("\n"),
+    );
+    const readme = await readFile(new URL("../../../README.md", import.meta.url), "utf8");
+    const examples = [...readme.matchAll(/```tsx\n([\s\S]*?)```/g)];
+    assert.ok(examples.length > 0, "README must contain a runnable TSX example.");
+    for (const [index, example] of examples.entries()) {
+      await writeFile(join(projectDirectory, `src/readme-${index}.tsx`), example[1]);
+    }
+    await writeFile(
+      join(projectDirectory, "tsconfig.json"),
+      JSON.stringify({
+        compilerOptions: {
+          target: "ES2022",
+          module: "ESNext",
+          moduleResolution: "Bundler",
+          jsx: "react-jsx",
+          strict: true,
+          skipLibCheck: true,
+          noEmit: true,
+        },
+        include: ["src/readme-*.tsx"],
+      }),
+    );
+    await execFile(process.execPath, [
+      fileURLToPath(new URL("../node_modules/typescript/bin/tsc", import.meta.url)),
+      "-p",
+      join(projectDirectory, "tsconfig.json"),
+    ]);
+    const result = await build({
+      configFile: false,
+      root: projectDirectory,
+      build: { write: false, minify: false },
+    });
+    assert.ok(!Array.isArray(result) && "output" in result);
+    const styles = result.output.filter(
+      (entry) => entry.type === "asset" && entry.fileName.endsWith(".css"),
+    );
+    assert.equal(styles.length, 1);
+    assert.equal(styles[0].type, "asset");
+    const css = String(styles[0].source);
+    const { themeClassNames } = await import("../dist/theme.js");
+    for (const mode of ["light", "dark"] as const) {
+      assert.ok(themeClassNames[mode].length > 0);
+      const rules = themeClassNames[mode].split(" ").filter((name) => css.includes(`.${name}`));
+      assert.ok(rules.length >= 2, `${mode} must include both color and shadow theme rules`);
+    }
+    assert.match(css, /#18181[bB]/);
+    assert.match(css, /#(?:FFFFFF|ffffff)/);
+    assert.match(css, /prefers-reduced-motion/);
+  } finally {
+    await rm(projectDirectory, { recursive: true, force: true });
+  }
 });

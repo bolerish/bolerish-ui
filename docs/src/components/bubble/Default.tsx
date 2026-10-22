@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Bubble } from "@bolerish/ui/bubble";
 import * as stylex from "@stylexjs/stylex";
-
-import { Bubble } from "@/components/ui/bubble";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -1,8 +1,7 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Field, FieldLabel } from "@bolerish/ui/field";
+import { NativeSelect, NativeSelectOption } from "@bolerish/ui/native-select";
 import * as stylex from "@stylexjs/stylex";
-
-import { Field, FieldLabel } from "@/components/ui/field";
-import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

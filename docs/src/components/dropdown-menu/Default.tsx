@@ -1,7 +1,5 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -12,7 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@bolerish/ui/dropdown-menu";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

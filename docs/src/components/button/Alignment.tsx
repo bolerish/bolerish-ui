@@ -1,8 +1,7 @@
 import { sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
 
 const styles = stylex.create({
   root: {

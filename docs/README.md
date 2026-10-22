@@ -4,6 +4,7 @@
 
 Keep `docs.mdx` and React examples together in `src/components/{component}/`.
 Pass the example's `?raw` import to `ComponentPreview` to display its source.
+Import components from `@bolerish/ui/{component}` so examples exercise the built package.
 Use `isolated height={360}` for examples that need an overlay boundary.
 
 ## Foundations
@@ -65,4 +66,4 @@ MCP service. Consumers must still inspect their installed local source/version.
 
 Run `pnpm --filter @bolerish/docs test:agent` after generating docs to check freshness,
 registry coverage, reference links and canonical source contents. The UI consumer
-Vite test also compiles the README examples against installed source APIs.
+Vite test also compiles the README examples against the package APIs. A separate plugin-free Vite consumer checks components, CSS and both themes.

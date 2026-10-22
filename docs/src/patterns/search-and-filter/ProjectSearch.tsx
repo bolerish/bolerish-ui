@@ -1,10 +1,7 @@
 import { colorVars, sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import * as stylex from "@stylexjs/stylex";
-import { useId, useState } from "react";
-
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Button } from "@bolerish/ui/button";
+import { Field, FieldLabel } from "@bolerish/ui/field";
+import { Input } from "@bolerish/ui/input";
 import {
   Select,
   SelectPopup,
@@ -12,7 +9,9 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@bolerish/ui/select";
+import * as stylex from "@stylexjs/stylex";
+import { useId, useState } from "react";
 
 const projects = [
   { name: "Design system", status: "active" },

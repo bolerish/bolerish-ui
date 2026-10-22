@@ -1,42 +1,93 @@
 # bolerish/ui
 
-A design system built with React and StyleX.
+A design system built with React and StyleX. Install the package to use compiled
+React components, CSS, and light/dark themes. Basic usage needs no StyleX build
+plugin or generated source files. React 19 or later is required.
 
 ## Installation
 
 ```sh
-pnpm dlx @bolerish/ui init
-pnpm dlx @bolerish/ui add button
+pnpm add @bolerish/ui
 ```
 
-For Vite, use `init --vite` to configure the StyleX plugin and reset stylesheet.
+Load the stylesheet once in your app's CSS entry:
+
+```css
+@import "@bolerish/ui/global.css";
+```
+
+`global.css` includes the reset, component styles, tokens, and both color themes.
+Import it before app styles so intentional app overrides come afterwards.
 
 ## Usage
 
-Components are copied into your project.
-
 ```tsx
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 
 export function SaveButton() {
   return <Button>Save</Button>;
 }
 ```
 
+Root imports such as `import { Button } from "@bolerish/ui"` also work.
+
+## Light and dark themes
+
+The default theme is light. `themeClassNames` contains precompiled color and shadow
+classes, including canvas, text, body font and `color-scheme`; applying them does
+not require a StyleX compiler. Apply the chosen theme
+to `html` so controls portaled to `body` inherit it too.
+
+```tsx
+import { themeClassNames } from "@bolerish/ui/theme";
+
+export function Document({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" className={themeClassNames.dark}>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Use `themeClassNames.light` for light mode. Your app owns the saved preference,
+system preference detection, and initial theme; replace the previous theme's
+classes when switching, while preserving unrelated root classes. For SSR, apply the initial theme before
+hydration to avoid a flash of the wrong theme.
+
+StyleX remains available for typed `xstyle` extensions. If your app authors
+`stylex.create()` styles or custom token themes, configure the StyleX compiler
+for that app. This is optional for the prebuilt components and themes above.
+
 ## LLM guide
 
-See [the @bolerish/ui usage guide for LLMs](docs/README.md#ai-coding-agent-references) for local imports,
-StyleX conventions, theme setup, and component API checks.
+See [the @bolerish/ui usage guide for LLMs](docs/README.md#ai-coding-agent-references)
+for package imports, theme setup, StyleX extensions, and exact component APIs.
+
+## Optional source ownership
+
+Use the CLI only when you want editable local component source:
+
+```sh
+pnpm dlx @bolerish/ui init --vite
+pnpm dlx @bolerish/ui add button
+```
+
+This path configures StyleX and copies components into your project. Import copied
+components from your configured local alias instead of the package. Package
+updates do not replace copied or manually edited files; merge those changes
+explicitly. The following configuration applies to this source-copy path only.
 
 ### Generated appearance defaults
 
-`.nuee.json` can configure initial appearance without editing each component:
+`.bolerish.json` can configure initial appearance without editing each component:
 
 `init` links `./node_modules/@bolerish/ui/configuration_schema.json` with `$schema`
 for editor completions and validation. Install `@bolerish/ui` in the project to resolve
-the schema, even when running the CLI with `bunx`. No separate schema file is generated. Rename an existing `nuee.json` to `.nuee.json`,
-then run `nuee init --force` to update the schema reference while preserving
-configuration. An old `.nuee.schema.json` can then be removed.
+the schema, even when running the CLI with `bunx`. No separate schema file is generated. The CLI reads `.bolerish.json` first, then
+`.nuee.json` and `nuee.json`. Run `bolerish init --force` to write the new name and
+schema while preserving configuration; legacy files remain untouched. An old
+`.nuee.schema.json` can then be removed.
 
 ```json
 {
@@ -50,7 +101,7 @@ configuration. An old `.nuee.schema.json` can then be removed.
 ```
 
 Keep the existing aliases and other configuration fields. After editing the
-configuration, run `nuee init --force`. Import the generated `preferences.css`
+configuration, run `bolerish init --force`. Import the generated `preferences.css`
 from your CSS entry (Vite initialization adds the import), and apply
 `stylex.props(...themeStyles)` from `settings.stylex.ts` to the app root. Put the
 styles on `html` when overlays portal to `body`. Compact density keeps 24px icon
@@ -68,7 +119,7 @@ src/styles/
 ```
 
 `aliases.styles` points to `styles`, and token imports use its `tokens` child.
-Existing flat token files remain usable. Run `nuee init --force` to copy them
+Existing flat token files remain usable. Run `bolerish init --force` to copy them
 into `tokens` without deleting the originals or overwriting customized tokens.
 
 JSON is an installation default, not a live user-settings store. Runtime font
@@ -106,8 +157,8 @@ See [the AI export workflow](docs/README.md#ai-coding-agent-references).
 A representative inline search uses the supported local API:
 
 ```tsx
-import { Combobox, ComboboxInput } from "@/components/ui/combobox";
-import { Input } from "@/components/ui/input";
+import { Combobox, ComboboxInput } from "@bolerish/ui/combobox";
+import { Input } from "@bolerish/ui/input";
 
 export function InlineControls() {
   return (
@@ -131,3 +182,15 @@ export function InlineControls() {
 ```
 
 Typography tokens are exported as `typo`. The existing `typographyVars` name remains a compatibility export of the same variable group; do not apply two separate themes. `spacingRoleVars` provides purpose-based spacing. Configure `theme.unit` as `rem` (default) or `px`, and `theme.density` as `default`, `compact`, or a positive number up to 2. Pixel mode uses 1rem=16px and does not follow root font-size preferences.
+
+### Migration from Nuée
+
+Package imports now use `@bolerish/*`, and the executable is `bolerish`. The product
+name is **bolerish/ui**. Existing runtime `--nuee-*` variables and
+`data-nuee-motion` attributes remain supported so appearance preferences keep working.
+Merge updated tokens and copied components together if you customized their source.
+
+Use `Heading level={1}` through `level={6}` for headings; `size` remains independent
+of the HTML level. Use `P` for paragraphs with `variant="body"` (default),
+`"description"` or `"caption"`. Field labels and validation errors keep their own
+components and accessibility relationships.

@@ -1,7 +1,6 @@
 import { sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Progress } from "@bolerish/ui/progress";
 import * as stylex from "@stylexjs/stylex";
-
-import { Progress } from "@/components/ui/progress";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

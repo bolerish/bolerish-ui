@@ -1,7 +1,6 @@
 import { typo, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Skeleton } from "@bolerish/ui/skeleton";
 import * as stylex from "@stylexjs/stylex";
-
-import { Skeleton } from "@/components/ui/skeleton";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

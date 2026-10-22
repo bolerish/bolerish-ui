@@ -1,8 +1,5 @@
 import { typo, spacingVars } from "@bolerish/tokens/semantic.stylex";
-import { FolderIcon } from "@phosphor-icons/react";
-import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   Empty,
   EmptyContent,
@@ -10,7 +7,9 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/components/ui/empty";
+} from "@bolerish/ui/empty";
+import { FolderIcon } from "@phosphor-icons/react";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -1,6 +1,3 @@
-import { CheckIcon, ClockIcon, WarningIcon } from "@phosphor-icons/react";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   Timeline,
   TimelineContent,
@@ -9,7 +6,9 @@ import {
   TimelineItem,
   TimelineTime,
   TimelineTitle,
-} from "@/components/ui/timeline";
+} from "@bolerish/ui/timeline";
+import { CheckIcon, ClockIcon, WarningIcon } from "@phosphor-icons/react";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   componentWidth: {
     maxWidth: "28rem",

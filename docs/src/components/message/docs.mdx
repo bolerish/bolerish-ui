@@ -20,9 +20,9 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Composition"} />
 
 ```tsx
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Bubble } from "@/components/ui/bubble";
-import { Message, MessageAvatar, MessageContent, MessageFooter } from "@/components/ui/message";
+import { Avatar, AvatarFallback } from "@bolerish/ui/avatar";
+import { Bubble } from "@bolerish/ui/bubble";
+import { Message, MessageAvatar, MessageContent, MessageFooter } from "@bolerish/ui/message";
 
 <Message>
   <MessageAvatar>
@@ -39,6 +39,6 @@ import { Message, MessageAvatar, MessageContent, MessageFooter } from "@/compone
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add message" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />

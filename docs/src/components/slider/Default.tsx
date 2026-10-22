@@ -1,8 +1,7 @@
 import { sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Field, FieldDescription, FieldLabel } from "@bolerish/ui/field";
+import { Slider } from "@bolerish/ui/slider";
 import * as stylex from "@stylexjs/stylex";
-
-import { Field, FieldDescription, FieldLabel } from "@/components/ui/field";
-import { Slider } from "@/components/ui/slider";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

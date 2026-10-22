@@ -1,5 +1,3 @@
-import { CheckIcon } from "@phosphor-icons/react";
-
 import {
   Timeline,
   TimelineItem,
@@ -8,7 +6,8 @@ import {
   TimelineTitle,
   TimelineDescription,
   TimelineTime,
-} from "@/components/ui/timeline";
+} from "@bolerish/ui/timeline";
+import { CheckIcon } from "@phosphor-icons/react";
 
 export default function Activity() {
   return (

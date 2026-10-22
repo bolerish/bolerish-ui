@@ -1,7 +1,6 @@
 import { spacingVars, typo, colorVars, sizeVars } from "@bolerish/tokens/semantic.stylex";
+import { AspectRatio } from "@bolerish/ui/aspect-ratio";
 import * as stylex from "@stylexjs/stylex";
-
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

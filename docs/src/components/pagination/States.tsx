@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { PaginationLink } from "@bolerish/ui/pagination";
 import * as stylex from "@stylexjs/stylex";
-
-import { PaginationLink } from "@/components/ui/pagination";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

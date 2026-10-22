@@ -1,15 +1,14 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import { PaperclipIcon } from "@phosphor-icons/react";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   Attachment,
   AttachmentContent,
   AttachmentDescription,
   AttachmentMedia,
   AttachmentTitle,
-} from "@/components/ui/attachment";
-import { AttachmentGroup } from "@/components/ui/attachment";
+} from "@bolerish/ui/attachment";
+import { AttachmentGroup } from "@bolerish/ui/attachment";
+import { PaperclipIcon } from "@phosphor-icons/react";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

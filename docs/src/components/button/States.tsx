@@ -1,8 +1,7 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
+import { Spinner } from "@bolerish/ui/spinner";
 import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

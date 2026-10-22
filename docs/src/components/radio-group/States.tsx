@@ -1,8 +1,7 @@
 import { sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Label } from "@bolerish/ui/label";
+import { RadioGroup, RadioGroupItem } from "@bolerish/ui/radio-group";
 import * as stylex from "@stylexjs/stylex";
-
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 const layout = stylex.create({
   option: {
     alignItems: "center",

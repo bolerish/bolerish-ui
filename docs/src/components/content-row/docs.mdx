@@ -24,7 +24,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 
 ```tsx
 import { DotsThreeIcon, FolderIcon } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@bolerish/ui/button";
 import {
   ContentRow,
   ContentRowActions,
@@ -33,7 +33,7 @@ import {
   ContentRowGroup,
   ContentRowMedia,
   ContentRowTitle,
-} from "@/components/ui/content-row";
+} from "@bolerish/ui/content-row";
 
 <ContentRowGroup>
   <ContentRow variant="outline">
@@ -55,7 +55,7 @@ import {
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add content-row" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

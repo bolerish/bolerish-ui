@@ -1,12 +1,11 @@
 import { colorVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Banner, BannerContent, BannerTitle } from "@bolerish/ui/banner";
+import { Field, FieldLabel, FieldError } from "@bolerish/ui/field";
+import { Input } from "@bolerish/ui/input";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@bolerish/ui/tabs";
+import { Toggle } from "@bolerish/ui/toggle";
+import { ToggleGroup, ToggleGroupItem } from "@bolerish/ui/toggle-group";
 import * as stylex from "@stylexjs/stylex";
-
-import { Banner, BannerContent, BannerTitle } from "@/components/ui/banner";
-import { Field, FieldLabel, FieldError } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Toggle } from "@/components/ui/toggle";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const styles = stylex.create({
   root: { display: "grid", gap: spacingVars.space4 },

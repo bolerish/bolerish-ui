@@ -1,7 +1,6 @@
 import { spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { P } from "@bolerish/ui/p";
 import * as stylex from "@stylexjs/stylex";
-
-import { P } from "@/components/ui/p";
 
 const styles = stylex.create({
   group: { display: "flex", flexDirection: "column", gap: spacingVars.space3 },

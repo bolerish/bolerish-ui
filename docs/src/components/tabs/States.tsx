@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@bolerish/ui/tabs";
 export default function States() {
   return (
     <Tabs defaultValue="account" variant="segmented">

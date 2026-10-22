@@ -1,7 +1,6 @@
 import { typo, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Separator } from "@bolerish/ui/separator";
 import * as stylex from "@stylexjs/stylex";
-
-import { Separator } from "@/components/ui/separator";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

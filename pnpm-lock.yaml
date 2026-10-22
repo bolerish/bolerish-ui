@@ -6,9 +6,6 @@ settings:
 
 catalogs:
   2026-08-27-stable:
-    '@base-ui/react':
-      specifier: 1.7.0
-      version: 1.7.0
     '@phosphor-icons/react':
       specifier: 2.1.10
       version: 2.1.10
@@ -166,25 +163,28 @@ importers:
 
   packages/ui:
     dependencies:
+      '@base-ui/react':
+        specifier: ^1.7.0
+        version: 1.7.0(@date-fns/tz@1.5.0)(@types/react@19.2.18)(date-fns@4.4.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@bolerish/cli':
         specifier: workspace:*
         version: link:../cli
       '@bolerish/tokens':
         specifier: workspace:*
         version: link:../tokens
-    devDependencies:
-      '@base-ui/react':
-        specifier: catalog:2026-08-27-stable
-        version: 1.7.0(@date-fns/tz@1.5.0)(@types/react@19.2.18)(date-fns@4.4.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@daypicker/react':
         specifier: ^10.0.1
         version: 10.0.1(@types/react@19.2.18)(react@19.2.8)
       '@phosphor-icons/react':
-        specifier: catalog:2026-08-27-stable
+        specifier: ^2.1.10
         version: 2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@stylexjs/stylex':
-        specifier: catalog:2026-08-27-stable
+        specifier: ^0.19.0
         version: 0.19.0
+      embla-carousel-react:
+        specifier: ^8.6.0
+        version: 8.6.0(react@19.2.8)
+    devDependencies:
       '@stylexjs/unplugin':
         specifier: catalog:2026-08-27-stable
         version: 0.19.0(unplugin@2.3.11)
@@ -200,9 +200,6 @@ importers:
       babel-plugin-react-compiler:
         specifier: catalog:2026-08-27-stable
         version: 1.0.0
-      embla-carousel-react:
-        specifier: ^8.6.0
-        version: 8.6.0(react@19.2.8)
       esbuild:
         specifier: 0.28.2
         version: 0.28.2

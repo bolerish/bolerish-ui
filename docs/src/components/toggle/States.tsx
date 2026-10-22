@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Toggle } from "@bolerish/ui/toggle";
 import * as stylex from "@stylexjs/stylex";
-
-import { Toggle } from "@/components/ui/toggle";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

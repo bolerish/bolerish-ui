@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Switch } from "@bolerish/ui/switch";
 import * as stylex from "@stylexjs/stylex";
-
-import { Switch } from "@/components/ui/switch";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Kbd, KbdGroup } from "@bolerish/ui/kbd";
 import * as stylex from "@stylexjs/stylex";
-
-import { Kbd, KbdGroup } from "@/components/ui/kbd";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

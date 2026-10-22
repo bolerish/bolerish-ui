@@ -1,7 +1,6 @@
 import { sizeVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Textarea } from "@bolerish/ui/textarea";
 import * as stylex from "@stylexjs/stylex";
-
-import { Textarea } from "@/components/ui/textarea";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

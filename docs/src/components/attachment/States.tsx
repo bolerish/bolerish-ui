@@ -1,7 +1,4 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
-import { DownloadSimpleIcon, FileIcon, XIcon } from "@phosphor-icons/react";
-import * as stylex from "@stylexjs/stylex";
-
 import {
   Attachment,
   AttachmentAction,
@@ -10,7 +7,9 @@ import {
   AttachmentDescription,
   AttachmentMedia,
   AttachmentTitle,
-} from "@/components/ui/attachment";
+} from "@bolerish/ui/attachment";
+import { DownloadSimpleIcon, FileIcon, XIcon } from "@phosphor-icons/react";
+import * as stylex from "@stylexjs/stylex";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

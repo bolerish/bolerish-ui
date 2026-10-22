@@ -1,12 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@bolerish/ui/input-otp";
 import * as stylex from "@stylexjs/stylex";
-
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

@@ -1,5 +1,3 @@
-import { fileURLToPath } from "node:url";
-
 import type { StorybookConfig } from "@storybook/react-vite";
 import stylex from "@stylexjs/unplugin/vite";
 import reactCompiler from "babel-plugin-react-compiler";
@@ -29,13 +27,6 @@ const config: StorybookConfig = {
   async viteFinal(config) {
     return {
       ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve?.alias,
-          "@/components/ui": fileURLToPath(new URL("../../packages/ui/src", import.meta.url)),
-        },
-      },
       plugins: [stylex(stylexCompilerOptions), ...(config.plugins ?? [])],
     };
   },

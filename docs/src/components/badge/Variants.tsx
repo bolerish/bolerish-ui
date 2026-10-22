@@ -1,7 +1,6 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Badge } from "@bolerish/ui/badge";
 import * as stylex from "@stylexjs/stylex";
-
-import { Badge } from "@/components/ui/badge";
 const layout = stylex.create({
   preview: {
     alignItems: "center",

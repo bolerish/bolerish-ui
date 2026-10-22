@@ -21,7 +21,7 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 
 ```tsx
 import * as stylex from "@stylexjs/stylex"
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@bolerish/ui/skeleton"
 
 const styles = stylex.create({
   title: { height: "1rem", width: "45%" },
@@ -36,6 +36,6 @@ const styles = stylex.create({
 
 <LocalizedMarkdown text={"## Installation"} />
 
-<CodeBlock code="pnpm dlx @bolerish/ui add skeleton" language="bash" />
+<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

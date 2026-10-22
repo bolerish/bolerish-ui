@@ -1,9 +1,8 @@
 import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
+import { ButtonGroup } from "@bolerish/ui/button-group";
 import { CaretLeftIcon, DotsThreeIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
-
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
 const layout = stylex.create({
   preview: {
     alignItems: "center",
