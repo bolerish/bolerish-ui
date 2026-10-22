@@ -191,6 +191,8 @@ name is **bolerish/ui**. Existing runtime `--nuee-*` variables and
 Merge updated tokens and copied components together if you customized their source.
 
 Use `Heading level={1}` through `level={6}` for headings; `size` remains independent
-of the HTML level. Use `P` for paragraphs with `variant="body"` (default),
+of the HTML level. Use `Paragraph` from `@bolerish/ui/paragraph` for paragraphs with `variant="body"` (default),
 `"description"` or `"caption"`. Field labels and validation errors keep their own
 components and accessibility relationships.
+
+`P` and `PProps` remain compatibility aliases for `Paragraph` and `ParagraphProps`.

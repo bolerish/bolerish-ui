@@ -5,7 +5,7 @@ import {
   spacingVars,
   typo,
 } from "@bolerish/tokens/semantic.stylex";
-import { P } from "@bolerish/ui/p";
+import { Paragraph } from "@bolerish/ui/paragraph";
 import * as stylex from "@stylexjs/stylex";
 import { isValidElement, type ReactNode } from "react";
 import type { Components } from "react-markdown";
@@ -110,7 +110,9 @@ export const documentationComponents: Components = {
       {children}
     </h3>
   ),
-  p: ({ node: _node, ...props }) => <P {...props} variant="description" xstyle={styles.p} />,
+  p: ({ node: _node, ...props }) => (
+    <Paragraph {...props} variant="description" xstyle={styles.p} />
+  ),
   ul: ({ node: _node, ...props }) => (
     <ul {...props} {...stylex.props(styles.list, styles.unordered)} />
   ),

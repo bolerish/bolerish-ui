@@ -80,7 +80,8 @@
     "./tooltip": "./dist/tooltip.js",
     "./heading": "./dist/heading.js",
     "./p": "./dist/p.js",
-    "./theme": "./dist/theme.js"
+    "./theme": "./dist/theme.js",
+    "./paragraph": "./dist/paragraph.js"
   },
   "publishConfig": {
     "access": "public"

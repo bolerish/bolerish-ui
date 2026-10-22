@@ -45,3 +45,11 @@ test("button renders caller content directly", () => {
   assert.match(html, /<\/svg>Save<\/button>/);
   assert.doesNotMatch(html, /<span/);
 });
+
+test("Paragraph is the canonical component and P remains a compatible alias", async () => {
+  const { Paragraph, P } = await import("../dist/index.js");
+  assert.equal(typeof Paragraph, "function");
+  assert.equal(P, Paragraph);
+  const entry = await import("../dist/paragraph.js");
+  assert.equal(entry.Paragraph, Paragraph);
+});

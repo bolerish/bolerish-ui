@@ -1,5 +1,5 @@
 import { spacingVars } from "@bolerish/tokens/semantic.stylex";
-import { P } from "@bolerish/ui/p";
+import { Paragraph } from "@bolerish/ui/paragraph";
 import * as stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({
@@ -9,11 +9,11 @@ const styles = stylex.create({
 export default function Default() {
   return (
     <div {...stylex.props(styles.group)}>
-      <P>Keep every project update in one place.</P>
-      <P variant="description">
+      <Paragraph>Keep every project update in one place.</Paragraph>
+      <Paragraph variant="description">
         Choose which notifications you receive. You can change these preferences at any time.
-      </P>
-      <P variant="caption">Last updated today</P>
+      </Paragraph>
+      <Paragraph variant="caption">Last updated today</Paragraph>
     </div>
   );
 }

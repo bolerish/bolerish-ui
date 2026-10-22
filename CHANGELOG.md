@@ -1,5 +1,8 @@
 ## Unreleased
 
+- Use Paragraph for body, description and caption text. P remains a compatible
+    alias, including its existing package and source-copy paths.
+
 The package is now named `@bolerish/ui`. Versions v0.9.1 and earlier below were
 released as `@nuee/ui`; their release notes remain part of this project history.
 

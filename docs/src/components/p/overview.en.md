@@ -1,3 +1,3 @@
 # P
 
-Display body copy, supporting descriptions and captions as semantic paragraphs.
+Compatibility alias for Paragraph. Use Paragraph in new code.
