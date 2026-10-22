@@ -40,7 +40,7 @@ for selection and drop backgrounds, foregrounds and borders. `bgSubtle` alone do
 
 ## Palette
 
-Use cool near-black surfaces and a distinct primary action. Light surfaces and essential control boundaries preserve contrast for reading and interaction.
+Use cool near-black surfaces and monochrome Zinc primary actions. Light surfaces and essential control boundaries preserve contrast for reading and interaction.
 
 | Role                   | Value   | Use                                         |
 | ---------------------- | ------- | ------------------------------------------- |
@@ -52,13 +52,14 @@ Use cool near-black surfaces and a distinct primary action. Light surfaces and e
 | Light canvas           | #F5F6F8 | Lowest light surface                        |
 | Light content          | #FFFFFF | Cards and inputs                            |
 | Light grouping         | #E5E5E6 | Subtle groups and dividers                  |
-| Primary action         | #E4F222 | Shared acid-lime accent in both modes       |
-| Primary hover          | #D2DF20 | A slightly lower-lightness lime             |
+| Light primary action   | #18181B | Dark button on a light surface              |
+| Light primary label    | #FFFFFF | Light label on a dark button                |
+| Dark primary action    | #E4E4E7 | Light button on a dark surface              |
+| Dark primary label     | #18181B | Dark label on a light button                |
+| Light primary hover    | #3F3F46 | Dark button hover                           |
+| Dark primary hover     | #D4D4D8 | Light button hover                          |
 
-Reserve lime for primary actions and current progress rather than large fields or
-all secondary buttons. Primary labels use #08090A. On light surfaces, a dark
-button boundary preserves the outline. Information, success, warning and error
-colors retain their feedback meanings rather than becoming decorative accents.
+Distinguish primary actions and current progress through monochrome contrast. Information, success, warning and error colors communicate their respective states.
 
 Essential input boundaries use #81868F in light mode and #62666D in dark mode.
 Decorative strokeDefault does not replace them. Dark selected boundaries use

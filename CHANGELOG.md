@@ -4,9 +4,9 @@
     Installation lives in Getting Started; duplicated source examples and old
     design proposals have been removed.
 
-- Use cool near-black dark surfaces and a focused acid-lime primary action,
-    with readable light surfaces and control boundaries. Feedback colors keep
-    their existing meanings.
+- Use cool near-black dark surfaces and monochrome Zinc primary actions.
+    Primary buttons use dark fills in light mode and light fills in dark mode.
+    Control boundaries preserve contrast; feedback colors retain their meanings.
 
 - Customize styled components with className and inline style without losing
     their built-in styles. Existing xstyle restrictions and styling targets

@@ -30,7 +30,7 @@ export const colorVars = stylex.defineVars({
   fgTertiary: colorPalette.steel,
   fgDisabled: colorPalette.silver,
   fgInverse: colorPalette.chalk,
-  fgOnActionPrimary: colorPalette.carbon,
+  fgOnActionPrimary: colorPalette.white,
   fgOnActionDestructive: colorPalette.neutral0,
   fgAction: colorPalette.carbon,
   fgFeedbackInfo: colorPalette.blueSolid,
@@ -44,7 +44,7 @@ export const colorVars = stylex.defineVars({
   /** Exact insertion position during drag; pair with a position label. */
   strokeDropIndicator: colorPalette.carbon,
   strokeFocus: colorPalette.iron,
-  strokeAction: colorPalette.carbon,
+  strokeAction: colorPalette.primarySolid,
   strokeFeedbackInfo: colorPalette.blueMuted,
   strokeFeedbackSuccess: colorPalette.greenMuted,
   strokeFeedbackWarning: colorPalette.yellowMuted,
