@@ -4,7 +4,6 @@ import { Guideline } from "../../documentation/Guideline";
 import guidelines from "./guidelines.md?raw";
 import english from "./guidelines.en.md?raw";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
 import { ComponentPreview } from "../../documentation/ComponentPreview";
@@ -16,39 +15,5 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="alert-dialog--Default" source={DefaultSource} isolated height={360} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@bolerish/ui/alert-dialog";
-
-<AlertDialog>
-  <AlertDialogTrigger>Delete project</AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Delete this project?</AlertDialogTitle>
-      <AlertDialogDescription>A deleted project cannot be restored.</AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction>Delete</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />

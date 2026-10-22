@@ -1,5 +1,9 @@
 ## Unreleased
 
+- Read package usage examples and concise prop choices on component pages.
+    Installation lives in Getting Started; duplicated source examples and old
+    design proposals have been removed.
+
 - Use cool near-black dark surfaces and a focused acid-lime primary action,
     with readable light surfaces and control boundaries. Feedback colors keep
     their existing meanings.

@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import StatesSource from "./States.tsx?raw";
 import VariantsSource from "./Variants.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
@@ -18,35 +17,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="tabs--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@bolerish/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@bolerish/ui/tabs";
-
-<Tabs defaultValue="overview">
-  <TabsList>
-    <TabsTrigger value="overview">Overview</TabsTrigger>
-    <TabsTrigger value="analytics">Analytics</TabsTrigger>
-    <TabsTrigger value="reports">Reports</TabsTrigger>
-    <TabsTrigger value="settings">Settings</TabsTrigger>
-  </TabsList>
-  <TabsContent value="overview">
-    <Card>
-      <CardHeader>
-        <CardTitle>Overview</CardTitle>
-        <CardDescription>View key metrics and recent activity.</CardDescription>
-      </CardHeader>
-      <CardContent>You have 12 active projects and 3 pending tasks.</CardContent>
-    </Card>
-  </TabsContent>
-</Tabs>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

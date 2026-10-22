@@ -1,5 +1,11 @@
 ## Usage guidelines
 
+### Props
+
+| Prop   | Default | Values     | Meaning                                |
+| ------ | ------- | ---------- | -------------------------------------- |
+| `size` | `md`    | `sm`, `md` | Changes track and thumb size together. |
+
 ### When to use
 
 Use `Switch` for an on/off setting whose effect is immediate, such as enabling notifications. Use [Checkbox](?path=/docs/components-checkbox--docs) for a choice submitted with a form or membership in a selection group.

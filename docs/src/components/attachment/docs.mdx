@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import StatesSource from "./States.tsx?raw";
 import SizesSource from "./Sizes.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
@@ -18,33 +17,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="attachment--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { PaperclipIcon } from "@phosphor-icons/react";
-import {
-  Attachment,
-  AttachmentContent,
-  AttachmentDescription,
-  AttachmentMedia,
-  AttachmentTitle,
-} from "@bolerish/ui/attachment";
-
-<Attachment>
-  <AttachmentMedia>
-    <PaperclipIcon />
-  </AttachmentMedia>
-  <AttachmentContent>
-    <AttachmentTitle>meeting-notes.txt</AttachmentTitle>
-    <AttachmentDescription>18 KB</AttachmentDescription>
-  </AttachmentContent>
-</Attachment>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

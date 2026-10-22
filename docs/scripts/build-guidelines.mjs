@@ -3,6 +3,7 @@ import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 const source = new URL("../src/foundations/", import.meta.url);
 const output = new URL("../public/", import.meta.url);
 const checking = process.argv.includes("--check");
+if (!checking) await rm(new URL("llms-full.en.txt", output), { force: true });
 async function emitFile(path, content) {
   if (checking) {
     const actual = await readFile(path, "utf8");
@@ -52,6 +53,9 @@ for (const [label, directory, names] of [
 const installation = await readFile(new URL("../../README.md", import.meta.url), "utf8");
 await emitFile(new URL("installation.md", output), installation);
 const catalog = [];
+catalog.push(
+  "- [p](../api/paragraph.en.md): Compatibility alias for Paragraph. Use Paragraph in new code.",
+);
 
 if (!checking) await rm(new URL("guidelines/", output), { recursive: true, force: true });
 if (!checking) await mkdir(new URL("guidelines/", output), { recursive: true });
@@ -107,7 +111,6 @@ for (const locale of ["ko", "en"]) {
   if (locale === "en") {
     const full = entries.join("\n\n---\n\n");
     await emitFile(new URL("llms-full.txt", output), full);
-    await emitFile(new URL("llms-full.en.txt", output), full);
   }
 }
 await emitFile(

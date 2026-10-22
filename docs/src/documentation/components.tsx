@@ -60,6 +60,7 @@ const styles = stylex.create({
     lineHeight: typo.lineHeightNormal,
   },
   selectionTable: { tableLayout: "fixed" },
+  propsTable: { minWidth: "44rem" },
   situationColumn: { width: "30%" },
   choiceColumn: { width: "30%" },
   codeColumn: { width: "40%" },
@@ -73,6 +74,7 @@ const styles = stylex.create({
   },
   th: { backgroundColor: colorVars.bgSubtle, fontWeight: typo.fontWeightSemibold },
   code: {
+    whiteSpace: "nowrap",
     fontFamily: "var(--nuee-font-code)",
     backgroundColor: colorVars.bgSubtle,
     color: colorVars.fgPrimary,
@@ -147,12 +149,19 @@ export const documentationComponents: Components = {
     const isSelectionTable =
       headers.join("|") === "사용 상황|권장 선택|적용 코드" ||
       headers.join("|") === "Situation|Recommended choice|Code";
+    const isPropsTable =
+      headers.join("|") === "속성|기본값|값|용도" ||
+      headers.join("|") === "Prop|Default|Values|Meaning";
 
     return (
       <div {...stylex.props(styles.scroll)}>
         <table
           {...props}
-          {...stylex.props(styles.table, isSelectionTable && styles.selectionTable)}
+          {...stylex.props(
+            styles.table,
+            isSelectionTable && styles.selectionTable,
+            isPropsTable && styles.propsTable,
+          )}
         >
           {isSelectionTable ? (
             <colgroup>

@@ -1,14 +1,8 @@
-import { spacingVars } from "@bolerish/tokens/semantic.stylex";
 import { Paragraph } from "@bolerish/ui/paragraph";
-import * as stylex from "@stylexjs/stylex";
-
-const styles = stylex.create({
-  group: { display: "flex", flexDirection: "column", gap: spacingVars.space3 },
-});
 
 export default function Default() {
   return (
-    <div {...stylex.props(styles.group)}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
       <Paragraph>Keep every project update in one place.</Paragraph>
       <Paragraph variant="description">
         Choose which notifications you receive. You can change these preferences at any time.

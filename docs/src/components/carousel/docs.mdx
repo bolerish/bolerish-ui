@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import PreviewSource from "./Preview.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
@@ -21,13 +20,5 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Neighboring preview"} />
 
 <ComponentPreview name="carousel--Preview" source={PreviewSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-<CodeBlock code={DefaultSource} language="tsx" />
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

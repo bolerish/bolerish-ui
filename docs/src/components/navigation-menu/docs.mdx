@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
 import { ComponentPreview } from "../../documentation/ComponentPreview";
@@ -16,39 +15,5 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="navigation-menu--Default" source={DefaultSource} isolated height={360} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@bolerish/ui/navigation-menu";
-
-<NavigationMenu>
-  <NavigationMenuList>
-    <NavigationMenuItem>
-      <NavigationMenuTrigger>Product</NavigationMenuTrigger>
-      <NavigationMenuContent>
-        <NavigationMenuLink href="#">Design tokens</NavigationMenuLink>
-        <NavigationMenuLink href="#">Components</NavigationMenuLink>
-      </NavigationMenuContent>
-    </NavigationMenuItem>
-    <NavigationMenuItem>
-      <NavigationMenuLink href="#">Documentation</NavigationMenuLink>
-    </NavigationMenuItem>
-  </NavigationMenuList>
-  <NavigationMenuViewport />
-</NavigationMenu>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

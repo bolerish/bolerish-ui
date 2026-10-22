@@ -1,4 +1,3 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import { Button } from "@bolerish/ui/button";
 import {
   Popover,
@@ -8,51 +7,16 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from "@bolerish/ui/popover";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
 export default function Default() {
   return (
-    <div {...stylex.props(layout.preview)}>
-      <Popover>
-        <PopoverTrigger render={<Button variant="secondary">Align left</Button>} />
-        <PopoverContent>
-          <PopoverHeader>
-            <PopoverTitle>Align left</PopoverTitle>
-            <PopoverDescription>Align the popover start with the trigger.</PopoverDescription>
-          </PopoverHeader>
-        </PopoverContent>
-      </Popover>
-
-      <Popover>
-        <PopoverTrigger render={<Button variant="secondary">Align center</Button>} />
-        <PopoverContent align="center">
-          <PopoverHeader>
-            <PopoverTitle>Align center</PopoverTitle>
-            <PopoverDescription>Align the popover center with the trigger.</PopoverDescription>
-          </PopoverHeader>
-        </PopoverContent>
-      </Popover>
-
-      <Popover>
-        <PopoverTrigger render={<Button variant="secondary">Align right</Button>} />
-        <PopoverContent align="end">
-          <PopoverHeader>
-            <PopoverTitle>Align right</PopoverTitle>
-            <PopoverDescription>Align the popover end with the trigger.</PopoverDescription>
-          </PopoverHeader>
-        </PopoverContent>
-      </Popover>
-    </div>
+    <Popover>
+      <PopoverTrigger render={<Button variant="secondary">Align left</Button>} />
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Align left</PopoverTitle>
+          <PopoverDescription>Align the popover start with the trigger.</PopoverDescription>
+        </PopoverHeader>
+      </PopoverContent>
+    </Popover>
   );
 }

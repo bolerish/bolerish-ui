@@ -1,5 +1,11 @@
 ## Usage guidelines
 
+### Props
+
+| Prop                        | Default   | Values                                   | Meaning                                                                            |
+| --------------------------- | --------- | ---------------------------------------- | ---------------------------------------------------------------------------------- |
+| `TimelineIndicator.variant` | `default` | `default`, `active`, `complete`, `error` | Distinguishes pending, current, completed, and failed steps. Include a text label. |
+
 Use it for history with meaningful ordering and time context. Use a plain list when sequence adds no meaning.
 
 > State clearly whether the newest event appears first or last, and keep that order consistent.

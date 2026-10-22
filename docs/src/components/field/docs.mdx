@@ -4,7 +4,6 @@ import { Guideline } from "../../documentation/Guideline";
 import guidelines from "./guidelines.md?raw";
 import english from "./guidelines.en.md?raw";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
 import { ComponentPreview } from "../../documentation/ComponentPreview";
@@ -16,57 +15,5 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="field--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { Checkbox } from "@bolerish/ui/checkbox";
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-  FieldTitle,
-} from "@bolerish/ui/field";
-import { Input } from "@bolerish/ui/input";
-
-<FieldSet>
-  <FieldLegend>Payment details</FieldLegend>
-  <p>Payment details are encrypted and handled securely.</p>
-  <FieldGroup>
-    <Field>
-      <FieldLabel htmlFor="cardholder">Cardholder name</FieldLabel>
-      <Input id="cardholder" autoComplete="cc-name" defaultValue="Jordan Lee" />
-    </Field>
-    <Field invalid>
-      <FieldLabel htmlFor="card-number">Card number</FieldLabel>
-      <Input
-        id="card-number"
-        aria-invalid
-        autoComplete="cc-number"
-        defaultValue="1234 5678 9012"
-        inputMode="numeric"
-      />
-      <FieldDescription>Enter all 16 digits.</FieldDescription>
-      <FieldError>The card number is incomplete.</FieldError>
-    </Field>
-    <Field orientation="horizontal">
-      <Checkbox id="billing-address" defaultChecked />
-      <FieldContent>
-        <FieldTitle>Billing address is the same as shipping address.</FieldTitle>
-        <FieldDescription>Clear this option to use a different billing address.</FieldDescription>
-      </FieldContent>
-    </Field>
-  </FieldGroup>
-</FieldSet>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />

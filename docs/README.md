@@ -3,9 +3,13 @@
 ## Component examples
 
 Keep `docs.mdx` and React examples together in `src/components/{component}/`.
-Pass the example's `?raw` import to `ComponentPreview` to display its source.
+Pass the example's `?raw` import to `ComponentPreview` to display its usage code.
 Import components from `@bolerish/ui/{component}` so examples exercise the built package.
 Use `isolated height={360}` for examples that need an overlay boundary.
+Keep preview-only layout in `ComponentPreview` and the isolated preview canvas.
+Show only imports, app state and composition needed to use the component in examples.
+Use the installed `className`/`style` APIs for simple placement; reserve `xstyle`
+for examples that actually demonstrate StyleX customization.
 
 ## Foundations
 
@@ -14,8 +18,8 @@ These files supply localized user documentation. Agent entry points, API links
 and full LLM guidelines use the canonical `*.en.md` sources exclusively.
 
 The development and build scripts generate `public/llms.txt`, `llms-full.txt`,
-`llms-full.en.txt`, `bolerish-for-llms.md`, and per-topic Markdown. Both full LLM
-files contain identical English content; Korean per-topic files remain available
+`bolerish-for-llms.md`, and per-topic Markdown. The full LLM
+file contains canonical English content; Korean per-topic files remain available
 for the user documentation. To regenerate them during development,
 run this from `docs/`:
 
@@ -32,9 +36,10 @@ Foundation selection guides follow: introduction → Selection guidelines → Ex
 beside the decision they qualify. Accessibility uses Design guidelines; writing
 pages use Writing guidelines. Getting Started remains a numbered walkthrough.
 
-Component pages follow: introduction → Basic example → Composition →
-Installation → Usage guidelines → More examples. Omit sections that have no additional content.
-Keep detailed usage guidance after the example and composition.
+Component pages follow: introduction → Basic example → Usage guidelines →
+More examples. Keep installation in Getting Started instead of repeating it on
+every page. Explain supported variants, sizes and behavior with their defaults
+and intended use; do not reproduce component implementations or inherited DOM props.
 
 Use consistent headings for tables with the same purpose:
 

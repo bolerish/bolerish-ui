@@ -1,5 +1,12 @@
 ## Usage guidelines
 
+### Props
+
+| Prop       | Default | Values                | Meaning                                                                                      |
+| ---------- | ------- | --------------------- | -------------------------------------------------------------------------------------------- |
+| `size`     | `md`    | `sm`, `md`            | Controls notice spacing and density.                                                         |
+| `announce` | Unset   | `polite`, `assertive` | Announces a dynamically added or updated notice. Reserve assertive for urgent interruptions. |
+
 ### When to use
 
 Use `Banner` for a page or section condition users need to keep in view, such as a connection problem or an upcoming interruption. Place it near the affected area. Use [Toast](?path=/docs/components-toast--docs) for a brief result and `FieldError` for a specific invalid input.

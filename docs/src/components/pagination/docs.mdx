@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import StatesSource from "./States.tsx?raw";
 import SizesSource from "./Sizes.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
@@ -18,49 +17,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="pagination--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from "@bolerish/ui/pagination";
-
-<Pagination>
-  <PaginationContent>
-    <PaginationItem>
-      <PaginationPrevious href="#" />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#">1</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#" isActive>
-        2
-      </PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="#">3</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationEllipsis />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationNext href="#" />
-    </PaginationItem>
-  </PaginationContent>
-</Pagination>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
 import { ComponentPreview } from "../../documentation/ComponentPreview";
@@ -16,43 +15,5 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="button-group--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { Button } from "@bolerish/ui/button";
-import { ButtonGroup } from "@bolerish/ui/button-group";
-import { CaretLeftIcon, DotsThreeIcon } from "@phosphor-icons/react";
-
-<div>
-  <ButtonGroup aria-label="Navigate back">
-    <Button size="icon-sm" variant="secondary" aria-label="Go back">
-      <CaretLeftIcon aria-hidden="true" />
-    </Button>
-  </ButtonGroup>
-
-  <ButtonGroup aria-label="Message actions">
-    <Button size="sm" variant="secondary">
-      Archive
-    </Button>
-    <Button size="sm" variant="secondary">
-      Report
-    </Button>
-  </ButtonGroup>
-
-  <ButtonGroup aria-label="More actions">
-    <Button size="sm" variant="secondary">
-      Snooze
-    </Button>
-    <Button size="icon-sm" variant="secondary" aria-label="More actions">
-      <DotsThreeIcon aria-hidden="true" />
-    </Button>
-  </ButtonGroup>
-</div>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

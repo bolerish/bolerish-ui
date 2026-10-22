@@ -1,14 +1,8 @@
-import { spacingVars } from "@bolerish/tokens/semantic.stylex";
 import { Heading } from "@bolerish/ui/heading";
-import * as stylex from "@stylexjs/stylex";
-
-const styles = stylex.create({
-  group: { display: "flex", flexDirection: "column", gap: spacingVars.space4 },
-});
 
 export default function Default() {
   return (
-    <div {...stylex.props(styles.group)}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
       <Heading level={1} size="page">
         Project settings
       </Heading>

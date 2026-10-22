@@ -1,11 +1,4 @@
 import {
-  colorVars,
-  radiusVars,
-  sizeVars,
-  spacingVars,
-  typo,
-} from "@bolerish/tokens/semantic.stylex";
-import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
@@ -13,57 +6,22 @@ import {
   ContextMenuShortcut,
   ContextMenuTrigger,
 } from "@bolerish/ui/context-menu";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-  column: {
-    alignItems: "stretch",
-    flexDirection: "column",
-  },
-  contextTarget: {
-    alignItems: "center",
-    borderColor: colorVars.strokeDefault,
-    borderRadius: radiusVars.md,
-    borderStyle: "dashed",
-    borderWidth: sizeVars.stroke,
-    color: colorVars.fgSecondary,
-    display: "flex",
-    fontSize: typo.fontSizeSm,
-    height: "10rem",
-    justifyContent: "center",
-    maxWidth: "28rem",
-    width: "100%",
-  },
-});
 export default function Default() {
   return (
-    <div {...stylex.props(layout.preview, layout.column)}>
-      <ContextMenu>
-        <ContextMenuTrigger {...stylex.props(layout.contextTarget)}>
-          project-proposal.pdf
-        </ContextMenuTrigger>
-        <ContextMenuContent>
-          <ContextMenuItem>
-            Preview<ContextMenuShortcut>Space</ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuItem>
-            Rename<ContextMenuShortcut>⌘R</ContextMenuShortcut>
-          </ContextMenuItem>
-          <ContextMenuSeparator />
-          <ContextMenuItem>
-            Download<ContextMenuShortcut>⌘D</ContextMenuShortcut>
-          </ContextMenuItem>
-        </ContextMenuContent>
-      </ContextMenu>
-    </div>
+    <ContextMenu>
+      <ContextMenuTrigger>project-proposal.pdf</ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem>
+          Preview<ContextMenuShortcut>Space</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuItem>
+          Rename<ContextMenuShortcut>⌘R</ContextMenuShortcut>
+        </ContextMenuItem>
+        <ContextMenuSeparator />
+        <ContextMenuItem>
+          Download<ContextMenuShortcut>⌘D</ContextMenuShortcut>
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 }

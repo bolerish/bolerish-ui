@@ -4,7 +4,6 @@ import { Guideline } from "../../documentation/Guideline";
 import guidelines from "./guidelines.md?raw";
 import english from "./guidelines.en.md?raw";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import SizesSource from "./Sizes.tsx?raw";
 import MessagesSource from "./Messages.tsx?raw";
 import CompactGuidanceSource from "./CompactGuidance.tsx?raw";
@@ -19,16 +18,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="banner--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-<LocalizedMarkdown text={"Display a persistent notice with a title and supporting description."} />
-
-<CodeBlock code={DefaultSource} language="tsx" />
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />
 

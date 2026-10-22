@@ -1,5 +1,14 @@
 ## Usage guidelines
 
+### Props
+
+| Prop      | Default   | Values                                                                  | Meaning                                                                      |
+| --------- | --------- | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `variant` | `primary` | `primary`, `secondary`, `outline`, `ghost`, `destructive`               | Primary, supporting, outlined, minimal, or destructive action.               |
+| `size`    | `md`      | `sm`, `md`, `lg`, `icon-xs`, `icon-sm`, `icon-md`, `icon-lg`, `icon-xl` | Text button height or icon-only dimensions. Icon buttons need an aria-label. |
+| `shape`   | `default` | `default`, `square`, `circle`                                           | Default corners, square, or circular outline.                                |
+| `align`   | `center`  | `start`, `center`, `end`, `space-between`                               | Aligns content inside the button.                                            |
+
 ### When to use
 
 Use `Button` to submit, save, create, or change something in the current task. For navigation to another page or a downloadable resource, use a link. Use `Checkbox` or `Switch` to represent a persistent choice; a pressed-looking button alone does not explain that state.

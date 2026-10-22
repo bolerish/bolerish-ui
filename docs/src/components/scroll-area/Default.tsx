@@ -1,28 +1,16 @@
-import { typo, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import { ScrollArea, ScrollAreaViewport, ScrollAreaContent } from "@bolerish/ui/scroll-area";
 import { Separator } from "@bolerish/ui/separator";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
-const styles = stylex.create({
+import type { CSSProperties } from "react";
+
+const styles = {
   viewport: {
     height: "14rem",
     width: "20rem",
   },
   item: {
-    paddingBlock: spacingVars.space3,
+    paddingBlock: "0.75rem",
   },
-});
+} satisfies Record<string, CSSProperties>;
 const activities = [
   "Completed the deployment checklist.",
   "Sent a design review request.",
@@ -39,19 +27,17 @@ const activities = [
 ];
 export default function Default() {
   return (
-    <div {...stylex.props(layout.preview)}>
-      <ScrollArea xstyle={styles.viewport}>
-        <ScrollAreaViewport>
-          <ScrollAreaContent>
-            {activities.map((activity, index) => (
-              <div key={index}>
-                <div {...stylex.props(styles.item)}>{activity}</div>
-                {index < 11 ? <Separator /> : null}
-              </div>
-            ))}
-          </ScrollAreaContent>
-        </ScrollAreaViewport>
-      </ScrollArea>
-    </div>
+    <ScrollArea style={styles.viewport}>
+      <ScrollAreaViewport>
+        <ScrollAreaContent>
+          {activities.map((activity, index) => (
+            <div key={index}>
+              <div style={styles.item}>{activity}</div>
+              {index < 11 ? <Separator /> : null}
+            </div>
+          ))}
+        </ScrollAreaContent>
+      </ScrollAreaViewport>
+    </ScrollArea>
   );
 }

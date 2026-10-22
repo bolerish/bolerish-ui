@@ -1,19 +1,6 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import { Button } from "@bolerish/ui/button";
 import { toast, Toaster } from "@bolerish/ui/toast";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
+
 export default function States() {
   const args = {
     position: "bottom-right" as const,
@@ -26,7 +13,7 @@ export default function States() {
           children: "Dismiss all",
         }}
       />
-      <div {...stylex.props(layout.preview)}>
+      <>
         <Button
           variant="secondary"
           onClick={() =>
@@ -73,7 +60,7 @@ export default function States() {
         >
           Save again
         </Button>
-      </div>
+      </>
     </>
   );
 }

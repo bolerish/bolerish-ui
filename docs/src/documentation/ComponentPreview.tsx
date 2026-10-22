@@ -1,4 +1,10 @@
-import { colorVars, radiusVars, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import {
+  colorVars,
+  radiusVars,
+  sizeVars,
+  spacingVars,
+  typo,
+} from "@bolerish/tokens/semantic.stylex";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@bolerish/ui/tabs";
 import { DocsContext } from "@storybook/addon-docs/blocks";
 import * as stylex from "@stylexjs/stylex";
@@ -21,7 +27,16 @@ const examples = Object.fromEntries(
 );
 
 const styles = stylex.create({
-  content: { padding: spacingVars.space6 },
+  content: {
+    alignItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    fontSize: typo.fontSizeSm,
+    gap: spacingVars.space3,
+    justifyContent: "center",
+    lineHeight: typo.lineHeightNormal,
+    padding: spacingVars.space6,
+  },
   frame: { borderWidth: 0, display: "block", height: "100%", width: "100%" },
   root: { marginBlock: spacingVars.space6, minWidth: 0 },
   preview: {

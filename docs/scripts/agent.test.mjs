@@ -20,25 +20,10 @@ test("agent catalog covers the registry and all its linked references exist", as
   }
 });
 
-test("input reference and configuration source contain the current canonical declarations", async () => {
-  for (const [reference, source] of [
-    ["api/input.en.md", "../../packages/ui/src/input.tsx"],
-    ["api/configuration-config.ts.md", "../../packages/cli/src/config.ts"],
-    ["api/tokens-semantic.stylex.ts.md", "../../packages/tokens/src/semantic.stylex.ts"],
-  ]) {
-    const actual = await readFile(new URL(reference, root), "utf8");
-    const canonical = await readFile(new URL(source, import.meta.url), "utf8");
-    assert.ok(actual.includes(canonical), reference);
-  }
-  const reference = await readFile(new URL("api/input.en.md", root), "utf8");
-  assert.match(reference, /variant\?: "outline" \| "inline"/);
-});
-
 test("canonical agent entry points use English and link English references", async () => {
   for (const name of [
     "llms.txt",
     "llms-full.txt",
-    "llms-full.en.txt",
     "agent/SKILL.md",
     "bolerish-for-llms.md",
     "installation.md",
@@ -48,8 +33,4 @@ test("canonical agent entry points use English and link English references", asy
   }
   const index = await readFile(new URL("llms.txt", root), "utf8");
   assert.doesNotMatch(index, /\.\/guidelines\/[^)]+(?<!\.en)\.md\)/);
-  assert.equal(
-    await readFile(new URL("llms-full.txt", root), "utf8"),
-    await readFile(new URL("llms-full.en.txt", root), "utf8"),
-  );
 });

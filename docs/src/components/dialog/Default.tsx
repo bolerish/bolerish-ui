@@ -1,46 +1,12 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import { Button } from "@bolerish/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@bolerish/ui/dialog";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@bolerish/ui/dialog";
 export default function Default() {
   return (
-    <div {...stylex.props(layout.preview)}>
-      <Dialog>
-        <DialogTrigger render={<Button>Archive project</Button>} />
-        <DialogContent closeLabel="Close">
-          <DialogHeader>
-            <DialogTitle>Archive this project?</DialogTitle>
-            <DialogDescription>
-              Archived projects are hidden from the list and can be restored in Settings.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose render={<Button variant="secondary">Cancel</Button>} />
-            <Button>Archive</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </div>
+    <Dialog>
+      <DialogTrigger render={<Button variant="secondary">Open profile</Button>} />
+      <DialogContent>
+        <DialogTitle>Profile</DialogTitle>
+      </DialogContent>
+    </Dialog>
   );
 }

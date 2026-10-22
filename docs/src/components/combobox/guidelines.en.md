@@ -1,5 +1,12 @@
 ## Usage guidelines
 
+### Props
+
+| Prop                                  | Default   | Values              | Meaning                                                 |
+| ------------------------------------- | --------- | ------------------- | ------------------------------------------------------- |
+| `ComboboxInput.variant`               | `outline` | `outline`, `inline` | Outlined search field or inline editing within content. |
+| `ComboboxInput.startAddon / endAddon` | Unset     | `ReactNode`         | Places supporting content before or after the input.    |
+
 ### When to use
 
 Use `Combobox` when users select an item by narrowing a list with text, such as finding a person or project. Use [Select](?path=/docs/components-select--docs) when scanning the list is sufficient, or `Input` when the value is unrestricted text.

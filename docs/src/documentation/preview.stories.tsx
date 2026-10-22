@@ -1,4 +1,4 @@
-import { spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as stylex from "@stylexjs/stylex";
 import { type ComponentType, lazy, Suspense } from "react";
@@ -16,7 +16,19 @@ const examples = Object.fromEntries(
     lazy(load),
   ]),
 );
-const styles = stylex.create({ content: { padding: spacingVars.space6, width: "100%" } });
+const styles = stylex.create({
+  content: {
+    alignItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    fontSize: typo.fontSizeSm,
+    gap: spacingVars.space3,
+    justifyContent: "center",
+    lineHeight: typo.lineHeightNormal,
+    padding: spacingVars.space6,
+    width: "100%",
+  },
+});
 
 function ExampleCanvas({ example }: { example: string }) {
   const Component = examples[example];

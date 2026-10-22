@@ -4,7 +4,6 @@ import { Guideline } from "../../documentation/Guideline";
 import guidelines from "./guidelines.md?raw";
 import english from "./guidelines.en.md?raw";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import PushContentSource from "./PushContent.tsx?raw";
 import PositionSource from "./Position.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
@@ -18,14 +17,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="drawer--Default" source={DefaultSource} isolated height={360} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-<CodeBlock code={DefaultSource} language="tsx" />
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={english} />
 

@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import SizesSource from "./Sizes.tsx?raw";
 import VariantsSource from "./Variants.tsx?raw";
 import ActionAlignmentSource from "./ActionAlignment.tsx?raw";
@@ -19,43 +18,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="content-row--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { DotsThreeIcon, FolderIcon } from "@phosphor-icons/react";
-import { Button } from "@bolerish/ui/button";
-import {
-  ContentRow,
-  ContentRowActions,
-  ContentRowContent,
-  ContentRowDescription,
-  ContentRowGroup,
-  ContentRowMedia,
-  ContentRowTitle,
-} from "@bolerish/ui/content-row";
-
-<ContentRowGroup>
-  <ContentRow variant="outline">
-    <ContentRowMedia>
-      <FolderIcon aria-hidden="true" />
-    </ContentRowMedia>
-    <ContentRowContent>
-      <ContentRowTitle>Design system</ContentRowTitle>
-      <ContentRowDescription>Last edited today at 2:18 PM</ContentRowDescription>
-    </ContentRowContent>
-    <ContentRowActions>
-      <Button aria-label="More actions" size="icon-sm" variant="ghost">
-        <DotsThreeIcon aria-hidden="true" size="1rem" />
-      </Button>
-    </ContentRowActions>
-  </ContentRow>
-</ContentRowGroup>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

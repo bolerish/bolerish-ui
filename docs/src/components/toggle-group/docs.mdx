@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import StatesSource from "./States.tsx?raw";
 import SizesSource from "./Sizes.tsx?raw";
 import VariantsSource from "./Variants.tsx?raw";
@@ -19,22 +18,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="toggle-group--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { ToggleGroup, ToggleGroupItem } from "@bolerish/ui/toggle-group";
-
-<ToggleGroup aria-label="Text alignment" defaultValue={["left"]} variant="outline">
-  <ToggleGroupItem value="left">Left</ToggleGroupItem>
-  <ToggleGroupItem value="center">Center</ToggleGroupItem>
-  <ToggleGroupItem value="right">Right</ToggleGroupItem>
-</ToggleGroup>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

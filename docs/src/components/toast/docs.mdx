@@ -4,7 +4,6 @@ import { Guideline } from "../../documentation/Guideline";
 import guidelines from "./guidelines.md?raw";
 import english from "./guidelines.en.md?raw";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import StatesSource from "./States.tsx?raw";
 import MultipleNotificationsSource from "./MultipleNotifications.tsx?raw";
 import ActionsSource from "./Actions.tsx?raw";
@@ -19,28 +18,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="toast--Default" source={DefaultSource} isolated height={420} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { Button } from "@bolerish/ui/button";
-import { toast, Toaster } from "@bolerish/ui/toast";
-
-export function ToastDemo() {
-  return (
-    <>
-      <Button onClick={() => toast.add({ title: "Saved." })}>Save</Button>
-      <Toaster clearAllProps={{ children: "Dismiss all" }} />
-    </>
-  );
-}
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
-
-<LocalizedMarkdown text={"Mount one `Toaster` near the root of your application."} />
 
 <Guideline content={guidelines} english={english} />
 

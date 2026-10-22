@@ -1,21 +1,8 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import { Avatar, AvatarBadge, AvatarFallback } from "@bolerish/ui/avatar";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
+
 export default function Sizes() {
   return (
-    <div {...stylex.props(layout.preview)}>
+    <>
       <Avatar size="sm">
         <AvatarFallback>MJ</AvatarFallback>
       </Avatar>
@@ -26,6 +13,6 @@ export default function Sizes() {
         <AvatarFallback>DS</AvatarFallback>
         <AvatarBadge />
       </Avatar>
-    </div>
+    </>
   );
 }

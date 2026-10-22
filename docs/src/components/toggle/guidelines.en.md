@@ -1,5 +1,12 @@
 ## Usage guidelines
 
+### Props
+
+| Prop      | Default   | Values                       | Meaning                                                    |
+| --------- | --------- | ---------------------------- | ---------------------------------------------------------- |
+| `variant` | `default` | `default`, `outline`, `soft` | Default, outlined, or soft-background selection treatment. |
+| `size`    | `md`      | `sm`, `md`, `lg`             | Controls toggle height and spacing.                        |
+
 Use it for a persistent mode such as bold formatting. Use `Button` for a one-time command and `Switch` for a setting.
 
 > Keep the accessible state in sync with the visible pressed treatment.

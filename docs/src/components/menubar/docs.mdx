@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import DefaultSource from "./Default.tsx?raw";
 import { Meta } from "@storybook/addon-docs/blocks";
 import { ComponentPreview } from "../../documentation/ComponentPreview";
@@ -16,41 +15,5 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="menubar--Default" source={DefaultSource} isolated height={360} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import {
-  Menubar,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarTrigger,
-} from "@bolerish/ui/menubar";
-
-<Menubar>
-  <MenubarMenu>
-    <MenubarTrigger>File</MenubarTrigger>
-    <MenubarContent>
-      <MenubarItem>
-        New document<MenubarShortcut>⌘N</MenubarShortcut>
-      </MenubarItem>
-      <MenubarItem>
-        Open<MenubarShortcut>⌘O</MenubarShortcut>
-      </MenubarItem>
-      <MenubarSeparator />
-      <MenubarItem>
-        Save<MenubarShortcut>⌘S</MenubarShortcut>
-      </MenubarItem>
-    </MenubarContent>
-  </MenubarMenu>
-</Menubar>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />

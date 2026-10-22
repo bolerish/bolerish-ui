@@ -1,4 +1,3 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import {
   Combobox,
   ComboboxCollection,
@@ -9,42 +8,28 @@ import {
   ComboboxItem,
 } from "@bolerish/ui/combobox";
 import { Field, FieldDescription, FieldLabel } from "@bolerish/ui/field";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
+
 const frameworks = ["React", "Vue", "Svelte", "Solid", "Angular"];
 export default function Default() {
   return (
-    <div {...stylex.props(layout.preview)}>
-      <Field>
-        <FieldLabel>Framework</FieldLabel>
-        <Combobox items={frameworks}>
-          <ComboboxInput placeholder="Search frameworks" />
-          <ComboboxPopup>
-            <ComboboxList>
-              <ComboboxEmpty>No matching frameworks.</ComboboxEmpty>
-              <ComboboxCollection>
-                {(framework: string) => (
-                  <ComboboxItem key={framework} value={framework}>
-                    {framework}
-                  </ComboboxItem>
-                )}
-              </ComboboxCollection>
-            </ComboboxList>
-          </ComboboxPopup>
-        </Combobox>
-        <FieldDescription>Select the framework used in your project.</FieldDescription>
-      </Field>
-    </div>
+    <Field>
+      <FieldLabel>Framework</FieldLabel>
+      <Combobox items={frameworks}>
+        <ComboboxInput placeholder="Search frameworks" />
+        <ComboboxPopup>
+          <ComboboxList>
+            <ComboboxEmpty>No matching frameworks.</ComboboxEmpty>
+            <ComboboxCollection>
+              {(framework: string) => (
+                <ComboboxItem key={framework} value={framework}>
+                  {framework}
+                </ComboboxItem>
+              )}
+            </ComboboxCollection>
+          </ComboboxList>
+        </ComboboxPopup>
+      </Combobox>
+      <FieldDescription>Select the framework used in your project.</FieldDescription>
+    </Field>
   );
 }

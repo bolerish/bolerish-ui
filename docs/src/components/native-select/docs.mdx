@@ -4,7 +4,6 @@ import overview from "./overview.md?raw";
 import overviewEnglish from "./overview.en.md?raw";
 import { Guideline } from "../../documentation/Guideline";
 import { LocalizedMarkdown } from "../../documentation/LocalizedMarkdown";
-import { CodeBlock } from "../../documentation/CodeBlock";
 import StatesSource from "./States.tsx?raw";
 import SizesSource from "./Sizes.tsx?raw";
 import DefaultSource from "./Default.tsx?raw";
@@ -18,26 +17,6 @@ import { ComponentPreview } from "../../documentation/ComponentPreview";
 <LocalizedMarkdown text={"## Basic example"} />
 
 <ComponentPreview name="native-select--Default" source={DefaultSource} />
-
-<LocalizedMarkdown text={"## Composition"} />
-
-```tsx
-import { Field, FieldLabel } from "@bolerish/ui/field";
-import { NativeSelect, NativeSelectOption } from "@bolerish/ui/native-select";
-
-<Field>
-  <FieldLabel>Language</FieldLabel>
-  <NativeSelect defaultValue="ko">
-    <NativeSelectOption value="ko">Korean</NativeSelectOption>
-    <NativeSelectOption value="en">English</NativeSelectOption>
-    <NativeSelectOption value="ja">Japanese</NativeSelectOption>
-  </NativeSelect>
-</Field>;
-```
-
-<LocalizedMarkdown text={"## Installation"} />
-
-<CodeBlock code="pnpm add @bolerish/ui" language="bash" />
 
 <Guideline content={guidelines} english={usageEnglish} />
 

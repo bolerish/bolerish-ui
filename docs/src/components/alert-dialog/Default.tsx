@@ -1,4 +1,3 @@
-import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,37 +10,20 @@ import {
   AlertDialogTrigger,
 } from "@bolerish/ui/alert-dialog";
 import { Button } from "@bolerish/ui/button";
-import * as stylex from "@stylexjs/stylex";
-const layout = stylex.create({
-  preview: {
-    alignItems: "center",
-    display: "flex",
-    flexWrap: "wrap",
-    fontSize: typo.fontSizeSm,
-    gap: spacingVars.space3,
-    lineHeight: typo.lineHeightNormal,
-    justifyContent: "center",
-    width: "100%",
-  },
-});
 export default function Default() {
   return (
-    <div {...stylex.props(layout.preview)}>
-      <AlertDialog>
-        <AlertDialogTrigger render={<Button variant="secondary">Delete project</Button>} />
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete this project?</AlertDialogTitle>
-            <AlertDialogDescription>
-              The project and its related files will be deleted. This cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction>Delete</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>
+    <AlertDialog>
+      <AlertDialogTrigger render={<Button variant="secondary">Delete project</Button>} />
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete this project?</AlertDialogTitle>
+          <AlertDialogDescription>A deleted project cannot be restored.</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Delete</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
