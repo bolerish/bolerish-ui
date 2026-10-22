@@ -1,18 +1,18 @@
 :root {
-  --docs-background: #f4f4f5;
+  --docs-background: #f5f6f8;
   --docs-surface: #ffffff;
-  --docs-selected: #e4e4e7;
-  --docs-foreground: #18181b;
-  --docs-control: #85858f;
-  --docs-focus: #52525b;
+  --docs-selected: #e5e5e6;
+  --docs-foreground: #08090a;
+  --docs-control: #81868f;
+  --docs-focus: #383b3f;
 }
 :root[data-color-mode="dark"] {
-  --docs-background: #18181b;
-  --docs-surface: #27272a;
-  --docs-selected: #27272a;
-  --docs-foreground: #f4f4f5;
-  --docs-control: #71717a;
-  --docs-focus: #a1a1aa;
+  --docs-background: #08090a;
+  --docs-surface: #0f1011;
+  --docs-selected: #23252a;
+  --docs-foreground: #f5f6f8;
+  --docs-control: #62666d;
+  --docs-focus: #8a8f98;
   color-scheme: dark;
 }
 /* Storybook 10 document nodes: hide only the built-in direct-child icon. */

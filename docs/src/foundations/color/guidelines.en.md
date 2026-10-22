@@ -38,26 +38,32 @@ is not a substitute for selection, error or focus, and does not guarantee suffic
 Follow the role composition contracts in [State](?path=/docs/foundations-state--docs)
 for selection and drop backgrounds, foregrounds and borders. `bgSubtle` alone does not mean selected.
 
-## Adopted palette
+## Palette
 
-Use subtly cool Zinc grays for surfaces, text, boundaries and primary actions. Existing token names and light/dark roles remain intact. Feedback colors, typography, spacing and radius scales retain the existing rules.
+Use cool near-black surfaces and a distinct primary action. Light surfaces and essential control boundaries preserve contrast for reading and interaction.
 
-| Palette  | Value   | Role                                          |
-| -------- | ------- | --------------------------------------------- |
-| White    | #FFFFFF | Light content surfaces, primary action labels |
-| Chalk    | #F4F4F5 | Light canvas, inverse text and action         |
-| Fog      | #E4E4E7 | Light grouping and decorative dividers        |
-| Silver   | #A1A1AA | Inverse descriptions                          |
-| Steel    | #71717A | Strong boundaries, unavailable text           |
-| Iron     | #52525B | Light descriptions, inverse dividers          |
-| Graphite | #27272A | Primary hover, inverse surfaces               |
-| Carbon   | #09090B | Light text and primary action                 |
+| Role                   | Value   | Use                                         |
+| ---------------------- | ------- | ------------------------------------------- |
+| Dark canvas            | #08090A | Lowest screen surface                       |
+| Dark content           | #0F1011 | Cards, inputs and default surfaces          |
+| Dark raised surface    | #161718 | Popups and subtle grouping                  |
+| Dark selection/divider | #23252A | Selected surfaces and decorative boundaries |
+| Dark supporting text   | #8A8F98 | Descriptions and metadata                   |
+| Light canvas           | #F5F6F8 | Lowest light surface                        |
+| Light content          | #FFFFFF | Cards and inputs                            |
+| Light grouping         | #E5E5E6 | Subtle groups and dividers                  |
+| Primary action         | #E4F222 | Shared acid-lime accent in both modes       |
+| Primary hover          | #D2DF20 | A slightly lower-lightness lime             |
 
-Use `strokeControl` (Zinc 450, #85858F) for inputs on White or Chalk. Use `strokeAction` for selected outlines on grouped Fog surfaces. `strokeDefault` is decorative. Text targets 4.5:1 and essential control/focus boundaries target 3:1 in the tested pairings.
+Reserve lime for primary actions and current progress rather than large fields or
+all secondary buttons. Primary labels use #08090A. On light surfaces, a dark
+button boundary preserves the outline. Information, success, warning and error
+colors retain their feedback meanings rather than becoming decorative accents.
 
-The dark canvas uses Zinc 900 (`#18181B`) with Graphite (`#27272A`) surfaces for a gentler tone step. Existing information/success/warning/error colors remain unchanged. Primary buttons use `bgActionPrimaryHover` on hover; other state layers retain their established roles.
-
-Resting control boundaries use Zinc 450 in light mode and Steel in dark mode. Decorative dark dividers use Zinc 700. Hover uses `strokeStrong`; focus uses Iron/Silver, preserving contrast for essential boundaries, focus and errors.
+Essential input boundaries use #81868F in light mode and #62666D in dark mode.
+Decorative strokeDefault does not replace them. Dark selected boundaries use
+#81868F via strokeStrong. Focus uses #383B3F in light and #8A8F98 in dark. Tested
+text pairings target 4.5:1 and essential control/focus boundaries target 3:1.
 
 ## Palette authoring and generation
 

@@ -32,21 +32,26 @@ test("invalid and out-of-gamut authoring values fail instead of silently clippin
   }
 });
 
-test("committed HEX tokens match the OKLCH source and retain Zinc anchors", async () => {
+test("committed HEX tokens match the OKLCH source and retain the authored colors", async () => {
   execFileSync(process.execPath, ["scripts/generate-palette.mjs", "--check"]);
   const source = JSON.parse(
     await readFile(new URL("../packages/tokens/palette.oklch.json", import.meta.url), "utf8"),
   );
   for (const [name, expected] of Object.entries({
     white: "#FFFFFF",
-    chalk: "#F4F4F5",
-    fog: "#E4E4E7",
-    silver: "#A1A1AA",
-    steel: "#71717A",
-    iron: "#52525B",
-    graphite: "#27272A",
-    carbon: "#09090B",
-    neutral450: "#85858F",
+    chalk: "#F5F6F8",
+    fog: "#E5E5E6",
+    silver: "#8A8F98",
+    steel: "#62666D",
+    iron: "#383B3F",
+    graphite: "#23252A",
+    carbon: "#08090A",
+    neutral450: "#81868F",
+    neutral800: "#161718",
+    neutral850: "#0F1011",
+    neutral900: "#08090A",
+    primarySolid: "#E4F222",
+    primarySolidDark: "#E4F222",
   })) {
     assert.equal(oklchToHex(source[name]), expected, name);
   }

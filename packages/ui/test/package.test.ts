@@ -417,7 +417,8 @@ test("package consumers build components and both themes without a StyleX plugin
       const rules = themeClassNames[mode].split(" ").filter((name) => css.includes(`.${name}`));
       assert.ok(rules.length >= 2, `${mode} must include both color and shadow theme rules`);
     }
-    assert.match(css, /#18181[bB]/);
+    assert.match(css, /#08090[aA]/);
+    assert.match(css, /#(?:E4F222|e4f222)/);
     assert.match(css, /#(?:FFFFFF|ffffff)/);
     assert.match(css, /prefers-reduced-motion/);
   } finally {

@@ -1,5 +1,9 @@
 ## Unreleased
 
+- Use cool near-black dark surfaces and a focused acid-lime primary action,
+    with readable light surfaces and control boundaries. Feedback colors keep
+    their existing meanings.
+
 - Customize styled components with className and inline style without losing
     their built-in styles. Existing xstyle restrictions and styling targets
     remain available. Check focus and state contrast when overriding appearance.

@@ -160,7 +160,7 @@ const sizeStyles = stylex.create({
 const variantStyles = stylex.create({
   primary: {
     backgroundColor: colorVars.bgActionPrimary,
-    borderColor: colorVars.bgActionPrimary,
+    borderColor: colorVars.strokeAction,
     color: colorVars.fgOnActionPrimary,
   },
   secondary: {
