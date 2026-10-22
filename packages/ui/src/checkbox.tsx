@@ -14,6 +14,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -65,16 +67,16 @@ const styles = stylex.create({
   },
 });
 
-export type CheckboxProps = Omit<
-  ComponentProps<typeof CheckboxPrimitive.Root>,
-  "className" | "style"
-> & {
+export type CheckboxProps = StyledProps<ComponentProps<typeof CheckboxPrimitive.Root>> & {
   xstyle?: ControlPlacementStyles;
 };
 
-export function Checkbox({ xstyle, ...props }: CheckboxProps) {
+export function Checkbox({ className, style, xstyle, ...props }: CheckboxProps) {
   return (
-    <CheckboxPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)}>
+    <CheckboxPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    >
       <CheckboxPrimitive.Indicator {...stylex.props(styles.indicator)}>
         <CheckIcon aria-hidden="true" weight="bold" />
       </CheckboxPrimitive.Indicator>

@@ -55,6 +55,11 @@ system preference detection, and initial theme; replace the previous theme's
 classes when switching, while preserving unrelated root classes. For SSR, apply the initial theme before
 hydration to avoid a flash of the wrong theme.
 
+Components accept a string `className` and React `style` object for plain CSS,
+CSS modules and inline overrides. These target the same element as `xstyle`;
+CSS precedence follows the normal cascade. Preserve focus and state contrast
+when overriding appearance.
+
 StyleX remains available for typed `xstyle` extensions. If your app authors
 `stylex.create()` styles or custom token themes, configure the StyleX compiler
 for that app. This is optional for the prebuilt components and themes above.

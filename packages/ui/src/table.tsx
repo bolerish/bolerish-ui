@@ -8,6 +8,9 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   container: { overflowX: "auto", position: "relative", width: "100%" },
   table: {
@@ -67,66 +70,92 @@ const styles = stylex.create({
   },
 });
 
-export type TableProps = Omit<ComponentProps<"table">, "className" | "style"> & {
+export type TableProps = StyledProps<ComponentProps<"table">> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function Table({ xstyle, ...props }: TableProps) {
-  return <table {...props} {...stylex.props(styles.table, xstyle)} />;
+export function Table({ className, style, xstyle, ...props }: TableProps) {
+  return (
+    <table {...props} {...mergeStyles(stylex.props(styles.table, xstyle), className, style)} />
+  );
 }
 
 export function TableHeader({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"thead">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <thead {...props} {...stylex.props(styles.header, xstyle)} />;
+}: StyledProps<ComponentProps<"thead">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <thead {...props} {...mergeStyles(stylex.props(styles.header, xstyle), className, style)} />
+  );
 }
 
 export function TableBody({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"tbody">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <tbody {...props} {...stylex.props(styles.body, xstyle)} />;
+}: StyledProps<ComponentProps<"tbody">> & { xstyle?: stylex.StyleXStyles }) {
+  return <tbody {...props} {...mergeStyles(stylex.props(styles.body, xstyle), className, style)} />;
 }
 
 export function TableFooter({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"tfoot">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <tfoot {...props} {...stylex.props(styles.footer, xstyle)} />;
+}: StyledProps<ComponentProps<"tfoot">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <tfoot {...props} {...mergeStyles(stylex.props(styles.footer, xstyle), className, style)} />
+  );
 }
 
 export function TableRow({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"tr">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <tr {...props} {...stylex.props(styles.row, xstyle)} />;
+}: StyledProps<ComponentProps<"tr">> & { xstyle?: stylex.StyleXStyles }) {
+  return <tr {...props} {...mergeStyles(stylex.props(styles.row, xstyle), className, style)} />;
 }
 
 export function TableHead({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"th">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <th {...props} {...stylex.props(styles.head, xstyle)} />;
+}: StyledProps<ComponentProps<"th">> & { xstyle?: stylex.StyleXStyles }) {
+  return <th {...props} {...mergeStyles(stylex.props(styles.head, xstyle), className, style)} />;
 }
 
 export function TableCell({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"td">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <td {...props} {...stylex.props(styles.cell, xstyle)} />;
+}: StyledProps<ComponentProps<"td">> & { xstyle?: stylex.StyleXStyles }) {
+  return <td {...props} {...mergeStyles(stylex.props(styles.cell, xstyle), className, style)} />;
 }
 
 export function TableCaption({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"caption">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <caption {...props} {...stylex.props(styles.caption, xstyle)} />;
+}: StyledProps<ComponentProps<"caption">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <caption {...props} {...mergeStyles(stylex.props(styles.caption, xstyle), className, style)} />
+  );
 }
 
 export function TableContainer({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.container, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.container, xstyle), className, style)} />
+  );
 }

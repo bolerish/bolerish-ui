@@ -15,6 +15,8 @@ import { CheckCircleIcon, InfoIcon, WarningIcon, XCircleIcon, XIcon } from "@pho
 import * as stylex from "@stylexjs/stylex";
 import { useEffect, useLayoutEffect, useRef, useState, type ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 import { toastViewportVars } from "./toast.stylex";
 import { typographyStyles } from "./typography";
 
@@ -326,9 +328,8 @@ export type ToastPosition =
   | "top-left"
   | "top-right";
 
-export type ToasterProps = Omit<
-  ComponentProps<typeof ToastPrimitive.Provider>,
-  "children" | "toastManager" | "className" | "style"
+export type ToasterProps = StyledProps<
+  Omit<ComponentProps<typeof ToastPrimitive.Provider>, "children" | "toastManager">
 > & {
   /** Toast viewport position. @default "bottom-right" */
   position?: ToastPosition;
@@ -499,6 +500,8 @@ function ToastStack({
 }
 
 export function Toaster({
+  className,
+  style,
   xstyle,
   limit = 3,
   position = "bottom-right",
@@ -514,11 +517,15 @@ export function Toaster({
     <ToastPrimitive.Provider {...props} limit={limit} toastManager={toast}>
       <ToastPrimitive.Portal>
         <ToastPrimitive.Viewport
-          {...stylex.props(
-            styles.viewport,
-            verticalPositionStyles[verticalPosition],
-            horizontalPositionStyles[horizontalPosition],
-            xstyle,
+          {...mergeStyles(
+            stylex.props(
+              styles.viewport,
+              verticalPositionStyles[verticalPosition],
+              horizontalPositionStyles[horizontalPosition],
+              xstyle,
+            ),
+            className,
+            style,
           )}
         >
           <ToastStack position={position} clearAllProps={clearAllProps} />

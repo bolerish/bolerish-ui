@@ -14,6 +14,8 @@ import type { ComponentProps, MouseEvent } from "react";
 
 import { Button, type ButtonProps } from "./button";
 import type { InputProps } from "./input";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 import type { TextareaProps } from "./textarea";
 
 const styles = stylex.create({
@@ -126,25 +128,37 @@ const alignStyles = stylex.create({
 type StyleProps = { xstyle?: stylex.StyleXStyles };
 type AddonAlignment = "block-end" | "block-start" | "inline-end" | "inline-start";
 
-export type InputGroupProps = Omit<ComponentProps<"div">, "className" | "style"> &
+export type InputGroupProps = StyledProps<ComponentProps<"div">> &
   StyleProps & { invalid?: boolean };
 
-export function InputGroup({ invalid = false, xstyle, ...props }: InputGroupProps) {
+export function InputGroup({
+  className,
+  style,
+  invalid = false,
+  xstyle,
+  ...props
+}: InputGroupProps) {
   return (
     <div
       {...props}
       data-invalid={invalid || undefined}
-      {...stylex.props(styles.root, invalid && styles.invalid, xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.root, invalid && styles.invalid, xstyle),
+        className,
+        style,
+      )}
     />
   );
 }
 
 export function InputGroupAddon({
+  className,
+  style,
   align = "inline-start",
   onClick,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps & { align?: AddonAlignment }) {
+}: StyledProps<ComponentProps<"div">> & StyleProps & { align?: AddonAlignment }) {
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     onClick?.(event);
     if (event.defaultPrevented || (event.target as HTMLElement).closest("button")) return;
@@ -157,17 +171,32 @@ export function InputGroupAddon({
       role="presentation"
       data-align={align}
       onClick={handleClick}
-      {...stylex.props(styles.addon, alignStyles[align], xstyle)}
+      {...mergeStyles(stylex.props(styles.addon, alignStyles[align], xstyle), className, style)}
     />
   );
 }
 
-export function InputGroupInput({ xstyle, ...props }: Omit<InputProps, "variant">) {
-  return <InputPrimitive {...props} {...stylex.props(styles.input, styles.control, xstyle)} />;
+export function InputGroupInput({
+  className,
+  style,
+  xstyle,
+  ...props
+}: Omit<InputProps, "variant">) {
+  return (
+    <InputPrimitive
+      {...props}
+      {...mergeStyles(stylex.props(styles.input, styles.control, xstyle), className, style)}
+    />
+  );
 }
 
-export function InputGroupTextarea({ xstyle, ...props }: TextareaProps) {
-  return <textarea {...props} {...stylex.props(styles.control, styles.textarea, xstyle)} />;
+export function InputGroupTextarea({ className, style, xstyle, ...props }: TextareaProps) {
+  return (
+    <textarea
+      {...props}
+      {...mergeStyles(stylex.props(styles.control, styles.textarea, xstyle), className, style)}
+    />
+  );
 }
 
 export function InputGroupButton({
@@ -180,8 +209,10 @@ export function InputGroupButton({
 }
 
 export function InputGroupText({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & StyleProps) {
-  return <span {...props} {...stylex.props(styles.text, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & StyleProps) {
+  return <span {...props} {...mergeStyles(stylex.props(styles.text, xstyle), className, style)} />;
 }

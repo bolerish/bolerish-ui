@@ -16,6 +16,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
 import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   positioner: { zIndex: layerVars.popup },
@@ -112,41 +114,52 @@ const styles = stylex.create({
 
 export const DropdownMenu = MenuPrimitive.Root;
 export function DropdownMenuTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <MenuPrimitive.Trigger {...props} {...stylex.props(xstyle)} />;
+  return (
+    <MenuPrimitive.Trigger {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 export function DropdownMenuGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.Group>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.Group>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <MenuPrimitive.Group {...props} {...stylex.props(xstyle)} />;
+  return (
+    <MenuPrimitive.Group {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 export function DropdownMenuRadioGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.RadioGroup>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.RadioGroup>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <MenuPrimitive.RadioGroup {...props} {...stylex.props(xstyle)} />;
+  return (
+    <MenuPrimitive.RadioGroup {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 export const DropdownMenuSub = MenuPrimitive.SubmenuRoot;
 
-type DropdownMenuContentProps = Omit<
-  ComponentProps<typeof MenuPrimitive.Popup>,
-  "className" | "style"
-> &
+type DropdownMenuContentProps = StyledProps<ComponentProps<typeof MenuPrimitive.Popup>> &
   Pick<
     ComponentProps<typeof MenuPrimitive.Positioner>,
     "align" | "alignOffset" | "side" | "sideOffset"
   > & { xstyle?: stylex.StyleXStyles };
 
 export function DropdownMenuContent({
+  className,
+  style,
   xstyle,
   align = "start",
   alignOffset,
@@ -155,12 +168,16 @@ export function DropdownMenuContent({
   ...props
 }: DropdownMenuContentProps) {
   function getPopupStyles(state: MenuPrimitive.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.popupTransitioning,
-      state.transitionStatus === "ending" && styles.popupEnding,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.popupTransitioning,
+        state.transitionStatus === "ending" && styles.popupEnding,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -182,29 +199,32 @@ export function DropdownMenuContent({
   );
 }
 
-type DropdownMenuItemProps = Omit<
-  ComponentProps<typeof MenuPrimitive.Item>,
-  "className" | "style"
-> & {
+type DropdownMenuItemProps = StyledProps<ComponentProps<typeof MenuPrimitive.Item>> & {
   destructive?: boolean;
   inset?: boolean;
   xstyle?: ControlLayoutStyles;
 };
 
 export function DropdownMenuItem({
+  className,
+  style,
   xstyle,
   destructive = false,
   inset = false,
   ...props
 }: DropdownMenuItemProps) {
   function getItemStyles(state: MenuPrimitive.Item.State) {
-    return stylex.props(
-      styles.item,
-      state.highlighted && styles.itemHighlighted,
-      state.disabled && styles.itemDisabled,
-      inset && styles.inset,
-      destructive && styles.destructive,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.item,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        inset && styles.inset,
+        destructive && styles.destructive,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -217,19 +237,25 @@ export function DropdownMenuItem({
 }
 
 export function DropdownMenuCheckboxItem({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.CheckboxItem>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.CheckboxItem>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getCheckboxItemStyles(state: MenuPrimitive.CheckboxItem.State) {
-    return stylex.props(
-      styles.item,
-      styles.choiceItem,
-      state.highlighted && styles.itemHighlighted,
-      state.disabled && styles.itemDisabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.item,
+        styles.choiceItem,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -247,19 +273,25 @@ export function DropdownMenuCheckboxItem({
 }
 
 export function DropdownMenuRadioItem({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.RadioItem>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.RadioItem>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getRadioItemStyles(state: MenuPrimitive.RadioItem.State) {
-    return stylex.props(
-      styles.item,
-      styles.choiceItem,
-      state.highlighted && styles.itemHighlighted,
-      state.disabled && styles.itemDisabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.item,
+        styles.choiceItem,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -277,58 +309,75 @@ export function DropdownMenuRadioItem({
 }
 
 export function DropdownMenuLabel({
+  className,
+  style,
   xstyle,
   inset = false,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.GroupLabel>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.GroupLabel>> & {
   inset?: boolean;
 } & { xstyle?: ControlPlacementStyles }) {
   return (
     <MenuPrimitive.GroupLabel
       {...props}
-      {...stylex.props(styles.label, inset && styles.inset, xstyle)}
+      {...mergeStyles(stylex.props(styles.label, inset && styles.inset, xstyle), className, style)}
     />
   );
 }
 
 export function DropdownMenuSeparator({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.Separator>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.Separator>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <MenuPrimitive.Separator {...props} {...stylex.props(styles.separator, xstyle)} />;
+  return (
+    <MenuPrimitive.Separator
+      {...props}
+      {...mergeStyles(stylex.props(styles.separator, xstyle), className, style)}
+    />
+  );
 }
 
 export function DropdownMenuShortcut({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { children: ReactNode } & {
+}: StyledProps<ComponentProps<"span">> & { children: ReactNode } & {
   xstyle?: stylex.StyleXStyles;
 }) {
   return (
-    <span {...props} {...stylex.props(styles.shortcut, xstyle)}>
+    <span {...props} {...mergeStyles(stylex.props(styles.shortcut, xstyle), className, style)}>
       {children}
     </span>
   );
 }
 
 export function DropdownMenuSubTrigger({
+  className,
+  style,
   xstyle,
   children,
   inset = false,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.SubmenuTrigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.SubmenuTrigger>> & {
   inset?: boolean;
 } & { xstyle?: ControlLayoutStyles }) {
   function getSubmenuTriggerStyles(state: MenuPrimitive.SubmenuTrigger.State) {
-    return stylex.props(
-      styles.item,
-      state.highlighted && styles.itemHighlighted,
-      state.disabled && styles.itemDisabled,
-      inset && styles.inset,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.item,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        inset && styles.inset,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (

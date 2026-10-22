@@ -12,6 +12,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -59,16 +61,21 @@ const styles = stylex.create({
   },
 });
 
-export type SliderProps = Omit<
-  ComponentProps<typeof SliderPrimitive.Root>,
-  "className" | "style"
-> & {
+export type SliderProps = StyledProps<ComponentProps<typeof SliderPrimitive.Root>> & {
   /** Returns an accessible name for each thumb in a range slider. */
   getAriaLabel?: (index: number) => string;
   xstyle?: ControlLayoutStyles;
 };
 
-export function Slider({ defaultValue, getAriaLabel, value, xstyle, ...props }: SliderProps) {
+export function Slider({
+  className,
+  style,
+  defaultValue,
+  getAriaLabel,
+  value,
+  xstyle,
+  ...props
+}: SliderProps) {
   const currentValue = value ?? defaultValue;
   const thumbCount = Array.isArray(currentValue) ? currentValue.length : 1;
   return (
@@ -76,7 +83,7 @@ export function Slider({ defaultValue, getAriaLabel, value, xstyle, ...props }: 
       {...props}
       defaultValue={defaultValue}
       value={value}
-      {...stylex.props(styles.root, xstyle)}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
     >
       <SliderPrimitive.Control {...stylex.props(styles.control)}>
         <SliderPrimitive.Track {...stylex.props(styles.track)}>

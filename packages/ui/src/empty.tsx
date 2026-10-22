@@ -8,6 +8,9 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   root: {
     alignItems: "center",
@@ -66,48 +69,70 @@ const styles = stylex.create({
 type StyleProps = { xstyle?: stylex.StyleXStyles };
 
 export function Empty({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.root, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.root, xstyle), className, style)} />;
 }
 
 export function EmptyHeader({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.header, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.header, xstyle), className, style)} />;
 }
 
 export function EmptyMedia({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} aria-hidden="true" {...stylex.props(styles.media, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return (
+    <div
+      {...props}
+      aria-hidden="true"
+      {...mergeStyles(stylex.props(styles.media, xstyle), className, style)}
+    />
+  );
 }
 
 export function EmptyTitle({
+  className,
+  style,
   children,
   xstyle,
   ...props
-}: Omit<ComponentProps<"h3">, "className" | "style"> & StyleProps) {
+}: StyledProps<ComponentProps<"h3">> & StyleProps) {
   return (
-    <h3 {...props} {...stylex.props(styles.title, xstyle)}>
+    <h3 {...props} {...mergeStyles(stylex.props(styles.title, xstyle), className, style)}>
       {children}
     </h3>
   );
 }
 
 export function EmptyDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"p">, "className" | "style"> & StyleProps) {
-  return <p {...props} {...stylex.props(styles.description, xstyle)} />;
+}: StyledProps<ComponentProps<"p">> & StyleProps) {
+  return (
+    <p {...props} {...mergeStyles(stylex.props(styles.description, xstyle), className, style)} />
+  );
 }
 
 export function EmptyContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }

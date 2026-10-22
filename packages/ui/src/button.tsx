@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -198,7 +200,7 @@ const squareStyles = stylex.create({
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "destructive";
 type ButtonSize = "sm" | "md" | "lg" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg" | "icon-xl";
 
-export type ButtonProps = Omit<ComponentProps<typeof ButtonPrimitive>, "className" | "style"> & {
+export type ButtonProps = StyledProps<ComponentProps<typeof ButtonPrimitive>> & {
   align?: "start" | "center" | "end" | "space-between";
   children: ReactNode;
   size?: ButtonSize;
@@ -209,6 +211,8 @@ export type ButtonProps = Omit<ComponentProps<typeof ButtonPrimitive>, "classNam
 };
 
 export function Button({
+  className,
+  style,
   align = "center",
   children,
   disabled,
@@ -226,19 +230,23 @@ export function Button({
     <ButtonPrimitive
       {...props}
       disabled={disabled}
-      {...stylex.props(
-        styles.root,
-        alignStyles[align],
-        variantStyles[variant],
-        sizeStyles[size],
-        !isStandardSize && styles.iconContent,
-        shapeStyles[shape],
-        shapeWidth,
-        hasSolidBackground ? styles.solidInteraction : styles.surfaceInteraction,
-        variant === "primary" && styles.primaryInteraction,
-        disabled && styles.disabled,
-        disabled && variant === "ghost" && styles.disabledGhost,
-        xstyle,
+      {...mergeStyles(
+        stylex.props(
+          styles.root,
+          alignStyles[align],
+          variantStyles[variant],
+          sizeStyles[size],
+          !isStandardSize && styles.iconContent,
+          shapeStyles[shape],
+          shapeWidth,
+          hasSolidBackground ? styles.solidInteraction : styles.surfaceInteraction,
+          variant === "primary" && styles.primaryInteraction,
+          disabled && styles.disabled,
+          disabled && variant === "ghost" && styles.disabledGhost,
+          xstyle,
+        ),
+        className,
+        style,
       )}
     >
       {children}

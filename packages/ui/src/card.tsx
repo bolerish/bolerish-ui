@@ -8,6 +8,9 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   card: {
     backgroundColor: colorVars.bgSurface,
@@ -62,34 +65,38 @@ type StyleProps = {
   xstyle?: stylex.StyleXStyles;
 };
 
-type ElementProps = Omit<ComponentProps<"div">, "className" | "style"> & StyleProps;
-type HeadingProps = Omit<ComponentProps<"h3">, "className" | "style"> & StyleProps;
-type ParagraphProps = Omit<ComponentProps<"p">, "className" | "style"> & StyleProps;
+type ElementProps = StyledProps<ComponentProps<"div">> & StyleProps;
+type HeadingProps = StyledProps<ComponentProps<"h3">> & StyleProps;
+type ParagraphProps = StyledProps<ComponentProps<"p">> & StyleProps;
 
-export function Card({ xstyle, ...props }: ElementProps) {
-  return <div {...props} {...stylex.props(styles.card, xstyle)} />;
+export function Card({ className, style, xstyle, ...props }: ElementProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.card, xstyle), className, style)} />;
 }
 
-export function CardHeader({ xstyle, ...props }: ElementProps) {
-  return <div {...props} {...stylex.props(styles.header, xstyle)} />;
+export function CardHeader({ className, style, xstyle, ...props }: ElementProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.header, xstyle), className, style)} />;
 }
 
-export function CardTitle({ children, xstyle, ...props }: HeadingProps) {
+export function CardTitle({ className, style, children, xstyle, ...props }: HeadingProps) {
   return (
-    <h3 {...props} {...stylex.props(styles.title, xstyle)}>
+    <h3 {...props} {...mergeStyles(stylex.props(styles.title, xstyle), className, style)}>
       {children}
     </h3>
   );
 }
 
-export function CardDescription({ xstyle, ...props }: ParagraphProps) {
-  return <p {...props} {...stylex.props(styles.description, xstyle)} />;
+export function CardDescription({ className, style, xstyle, ...props }: ParagraphProps) {
+  return (
+    <p {...props} {...mergeStyles(stylex.props(styles.description, xstyle), className, style)} />
+  );
 }
 
-export function CardContent({ xstyle, ...props }: ElementProps) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+export function CardContent({ className, style, xstyle, ...props }: ElementProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
-export function CardFooter({ xstyle, ...props }: ElementProps) {
-  return <div {...props} {...stylex.props(styles.footer, xstyle)} />;
+export function CardFooter({ className, style, xstyle, ...props }: ElementProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.footer, xstyle), className, style)} />;
 }

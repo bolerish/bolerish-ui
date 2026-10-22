@@ -14,6 +14,9 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   popup: {
     backgroundColor: colorVars.bgRaised,
@@ -56,28 +59,29 @@ const styles = stylex.create({
 
 export const HoverCard = PreviewCard.Root;
 
-export type HoverCardTriggerProps = Omit<
-  ComponentProps<typeof PreviewCard.Trigger>,
-  "className" | "style"
-> & {
+export type HoverCardTriggerProps = StyledProps<ComponentProps<typeof PreviewCard.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function HoverCardTrigger({ xstyle, ...props }: HoverCardTriggerProps) {
-  return <PreviewCard.Trigger {...props} {...stylex.props(styles.trigger, xstyle)} />;
+export function HoverCardTrigger({ className, style, xstyle, ...props }: HoverCardTriggerProps) {
+  return (
+    <PreviewCard.Trigger
+      {...props}
+      {...mergeStyles(stylex.props(styles.trigger, xstyle), className, style)}
+    />
+  );
 }
 
-export type HoverCardContentProps = Omit<
-  ComponentProps<typeof PreviewCard.Popup>,
-  "className" | "style"
-> & {
-  align?: Omit<ComponentProps<typeof PreviewCard.Positioner>, "className" | "style">["align"];
-  side?: Omit<ComponentProps<typeof PreviewCard.Positioner>, "className" | "style">["side"];
+export type HoverCardContentProps = StyledProps<ComponentProps<typeof PreviewCard.Popup>> & {
+  align?: StyledProps<ComponentProps<typeof PreviewCard.Positioner>>["align"];
+  side?: StyledProps<ComponentProps<typeof PreviewCard.Positioner>>["side"];
   sideOffset?: number;
   xstyle?: stylex.StyleXStyles;
 };
 
 export function HoverCardContent({
+  className,
+  style,
   align = "center",
   side = "bottom",
   sideOffset = 6,
@@ -85,11 +89,15 @@ export function HoverCardContent({
   ...props
 }: HoverCardContentProps) {
   function getPopupStyles(state: PreviewCard.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      xstyle,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.transitioning,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        xstyle,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.transitioning,
+      ),
+      className,
+      style,
     );
   }
 

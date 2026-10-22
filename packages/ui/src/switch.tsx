@@ -12,6 +12,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -82,17 +84,17 @@ const thumbSizeStyles = stylex.create({
   },
 });
 
-export type SwitchProps = Omit<
-  ComponentProps<typeof SwitchPrimitive.Root>,
-  "className" | "style"
-> & {
+export type SwitchProps = StyledProps<ComponentProps<typeof SwitchPrimitive.Root>> & {
   size?: "md" | "sm";
   xstyle?: ControlPlacementStyles;
 };
 
-export function Switch({ size = "md", xstyle, ...props }: SwitchProps) {
+export function Switch({ className, style, size = "md", xstyle, ...props }: SwitchProps) {
   return (
-    <SwitchPrimitive.Root {...props} {...stylex.props(styles.root, sizeStyles[size], xstyle)}>
+    <SwitchPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, sizeStyles[size], xstyle), className, style)}
+    >
       <SwitchPrimitive.Thumb {...stylex.props(styles.thumb, thumbSizeStyles[size])} />
     </SwitchPrimitive.Root>
   );

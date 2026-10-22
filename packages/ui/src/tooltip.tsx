@@ -14,6 +14,9 @@ import {
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   positioner: { zIndex: layerVars.notification },
   popup: {
@@ -54,23 +57,26 @@ const styles = stylex.create({
 export const Tooltip = TooltipPrimitive.Root;
 export const TooltipProvider = TooltipPrimitive.Provider;
 export function TooltipTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof TooltipPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof TooltipPrimitive.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <TooltipPrimitive.Trigger {...props} {...stylex.props(xstyle)} />;
+  return (
+    <TooltipPrimitive.Trigger {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 
-type TooltipContentProps = Omit<
-  ComponentProps<typeof TooltipPrimitive.Popup>,
-  "className" | "style"
-> &
+type TooltipContentProps = StyledProps<ComponentProps<typeof TooltipPrimitive.Popup>> &
   Pick<ComponentProps<typeof TooltipPrimitive.Positioner>, "align" | "side" | "sideOffset"> & {
     xstyle?: stylex.StyleXStyles;
   };
 
 export function TooltipContent({
+  className,
+  style,
   align = "center",
   side = "top",
   sideOffset = 6,
@@ -78,12 +84,16 @@ export function TooltipContent({
   ...props
 }: TooltipContentProps) {
   function getPopupStyles(state: TooltipPrimitive.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.popupTransitioning,
-      state.transitionStatus === "ending" && styles.popupEnding,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.popupTransitioning,
+        state.transitionStatus === "ending" && styles.popupEnding,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (

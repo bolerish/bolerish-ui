@@ -21,9 +21,17 @@ const placement = { $$css: true, alignSelf: "consumer-placement" } as unknown as
 }>;
 
 test("container xstyle arrays reach the root without leaking a DOM attribute", () => {
-  const html = renderToStaticMarkup(createElement(Accordion, { xstyle: [spacing, placement] }));
+  const html = renderToStaticMarkup(
+    createElement(Accordion, {
+      xstyle: [spacing, placement],
+      className: "consumer-class",
+      style: { opacity: 0.7 },
+    }),
+  );
   assert.match(html, /class="[^"]*consumer-spacing/);
   assert.match(html, /class="[^"]*consumer-placement/);
+  assert.match(html, /class="[^"]*consumer-class/);
+  assert.match(html, /style="[^"]*opacity:0.7/);
   assert.doesNotMatch(html, /\bxstyle=/i);
 });
 

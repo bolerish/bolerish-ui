@@ -28,6 +28,8 @@ import {
   DropdownMenuSubTrigger,
 } from "./dropdown-menu";
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -77,28 +79,41 @@ const styles = stylex.create({
 });
 
 export function Menubar({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof MenubarPrimitive>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenubarPrimitive>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <MenubarPrimitive {...props} {...stylex.props(styles.root, xstyle)} />;
+  return (
+    <MenubarPrimitive
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export const MenubarMenu = MenuPrimitive.Root;
 
 export function MenubarTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof MenuPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof MenuPrimitive.Trigger>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getTriggerStyles(state: MenuPrimitive.Trigger.State) {
-    return stylex.props(
-      styles.trigger,
-      state.open && styles.triggerOpen,
-      state.disabled && styles.triggerDisabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.trigger,
+        state.open && styles.triggerOpen,
+        state.disabled && styles.triggerDisabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (

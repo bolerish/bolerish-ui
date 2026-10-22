@@ -16,6 +16,8 @@ import type { ComponentProps, ReactNode } from "react";
 
 import { Button } from "./button";
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   backdrop: {
@@ -109,28 +111,41 @@ const styles = stylex.create({
 
 export const AlertDialog = AlertDialogPrimitive.Root;
 export function AlertDialogTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof AlertDialogPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AlertDialogPrimitive.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <AlertDialogPrimitive.Trigger {...props} {...stylex.props(xstyle)} />;
+  return (
+    <AlertDialogPrimitive.Trigger
+      {...props}
+      {...mergeStyles(stylex.props(xstyle), className, style)}
+    />
+  );
 }
 
-type AlertDialogContentProps = Omit<
-  ComponentProps<typeof AlertDialogPrimitive.Popup>,
-  "className" | "style"
-> & {
+type AlertDialogContentProps = StyledProps<ComponentProps<typeof AlertDialogPrimitive.Popup>> & {
   children: ReactNode;
   xstyle?: stylex.StyleXStyles;
 };
 
-export function AlertDialogContent({ children, xstyle, ...props }: AlertDialogContentProps) {
+export function AlertDialogContent({
+  className,
+  style,
+  children,
+  xstyle,
+  ...props
+}: AlertDialogContentProps) {
   return (
     <AlertDialogPrimitive.Portal>
       <AlertDialogPrimitive.Backdrop {...stylex.props(styles.backdrop)} />
       <AlertDialogPrimitive.Viewport {...stylex.props(styles.viewport)}>
-        <AlertDialogPrimitive.Popup {...props} {...stylex.props(styles.popup, xstyle)}>
+        <AlertDialogPrimitive.Popup
+          {...props}
+          {...mergeStyles(stylex.props(styles.popup, xstyle), className, style)}
+        >
           {children}
         </AlertDialogPrimitive.Popup>
       </AlertDialogPrimitive.Viewport>
@@ -139,43 +154,56 @@ export function AlertDialogContent({ children, xstyle, ...props }: AlertDialogCo
 }
 
 export function AlertDialogHeader({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.header, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.header, xstyle), className, style)} />;
 }
 
 export function AlertDialogFooter({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.footer, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.footer, xstyle), className, style)} />;
 }
 
 export function AlertDialogTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof AlertDialogPrimitive.Title>, "className" | "style"> & {
-  xstyle?: ControlPlacementStyles;
-}) {
-  return <AlertDialogPrimitive.Title {...props} {...stylex.props(styles.title, xstyle)} />;
-}
-
-export function AlertDialogDescription({
-  xstyle,
-  ...props
-}: Omit<ComponentProps<typeof AlertDialogPrimitive.Description>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AlertDialogPrimitive.Title>> & {
   xstyle?: ControlPlacementStyles;
 }) {
   return (
-    <AlertDialogPrimitive.Description {...props} {...stylex.props(styles.description, xstyle)} />
+    <AlertDialogPrimitive.Title
+      {...props}
+      {...mergeStyles(stylex.props(styles.title, xstyle), className, style)}
+    />
   );
 }
 
-type AlertDialogButtonProps = Omit<
-  ComponentProps<typeof AlertDialogPrimitive.Close>,
-  "className" | "style"
->;
+export function AlertDialogDescription({
+  className,
+  style,
+  xstyle,
+  ...props
+}: StyledProps<ComponentProps<typeof AlertDialogPrimitive.Description>> & {
+  xstyle?: ControlPlacementStyles;
+}) {
+  return (
+    <AlertDialogPrimitive.Description
+      {...props}
+      {...mergeStyles(stylex.props(styles.description, xstyle), className, style)}
+    />
+  );
+}
+
+type AlertDialogButtonProps = StyledProps<ComponentProps<typeof AlertDialogPrimitive.Close>>;
 
 export function AlertDialogCancel({ children, ...props }: AlertDialogButtonProps) {
   return (

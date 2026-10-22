@@ -5,17 +5,17 @@ export const registryItems = {
     registryDependencies: ["paragraph"],
   },
   paragraph: {
-    files: ["paragraph.tsx", "typography.ts", "styles/control-layout.ts"],
+    files: ["paragraph.tsx", "typography.ts", "styles/control-layout.ts", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   heading: {
-    files: ["heading.tsx", "typography.ts"],
+    files: ["heading.tsx", "typography.ts", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   accordion: {
-    files: ["accordion.tsx"],
+    files: ["accordion.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -25,62 +25,62 @@ export const registryItems = {
     registryDependencies: [],
   },
   "alert-dialog": {
-    files: ["alert-dialog.tsx"],
+    files: ["alert-dialog.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["button"],
   },
   "aspect-ratio": {
-    files: ["aspect-ratio.tsx"],
+    files: ["aspect-ratio.tsx", "styles/merge-styles.ts"],
     dependencies: ["@stylexjs/stylex"],
     registryDependencies: [],
   },
   attachment: {
-    files: ["attachment.tsx"],
+    files: ["attachment.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["button"],
   },
   avatar: {
-    files: ["avatar.tsx"],
+    files: ["avatar.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   badge: {
-    files: ["badge.tsx"],
+    files: ["badge.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   banner: {
-    files: ["banner.tsx"],
+    files: ["banner.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   breadcrumb: {
-    files: ["breadcrumb.tsx"],
+    files: ["breadcrumb.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@phosphor-icons/react", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   button: {
-    files: ["button.tsx", "styles/control-layout.ts"],
+    files: ["button.tsx", "styles/control-layout.ts", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "button-group": {
-    files: ["button-group.tsx"],
+    files: ["button-group.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["separator"],
   },
   card: {
-    files: ["card.tsx"],
+    files: ["card.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   calendar: {
-    files: ["calendar.tsx"],
+    files: ["calendar.tsx", "styles/merge-styles.ts"],
     dependencies: ["@daypicker/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   carousel: {
-    files: ["carousel.tsx"],
+    files: ["carousel.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@bolerish/tokens",
       "@phosphor-icons/react",
@@ -90,7 +90,7 @@ export const registryItems = {
     registryDependencies: ["button"],
   },
   checkbox: {
-    files: ["checkbox.tsx"],
+    files: ["checkbox.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -100,7 +100,7 @@ export const registryItems = {
     registryDependencies: [],
   },
   collapsible: {
-    files: ["collapsible.tsx"],
+    files: ["collapsible.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -110,7 +110,7 @@ export const registryItems = {
     registryDependencies: [],
   },
   combobox: {
-    files: ["combobox.tsx"],
+    files: ["combobox.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -120,12 +120,12 @@ export const registryItems = {
     registryDependencies: [],
   },
   "context-menu": {
-    files: ["context-menu.tsx"],
+    files: ["context-menu.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react"],
     registryDependencies: ["dropdown-menu"],
   },
   dialog: {
-    files: ["dialog.tsx"],
+    files: ["dialog.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -145,12 +145,12 @@ export const registryItems = {
     registryDependencies: ["calendar", "popover"],
   },
   drawer: {
-    files: ["drawer.tsx"],
+    files: ["drawer.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "dropdown-menu": {
-    files: ["dropdown-menu.tsx"],
+    files: ["dropdown-menu.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -160,52 +160,52 @@ export const registryItems = {
     registryDependencies: [],
   },
   empty: {
-    files: ["empty.tsx"],
+    files: ["empty.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   field: {
-    files: ["field.tsx", "typography.ts"],
+    files: ["field.tsx", "typography.ts", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["checkbox", "input"],
   },
   "hover-card": {
-    files: ["hover-card.tsx"],
+    files: ["hover-card.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   input: {
-    files: ["input.tsx", "styles/control-layout.ts"],
+    files: ["input.tsx", "styles/control-layout.ts", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "input-group": {
-    files: ["input-group.tsx"],
+    files: ["input-group.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["button", "input", "textarea"],
   },
   "input-otp": {
-    files: ["input-otp.tsx"],
+    files: ["input-otp.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "content-row": {
-    files: ["content-row.tsx", "typography.ts"],
+    files: ["content-row.tsx", "typography.ts", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   kbd: {
-    files: ["kbd.tsx"],
+    files: ["kbd.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   label: {
-    files: ["label.tsx", "typography.ts"],
+    files: ["label.tsx", "typography.ts", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   link: {
-    files: ["link.tsx"],
+    files: ["link.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -215,22 +215,22 @@ export const registryItems = {
     registryDependencies: [],
   },
   marker: {
-    files: ["marker.tsx"],
+    files: ["marker.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   menubar: {
-    files: ["menubar.tsx"],
+    files: ["menubar.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["dropdown-menu"],
   },
   "native-select": {
-    files: ["native-select.tsx"],
+    files: ["native-select.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@phosphor-icons/react", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "navigation-menu": {
-    files: ["navigation-menu.tsx"],
+    files: ["navigation-menu.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -240,32 +240,32 @@ export const registryItems = {
     registryDependencies: [],
   },
   pagination: {
-    files: ["pagination.tsx"],
+    files: ["pagination.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@phosphor-icons/react", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   popover: {
-    files: ["popover.tsx"],
+    files: ["popover.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   progress: {
-    files: ["progress.tsx"],
+    files: ["progress.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "radio-group": {
-    files: ["radio-group.tsx"],
+    files: ["radio-group.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "scroll-area": {
-    files: ["scroll-area.tsx"],
+    files: ["scroll-area.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   select: {
-    files: ["select.tsx"],
+    files: ["select.tsx", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -275,52 +275,52 @@ export const registryItems = {
     registryDependencies: [],
   },
   separator: {
-    files: ["separator.tsx"],
+    files: ["separator.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   skeleton: {
-    files: ["skeleton.tsx"],
+    files: ["skeleton.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   slider: {
-    files: ["slider.tsx"],
+    files: ["slider.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   spinner: {
-    files: ["spinner.tsx"],
+    files: ["spinner.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   switch: {
-    files: ["switch.tsx", "styles/control-layout.ts"],
+    files: ["switch.tsx", "styles/control-layout.ts", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   timeline: {
-    files: ["timeline.tsx"],
+    files: ["timeline.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   table: {
-    files: ["table.tsx"],
+    files: ["table.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   tabs: {
-    files: ["tabs.tsx"],
+    files: ["tabs.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   textarea: {
-    files: ["textarea.tsx"],
+    files: ["textarea.tsx", "styles/merge-styles.ts"],
     dependencies: ["@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   toast: {
-    files: ["toast.tsx", "toast.stylex.ts", "typography.ts"],
+    files: ["toast.tsx", "toast.stylex.ts", "typography.ts", "styles/merge-styles.ts"],
     dependencies: [
       "@base-ui/react",
       "@bolerish/tokens",
@@ -330,17 +330,17 @@ export const registryItems = {
     registryDependencies: [],
   },
   toggle: {
-    files: ["toggle.tsx"],
+    files: ["toggle.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },
   "toggle-group": {
-    files: ["toggle-group.tsx"],
+    files: ["toggle-group.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: ["toggle"],
   },
   tooltip: {
-    files: ["tooltip.tsx"],
+    files: ["tooltip.tsx", "styles/merge-styles.ts"],
     dependencies: ["@base-ui/react", "@bolerish/tokens", "@stylexjs/stylex"],
     registryDependencies: [],
   },

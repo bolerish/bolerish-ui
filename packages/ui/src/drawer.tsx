@@ -16,6 +16,8 @@ import { createContext, useContext } from "react";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   overlay: {
@@ -241,9 +243,8 @@ const DrawerContext = createContext<DrawerContextValue>({
   swipeDirection: "down",
 });
 
-export type DrawerProps = Omit<
-  ComponentProps<typeof DrawerPrimitive.Root>,
-  "swipeDirection" | "className" | "style"
+export type DrawerProps = StyledProps<
+  Omit<ComponentProps<typeof DrawerPrimitive.Root>, "swipeDirection">
 > & {
   /** Controls the backdrop behind the Drawer. */
   overlay?: DrawerOverlayMode;
@@ -265,44 +266,49 @@ export function Drawer({
 }
 
 export function DrawerTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof DrawerPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof DrawerPrimitive.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <DrawerPrimitive.Trigger {...props} {...stylex.props(xstyle)} />;
+  return (
+    <DrawerPrimitive.Trigger {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 export function DrawerClose({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof DrawerPrimitive.Close>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof DrawerPrimitive.Close>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <DrawerPrimitive.Close {...props} {...stylex.props(xstyle)} />;
+  return (
+    <DrawerPrimitive.Close {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 
-type DrawerOverlayProps = Omit<
-  ComponentProps<typeof DrawerPrimitive.Backdrop>,
-  "className" | "style"
-> & {
+type DrawerOverlayProps = StyledProps<ComponentProps<typeof DrawerPrimitive.Backdrop>> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-function DrawerOverlay({ xstyle, ...props }: DrawerOverlayProps) {
+function DrawerOverlay({ className, style, xstyle, ...props }: DrawerOverlayProps) {
   return (
     <DrawerPrimitive.Backdrop
       {...props}
       data-slot="drawer-overlay"
-      {...stylex.props(styles.overlay, xstyle)}
+      {...mergeStyles(stylex.props(styles.overlay, xstyle), className, style)}
     />
   );
 }
 
-type DrawerSwipeHandleProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+type DrawerSwipeHandleProps = StyledProps<ComponentProps<"div">> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-function DrawerSwipeHandle({ xstyle, ...props }: DrawerSwipeHandleProps) {
+function DrawerSwipeHandle({ className, style, xstyle, ...props }: DrawerSwipeHandleProps) {
   const { swipeDirection } = useContext(DrawerContext);
   const isHorizontal = swipeDirection === "left" || swipeDirection === "right";
   return (
@@ -310,24 +316,31 @@ function DrawerSwipeHandle({ xstyle, ...props }: DrawerSwipeHandleProps) {
       aria-hidden="true"
       data-slot="drawer-swipe-handle"
       {...props}
-      {...stylex.props(
-        styles.swipeHandle,
-        isHorizontal && styles.horizontalSwipeHandle,
-        handleDirectionStyles[swipeDirection],
-        xstyle,
+      {...mergeStyles(
+        stylex.props(
+          styles.swipeHandle,
+          isHorizontal && styles.horizontalSwipeHandle,
+          handleDirectionStyles[swipeDirection],
+          xstyle,
+        ),
+        className,
+        style,
       )}
     />
   );
 }
 
-type DrawerContentProps = Omit<
-  ComponentProps<typeof DrawerPrimitive.Popup>,
-  "className" | "style"
-> & {
+type DrawerContentProps = StyledProps<ComponentProps<typeof DrawerPrimitive.Popup>> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function DrawerContent({ children, xstyle, ...props }: DrawerContentProps) {
+export function DrawerContent({
+  className,
+  style,
+  children,
+  xstyle,
+  ...props
+}: DrawerContentProps) {
   const { overlay, showSwipeHandle, swipeDirection } = useContext(DrawerContext);
   const isHorizontal = swipeDirection === "left" || swipeDirection === "right";
 
@@ -347,7 +360,9 @@ export function DrawerContent({ children, xstyle, ...props }: DrawerContentProps
           )}
         >
           {showSwipeHandle ? <DrawerSwipeHandle /> : null}
-          <DrawerPrimitive.Content {...stylex.props(styles.content, xstyle)}>
+          <DrawerPrimitive.Content
+            {...mergeStyles(stylex.props(styles.content, xstyle), className, style)}
+          >
             {children}
           </DrawerPrimitive.Content>
         </DrawerPrimitive.Popup>
@@ -357,38 +372,63 @@ export function DrawerContent({ children, xstyle, ...props }: DrawerContentProps
 }
 
 export function DrawerHeader({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.header, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.header, xstyle), className, style)} />;
 }
 
 export function DrawerFooter({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
   const { swipeDirection } = useContext(DrawerContext);
   const isSideDrawer = swipeDirection === "left" || swipeDirection === "right";
 
   return (
-    <div {...props} {...stylex.props(styles.footer, isSideDrawer && styles.sideFooter, xstyle)} />
+    <div
+      {...props}
+      {...mergeStyles(
+        stylex.props(styles.footer, isSideDrawer && styles.sideFooter, xstyle),
+        className,
+        style,
+      )}
+    />
   );
 }
 
 export function DrawerTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof DrawerPrimitive.Title>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof DrawerPrimitive.Title>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <DrawerPrimitive.Title {...props} {...stylex.props(styles.title, xstyle)} />;
+  return (
+    <DrawerPrimitive.Title
+      {...props}
+      {...mergeStyles(stylex.props(styles.title, xstyle), className, style)}
+    />
+  );
 }
 
 export function DrawerDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof DrawerPrimitive.Description>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof DrawerPrimitive.Description>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <DrawerPrimitive.Description {...props} {...stylex.props(styles.description, xstyle)} />;
+  return (
+    <DrawerPrimitive.Description
+      {...props}
+      {...mergeStyles(stylex.props(styles.description, xstyle), className, style)}
+    />
+  );
 }

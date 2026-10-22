@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -85,12 +87,14 @@ const styles = stylex.create({
   },
 });
 
-export type InputProps = Omit<ComponentProps<typeof InputPrimitive>, "className" | "style"> & {
+export type InputProps = StyledProps<ComponentProps<typeof InputPrimitive>> & {
   xstyle?: ControlLayoutStyles;
   variant?: "outline" | "inline";
 };
 
 export function Input({
+  className,
+  style,
   "aria-invalid": ariaInvalid,
   variant = "outline",
   xstyle,
@@ -101,11 +105,15 @@ export function Input({
     <InputPrimitive
       {...props}
       aria-invalid={ariaInvalid}
-      {...stylex.props(
-        styles.root,
-        variant === "inline" && styles.inline,
-        isInvalid && styles.invalid,
-        xstyle,
+      {...mergeStyles(
+        stylex.props(
+          styles.root,
+          variant === "inline" && styles.inline,
+          isInvalid && styles.invalid,
+          xstyle,
+        ),
+        className,
+        style,
       )}
     />
   );

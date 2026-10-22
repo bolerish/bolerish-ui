@@ -16,6 +16,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
 import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   trigger: {
@@ -145,31 +147,45 @@ const styles = stylex.create({
 
 export const Select = SelectPrimitive.Root;
 export function SelectValue({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.Value>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.Value>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <SelectPrimitive.Value {...props} {...stylex.props(xstyle)} />;
+  return (
+    <SelectPrimitive.Value {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 export function SelectGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.Group>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.Group>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <SelectPrimitive.Group {...props} {...stylex.props(xstyle)} />;
+  return (
+    <SelectPrimitive.Group {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 
 export function SelectTrigger({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.Trigger>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getTriggerStyles(state: SelectPrimitive.Trigger.State) {
-    return stylex.props(styles.trigger, state.disabled && styles.triggerDisabled, xstyle);
+    return mergeStyles(
+      stylex.props(styles.trigger, state.disabled && styles.triggerDisabled, xstyle),
+      className,
+      style,
+    );
   }
   return (
     <SelectPrimitive.Trigger
@@ -185,7 +201,7 @@ export function SelectTrigger({
   );
 }
 
-type SelectPopupProps = Omit<ComponentProps<typeof SelectPrimitive.Popup>, "className" | "style"> &
+type SelectPopupProps = StyledProps<ComponentProps<typeof SelectPrimitive.Popup>> &
   Pick<
     ComponentProps<typeof SelectPrimitive.Positioner>,
     "align" | "alignItemWithTrigger" | "side" | "sideOffset"
@@ -194,6 +210,8 @@ type SelectPopupProps = Omit<ComponentProps<typeof SelectPrimitive.Popup>, "clas
   };
 
 export function SelectPopup({
+  className,
+  style,
   xstyle,
   align = "start",
   alignItemWithTrigger = false,
@@ -203,12 +221,16 @@ export function SelectPopup({
   ...props
 }: SelectPopupProps) {
   function getPopupStyles(state: SelectPrimitive.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.popupTransitioning,
-      state.transitionStatus === "ending" && styles.popupEnding,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.popupTransitioning,
+        state.transitionStatus === "ending" && styles.popupEnding,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -233,18 +255,24 @@ export function SelectPopup({
 }
 
 export function SelectItem({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.Item>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.Item>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getItemStyles(state: SelectPrimitive.Item.State) {
-    return stylex.props(
-      styles.item,
-      state.highlighted && styles.itemHighlighted,
-      state.disabled && styles.itemDisabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.item,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -262,28 +290,49 @@ export function SelectItem({
 }
 
 export function SelectLabel({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.GroupLabel>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.GroupLabel>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <SelectPrimitive.GroupLabel {...props} {...stylex.props(styles.label, xstyle)} />;
+  return (
+    <SelectPrimitive.GroupLabel
+      {...props}
+      {...mergeStyles(stylex.props(styles.label, xstyle), className, style)}
+    />
+  );
 }
 
 export function SelectSeparator({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.Separator>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.Separator>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <SelectPrimitive.Separator {...props} {...stylex.props(styles.separator, xstyle)} />;
+  return (
+    <SelectPrimitive.Separator
+      {...props}
+      {...mergeStyles(stylex.props(styles.separator, xstyle), className, style)}
+    />
+  );
 }
 
 export function SelectList({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof SelectPrimitive.List>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof SelectPrimitive.List>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <SelectPrimitive.List {...props} {...stylex.props(styles.list, xstyle)} />;
+  return (
+    <SelectPrimitive.List
+      {...props}
+      {...mergeStyles(stylex.props(styles.list, xstyle), className, style)}
+    />
+  );
 }

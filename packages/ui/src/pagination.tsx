@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { display: "flex", justifyContent: "center", width: "100%" },
@@ -78,33 +80,47 @@ const sizeStyles = stylex.create({
 });
 
 export function Pagination({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"nav">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <nav aria-label="Pagination" {...props} {...stylex.props(styles.root, xstyle)} />;
+}: StyledProps<ComponentProps<"nav">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <nav
+      aria-label="Pagination"
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export function PaginationContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"ul">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <ul {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"ul">> & { xstyle?: stylex.StyleXStyles }) {
+  return <ul {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />;
 }
 
 export function PaginationItem({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"li">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <li {...props} {...stylex.props(styles.item, xstyle)} />;
+}: StyledProps<ComponentProps<"li">> & { xstyle?: stylex.StyleXStyles }) {
+  return <li {...props} {...mergeStyles(stylex.props(styles.item, xstyle), className, style)} />;
 }
 
-export type PaginationLinkProps = Omit<ComponentProps<"a">, "className" | "style"> & {
+export type PaginationLinkProps = StyledProps<ComponentProps<"a">> & {
   isActive?: boolean;
   size?: "default" | "icon";
   xstyle?: ControlLayoutStyles;
 };
 
 export function PaginationLink({
+  className,
+  style,
   xstyle,
   children,
   isActive = false,
@@ -115,7 +131,11 @@ export function PaginationLink({
     <a
       aria-current={isActive ? "page" : undefined}
       {...props}
-      {...stylex.props(styles.link, sizeStyles[size], isActive && styles.active, xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.link, sizeStyles[size], isActive && styles.active, xstyle),
+        className,
+        style,
+      )}
     >
       {children}
     </a>
@@ -141,11 +161,17 @@ export function PaginationNext({ children, ...props }: PaginationLinkProps) {
 }
 
 export function PaginationEllipsis({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
+}: StyledProps<ComponentProps<"span">> & { xstyle?: ControlPlacementStyles }) {
   return (
-    <span aria-hidden="true" {...props} {...stylex.props(styles.ellipsis, xstyle)}>
+    <span
+      aria-hidden="true"
+      {...props}
+      {...mergeStyles(stylex.props(styles.ellipsis, xstyle), className, style)}
+    >
       …
     </span>
   );

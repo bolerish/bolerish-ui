@@ -10,6 +10,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlFieldStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -66,17 +68,27 @@ const styles = stylex.create({
   },
 });
 
-export type TextareaProps = Omit<ComponentProps<"textarea">, "className" | "style"> & {
+export type TextareaProps = StyledProps<ComponentProps<"textarea">> & {
   xstyle?: ControlFieldStyles;
 };
 
-export function Textarea({ "aria-invalid": ariaInvalid, xstyle, ...props }: TextareaProps) {
+export function Textarea({
+  className,
+  style,
+  "aria-invalid": ariaInvalid,
+  xstyle,
+  ...props
+}: TextareaProps) {
   const isInvalid = ariaInvalid === true || ariaInvalid === "true";
   return (
     <textarea
       {...props}
       aria-invalid={ariaInvalid}
-      {...stylex.props(styles.root, isInvalid && styles.invalid, xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.root, isInvalid && styles.invalid, xstyle),
+        className,
+        style,
+      )}
     />
   );
 }

@@ -6,6 +6,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -29,16 +31,16 @@ const styles = stylex.create({
   },
 });
 
-export type ProgressProps = Omit<
-  ComponentProps<typeof ProgressPrimitive.Root>,
-  "className" | "style"
-> & {
+export type ProgressProps = StyledProps<ComponentProps<typeof ProgressPrimitive.Root>> & {
   xstyle?: ControlLayoutStyles;
 };
 
-export function Progress({ xstyle, ...props }: ProgressProps) {
+export function Progress({ className, style, xstyle, ...props }: ProgressProps) {
   return (
-    <ProgressPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)}>
+    <ProgressPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    >
       <ProgressPrimitive.Indicator {...stylex.props(styles.indicator)} />
     </ProgressPrimitive.Root>
   );

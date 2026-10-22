@@ -15,6 +15,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   positioner: { zIndex: layerVars.popup },
@@ -69,31 +71,38 @@ const styles = stylex.create({
 
 export const Popover = PopoverPrimitive.Root;
 export function PopoverTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof PopoverPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof PopoverPrimitive.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <PopoverPrimitive.Trigger {...props} {...stylex.props(xstyle)} />;
+  return (
+    <PopoverPrimitive.Trigger {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 export function PopoverClose({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof PopoverPrimitive.Close>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof PopoverPrimitive.Close>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <PopoverPrimitive.Close {...props} {...stylex.props(xstyle)} />;
+  return (
+    <PopoverPrimitive.Close {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 
-type PopoverContentProps = Omit<
-  ComponentProps<typeof PopoverPrimitive.Popup>,
-  "className" | "style"
-> &
+type PopoverContentProps = StyledProps<ComponentProps<typeof PopoverPrimitive.Popup>> &
   Pick<ComponentProps<typeof PopoverPrimitive.Positioner>, "align" | "side" | "sideOffset"> & {
     xstyle?: stylex.StyleXStyles;
   };
 
 export function PopoverContent({
+  className,
+  style,
   align = "start",
   side = "bottom",
   sideOffset = 6,
@@ -101,12 +110,16 @@ export function PopoverContent({
   ...props
 }: PopoverContentProps) {
   function getPopupStyles(state: PopoverPrimitive.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.popupTransitioning,
-      state.transitionStatus === "ending" && styles.popupEnding,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.popupTransitioning,
+        state.transitionStatus === "ending" && styles.popupEnding,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -128,25 +141,33 @@ export function PopoverContent({
 }
 
 export function PopoverHeader({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.header, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.header, xstyle), className, style)} />;
 }
 export function PopoverTitle({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<"h2">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
+}: StyledProps<ComponentProps<"h2">> & { xstyle?: ControlPlacementStyles }) {
   return (
-    <h2 {...props} {...stylex.props(styles.title, xstyle)}>
+    <h2 {...props} {...mergeStyles(stylex.props(styles.title, xstyle), className, style)}>
       {children}
     </h2>
   );
 }
 export function PopoverDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"p">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <p {...props} {...stylex.props(styles.description, xstyle)} />;
+}: StyledProps<ComponentProps<"p">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <p {...props} {...mergeStyles(stylex.props(styles.description, xstyle), className, style)} />
+  );
 }

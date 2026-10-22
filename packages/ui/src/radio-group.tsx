@@ -14,6 +14,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   group: { display: "flex", flexDirection: "column", gap: spacingVars.space3 },
@@ -53,27 +55,29 @@ const styles = stylex.create({
   },
 });
 
-export type RadioGroupProps = Omit<
-  ComponentProps<typeof RadioGroupPrimitive>,
-  "className" | "style"
-> & {
+export type RadioGroupProps = StyledProps<ComponentProps<typeof RadioGroupPrimitive>> & {
   xstyle?: ControlLayoutStyles;
 };
 
-export function RadioGroup({ xstyle, ...props }: RadioGroupProps) {
-  return <RadioGroupPrimitive {...props} {...stylex.props(styles.group, xstyle)} />;
+export function RadioGroup({ className, style, xstyle, ...props }: RadioGroupProps) {
+  return (
+    <RadioGroupPrimitive
+      {...props}
+      {...mergeStyles(stylex.props(styles.group, xstyle), className, style)}
+    />
+  );
 }
 
-export type RadioGroupItemProps = Omit<
-  ComponentProps<typeof RadioPrimitive.Root>,
-  "className" | "style"
-> & {
+export type RadioGroupItemProps = StyledProps<ComponentProps<typeof RadioPrimitive.Root>> & {
   xstyle?: ControlPlacementStyles;
 };
 
-export function RadioGroupItem({ xstyle, ...props }: RadioGroupItemProps) {
+export function RadioGroupItem({ className, style, xstyle, ...props }: RadioGroupItemProps) {
   return (
-    <RadioPrimitive.Root {...props} {...stylex.props(styles.item, xstyle)}>
+    <RadioPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.item, xstyle), className, style)}
+    >
       <RadioPrimitive.Indicator {...stylex.props(styles.indicator)}>
         <span {...stylex.props(styles.dot)} />
       </RadioPrimitive.Indicator>

@@ -35,3 +35,24 @@ Emphasis follows the task, not the number of available controls. A page can have
 These recommendations are starting points for new screens. Preserve the typography and alignment already defined by components. Document the reason and scope of any exception.
 
 Start with the [State role composition contracts](?path=/docs/foundations-state--docs) when choosing visual hierarchy and states. They define selection surfaces, drop areas, insertion positions and overlapping states in one place.
+
+## Consumer styles
+
+Styled components accept `xstyle`, string `className`, and a React CSS properties
+object in `style`. Use `xstyle` when the app already compiles StyleX; its existing
+placement/layout restrictions remain intact. Plain CSS, CSS modules and inline
+styles do not require a consumer StyleX compiler.
+
+All three target the same element. Internal StyleX and `xstyle` are merged in one
+call, consumer classes are preserved, and inline properties are merged after
+internal dynamic inline values. Class string order alone does not determine CSS
+precedence: selectors, layers, source order and important declarations still apply.
+
+Containers allow broad `xstyle`; controls retain their placement and width
+contracts. `className` and `style` provide an appearance escape hatch, so check
+error, disabled, selected and keyboard-focus states and contrast after overriding.
+Context-only roots, providers and portals do not gain a styling target.
+
+Styling follows the component's documented target. AccordionContent styles its
+inner content rather than its animated panel. NativeSelect styles the wrapper,
+including the icon, and DrawerContent styles the element directly around children.

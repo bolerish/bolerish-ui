@@ -3,6 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const spin = stylex.keyframes({ to: { transform: "rotate(360deg)" } });
 
@@ -28,11 +30,17 @@ const styles = stylex.create({
   },
 });
 
-export type SpinnerProps = Omit<ComponentProps<"output">, "className" | "style"> & {
+export type SpinnerProps = StyledProps<ComponentProps<"output">> & {
   label?: string;
   xstyle?: ControlPlacementStyles;
 };
 
-export function Spinner({ xstyle, label = "Loading", ...props }: SpinnerProps) {
-  return <output {...props} aria-label={label} {...stylex.props(styles.root, xstyle)} />;
+export function Spinner({ className, style, xstyle, label = "Loading", ...props }: SpinnerProps) {
+  return (
+    <output
+      {...props}
+      aria-label={label}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }

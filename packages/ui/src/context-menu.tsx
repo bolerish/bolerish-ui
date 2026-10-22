@@ -3,6 +3,10 @@
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
+
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 export {
   DropdownMenuCheckboxItem as ContextMenuCheckboxItem,
   DropdownMenuContent as ContextMenuContent,
@@ -19,10 +23,17 @@ export {
 } from "./dropdown-menu";
 export const ContextMenu = ContextMenuPrimitive.Root;
 export function ContextMenuTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ContextMenuPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ContextMenuPrimitive.Trigger>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <ContextMenuPrimitive.Trigger {...props} {...stylex.props(xstyle)} />;
+  return (
+    <ContextMenuPrimitive.Trigger
+      {...props}
+      {...mergeStyles(stylex.props(xstyle), className, style)}
+    />
+  );
 }

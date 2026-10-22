@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { minWidth: 0, width: "100%" },
@@ -97,32 +99,52 @@ const styles = stylex.create({
 });
 
 export function Accordion({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof AccordionPrimitive.Root>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AccordionPrimitive.Root>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <AccordionPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)} />;
+  return (
+    <AccordionPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export function AccordionItem({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof AccordionPrimitive.Item>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AccordionPrimitive.Item>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <AccordionPrimitive.Item {...props} {...stylex.props(styles.item, xstyle)} />;
+  return (
+    <AccordionPrimitive.Item
+      {...props}
+      {...mergeStyles(stylex.props(styles.item, xstyle), className, style)}
+    />
+  );
 }
 
 export function AccordionTrigger({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof AccordionPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AccordionPrimitive.Trigger>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getTriggerStyles(state: AccordionPrimitive.Trigger.State) {
-    return stylex.props(styles.trigger, state.disabled && styles.triggerDisabled, xstyle);
+    return mergeStyles(
+      stylex.props(styles.trigger, state.disabled && styles.triggerDisabled, xstyle),
+      className,
+      style,
+    );
   }
   return (
     <AccordionPrimitive.Header {...stylex.props(styles.header)}>
@@ -141,10 +163,12 @@ export function AccordionTrigger({
 }
 
 export function AccordionContent({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof AccordionPrimitive.Panel>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AccordionPrimitive.Panel>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
   function getPanelStyles(state: AccordionPrimitive.Panel.State) {
@@ -160,7 +184,9 @@ export function AccordionContent({
       className={(state) => getPanelStyles(state).className}
       style={(state) => getPanelStyles(state).style}
     >
-      <div {...stylex.props(styles.panelContent, xstyle)}>{children}</div>
+      <div {...mergeStyles(stylex.props(styles.panelContent, xstyle), className, style)}>
+        {children}
+      </div>
     </AccordionPrimitive.Panel>
   );
 }

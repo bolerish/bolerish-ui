@@ -4,6 +4,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 import { typographyStyles } from "./typography";
 
 const styles = stylex.create({
@@ -17,10 +19,15 @@ const styles = stylex.create({
   },
 });
 
-export type LabelProps = Omit<ComponentProps<"label">, "className" | "style"> & {
+export type LabelProps = StyledProps<ComponentProps<"label">> & {
   xstyle?: ControlPlacementStyles;
 };
 
-export function Label({ xstyle, ...props }: LabelProps) {
-  return <label {...props} {...stylex.props(typographyStyles.title, styles.root, xstyle)} />;
+export function Label({ className, style, xstyle, ...props }: LabelProps) {
+  return (
+    <label
+      {...props}
+      {...mergeStyles(stylex.props(typographyStyles.title, styles.root, xstyle), className, style)}
+    />
+  );
 }

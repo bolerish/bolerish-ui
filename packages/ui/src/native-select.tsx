@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { display: "inline-flex", position: "relative", width: "fit-content" },
@@ -67,14 +69,21 @@ const sizeStyles = stylex.create({
   md: { height: sizeVars.controlMd },
 });
 
-export type NativeSelectProps = Omit<ComponentProps<"select">, "size" | "className" | "style"> & {
+export type NativeSelectProps = StyledProps<Omit<ComponentProps<"select">, "size">> & {
   size?: "md" | "sm";
   xstyle?: ControlLayoutStyles;
 };
 
-export function NativeSelect({ children, size = "md", xstyle, ...props }: NativeSelectProps) {
+export function NativeSelect({
+  className,
+  style,
+  children,
+  size = "md",
+  xstyle,
+  ...props
+}: NativeSelectProps) {
   return (
-    <span {...stylex.props(styles.root, xstyle)}>
+    <span {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}>
       <select {...props} {...stylex.props(styles.select, sizeStyles[size])}>
         {children}
       </select>
@@ -84,14 +93,18 @@ export function NativeSelect({ children, size = "md", xstyle, ...props }: Native
 }
 
 export function NativeSelectOption({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"option">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <option {...props} {...stylex.props(xstyle)} />;
+}: StyledProps<ComponentProps<"option">> & { xstyle?: stylex.StyleXStyles }) {
+  return <option {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />;
 }
 export function NativeSelectOptGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"optgroup">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <optgroup {...props} {...stylex.props(xstyle)} />;
+}: StyledProps<ComponentProps<"optgroup">> & { xstyle?: stylex.StyleXStyles }) {
+  return <optgroup {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />;
 }

@@ -1,5 +1,9 @@
 ## Unreleased
 
+- Customize styled components with className and inline style without losing
+    their built-in styles. Existing xstyle restrictions and styling targets
+    remain available. Check focus and state contrast when overriding appearance.
+
 - Keep palette authoring in OKLCH and ship generated HEX tokens. Existing Zinc
     values and token names are retained; translucent colors use eight-bit alpha.
 

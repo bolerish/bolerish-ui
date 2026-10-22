@@ -364,9 +364,14 @@ test("package consumers build components and both themes without a StyleX plugin
         'import { Button } from "@bolerish/ui/button";',
         'import { themeClassNames } from "@bolerish/ui/theme";',
         'import "@bolerish/ui/global.css";',
+        'import "./custom.css";',
         'document.documentElement.classList.add(...themeClassNames.dark.split(" "));',
-        'createRoot(document.getElementById("root")!).render(<Button>Save</Button>);',
+        'createRoot(document.getElementById("root")!).render(<Button className="consumer-button" style={{ maxWidth: 320 }}>Save</Button>);',
       ].join("\n"),
+    );
+    await writeFile(
+      join(projectDirectory, "src/custom.css"),
+      ".consumer-button { border-radius: 12px; }\n",
     );
     const readme = await readFile(new URL("../../../README.md", import.meta.url), "utf8");
     const examples = [...readme.matchAll(/```tsx\n([\s\S]*?)```/g)];

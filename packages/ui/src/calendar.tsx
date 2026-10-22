@@ -11,6 +11,9 @@ import {
 import { DayButton, DayPicker, type DayButtonProps, type DayPickerProps } from "@daypicker/react";
 import * as stylex from "@stylexjs/stylex";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   root: {
     color: colorVars.fgPrimary,
@@ -171,15 +174,11 @@ function CalendarDayButton({ children, modifiers, ...props }: DayButtonProps) {
 }
 
 type WithoutCalendarStyling<Props> = Props extends unknown
-  ? Omit<
-      Props,
-      | "className"
-      | "classNames"
-      | "components"
-      | "modifiersClassNames"
-      | "modifiersStyles"
-      | "style"
-      | "styles"
+  ? StyledProps<
+      Omit<
+        Props,
+        "classNames" | "components" | "modifiersClassNames" | "modifiersStyles" | "styles"
+      >
     >
   : never;
 
@@ -189,11 +188,17 @@ export type CalendarProps = CalendarDayPickerProps & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function Calendar({ navLayout = "around", xstyle, ...props }: CalendarProps) {
+export function Calendar({
+  className,
+  style,
+  navLayout = "around",
+  xstyle,
+  ...props
+}: CalendarProps) {
   return (
     <DayPicker
       {...props}
-      {...stylex.props(styles.root, xstyle)}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
       classNames={classNames}
       components={{ DayButton: CalendarDayButton }}
       navLayout={navLayout}

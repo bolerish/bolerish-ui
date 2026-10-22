@@ -5,6 +5,8 @@ import { colorVars, spacingRoleVars, spacingVars, typo } from "@bolerish/tokens/
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 import { typographyStyles } from "./typography";
 
 const styles = stylex.create({
@@ -59,86 +61,131 @@ const orientationStyles = stylex.create({
 type StyleProps = { xstyle?: stylex.StyleXStyles };
 type FieldOrientation = "horizontal" | "vertical";
 
-export type FieldProps = Omit<ComponentProps<typeof FieldPrimitive.Root>, "className" | "style"> &
+export type FieldProps = StyledProps<ComponentProps<typeof FieldPrimitive.Root>> &
   StyleProps & { orientation?: FieldOrientation };
 
-export function Field({ orientation = "vertical", xstyle, ...props }: FieldProps) {
+export function Field({
+  className,
+  style,
+  orientation = "vertical",
+  xstyle,
+  ...props
+}: FieldProps) {
   return (
     <FieldPrimitive.Root
       {...props}
       data-orientation={orientation}
-      {...stylex.props(styles.root, orientationStyles[orientation], xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.root, orientationStyles[orientation], xstyle),
+        className,
+        style,
+      )}
     />
   );
 }
 
 export function FieldLabel({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof FieldPrimitive.Label>, "className" | "style"> & StyleProps) {
+}: StyledProps<ComponentProps<typeof FieldPrimitive.Label>> & StyleProps) {
   return (
     <FieldPrimitive.Label
       {...props}
-      {...stylex.props(typographyStyles.label, styles.label, xstyle)}
+      {...mergeStyles(stylex.props(typographyStyles.label, styles.label, xstyle), className, style)}
     />
   );
 }
 
 export function FieldDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof FieldPrimitive.Description>, "className" | "style"> & StyleProps) {
+}: StyledProps<ComponentProps<typeof FieldPrimitive.Description>> & StyleProps) {
   return (
     <FieldPrimitive.Description
       {...props}
-      {...stylex.props(typographyStyles.description, styles.description, xstyle)}
+      {...mergeStyles(
+        stylex.props(typographyStyles.description, styles.description, xstyle),
+        className,
+        style,
+      )}
     />
   );
 }
 
 export function FieldError({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof FieldPrimitive.Error>, "className" | "style"> & StyleProps) {
+}: StyledProps<ComponentProps<typeof FieldPrimitive.Error>> & StyleProps) {
   return (
     <FieldPrimitive.Error
       {...props}
-      {...stylex.props(typographyStyles.description, styles.error, xstyle)}
+      {...mergeStyles(
+        stylex.props(typographyStyles.description, styles.error, xstyle),
+        className,
+        style,
+      )}
     />
   );
 }
 
 export function FieldSet({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"fieldset">, "className" | "style"> & StyleProps) {
-  return <fieldset {...props} {...stylex.props(styles.set, xstyle)} />;
+}: StyledProps<ComponentProps<"fieldset">> & StyleProps) {
+  return (
+    <fieldset {...props} {...mergeStyles(stylex.props(styles.set, xstyle), className, style)} />
+  );
 }
 
 export function FieldLegend({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"legend">, "className" | "style"> & StyleProps) {
-  return <legend {...props} {...stylex.props(styles.legend, xstyle)} />;
+}: StyledProps<ComponentProps<"legend">> & StyleProps) {
+  return (
+    <legend {...props} {...mergeStyles(stylex.props(styles.legend, xstyle), className, style)} />
+  );
 }
 
 export function FieldGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.group, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.group, xstyle), className, style)} />;
 }
 
 export function FieldContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
 export function FieldTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(typographyStyles.label, styles.title, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return (
+    <div
+      {...props}
+      {...mergeStyles(stylex.props(typographyStyles.label, styles.title, xstyle), className, style)}
+    />
+  );
 }

@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -102,23 +104,34 @@ const variantStyles = stylex.create({
 export type ToggleSize = "lg" | "md" | "sm";
 export type ToggleVariant = "default" | "outline" | "soft";
 
-export type ToggleProps = Omit<ComponentProps<typeof TogglePrimitive>, "className" | "style"> & {
+export type ToggleProps = StyledProps<ComponentProps<typeof TogglePrimitive>> & {
   size?: ToggleSize;
   variant?: ToggleVariant;
   xstyle?: ControlLayoutStyles;
 };
 
-export function Toggle({ size = "md", variant = "default", xstyle, ...props }: ToggleProps) {
+export function Toggle({
+  className,
+  style,
+  size = "md",
+  variant = "default",
+  xstyle,
+  ...props
+}: ToggleProps) {
   function getToggleStyles(state: TogglePrimitive.State) {
-    return stylex.props(
-      styles.root,
-      sizeStyles[size],
-      variantStyles[variant],
-      state.pressed && styles.pressed,
-      state.pressed && variant === "soft" && styles.softPressed,
-      state.disabled && !state.pressed && styles.unavailable,
-      state.disabled && styles.disabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.root,
+        sizeStyles[size],
+        variantStyles[variant],
+        state.pressed && styles.pressed,
+        state.pressed && variant === "soft" && styles.softPressed,
+        state.disabled && !state.pressed && styles.unavailable,
+        state.disabled && styles.disabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (

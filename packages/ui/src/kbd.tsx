@@ -9,6 +9,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -33,15 +35,19 @@ const styles = stylex.create({
 });
 
 export function Kbd({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"kbd">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <kbd {...props} {...stylex.props(styles.root, xstyle)} />;
+}: StyledProps<ComponentProps<"kbd">> & { xstyle?: ControlPlacementStyles }) {
+  return <kbd {...props} {...mergeStyles(stylex.props(styles.root, xstyle), className, style)} />;
 }
 
 export function KbdGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <span {...props} {...stylex.props(styles.group, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & { xstyle?: stylex.StyleXStyles }) {
+  return <span {...props} {...mergeStyles(stylex.props(styles.group, xstyle), className, style)} />;
 }

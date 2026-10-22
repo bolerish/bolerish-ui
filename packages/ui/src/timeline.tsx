@@ -9,6 +9,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -103,28 +105,30 @@ const indicatorVariantStyles = stylex.create({
 
 export type TimelineIndicatorVariant = "active" | "complete" | "default" | "error";
 
-export type TimelineProps = Omit<ComponentProps<"ol">, "className" | "style"> & {
+export type TimelineProps = StyledProps<ComponentProps<"ol">> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function Timeline({ xstyle, ...props }: TimelineProps) {
-  return <ol {...props} {...stylex.props(styles.root, xstyle)} />;
+export function Timeline({ className, style, xstyle, ...props }: TimelineProps) {
+  return <ol {...props} {...mergeStyles(stylex.props(styles.root, xstyle), className, style)} />;
 }
 
-export type TimelineItemProps = Omit<ComponentProps<"li">, "className" | "style"> & {
+export type TimelineItemProps = StyledProps<ComponentProps<"li">> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function TimelineItem({ xstyle, ...props }: TimelineItemProps) {
-  return <li {...props} {...stylex.props(styles.item, xstyle)} />;
+export function TimelineItem({ className, style, xstyle, ...props }: TimelineItemProps) {
+  return <li {...props} {...mergeStyles(stylex.props(styles.item, xstyle), className, style)} />;
 }
 
-export type TimelineIndicatorProps = Omit<ComponentProps<"span">, "className" | "style"> & {
+export type TimelineIndicatorProps = StyledProps<ComponentProps<"span">> & {
   variant?: TimelineIndicatorVariant;
   xstyle?: stylex.StyleXStyles;
 };
 
 export function TimelineIndicator({
+  className,
+  style,
   xstyle,
   variant = "default",
   ...props
@@ -133,35 +137,51 @@ export function TimelineIndicator({
     <span
       aria-hidden={props["aria-label"] === undefined ? true : undefined}
       {...props}
-      {...stylex.props(styles.indicator, indicatorVariantStyles[variant], xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.indicator, indicatorVariantStyles[variant], xstyle),
+        className,
+        style,
+      )}
     />
   );
 }
 
 export function TimelineContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
 export function TimelineTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <div {...props} {...stylex.props(styles.title, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: ControlPlacementStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.title, xstyle), className, style)} />;
 }
 
 export function TimelineDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"p">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <p {...props} {...stylex.props(styles.description, xstyle)} />;
+}: StyledProps<ComponentProps<"p">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <p {...props} {...mergeStyles(stylex.props(styles.description, xstyle), className, style)} />
+  );
 }
 
 export function TimelineTime({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"time">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <time {...props} {...stylex.props(styles.time, xstyle)} />;
+}: StyledProps<ComponentProps<"time">> & { xstyle?: ControlPlacementStyles }) {
+  return <time {...props} {...mergeStyles(stylex.props(styles.time, xstyle), className, style)} />;
 }

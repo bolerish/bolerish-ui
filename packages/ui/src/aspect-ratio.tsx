@@ -1,6 +1,9 @@
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   root: (ratio: number) => ({
     aspectRatio: ratio,
@@ -10,11 +13,13 @@ const styles = stylex.create({
   }),
 });
 
-export type AspectRatioProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type AspectRatioProps = StyledProps<ComponentProps<"div">> & {
   ratio?: number;
   xstyle?: stylex.StyleXStyles;
 };
 
-export function AspectRatio({ ratio = 1, xstyle, ...props }: AspectRatioProps) {
-  return <div {...props} {...stylex.props(styles.root(ratio), xstyle)} />;
+export function AspectRatio({ className, style, ratio = 1, xstyle, ...props }: AspectRatioProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.root(ratio), xstyle), className, style)} />
+  );
 }

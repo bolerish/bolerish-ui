@@ -14,6 +14,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { alignItems: "center", display: "flex", gap: spacingVars.space2 },
@@ -55,36 +57,56 @@ const styles = stylex.create({
   separator: { color: colorVars.fgTertiary, paddingInline: spacingVars.space1 },
 });
 
-export type InputOTPProps = Omit<ComponentProps<typeof OTPField.Root>, "className" | "style"> & {
+export type InputOTPProps = StyledProps<ComponentProps<typeof OTPField.Root>> & {
   xstyle?: ControlLayoutStyles;
 };
 
-export function InputOTP({ xstyle, ...props }: InputOTPProps) {
-  return <OTPField.Root {...props} {...stylex.props(styles.root, xstyle)} />;
+export function InputOTP({ className, style, xstyle, ...props }: InputOTPProps) {
+  return (
+    <OTPField.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export function InputOTPGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.group, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.group, xstyle), className, style)} />;
 }
 
 export function InputOTPSlot({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof OTPField.Input>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof OTPField.Input>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <OTPField.Input {...props} {...stylex.props(styles.slot, xstyle)} />;
+  return (
+    <OTPField.Input
+      {...props}
+      {...mergeStyles(stylex.props(styles.slot, xstyle), className, style)}
+    />
+  );
 }
 
 export function InputOTPSeparator({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
+}: StyledProps<ComponentProps<"span">> & { xstyle?: ControlPlacementStyles }) {
   return (
-    <span aria-hidden="true" {...props} {...stylex.props(styles.separator, xstyle)}>
+    <span
+      aria-hidden="true"
+      {...props}
+      {...mergeStyles(stylex.props(styles.separator, xstyle), className, style)}
+    >
       {props.children ?? "–"}
     </span>
   );

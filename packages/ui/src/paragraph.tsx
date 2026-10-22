@@ -3,6 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 import { typographyStyles } from "./typography";
 
 const styles = stylex.create({
@@ -11,20 +13,30 @@ const styles = stylex.create({
   caption: { color: colorVars.fgTertiary },
 });
 
-export type ParagraphProps = Omit<ComponentProps<"p">, "className" | "style"> & {
+export type ParagraphProps = StyledProps<ComponentProps<"p">> & {
   variant?: "body" | "description" | "caption";
   xstyle?: ControlLayoutStyles;
 };
 
-export function Paragraph({ variant = "body", xstyle, ...props }: ParagraphProps) {
+export function Paragraph({
+  className,
+  style,
+  variant = "body",
+  xstyle,
+  ...props
+}: ParagraphProps) {
   return (
     <p
       {...props}
-      {...stylex.props(
-        styles.root,
-        typographyStyles[variant],
-        variant !== "body" && styles[variant],
-        xstyle,
+      {...mergeStyles(
+        stylex.props(
+          styles.root,
+          typographyStyles[variant],
+          variant !== "body" && styles[variant],
+          xstyle,
+        ),
+        className,
+        style,
       )}
     />
   );

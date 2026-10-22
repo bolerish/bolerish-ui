@@ -9,6 +9,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -59,11 +61,16 @@ const variantStyles = stylex.create({
 
 type BadgeVariant = "primary" | "secondary" | "destructive" | "outline" | "ghost";
 
-export type BadgeProps = Omit<ComponentProps<"span">, "className" | "style"> & {
+export type BadgeProps = StyledProps<ComponentProps<"span">> & {
   variant?: BadgeVariant;
   xstyle?: ControlPlacementStyles;
 };
 
-export function Badge({ xstyle, variant = "primary", ...props }: BadgeProps) {
-  return <span {...props} {...stylex.props(styles.root, variantStyles[variant], xstyle)} />;
+export function Badge({ className, style, xstyle, variant = "primary", ...props }: BadgeProps) {
+  return (
+    <span
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, variantStyles[variant], xstyle), className, style)}
+    />
+  );
 }

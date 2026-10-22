@@ -14,6 +14,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -90,23 +92,36 @@ const styles = stylex.create({
 });
 
 export function Collapsible({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof CollapsiblePrimitive.Root>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof CollapsiblePrimitive.Root>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <CollapsiblePrimitive.Root {...props} {...stylex.props(styles.root, xstyle)} />;
+  return (
+    <CollapsiblePrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export function CollapsibleTrigger({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof CollapsiblePrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof CollapsiblePrimitive.Trigger>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getTriggerStyles(state: CollapsiblePrimitive.Trigger.State) {
-    return stylex.props(styles.trigger, state.disabled && styles.triggerDisabled, xstyle);
+    return mergeStyles(
+      stylex.props(styles.trigger, state.disabled && styles.triggerDisabled, xstyle),
+      className,
+      style,
+    );
   }
   return (
     <CollapsiblePrimitive.Trigger
@@ -123,18 +138,24 @@ export function CollapsibleTrigger({
 }
 
 export function CollapsiblePanel({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof CollapsiblePrimitive.Panel>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof CollapsiblePrimitive.Panel>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
   function getPanelStyles(state: CollapsiblePrimitive.Panel.State) {
-    return stylex.props(
-      styles.panel,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.panelTransitioning,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.panel,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.panelTransitioning,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -149,8 +170,12 @@ export function CollapsiblePanel({
 }
 
 export function CollapsibleContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.panelContent, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.panelContent, xstyle), className, style)} />
+  );
 }

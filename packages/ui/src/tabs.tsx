@@ -14,6 +14,8 @@ import * as stylex from "@stylexjs/stylex";
 import { createContext, type ComponentProps, useContext } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { minWidth: 0, width: "100%" },
@@ -144,26 +146,31 @@ const indicatorVariantStyles = stylex.create({
 });
 
 export type TabsVariant = "segmented" | "underline";
-export type TabsProps = Omit<ComponentProps<typeof TabsPrimitive.Root>, "className" | "style"> & {
+export type TabsProps = StyledProps<ComponentProps<typeof TabsPrimitive.Root>> & {
   variant?: TabsVariant;
   xstyle?: stylex.StyleXStyles;
 };
 
 const TabsVariantContext = createContext<TabsVariant>("segmented");
 
-export function Tabs({ xstyle, variant = "segmented", ...props }: TabsProps) {
+export function Tabs({ className, style, xstyle, variant = "segmented", ...props }: TabsProps) {
   return (
     <TabsVariantContext.Provider value={variant}>
-      <TabsPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)} />
+      <TabsPrimitive.Root
+        {...props}
+        {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+      />
     </TabsVariantContext.Provider>
   );
 }
 
 export function TabsList({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof TabsPrimitive.List>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof TabsPrimitive.List>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
   const variant = useContext(TabsVariantContext);
@@ -171,7 +178,11 @@ export function TabsList({
   return (
     <TabsPrimitive.List
       {...props}
-      {...stylex.props(styles.list, listVariantStyles[variant], xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.list, listVariantStyles[variant], xstyle),
+        className,
+        style,
+      )}
     >
       {children}
       <TabsPrimitive.Indicator
@@ -182,20 +193,26 @@ export function TabsList({
 }
 
 export function TabsTrigger({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof TabsPrimitive.Tab>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof TabsPrimitive.Tab>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   const variant = useContext(TabsVariantContext);
 
   function getTabStyles(state: TabsPrimitive.Tab.State) {
-    return stylex.props(
-      styles.trigger,
-      triggerVariantStyles[variant],
-      state.active && styles.triggerActive,
-      state.disabled && styles.triggerDisabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.trigger,
+        triggerVariantStyles[variant],
+        state.active && styles.triggerActive,
+        state.disabled && styles.triggerDisabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -208,10 +225,17 @@ export function TabsTrigger({
 }
 
 export function TabsContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof TabsPrimitive.Panel>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof TabsPrimitive.Panel>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <TabsPrimitive.Panel {...props} {...stylex.props(styles.panel, xstyle)} />;
+  return (
+    <TabsPrimitive.Panel
+      {...props}
+      {...mergeStyles(stylex.props(styles.panel, xstyle), className, style)}
+    />
+  );
 }

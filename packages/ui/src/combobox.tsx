@@ -16,6 +16,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
 import type { ControlLayoutStyles, ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   inputGroup: {
@@ -178,21 +180,27 @@ const styles = stylex.create({
 export const Combobox = ComboboxPrimitive.Root;
 export const ComboboxCollection = ComboboxPrimitive.Collection;
 export function ComboboxGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.Group>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.Group>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <ComboboxPrimitive.Group {...props} {...stylex.props(xstyle)} />;
+  return (
+    <ComboboxPrimitive.Group {...props} {...mergeStyles(stylex.props(xstyle), className, style)} />
+  );
 }
 
 export function ComboboxInput({
+  className,
+  style,
   xstyle,
   variant = "outline",
   startAddon,
   endAddon,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.Input>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.Input>> & {
   xstyle?: ControlLayoutStyles;
   variant?: "outline" | "inline";
   startAddon?: ReactNode;
@@ -207,7 +215,11 @@ export function ComboboxInput({
 
   return (
     <ComboboxPrimitive.InputGroup
-      {...stylex.props(styles.inputGroup, variant === "inline" && styles.inline, xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.inputGroup, variant === "inline" && styles.inline, xstyle),
+        className,
+        style,
+      )}
     >
       {startAddon ?? (
         <MagnifyingGlassIcon aria-hidden="true" {...stylex.props(styles.searchIcon)} />
@@ -230,16 +242,15 @@ export function ComboboxInput({
   );
 }
 
-type ComboboxPopupProps = Omit<
-  ComponentProps<typeof ComboboxPrimitive.Popup>,
-  "className" | "style"
-> &
+type ComboboxPopupProps = StyledProps<ComponentProps<typeof ComboboxPrimitive.Popup>> &
   Pick<ComponentProps<typeof ComboboxPrimitive.Positioner>, "align" | "side" | "sideOffset"> & {
     children: ReactNode;
     xstyle?: stylex.StyleXStyles;
   };
 
 export function ComboboxPopup({
+  className,
+  style,
   xstyle,
   align = "start",
   children,
@@ -248,12 +259,16 @@ export function ComboboxPopup({
   ...props
 }: ComboboxPopupProps) {
   function getPopupStyles(state: ComboboxPrimitive.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.popupTransitioning,
-      state.transitionStatus === "ending" && styles.popupEnding,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.popupTransitioning,
+        state.transitionStatus === "ending" && styles.popupEnding,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -277,18 +292,24 @@ export function ComboboxPopup({
 }
 
 export function ComboboxItem({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.Item>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.Item>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getItemStyles(state: ComboboxPrimitive.Item.State) {
-    return stylex.props(
-      styles.item,
-      state.highlighted && styles.itemHighlighted,
-      state.disabled && styles.itemDisabled,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.item,
+        state.highlighted && styles.itemHighlighted,
+        state.disabled && styles.itemDisabled,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -306,37 +327,65 @@ export function ComboboxItem({
 }
 
 export function ComboboxEmpty({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.Empty>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.Empty>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <ComboboxPrimitive.Empty {...props} {...stylex.props(styles.empty, xstyle)} />;
+  return (
+    <ComboboxPrimitive.Empty
+      {...props}
+      {...mergeStyles(stylex.props(styles.empty, xstyle), className, style)}
+    />
+  );
 }
 
 export function ComboboxLabel({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.GroupLabel>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.GroupLabel>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <ComboboxPrimitive.GroupLabel {...props} {...stylex.props(styles.label, xstyle)} />;
+  return (
+    <ComboboxPrimitive.GroupLabel
+      {...props}
+      {...mergeStyles(stylex.props(styles.label, xstyle), className, style)}
+    />
+  );
 }
 
 export function ComboboxSeparator({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.Separator>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.Separator>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <ComboboxPrimitive.Separator {...props} {...stylex.props(styles.separator, xstyle)} />;
+  return (
+    <ComboboxPrimitive.Separator
+      {...props}
+      {...mergeStyles(stylex.props(styles.separator, xstyle), className, style)}
+    />
+  );
 }
 
 export function ComboboxList({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ComboboxPrimitive.List>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ComboboxPrimitive.List>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <ComboboxPrimitive.List {...props} {...stylex.props(styles.list, xstyle)} />;
+  return (
+    <ComboboxPrimitive.List
+      {...props}
+      {...mergeStyles(stylex.props(styles.list, xstyle), className, style)}
+    />
+  );
 }

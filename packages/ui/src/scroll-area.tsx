@@ -5,6 +5,9 @@ import { colorVars, motionVars, radiusVars, spacingVars } from "@bolerish/tokens
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   root: { overflow: "hidden", position: "relative" },
   viewport: { height: "100%", width: "100%" },
@@ -38,23 +41,25 @@ const orientationStyles = stylex.create({
   vertical: { height: "100%", width: 10 },
 });
 
-export type ScrollAreaProps = Omit<
-  ComponentProps<typeof ScrollAreaPrimitive.Root>,
-  "className" | "style"
-> & {
+export type ScrollAreaProps = StyledProps<ComponentProps<typeof ScrollAreaPrimitive.Root>> & {
   children: ReactNode;
   scrollbars?: "both" | "horizontal" | "vertical";
   xstyle?: stylex.StyleXStyles;
 };
 
 export function ScrollArea({
+  className,
+  style,
   children,
   scrollbars = "vertical",
   xstyle,
   ...props
 }: ScrollAreaProps) {
   return (
-    <ScrollAreaPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)}>
+    <ScrollAreaPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    >
       {children}
       {scrollbars === "vertical" || scrollbars === "both" ? (
         <ScrollBar orientation="vertical" />
@@ -68,16 +73,22 @@ export function ScrollArea({
 }
 
 export function ScrollBar({
+  className,
+  style,
   xstyle,
   orientation = "vertical",
   ...props
-}: Omit<ComponentProps<typeof ScrollAreaPrimitive.Scrollbar>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ScrollAreaPrimitive.Scrollbar>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
   return (
     <ScrollAreaPrimitive.Scrollbar
       {...props}
-      {...stylex.props(styles.scrollbar, orientationStyles[orientation], xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.scrollbar, orientationStyles[orientation], xstyle),
+        className,
+        style,
+      )}
       orientation={orientation}
     >
       <ScrollAreaPrimitive.Thumb {...stylex.props(styles.thumb)} />
@@ -86,19 +97,33 @@ export function ScrollBar({
 }
 
 export function ScrollAreaViewport({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ScrollAreaPrimitive.Viewport>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ScrollAreaPrimitive.Viewport>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <ScrollAreaPrimitive.Viewport {...props} {...stylex.props(styles.viewport, xstyle)} />;
+  return (
+    <ScrollAreaPrimitive.Viewport
+      {...props}
+      {...mergeStyles(stylex.props(styles.viewport, xstyle), className, style)}
+    />
+  );
 }
 
 export function ScrollAreaContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ScrollAreaPrimitive.Content>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ScrollAreaPrimitive.Content>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <ScrollAreaPrimitive.Content {...props} {...stylex.props(styles.content, xstyle)} />;
+  return (
+    <ScrollAreaPrimitive.Content
+      {...props}
+      {...mergeStyles(stylex.props(styles.content, xstyle), className, style)}
+    />
+  );
 }

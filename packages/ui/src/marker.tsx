@@ -3,6 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -46,25 +48,42 @@ const variantStyles = stylex.create({
   },
 });
 
-export type MarkerProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type MarkerProps = StyledProps<ComponentProps<"div">> & {
   variant?: "border" | "default" | "separator";
   xstyle?: stylex.StyleXStyles;
 };
 
-export function Marker({ variant = "default", xstyle, ...props }: MarkerProps) {
-  return <div {...props} {...stylex.props(styles.root, variantStyles[variant], xstyle)} />;
+export function Marker({ className, style, variant = "default", xstyle, ...props }: MarkerProps) {
+  return (
+    <div
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, variantStyles[variant], xstyle), className, style)}
+    />
+  );
 }
 
 export function MarkerIcon({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <span aria-hidden="true" {...props} {...stylex.props(styles.icon, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <span
+      aria-hidden="true"
+      {...props}
+      {...mergeStyles(stylex.props(styles.icon, xstyle), className, style)}
+    />
+  );
 }
 
 export function MarkerContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <span {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <span {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }

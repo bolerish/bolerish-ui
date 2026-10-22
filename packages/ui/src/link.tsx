@@ -7,6 +7,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -52,17 +54,25 @@ const variantStyles = stylex.create({
 
 export type LinkVariant = "current" | "inline" | "plain";
 
-export type LinkProps = Omit<useRender.ComponentProps<"a">, "className" | "style"> & {
+export type LinkProps = StyledProps<useRender.ComponentProps<"a">> & {
   variant?: LinkVariant;
   xstyle?: ControlPlacementStyles;
 };
 
-function LinkBase({ xstyle, ref, render, variant = "inline", ...props }: LinkProps) {
+function LinkBase({
+  className,
+  style,
+  xstyle,
+  ref,
+  render,
+  variant = "inline",
+  ...props
+}: LinkProps) {
   return useRender({
     defaultTagName: "a",
     props: {
       ...props,
-      ...stylex.props(styles.root, variantStyles[variant], xstyle),
+      ...mergeStyles(stylex.props(styles.root, variantStyles[variant], xstyle), className, style),
     },
     ref,
     render,
@@ -70,12 +80,21 @@ function LinkBase({ xstyle, ref, render, variant = "inline", ...props }: LinkPro
 }
 
 function ExternalIcon({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof ArrowSquareOutIcon>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof ArrowSquareOutIcon>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <ArrowSquareOutIcon aria-hidden="true" size="1em" {...props} {...stylex.props(xstyle)} />;
+  return (
+    <ArrowSquareOutIcon
+      aria-hidden="true"
+      size="1em"
+      {...props}
+      {...mergeStyles(stylex.props(xstyle), className, style)}
+    />
+  );
 }
 
 export const Link = Object.assign(LinkBase, { ExternalIcon });

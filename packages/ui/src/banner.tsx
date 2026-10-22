@@ -2,6 +2,9 @@ import { colorVars, radiusVars, spacingVars, typo } from "@bolerish/tokens/seman
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
+
 const styles = stylex.create({
   root: {
     backgroundColor: colorVars.bgSubtle,
@@ -46,14 +49,23 @@ export type BannerAnnounce = "assertive" | "polite";
 
 type StyleProps = { xstyle?: stylex.StyleXStyles };
 
-export type BannerProps = Omit<ComponentProps<"div">, "title" | "className" | "style"> &
+export type BannerProps = StyledProps<Omit<ComponentProps<"div">, "title">> &
   StyleProps & {
     /** Announces a Banner that is added or updated after the initial page render. */
     announce?: BannerAnnounce;
     size?: BannerSize;
   };
 
-export function Banner({ announce, children, role, size = "md", xstyle, ...props }: BannerProps) {
+export function Banner({
+  className,
+  style,
+  announce,
+  children,
+  role,
+  size = "md",
+  xstyle,
+  ...props
+}: BannerProps) {
   let liveRole: "alert" | "status" | undefined;
   if (announce === "assertive") {
     liveRole = "alert";
@@ -65,7 +77,7 @@ export function Banner({ announce, children, role, size = "md", xstyle, ...props
     <div
       {...props}
       role={role ?? liveRole}
-      {...stylex.props(styles.root, sizeStyles[size], xstyle)}
+      {...mergeStyles(stylex.props(styles.root, sizeStyles[size], xstyle), className, style)}
     >
       {children}
     </div>
@@ -73,29 +85,41 @@ export function Banner({ announce, children, role, size = "md", xstyle, ...props
 }
 
 export function BannerTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.title, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.title, xstyle), className, style)} />;
 }
 
 export function BannerDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.description, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.description, xstyle), className, style)} />
+  );
 }
 
 export function BannerContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
 export function BannerActions({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & StyleProps) {
-  return <div {...props} {...stylex.props(styles.action, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & StyleProps) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.action, xstyle), className, style)} />;
 }

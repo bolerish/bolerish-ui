@@ -12,6 +12,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -83,55 +85,77 @@ const sizeStyles = stylex.create({
 
 export type AvatarSize = "lg" | "md" | "sm";
 
-export type AvatarProps = Omit<
-  ComponentProps<typeof AvatarPrimitive.Root>,
-  "className" | "style"
-> & {
+export type AvatarProps = StyledProps<ComponentProps<typeof AvatarPrimitive.Root>> & {
   size?: AvatarSize;
   xstyle?: ControlPlacementStyles;
 };
 
-export function Avatar({ xstyle, size = "md", ...props }: AvatarProps) {
+export function Avatar({ className, style, xstyle, size = "md", ...props }: AvatarProps) {
   return (
-    <AvatarPrimitive.Root {...props} {...stylex.props(styles.root, sizeStyles[size], xstyle)} />
+    <AvatarPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, sizeStyles[size], xstyle), className, style)}
+    />
   );
 }
 
 export function AvatarImage({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof AvatarPrimitive.Image>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AvatarPrimitive.Image>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <AvatarPrimitive.Image {...props} {...stylex.props(styles.image, xstyle)} />;
+  return (
+    <AvatarPrimitive.Image
+      {...props}
+      {...mergeStyles(stylex.props(styles.image, xstyle), className, style)}
+    />
+  );
 }
 
 export function AvatarFallback({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof AvatarPrimitive.Fallback>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof AvatarPrimitive.Fallback>> & {
   xstyle?: ControlPlacementStyles;
 }) {
-  return <AvatarPrimitive.Fallback {...props} {...stylex.props(styles.fallback, xstyle)} />;
+  return (
+    <AvatarPrimitive.Fallback
+      {...props}
+      {...mergeStyles(stylex.props(styles.fallback, xstyle), className, style)}
+    />
+  );
 }
 
 export function AvatarBadge({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <span {...props} {...stylex.props(styles.badge, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & { xstyle?: ControlPlacementStyles }) {
+  return <span {...props} {...mergeStyles(stylex.props(styles.badge, xstyle), className, style)} />;
 }
 
 export function AvatarGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.group, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.group, xstyle), className, style)} />;
 }
 
 export function AvatarGroupCount({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <span {...props} {...stylex.props(styles.groupCount, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <span {...props} {...mergeStyles(stylex.props(styles.groupCount, xstyle), className, style)} />
+  );
 }

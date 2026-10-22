@@ -19,6 +19,8 @@ import {
 } from "react";
 
 import { Separator } from "./separator";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -130,10 +132,12 @@ function getItemPositionStyle(
 }
 
 /** Direct children must be Nuee buttons or components that forward xstyle. Fragments and native elements are not styled as group items. */
-export type ButtonGroupProps = Omit<ComponentProps<"div">, "className" | "style"> &
+export type ButtonGroupProps = StyledProps<ComponentProps<"div">> &
   StyleProps & { orientation?: "horizontal" | "vertical" };
 
 export function ButtonGroup({
+  className,
+  style,
   children,
   orientation = "horizontal",
   role,
@@ -173,7 +177,11 @@ export function ButtonGroup({
       {...props}
       data-orientation={orientation}
       role={role ?? "group"}
-      {...stylex.props(styles.root, orientationStyles[orientation], xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.root, orientationStyles[orientation], xstyle),
+        className,
+        style,
+      )}
     >
       {content}
     </div>
@@ -181,16 +189,18 @@ export function ButtonGroup({
 }
 
 export function ButtonGroupText({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & StyleProps) {
-  return <span {...props} {...stylex.props(styles.text, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & StyleProps) {
+  return <span {...props} {...mergeStyles(stylex.props(styles.text, xstyle), className, style)} />;
 }
 
 export function ButtonGroupSeparator({
   orientation = "vertical",
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof Separator>, "className" | "style"> & StyleProps) {
+}: StyledProps<ComponentProps<typeof Separator>> & StyleProps) {
   return <Separator {...props} orientation={orientation} xstyle={[styles.separator, xstyle]} />;
 }

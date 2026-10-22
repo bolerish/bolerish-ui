@@ -16,6 +16,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlLayoutStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -171,46 +173,73 @@ const exitStyles = stylex.create({
 });
 
 export function NavigationMenu({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof NavigationMenuPrimitive.Root>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof NavigationMenuPrimitive.Root>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <NavigationMenuPrimitive.Root {...props} {...stylex.props(styles.root, xstyle)} />;
+  return (
+    <NavigationMenuPrimitive.Root
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export function NavigationMenuList({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof NavigationMenuPrimitive.List>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof NavigationMenuPrimitive.List>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <NavigationMenuPrimitive.List {...props} {...stylex.props(styles.list, xstyle)} />;
+  return (
+    <NavigationMenuPrimitive.List
+      {...props}
+      {...mergeStyles(stylex.props(styles.list, xstyle), className, style)}
+    />
+  );
 }
 
 export function NavigationMenuItem({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof NavigationMenuPrimitive.Item>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof NavigationMenuPrimitive.Item>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
-  return <NavigationMenuPrimitive.Item {...props} {...stylex.props(styles.item, xstyle)} />;
+  return (
+    <NavigationMenuPrimitive.Item
+      {...props}
+      {...mergeStyles(stylex.props(styles.item, xstyle), className, style)}
+    />
+  );
 }
 
 export function NavigationMenuContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof NavigationMenuPrimitive.Content>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof NavigationMenuPrimitive.Content>> & {
   xstyle?: stylex.StyleXStyles;
 }) {
   function getContentStyles(state: NavigationMenuPrimitive.Content.State) {
     const { transitionStatus, activationDirection } = state;
     const hasDirection = activationDirection === "left" || activationDirection === "right";
-    return stylex.props(
-      styles.content,
-      hasDirection && transitionStatus === "starting" && enterStyles[activationDirection],
-      hasDirection && transitionStatus === "ending" && exitStyles[activationDirection],
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.content,
+        hasDirection && transitionStatus === "starting" && enterStyles[activationDirection],
+        hasDirection && transitionStatus === "ending" && exitStyles[activationDirection],
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (
@@ -223,14 +252,20 @@ export function NavigationMenuContent({
 }
 
 export function NavigationMenuTrigger({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<typeof NavigationMenuPrimitive.Trigger>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof NavigationMenuPrimitive.Trigger>> & {
   xstyle?: ControlLayoutStyles;
 }) {
   function getTriggerStyles(state: NavigationMenuPrimitive.Trigger.State) {
-    return stylex.props(styles.trigger, state.open && styles.triggerOpen, xstyle);
+    return mergeStyles(
+      stylex.props(styles.trigger, state.open && styles.triggerOpen, xstyle),
+      className,
+      style,
+    );
   }
   return (
     <NavigationMenuPrimitive.Trigger
@@ -247,17 +282,23 @@ export function NavigationMenuTrigger({
 }
 
 export function NavigationMenuLink({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<typeof NavigationMenuPrimitive.Link>, "className" | "style"> & {
+}: StyledProps<ComponentProps<typeof NavigationMenuPrimitive.Link>> & {
   xstyle?: ControlLayoutStyles;
 }) {
-  return <NavigationMenuPrimitive.Link {...props} {...stylex.props(styles.link, xstyle)} />;
+  return (
+    <NavigationMenuPrimitive.Link
+      {...props}
+      {...mergeStyles(stylex.props(styles.link, xstyle), className, style)}
+    />
+  );
 }
 
-type NavigationMenuViewportProps = Omit<
-  ComponentProps<typeof NavigationMenuPrimitive.Popup>,
-  "className" | "style"
+type NavigationMenuViewportProps = StyledProps<
+  ComponentProps<typeof NavigationMenuPrimitive.Popup>
 > &
   Pick<
     ComponentProps<typeof NavigationMenuPrimitive.Positioner>,
@@ -265,6 +306,8 @@ type NavigationMenuViewportProps = Omit<
   > & { xstyle?: stylex.StyleXStyles };
 
 export function NavigationMenuViewport({
+  className,
+  style,
   xstyle,
   align = "start",
   side = "bottom",
@@ -272,11 +315,15 @@ export function NavigationMenuViewport({
   ...props
 }: NavigationMenuViewportProps) {
   function getPopupStyles(state: NavigationMenuPrimitive.Popup.State) {
-    return stylex.props(
-      styles.popup,
-      (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
-        styles.popupTransitioning,
-      xstyle,
+    return mergeStyles(
+      stylex.props(
+        styles.popup,
+        (state.transitionStatus === "starting" || state.transitionStatus === "ending") &&
+          styles.popupTransitioning,
+        xstyle,
+      ),
+      className,
+      style,
     );
   }
   return (

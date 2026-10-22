@@ -28,29 +28,28 @@ import type { ToggleGroupItem } from "../dist/toggle-group.js";
 import type { Toggle } from "../dist/toggle.js";
 
 type Assert<Value extends true> = Value;
-type HasOnlyStylex<Props> =
-  Extract<keyof Props, "className" | "style"> extends never ? true : false;
+type HasStylingProps<Props> = "className" | "style" extends keyof Props ? true : false;
 type HasXstyle<Props> = "xstyle" extends keyof Props ? true : false;
-export type ButtonContract = Assert<HasOnlyStylex<ComponentProps<typeof Button>>>;
-export type CardContract = Assert<HasOnlyStylex<ComponentProps<typeof Card>>>;
-export type AccordionContract = Assert<HasOnlyStylex<ComponentProps<typeof AccordionTrigger>>>;
-export type SelectContract = Assert<HasOnlyStylex<ComponentProps<typeof SelectTrigger>>>;
-export type ToggleGroupContract = Assert<HasOnlyStylex<ComponentProps<typeof ToggleGroupItem>>>;
-export type InputContract = Assert<HasOnlyStylex<ComponentProps<typeof Input>>>;
-export type TableContract = Assert<HasOnlyStylex<ComponentProps<typeof Table>>>;
-export type CarouselContract = Assert<HasOnlyStylex<ComponentProps<typeof Carousel>>>;
-export type CalendarContract = Assert<HasOnlyStylex<ComponentProps<typeof Calendar>>>;
-export type BannerContract = Assert<HasOnlyStylex<BannerProps>>;
+export type ButtonContract = Assert<HasStylingProps<ComponentProps<typeof Button>>>;
+export type CardContract = Assert<HasStylingProps<ComponentProps<typeof Card>>>;
+export type AccordionContract = Assert<HasStylingProps<ComponentProps<typeof AccordionTrigger>>>;
+export type SelectContract = Assert<HasStylingProps<ComponentProps<typeof SelectTrigger>>>;
+export type ToggleGroupContract = Assert<HasStylingProps<ComponentProps<typeof ToggleGroupItem>>>;
+export type InputContract = Assert<HasStylingProps<ComponentProps<typeof Input>>>;
+export type TableContract = Assert<HasStylingProps<ComponentProps<typeof Table>>>;
+export type CarouselContract = Assert<HasStylingProps<ComponentProps<typeof Carousel>>>;
+export type CalendarContract = Assert<HasStylingProps<ComponentProps<typeof Calendar>>>;
+export type BannerContract = Assert<HasStylingProps<BannerProps>>;
 export type LabelContract = Assert<HasXstyle<ComponentProps<typeof Label>>>;
 export type BadgeContract = Assert<HasXstyle<ComponentProps<typeof Badge>>>;
 export type KbdContract = Assert<HasXstyle<ComponentProps<typeof Kbd>>>;
 export type SpinnerContract = Assert<HasXstyle<ComponentProps<typeof Spinner>>>;
 export type AvatarContract = Assert<HasXstyle<ComponentProps<typeof Avatar>>>;
 export type LinkContract = Assert<HasXstyle<ComponentProps<typeof Link>>>;
-export type AvatarStyleOnlyContract = Assert<HasOnlyStylex<ComponentProps<typeof Avatar>>>;
-export type LinkStyleOnlyContract = Assert<HasOnlyStylex<ComponentProps<typeof Link>>>;
-export type TimelineContract = Assert<HasOnlyStylex<ComponentProps<typeof Timeline>>>;
-export type TimelineItemContract = Assert<HasOnlyStylex<ComponentProps<typeof TimelineItem>>>;
+export type AvatarStylingContract = Assert<HasStylingProps<ComponentProps<typeof Avatar>>>;
+export type LinkStylingContract = Assert<HasStylingProps<ComponentProps<typeof Link>>>;
+export type TimelineContract = Assert<HasStylingProps<ComponentProps<typeof Timeline>>>;
+export type TimelineItemContract = Assert<HasStylingProps<ComponentProps<typeof TimelineItem>>>;
 export const bannerWithReactChildren: BannerProps = { children: <strong>Notice</strong> };
 
 const styles = stylex.create({
@@ -181,4 +180,10 @@ export const removedContentStyle: import("react").ComponentProps<
 export const removedContainerStyle: ComponentProps<typeof Table> = {
   // @ts-expect-error The container is a separate component.
   containerXstyle: styles.layout,
+};
+
+export const buttonCss: ComponentProps<typeof Button> = {
+  children: "Save",
+  className: "consumer-button",
+  style: { maxWidth: 320, opacity: 0.9 },
 };

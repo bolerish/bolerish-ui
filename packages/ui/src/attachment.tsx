@@ -13,6 +13,8 @@ import type { ComponentProps } from "react";
 
 import { Button, type ButtonProps } from "./button";
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: {
@@ -129,7 +131,7 @@ const sizeStyles = stylex.create({
 export type AttachmentState = "done" | "error" | "idle" | "processing" | "uploading";
 export type AttachmentSize = "default" | "sm" | "xs";
 
-export type AttachmentProps = Omit<ComponentProps<"div">, "title" | "className" | "style"> & {
+export type AttachmentProps = StyledProps<Omit<ComponentProps<"div">, "title">> & {
   orientation?: "horizontal" | "vertical";
   size?: AttachmentSize;
   state?: AttachmentState;
@@ -137,6 +139,8 @@ export type AttachmentProps = Omit<ComponentProps<"div">, "title" | "className" 
 };
 
 export function Attachment({
+  className,
+  style,
   orientation = "horizontal",
   size = "default",
   state = "done",
@@ -148,52 +152,85 @@ export function Attachment({
       {...props}
       data-orientation={orientation}
       data-state={state}
-      {...stylex.props(
-        styles.root,
-        orientationStyles[orientation],
-        sizeStyles[size],
-        state === "error" && styles.error,
-        xstyle,
+      {...mergeStyles(
+        stylex.props(
+          styles.root,
+          orientationStyles[orientation],
+          sizeStyles[size],
+          state === "error" && styles.error,
+          xstyle,
+        ),
+        className,
+        style,
       )}
     />
   );
 }
 
-export type AttachmentMediaProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type AttachmentMediaProps = StyledProps<ComponentProps<"div">> & {
   variant?: "icon" | "image";
   xstyle?: stylex.StyleXStyles;
 };
 
-export function AttachmentMedia({ xstyle, variant = "icon", ...props }: AttachmentMediaProps) {
-  return <div {...props} {...stylex.props(styles.media, mediaVariantStyles[variant], xstyle)} />;
+export function AttachmentMedia({
+  className,
+  style,
+  xstyle,
+  variant = "icon",
+  ...props
+}: AttachmentMediaProps) {
+  return (
+    <div
+      {...props}
+      {...mergeStyles(
+        stylex.props(styles.media, mediaVariantStyles[variant], xstyle),
+        className,
+        style,
+      )}
+    />
+  );
 }
 
 export function AttachmentContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
 export function AttachmentTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <div {...props} {...stylex.props(styles.title, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: ControlPlacementStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.title, xstyle), className, style)} />;
 }
 
 export function AttachmentDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"p">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <p {...props} {...stylex.props(styles.description, xstyle)} />;
+}: StyledProps<ComponentProps<"p">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <p {...props} {...mergeStyles(stylex.props(styles.description, xstyle), className, style)} />
+  );
 }
 
 export function AttachmentActions({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.actions, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.actions, xstyle), className, style)} />
+  );
 }
 
 export type AttachmentActionProps = Omit<ButtonProps, "size" | "variant">;
@@ -203,16 +240,26 @@ export function AttachmentAction({ xstyle, ...props }: AttachmentActionProps) {
 }
 
 export function AttachmentTrigger({
+  className,
+  style,
   xstyle,
   type = "button",
   ...props
-}: Omit<ComponentProps<"button">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <button {...props} type={type} {...stylex.props(styles.trigger, xstyle)} />;
+}: StyledProps<ComponentProps<"button">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <button
+      {...props}
+      type={type}
+      {...mergeStyles(stylex.props(styles.trigger, xstyle), className, style)}
+    />
+  );
 }
 
 export function AttachmentGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.group, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.group, xstyle), className, style)} />;
 }

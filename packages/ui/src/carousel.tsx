@@ -16,6 +16,8 @@ import {
 } from "react";
 
 import { Button } from "./button";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { position: "relative", width: "100%" },
@@ -61,7 +63,7 @@ function useCarousel() {
 
 export type { CarouselApi };
 
-export type CarouselProps = Omit<ComponentProps<"section">, "className" | "style"> & {
+export type CarouselProps = StyledProps<ComponentProps<"section">> & {
   children: ReactNode;
   onSelect?: (api: NonNullable<CarouselApi>) => void;
   options?: CarouselOptions;
@@ -73,6 +75,8 @@ export type CarouselProps = Omit<ComponentProps<"section">, "className" | "style
 };
 
 export function Carousel({
+  className,
+  style,
   children,
   onSelect,
   options,
@@ -148,7 +152,11 @@ export function Carousel({
       <section
         aria-roledescription="carousel"
         {...props}
-        {...stylex.props(styles.root, slideShare !== undefined && styles.ratioRoot, xstyle)}
+        {...mergeStyles(
+          stylex.props(styles.root, slideShare !== undefined && styles.ratioRoot, xstyle),
+          className,
+          style,
+        )}
       >
         {children}
       </section>
@@ -156,43 +164,52 @@ export function Carousel({
   );
 }
 
-export type CarouselContentProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type CarouselContentProps = StyledProps<ComponentProps<"div">> & {
   xstyle?: stylex.StyleXStyles;
 };
 
 export function CarouselViewport({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style" | "ref"> & { xstyle?: stylex.StyleXStyles }) {
+}: StyledProps<Omit<ComponentProps<"div">, "ref">> & { xstyle?: stylex.StyleXStyles }) {
   const { viewportRef } = useCarousel();
-  return <div ref={viewportRef} {...props} {...stylex.props(styles.viewport, xstyle)} />;
+  return (
+    <div
+      ref={viewportRef}
+      {...props}
+      {...mergeStyles(stylex.props(styles.viewport, xstyle), className, style)}
+    />
+  );
 }
 
-export function CarouselContent({ xstyle, ...props }: CarouselContentProps) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+export function CarouselContent({ className, style, xstyle, ...props }: CarouselContentProps) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
-export type CarouselItemProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type CarouselItemProps = StyledProps<ComponentProps<"div">> & {
   xstyle?: stylex.StyleXStyles;
 };
 
-export function CarouselItem({ xstyle, ...props }: CarouselItemProps) {
+export function CarouselItem({ className, style, xstyle, ...props }: CarouselItemProps) {
   const { slideShare } = useCarousel();
   return (
     <div
       {...props}
-      {...stylex.props(
-        styles.item,
-        slideShare !== undefined && styles.ratioItem(slideShare),
-        xstyle,
+      {...mergeStyles(
+        stylex.props(styles.item, slideShare !== undefined && styles.ratioItem(slideShare), xstyle),
+        className,
+        style,
       )}
     />
   );
 }
 
-type CarouselControlProps = Omit<
-  ComponentProps<typeof Button>,
-  "children" | "onClick" | "className" | "style"
+type CarouselControlProps = StyledProps<
+  Omit<ComponentProps<typeof Button>, "children" | "onClick">
 >;
 
 export function CarouselPrevious({ disabled, xstyle, ...props }: CarouselControlProps) {

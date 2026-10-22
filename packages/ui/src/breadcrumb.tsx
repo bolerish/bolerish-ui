@@ -13,6 +13,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 
 const styles = stylex.create({
   root: { minWidth: 0 },
@@ -58,50 +60,74 @@ const styles = stylex.create({
 });
 
 export function Breadcrumb({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"nav">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <nav aria-label="Breadcrumb" {...props} {...stylex.props(styles.root, xstyle)} />;
+}: StyledProps<ComponentProps<"nav">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <nav
+      aria-label="Breadcrumb"
+      {...props}
+      {...mergeStyles(stylex.props(styles.root, xstyle), className, style)}
+    />
+  );
 }
 
 export function BreadcrumbList({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"ol">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <ol {...props} {...stylex.props(styles.list, xstyle)} />;
+}: StyledProps<ComponentProps<"ol">> & { xstyle?: stylex.StyleXStyles }) {
+  return <ol {...props} {...mergeStyles(stylex.props(styles.list, xstyle), className, style)} />;
 }
 
 export function BreadcrumbItem({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"li">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <li {...props} {...stylex.props(styles.item, xstyle)} />;
+}: StyledProps<ComponentProps<"li">> & { xstyle?: stylex.StyleXStyles }) {
+  return <li {...props} {...mergeStyles(stylex.props(styles.item, xstyle), className, style)} />;
 }
 
 export function BreadcrumbLink({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<"a">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
+}: StyledProps<ComponentProps<"a">> & { xstyle?: ControlPlacementStyles }) {
   return (
-    <a {...props} {...stylex.props(styles.link, xstyle)}>
+    <a {...props} {...mergeStyles(stylex.props(styles.link, xstyle), className, style)}>
       {children}
     </a>
   );
 }
 
 export function BreadcrumbPage({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <span aria-current="page" {...props} {...stylex.props(styles.page, xstyle)} />;
+}: StyledProps<ComponentProps<"span">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <span
+      aria-current="page"
+      {...props}
+      {...mergeStyles(stylex.props(styles.page, xstyle), className, style)}
+    />
+  );
 }
 
 export function BreadcrumbSeparator({
+  className,
+  style,
   xstyle,
   children,
   ...props
-}: Omit<ComponentProps<"li">, "className" | "style"> & { children?: ReactNode } & {
+}: StyledProps<ComponentProps<"li">> & { children?: ReactNode } & {
   xstyle?: ControlPlacementStyles;
 }) {
   return (
@@ -109,7 +135,7 @@ export function BreadcrumbSeparator({
       aria-hidden="true"
       role="presentation"
       {...props}
-      {...stylex.props(styles.separator, xstyle)}
+      {...mergeStyles(stylex.props(styles.separator, xstyle), className, style)}
     >
       {children ?? <CaretRightIcon />}
     </li>
@@ -117,11 +143,17 @@ export function BreadcrumbSeparator({
 }
 
 export function BreadcrumbEllipsis({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"span">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
+}: StyledProps<ComponentProps<"span">> & { xstyle?: ControlPlacementStyles }) {
   return (
-    <span aria-hidden="true" {...props} {...stylex.props(styles.ellipsis, xstyle)}>
+    <span
+      aria-hidden="true"
+      {...props}
+      {...mergeStyles(stylex.props(styles.ellipsis, xstyle), className, style)}
+    >
       …
     </span>
   );

@@ -3,6 +3,8 @@ import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 
 import type { ControlPlacementStyles } from "./styles/control-layout";
+import { mergeStyles } from "./styles/merge-styles";
+import type { StyledProps } from "./styles/merge-styles";
 import { typographyStyles } from "./typography";
 
 const styles = stylex.create({
@@ -79,13 +81,15 @@ const variantStyles = stylex.create({
 export type ContentRowSize = "default" | "sm" | "xs";
 export type ContentRowVariant = "default" | "muted" | "outline";
 
-export type ContentRowProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type ContentRowProps = StyledProps<ComponentProps<"div">> & {
   size?: ContentRowSize;
   variant?: ContentRowVariant;
   xstyle?: stylex.StyleXStyles;
 };
 
 export function ContentRow({
+  className,
+  style,
   size = "default",
   variant = "default",
   xstyle,
@@ -94,53 +98,98 @@ export function ContentRow({
   return (
     <div
       {...props}
-      {...stylex.props(styles.root, sizeStyles[size], variantStyles[variant], xstyle)}
+      {...mergeStyles(
+        stylex.props(styles.root, sizeStyles[size], variantStyles[variant], xstyle),
+        className,
+        style,
+      )}
     />
   );
 }
 
 export function ContentRowGroup({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.group, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return <div {...props} {...mergeStyles(stylex.props(styles.group, xstyle), className, style)} />;
 }
 
-export type ContentRowMediaProps = Omit<ComponentProps<"div">, "className" | "style"> & {
+export type ContentRowMediaProps = StyledProps<ComponentProps<"div">> & {
   variant?: "avatar" | "icon" | "image";
   xstyle?: stylex.StyleXStyles;
 };
 
-export function ContentRowMedia({ xstyle, variant = "icon", ...props }: ContentRowMediaProps) {
-  return <div {...props} {...stylex.props(styles.media, mediaVariantStyles[variant], xstyle)} />;
+export function ContentRowMedia({
+  className,
+  style,
+  xstyle,
+  variant = "icon",
+  ...props
+}: ContentRowMediaProps) {
+  return (
+    <div
+      {...props}
+      {...mergeStyles(
+        stylex.props(styles.media, mediaVariantStyles[variant], xstyle),
+        className,
+        style,
+      )}
+    />
+  );
 }
 
 export function ContentRowContent({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.content, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.content, xstyle), className, style)} />
+  );
 }
 
 export function ContentRowTitle({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
-  return <div {...props} {...stylex.props(typographyStyles.title, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: ControlPlacementStyles }) {
+  return (
+    <div
+      {...props}
+      {...mergeStyles(stylex.props(typographyStyles.title, xstyle), className, style)}
+    />
+  );
 }
 
 export function ContentRowDescription({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"p">, "className" | "style"> & { xstyle?: ControlPlacementStyles }) {
+}: StyledProps<ComponentProps<"p">> & { xstyle?: ControlPlacementStyles }) {
   return (
-    <p {...props} {...stylex.props(typographyStyles.description, styles.description, xstyle)} />
+    <p
+      {...props}
+      {...mergeStyles(
+        stylex.props(typographyStyles.description, styles.description, xstyle),
+        className,
+        style,
+      )}
+    />
   );
 }
 
 export function ContentRowActions({
+  className,
+  style,
   xstyle,
   ...props
-}: Omit<ComponentProps<"div">, "className" | "style"> & { xstyle?: stylex.StyleXStyles }) {
-  return <div {...props} {...stylex.props(styles.actions, xstyle)} />;
+}: StyledProps<ComponentProps<"div">> & { xstyle?: stylex.StyleXStyles }) {
+  return (
+    <div {...props} {...mergeStyles(stylex.props(styles.actions, xstyle), className, style)} />
+  );
 }
