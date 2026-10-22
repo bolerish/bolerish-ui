@@ -1,4 +1,4 @@
-import { spacingVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Spinner } from "@/components/ui/spinner";

@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, radiusVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, sizeVars, radiusVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { TokenRow } from "../../documentation/TokenRow";

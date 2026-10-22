@@ -1,17 +1,17 @@
 {
-  "name": "@nuee/docs",
+  "name": "@bolerish/docs",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
-    "build-storybook": "node scripts/build-guidelines.mjs && pnpm --filter @nuee/ui build && storybook build",
-    "storybook": "node scripts/build-guidelines.mjs && pnpm --filter @nuee/ui build && storybook dev -p 6006",
+    "build-storybook": "node scripts/build-guidelines.mjs && pnpm --filter @bolerish/ui build && storybook build",
+    "storybook": "node scripts/build-guidelines.mjs && pnpm --filter @bolerish/ui build && storybook dev -p 6006",
     "test:agent": "node scripts/build-guidelines.mjs --check && node --test scripts/agent.test.mjs",
-    "typecheck": "pnpm --filter @nuee/ui build && tsc --noEmit"
+    "typecheck": "pnpm --filter @bolerish/ui build && tsc --noEmit"
   },
   "dependencies": {
-    "@nuee/tokens": "workspace:*",
-    "@nuee/ui": "workspace:*",
+    "@bolerish/tokens": "workspace:*",
+    "@bolerish/ui": "workspace:*",
     "@phosphor-icons/react": "catalog:2026-08-27-stable",
     "@stylexjs/stylex": "catalog:2026-08-27-stable",
     "react": "catalog:2026-08-27-stable",

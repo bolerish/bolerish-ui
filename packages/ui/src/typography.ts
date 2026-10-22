@@ -1,4 +1,4 @@
-import { typo } from "@nuee/tokens/semantic.stylex";
+import { typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 export const typographyStyles = stylex.create({

@@ -1,5 +1,5 @@
-import { colorVars, radiusVars, sizeVars, spacingVars } from "@nuee/tokens/semantic.stylex";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@nuee/ui/tabs";
+import { colorVars, radiusVars, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@bolerish/ui/tabs";
 import { DocsContext } from "@storybook/addon-docs/blocks";
 import * as stylex from "@stylexjs/stylex";
 import { useContext, useEffect, useRef, useState, lazy, Suspense, type ComponentType } from "react";

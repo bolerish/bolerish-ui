@@ -1,4 +1,4 @@
-import { spacingVars } from "@nuee/tokens/semantic.stylex";
+import { spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Heading } from "@/components/ui/heading";

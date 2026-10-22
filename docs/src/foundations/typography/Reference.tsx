@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, typo } from "@nuee/tokens/semantic.stylex";
+import { colorVars, sizeVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { TokenRow } from "../../documentation/TokenRow";
@@ -45,7 +45,9 @@ export function Typography() {
         usage="Body text, form controls, and product UI"
         value={typo.fontFamilyBody}
       >
-        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyBody))}>@nuee/ui Aa Bb</span>
+        <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyBody))}>
+          @bolerish/ui Aa Bb
+        </span>
       </TokenRow>
       <TokenRow
         name="typo.fontFamilyHeading"
@@ -53,7 +55,7 @@ export function Typography() {
         value={typo.fontFamilyHeading}
       >
         <span {...stylex.props(styles.fontFamilySample(typo.fontFamilyHeading))}>
-          @nuee/ui Aa Bb
+          @bolerish/ui Aa Bb
         </span>
       </TokenRow>
       {fontSizeTokens.map(([name, value, usage]) => (
@@ -63,7 +65,7 @@ export function Typography() {
               styles.typeSample(value, typo.fontWeightRegular, typo.lineHeightNormal),
             )}
           >
-            @nuee/ui Aa Bb
+            @bolerish/ui Aa Bb
           </span>
         </TokenRow>
       ))}
@@ -81,7 +83,7 @@ export function Typography() {
       {fontWeightTokens.map(([name, value, usage]) => (
         <TokenRow key={name} name={`typo.${name}`} usage={usage} value={value}>
           <span {...stylex.props(styles.typeSample(typo.fontSizeSm, value, typo.lineHeightNormal))}>
-            @nuee/ui Aa Bb
+            @bolerish/ui Aa Bb
           </span>
         </TokenRow>
       ))}

@@ -1,4 +1,4 @@
-import { colorVars, motionVars, radiusVars, sizeVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, motionVars, radiusVars, sizeVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 

@@ -1,12 +1,12 @@
-# @nuee/ui
+# bolerish/ui
 
 A design system built with React and StyleX.
 
 ## Installation
 
 ```sh
-pnpm dlx @nuee/ui init
-pnpm dlx @nuee/ui add button
+pnpm dlx @bolerish/ui init
+pnpm dlx @bolerish/ui add button
 ```
 
 For Vite, use `init --vite` to configure the StyleX plugin and reset stylesheet.
@@ -25,15 +25,15 @@ export function SaveButton() {
 
 ## LLM guide
 
-See [the @nuee/ui usage guide for LLMs](docs/README.md#ai-coding-agent-references) for local imports,
+See [the @bolerish/ui usage guide for LLMs](docs/README.md#ai-coding-agent-references) for local imports,
 StyleX conventions, theme setup, and component API checks.
 
 ### Generated appearance defaults
 
 `.nuee.json` can configure initial appearance without editing each component:
 
-`init` links `./node_modules/@nuee/ui/configuration_schema.json` with `$schema`
-for editor completions and validation. Install `@nuee/ui` in the project to resolve
+`init` links `./node_modules/@bolerish/ui/configuration_schema.json` with `$schema`
+for editor completions and validation. Install `@bolerish/ui` in the project to resolve
 the schema, even when running the CLI with `bunx`. No separate schema file is generated. Rename an existing `nuee.json` to `.nuee.json`,
 then run `nuee init --force` to update the schema reference while preserving
 configuration. An old `.nuee.schema.json` can then be removed.
@@ -73,7 +73,7 @@ into `tokens` without deleting the originals or overwriting customized tokens.
 
 JSON is an installation default, not a live user-settings store. Runtime font
 choices override `--nuee-font-body` and `--nuee-font-heading` on the root; removing
-an override restores the generated default. Fonts are CSS family lists; @nuee/ui
+an override restores the generated default. Fonts are CSS family lists; @bolerish/ui
 does not download font files. JSON accepts `system` or `off` as the app default.
 Set `data-nuee-motion="system"`, `"on"` or `"off"` on `html` for the app end
 user's runtime choice. `system` follows OS reduced motion; `off` suppresses
@@ -84,8 +84,8 @@ App-controlled View Transitions and JavaScript scrolling must use the same
 resolved preference. Generated `MotionPreference` and `motionDefault` provide
 the runtime type and initial default. Remove the attribute to restore JSON's
 default; selecting `system` explicitly follows the OS even if JSON uses `off`.
-Package consumers can import `MotionPreference` from `@nuee/ui` and load
-`@nuee/ui/global.css`. Existing copied components need the updated motion
+Package consumers can import `MotionPreference` from `@bolerish/ui` and load
+`@bolerish/ui/global.css`. Existing copied components need the updated motion
 selectors from `add --force`, or a manual merge if their source was edited.
 
 Existing aliases, accessibility settings and edited source files are retained.

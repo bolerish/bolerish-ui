@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { registryItems, registryVersion } from "@nuee/registry";
+import { registryItems, registryVersion } from "@bolerish/registry";
 
 import { add, getMissingDependencies } from "../dist/add.js";
 import { configFileName, defaultConfig, readConfig } from "../dist/config.js";
@@ -227,7 +227,7 @@ test("every registry component uses the project's local StyleX tokens", async ()
         if (!file.endsWith(".tsx")) continue;
 
         const source = await readFile(join(projectDirectory, "src/components/ui", file), "utf8");
-        assert.doesNotMatch(source, /@nuee\/tokens/);
+        assert.doesNotMatch(source, /@bolerish\/tokens/);
       }
     }
   } finally {

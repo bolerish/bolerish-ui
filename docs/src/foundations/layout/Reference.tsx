@@ -5,9 +5,9 @@ import {
   spacingVars,
   typographyVars,
   radiusVars,
-} from "@nuee/tokens/semantic.stylex";
-import { Button } from "@nuee/ui/button";
-import { Input } from "@nuee/ui/input";
+} from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
+import { Input } from "@bolerish/ui/input";
 import { InfoIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 

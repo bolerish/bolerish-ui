@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { registryVersion } from "@nuee/registry";
+import { registryVersion } from "@bolerish/registry";
 
 import {
   configFileName,
@@ -45,7 +45,7 @@ test("readConfig explains how to replace an older configuration", async () => {
 
     await assert.rejects(
       () => readConfig(projectDirectory),
-      /uses an older format\. Run `nuee init --force`/,
+      /uses an older format\. Run `bolerish init --force`/,
     );
   } finally {
     await rm(projectDirectory, { recursive: true });

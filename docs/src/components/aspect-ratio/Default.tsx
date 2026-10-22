@@ -1,4 +1,4 @@
-import { spacingVars, typographyVars, colorVars, sizeVars } from "@nuee/tokens/semantic.stylex";
+import { spacingVars, typographyVars, colorVars, sizeVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { AspectRatio } from "@/components/ui/aspect-ratio";

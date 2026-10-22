@@ -1,4 +1,4 @@
-import { colorVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Banner, BannerContent, BannerTitle } from "@/components/ui/banner";

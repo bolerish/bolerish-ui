@@ -1,4 +1,4 @@
-import { sizeVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Label } from "@/components/ui/label";

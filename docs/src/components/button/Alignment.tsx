@@ -1,4 +1,4 @@
-import { sizeVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 

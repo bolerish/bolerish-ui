@@ -39,7 +39,7 @@ for (const [name, item] of Object.entries(registryItems)) {
         name,
         primaryExport,
         ...item,
-        dependencies: item.dependencies.filter((dependency) => dependency !== "@nuee/tokens"),
+        dependencies: item.dependencies.filter((dependency) => dependency !== "@bolerish/tokens"),
         files,
       },
       null,

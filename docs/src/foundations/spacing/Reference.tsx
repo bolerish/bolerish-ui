@@ -4,7 +4,7 @@ import {
   spacingRoleVars,
   spacingVars,
   radiusVars,
-} from "@nuee/tokens/semantic.stylex";
+} from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { TokenRow } from "../../documentation/TokenRow";

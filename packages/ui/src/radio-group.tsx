@@ -9,7 +9,7 @@ import {
   radiusVars,
   sizeVars,
   spacingVars,
-} from "@nuee/tokens/semantic.stylex";
+} from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 

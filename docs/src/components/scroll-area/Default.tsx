@@ -1,4 +1,4 @@
-import { typographyVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { typographyVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { ScrollArea, ScrollAreaViewport, ScrollAreaContent } from "@/components/ui/scroll-area";

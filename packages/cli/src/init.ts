@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join, relative, sep } from "node:path";
 import { createInterface } from "node:readline/promises";
 
-import { getFoundationFiles, registryVersion } from "@nuee/registry";
+import { getFoundationFiles, registryVersion } from "@bolerish/registry";
 
 import type { CliOptions } from "./arguments.js";
 import {
@@ -10,7 +10,7 @@ import {
   getDefaultAliases,
   hasConfig,
   readConfig,
-  type NueeConfig,
+  type BolerishConfig,
   resolveConfigAlias,
   writeConfig,
 } from "./config.js";
@@ -144,10 +144,10 @@ async function prepareResetImport(
 
 export async function prepareInitialization(projectDirectory: string, options: CliOptions) {
   if ((await hasConfig(projectDirectory)) && !options.force) {
-    throw new Error(".nuee.json already exists. Use --force to create it again.");
+    throw new Error("A configuration already exists. Use --force to migrate or refresh it.");
   }
 
-  let previousConfig: NueeConfig | undefined;
+  let previousConfig: BolerishConfig | undefined;
   if (await hasConfig(projectDirectory)) {
     try {
       previousConfig = await readConfig(projectDirectory);
@@ -244,5 +244,5 @@ export async function applyInitialization(
 export async function init(projectDirectory: string, options: CliOptions, shouldLog = true) {
   const plan = await prepareInitialization(projectDirectory, options);
   await applyInitialization(projectDirectory, plan);
-  if (shouldLog) console.log("✔ Initialized @nuee/ui.");
+  if (shouldLog) console.log("✔ Initialized bolerish/ui.");
 }

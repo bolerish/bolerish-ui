@@ -16,7 +16,7 @@ Pressing a button and completing a save need feedback at different times. Show t
 | Request pending        | A processing label and `Spinner`                                     | `<Spinner />`                                   |
 | Request completed      | Inline confirmation or Toast                                         | `toast.add({ title: "Changes saved." })`        |
 
-The color tokens belong to `colorVars`. A pressed response does not mean success. @nuee/ui `Button` has no shared pressed-scale effect; do not introduce one as if it were the default. Compare actual colors in [State](?path=/docs/foundations-state--docs).
+The color tokens belong to `colorVars`. A pressed response does not mean success. @bolerish/ui `Button` has no shared pressed-scale effect; do not introduce one as if it were the default. Compare actual colors in [State](?path=/docs/foundations-state--docs).
 
 | Situation                                | Recommended choice                         | Code                                                                                          |
 | ---------------------------------------- | ------------------------------------------ | --------------------------------------------------------------------------------------------- |

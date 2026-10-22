@@ -7,7 +7,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
-import { isRegistryItem } from "@nuee/registry";
+import { isRegistryItem } from "@bolerish/registry";
 
 import { add } from "../dist/add.js";
 import { configureVite, inspectViteConfig, removeReducedMotionStyles } from "../dist/source.js";
@@ -27,7 +27,7 @@ test("dry-run validates the same Vite initialization plan as add", async () => {
         /Could not find a Vite config file/,
       );
     }
-    await assert.rejects(access(join(directory, ".nuee.json")));
+    await assert.rejects(access(join(directory, ".bolerish.json")));
     await assert.rejects(access(join(directory, "src")));
   } finally {
     await rm(directory, { recursive: true, force: true });
@@ -63,7 +63,7 @@ for (const code of ["ENOTFOUND", "E404"]) {
         await mkdir(join(directory, "packages", name), { recursive: true });
         await writeFile(
           join(directory, "packages", name, "package.json"),
-          JSON.stringify({ name: `@nuee/${name}`, version: "0.0.0-test" }),
+          JSON.stringify({ name: `@bolerish/${name}`, version: "0.0.0-test" }),
         );
       }
       const bin = join(directory, "bin");

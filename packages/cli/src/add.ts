@@ -68,7 +68,7 @@ function resolveTargetPath(uiDirectory: string, filePath: string) {
 
 function replaceTokenImport(source: string, stylesAlias: string, tokenAlias: string) {
   return source
-    .replaceAll("@nuee/tokens/semantic.stylex", `${tokenAlias}/semantic.stylex`)
+    .replaceAll("@bolerish/tokens/semantic.stylex", `${tokenAlias}/semantic.stylex`)
     .replaceAll('"./styles/control-layout"', JSON.stringify(`${stylesAlias}/control-layout`));
 }
 

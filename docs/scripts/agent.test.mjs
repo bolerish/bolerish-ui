@@ -40,7 +40,7 @@ test("canonical agent entry points use English and link English references", asy
     "llms-full.txt",
     "llms-full.en.txt",
     "agent/SKILL.md",
-    "nuee-for-llms.md",
+    "bolerish-for-llms.md",
     "installation.md",
   ]) {
     const content = await readFile(new URL(name, root), "utf8");

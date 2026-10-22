@@ -1,7 +1,7 @@
 "use client";
 
 import { Field as FieldPrimitive } from "@base-ui/react/field";
-import { colorVars, spacingRoleVars, spacingVars, typo } from "@nuee/tokens/semantic.stylex";
+import { colorVars, spacingRoleVars, spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps } from "react";
 

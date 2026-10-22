@@ -1,4 +1,4 @@
-import { spacingVars, typo } from "@nuee/tokens/semantic.stylex";
+import { spacingVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Toggle } from "@/components/ui/toggle";

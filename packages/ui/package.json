@@ -1,5 +1,5 @@
 {
-  "name": "@nuee/ui",
+  "name": "@bolerish/ui",
   "version": "0.9.1",
   "private": false,
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/nueexyz/ui.git"
   },
   "bin": {
-    "nuee": "./dist/cli.js"
+    "bolerish": "./dist/cli.js"
   },
   "files": [
     "configuration_schema.json",
@@ -81,14 +81,14 @@
     "access": "public"
   },
   "scripts": {
-    "build": "pnpm --filter @nuee/cli build && node --experimental-strip-types scripts/build.ts && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
+    "build": "pnpm --filter @bolerish/cli build && node --experimental-strip-types scripts/build.ts && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
     "prepack": "pnpm build",
     "test": "pnpm build && node --experimental-strip-types --test test/*.test.ts",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.cli.json --noEmit && pnpm build && tsc -p tsconfig.test.json"
   },
   "dependencies": {
-    "@nuee/cli": "workspace:*",
-    "@nuee/tokens": "workspace:*"
+    "@bolerish/cli": "workspace:*",
+    "@bolerish/tokens": "workspace:*"
   },
   "devDependencies": {
     "@base-ui/react": "catalog:2026-08-27-stable",

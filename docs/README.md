@@ -1,4 +1,4 @@
-# @nuee/ui documentation
+# @bolerish/ui documentation
 
 ## Component examples
 
@@ -13,7 +13,7 @@ These files supply localized user documentation. Agent entry points, API links
 and full LLM guidelines use the canonical `*.en.md` sources exclusively.
 
 The development and build scripts generate `public/llms.txt`, `llms-full.txt`,
-`llms-full.en.txt`, `nuee-for-llms.md`, and per-topic Markdown. Both full LLM
+`llms-full.en.txt`, `bolerish-for-llms.md`, and per-topic Markdown. Both full LLM
 files contain identical English content; Korean per-topic files remain available
 for the user documentation. To regenerate them during development,
 run this from `docs/`:
@@ -63,6 +63,6 @@ or README, then regenerate; do not maintain a second API catalog by hand.
 The generated skill is a static downloadable entry, not an installed plugin or
 MCP service. Consumers must still inspect their installed local source/version.
 
-Run `pnpm --filter @nuee/docs test:agent` after generating docs to check freshness,
+Run `pnpm --filter @bolerish/docs test:agent` after generating docs to check freshness,
 registry coverage, reference links and canonical source contents. The UI consumer
 Vite test also compiles the README examples against installed source APIs.

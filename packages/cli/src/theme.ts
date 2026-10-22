@@ -1,12 +1,12 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 
-import { defaultConfig, validateConfig, type NueeTheme } from "./config.js";
+import { defaultConfig, validateConfig, type BolerishTheme } from "./config.js";
 
 const marker = "// Nuee generated theme: ";
 const cssMarker = "/* Nuee generated theme: ";
 
-export function getThemeFiles(theme: NueeTheme = {}) {
+export function getThemeFiles(theme: BolerishTheme = {}) {
   const defaults = {
     density: theme.density ?? "default",
     motion: theme.motion ?? "system",
@@ -71,7 +71,7 @@ ${suppress}
 }
 
 /** Refresh untouched generated files; preserve any consumer edits even with --force. */
-export async function prepareThemeFiles(directory: string, theme: NueeTheme | undefined) {
+export async function prepareThemeFiles(directory: string, theme: BolerishTheme | undefined) {
   const files: { path: string; source: string; flag: "w" | "wx" }[] = [];
   for (const file of getThemeFiles(theme)) {
     const path = join(directory, file.name);
@@ -81,7 +81,7 @@ export async function prepareThemeFiles(directory: string, theme: NueeTheme | un
       const prefix = file.name.endsWith(".css") ? cssMarker : marker;
       if (!firstLine.startsWith(prefix)) continue;
       const metadata = firstLine.slice(prefix.length).replace(/ \*\/$/, "");
-      let previous: NueeTheme | undefined;
+      let previous: BolerishTheme | undefined;
       try {
         previous = validateConfig({ ...defaultConfig, theme: JSON.parse(metadata) }).theme;
       } catch {

@@ -201,7 +201,7 @@
   "## 4. Add a component": "## 4. 컴포넌트 추가",
   "Add Button using the paths configured above.": "앞에서 설정한 경로에 Button을 추가합니다.",
   "Import the generated component into a page. This example uses the alias from step 2.": "생성한 컴포넌트를 페이지에서 가져옵니다. 다음 예시는 2단계에서 설정한 별칭을 사용합니다.",
-  "Start your application with its existing development command. Confirm that the button appears with @nuee/ui styling and shows a focus indicator when reached with Tab. If it appears unstyled, check the StyleX build integration and reset stylesheet import.": "프로젝트에서 사용하는 개발 서버 명령을 실행합니다. 버튼에 @nuee/ui 스타일이 적용되고 Tab으로 이동했을 때 초점 표시가 보이는지 확인합니다. 스타일이 적용되지 않으면 StyleX 빌드 설정과 초기화 스타일시트의 import를 확인합니다.",
+  "Start your application with its existing development command. Confirm that the button appears with @bolerish/ui styling and shows a focus indicator when reached with Tab. If it appears unstyled, check the StyleX build integration and reset stylesheet import.": "프로젝트에서 사용하는 개발 서버 명령을 실행합니다. 버튼에 @bolerish/ui 스타일이 적용되고 Tab으로 이동했을 때 초점 표시가 보이는지 확인합니다. 스타일이 적용되지 않으면 StyleX 빌드 설정과 초기화 스타일시트의 import를 확인합니다.",
   "Display a persistent notice with a title and supporting description.": "계속 보여 줄 안내를 제목과 보조 설명으로 구성합니다.",
   "## Palette": "## 팔레트",
   "## Interaction colors": "## 상호작용 색상",

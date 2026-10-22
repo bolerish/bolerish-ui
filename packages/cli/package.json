@@ -1,5 +1,5 @@
 {
-  "name": "@nuee/cli",
+  "name": "@bolerish/cli",
   "version": "0.9.1",
   "private": false,
   "repository": {
@@ -7,7 +7,7 @@
     "url": "https://github.com/nueexyz/ui.git"
   },
   "bin": {
-    "nuee": "./dist/cli.js"
+    "bolerish": "./dist/cli.js"
   },
   "files": [
     "dist"
@@ -23,7 +23,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "pnpm --filter @nuee/registry build && tsc -p tsconfig.build.json",
+    "build": "pnpm --filter @bolerish/registry build && tsc -p tsconfig.build.json",
     "prepack": "pnpm build",
     "test": "pnpm build && node --experimental-strip-types --test test/*.test.ts",
     "typecheck": "tsc --noEmit && pnpm build && tsc -p tsconfig.test.json"
@@ -31,7 +31,7 @@
   "dependencies": {
     "@babel/parser": "7.29.8",
     "@babel/types": "7.29.8",
-    "@nuee/registry": "workspace:*",
+    "@bolerish/registry": "workspace:*",
     "get-tsconfig": "^4.14.3",
     "jsonc-parser": "^3.3.1"
   },

@@ -123,7 +123,7 @@ for (const [key, value] of [
 test("invalid component names cannot initialize a project", () =>
   fixture(async (directory) => {
     await assert.rejects(add(directory, "not-a-real-component", { "skip-dependencies": true }));
-    await assert.rejects(access(join(directory, ".nuee.json")));
+    await assert.rejects(access(join(directory, ".bolerish.json")));
     await assert.rejects(access(join(directory, "src/styles")));
   }));
 test("invalid package manifest cannot create component files", () =>

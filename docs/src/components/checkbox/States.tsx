@@ -1,4 +1,4 @@
-import { sizeVars, spacingVars, typographyVars, colorVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars, spacingVars, typographyVars, colorVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Checkbox } from "@/components/ui/checkbox";

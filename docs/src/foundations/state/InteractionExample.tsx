@@ -4,7 +4,7 @@ import {
   sizeVars,
   spacingVars,
   typographyVars,
-} from "@nuee/tokens/semantic.stylex";
+} from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useState } from "react";
 

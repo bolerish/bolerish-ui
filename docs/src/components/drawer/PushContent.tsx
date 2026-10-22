@@ -1,4 +1,4 @@
-import { sizeVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useState } from "react";
 

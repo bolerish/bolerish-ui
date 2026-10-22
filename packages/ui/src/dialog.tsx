@@ -10,7 +10,7 @@ import {
   sizeVars,
   spacingVars,
   typographyVars,
-} from "@nuee/tokens/semantic.stylex";
+} from "@bolerish/tokens/semantic.stylex";
 import { XIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";

@@ -1,6 +1,5 @@
 "use client";
 
-import { DayButton, DayPicker, type DayButtonProps, type DayPickerProps } from "@daypicker/react";
 import {
   colorVars,
   motionVars,
@@ -8,7 +7,8 @@ import {
   sizeVars,
   spacingVars,
   typographyVars,
-} from "@nuee/tokens/semantic.stylex";
+} from "@bolerish/tokens/semantic.stylex";
+import { DayButton, DayPicker, type DayButtonProps, type DayPickerProps } from "@daypicker/react";
 import * as stylex from "@stylexjs/stylex";
 
 const styles = stylex.create({

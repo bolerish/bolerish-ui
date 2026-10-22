@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { isRegistryItem, parseRegistryItem } from "@nuee/registry";
+import { isRegistryItem, parseRegistryItem } from "@bolerish/registry";
 
 import { add } from "../dist/add.js";
 import { resolveComponent } from "../dist/registry.js";

@@ -31,15 +31,15 @@ export async function run(arguments_ = process.argv.slice(2)) {
         await newComponent(projectDirectory, positionals[0]);
         break;
       default:
-        console.log(`@nuee/ui CLI
+        console.log(`bolerish/ui CLI
 
 Usage:
-  nuee init [--ui <path>] [--styles <path>] [--vite]
-  nuee add <component...> [--skip-dependencies] [--dry-run]
-  nuee doctor
-  nuee list
-  nuee docs [component]
-  nuee new <kebab-case-name>`);
+  bolerish init [--ui <path>] [--styles <path>] [--vite]
+  bolerish add <component...> [--skip-dependencies] [--dry-run]
+  bolerish doctor
+  bolerish list
+  bolerish docs [component]
+  bolerish new <kebab-case-name>`);
         break;
     }
 

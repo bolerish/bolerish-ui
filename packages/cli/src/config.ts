@@ -4,17 +4,17 @@ import { isAbsolute, join, relative, resolve } from "node:path";
 import { createPathsMatcher, parseTsconfig } from "get-tsconfig";
 import { parse, type ParseError } from "jsonc-parser";
 
-export const configFileName = ".nuee.json";
+export const configFileName = ".bolerish.json";
 
-export type NueeTheme = {
+export type BolerishTheme = {
   density?: "default" | "compact" | number;
   unit?: "rem" | "px";
   motion?: "system" | "off";
   fonts?: { body?: string; heading?: string };
 };
 
-export type NueeConfig = {
-  theme?: NueeTheme;
+export type BolerishConfig = {
+  theme?: BolerishTheme;
   version?: string;
   components?: Record<string, string | null>;
   accessibility: {
@@ -26,7 +26,11 @@ export type NueeConfig = {
   };
 };
 
-export const defaultConfig: NueeConfig = {
+/** Compatibility names for integrations using the previous CLI types. */
+export type NueeConfig = BolerishConfig;
+export type NueeTheme = BolerishTheme;
+
+export const defaultConfig: BolerishConfig = {
   accessibility: {
     respectReducedMotion: true,
   },
@@ -51,22 +55,19 @@ function getAliasPrefix(paths: Record<string, string[]> | undefined) {
   return undefined;
 }
 
-export async function hasConfig(projectDirectory: string) {
-  try {
-    await access(resolve(projectDirectory, configFileName));
-    return true;
-  } catch (error) {
-    if (!isNotFoundError(error)) throw error;
+async function findConfigFileName(projectDirectory: string) {
+  for (const name of [configFileName, ".nuee.json", "nuee.json"]) {
     try {
-      await access(resolve(projectDirectory, "nuee.json"));
-    } catch (legacyError) {
-      if (!isNotFoundError(legacyError)) throw legacyError;
-      return false;
+      await access(resolve(projectDirectory, name));
+      return name;
+    } catch (error) {
+      if (!isNotFoundError(error)) throw error;
     }
-    throw new Error(
-      "Rename nuee.json to .nuee.json, then run `nuee init --force` to enable completions.",
-    );
   }
+}
+
+export async function hasConfig(projectDirectory: string) {
+  return (await findConfigFileName(projectDirectory)) !== undefined;
 }
 
 function ensureRelativePath(projectDirectory: string, path: string, name: string) {
@@ -77,9 +78,9 @@ function ensureRelativePath(projectDirectory: string, path: string, name: string
   }
 }
 
-export function validateConfig(config: unknown): NueeConfig {
+export function validateConfig(config: unknown): BolerishConfig {
   if (typeof config !== "object" || config === null || Array.isArray(config)) {
-    throw new Error("Configure .nuee.json as an object.");
+    throw new Error("Configure .bolerish.json as an object.");
   }
   const candidate = config as {
     accessibility?: { respectReducedMotion?: unknown };
@@ -92,7 +93,7 @@ export function validateConfig(config: unknown): NueeConfig {
   };
   if (candidate.paths || candidate.tokens) {
     throw new Error(
-      "This .nuee.json uses an older format. Run `nuee init --force` to create alias-based configuration.",
+      "This .bolerish.json uses an older format. Run `bolerish init --force` to create alias-based configuration.",
     );
   }
   if (!candidate.aliases || typeof candidate.aliases !== "object") {
@@ -131,7 +132,7 @@ export function validateConfig(config: unknown): NueeConfig {
   ) {
     throw new Error("Configure components as component names mapped to versions or null.");
   }
-  let theme: NueeTheme | undefined;
+  let theme: BolerishTheme | undefined;
   if (candidate.theme !== undefined) {
     if (!candidate.theme || typeof candidate.theme !== "object" || Array.isArray(candidate.theme)) {
       throw new Error("Configure theme as an object.");
@@ -158,7 +159,7 @@ export function validateConfig(config: unknown): NueeConfig {
     if (value.motion !== undefined && value.motion !== "system" && value.motion !== "off") {
       throw new Error("Configure theme.motion as system or off.");
     }
-    let fonts: NueeTheme["fonts"];
+    let fonts: BolerishTheme["fonts"];
     if (value.fonts !== undefined) {
       if (!value.fonts || typeof value.fonts !== "object" || Array.isArray(value.fonts)) {
         throw new Error("Configure theme.fonts as an object.");
@@ -175,9 +176,11 @@ export function validateConfig(config: unknown): NueeConfig {
       }
     }
     theme = {
-      ...(value.unit !== undefined ? { unit: value.unit as NueeTheme["unit"] } : {}),
-      ...(value.density !== undefined ? { density: value.density as NueeTheme["density"] } : {}),
-      ...(value.motion !== undefined ? { motion: value.motion as NueeTheme["motion"] } : {}),
+      ...(value.unit !== undefined ? { unit: value.unit as BolerishTheme["unit"] } : {}),
+      ...(value.density !== undefined
+        ? { density: value.density as BolerishTheme["density"] }
+        : {}),
+      ...(value.motion !== undefined ? { motion: value.motion as BolerishTheme["motion"] } : {}),
       ...(fonts !== undefined ? { fonts } : {}),
     };
   }
@@ -207,26 +210,26 @@ function isNotFoundError(error: unknown) {
 }
 
 export async function readConfig(projectDirectory: string) {
-  await hasConfig(projectDirectory);
-  const configPath = resolve(projectDirectory, configFileName);
+  const filename = (await findConfigFileName(projectDirectory)) ?? configFileName;
+  const configPath = resolve(projectDirectory, filename);
 
   try {
     const config = JSON.parse(await readFile(configPath, "utf8"));
     return validateConfig(config);
   } catch (error) {
     if (isNotFoundError(error)) {
-      throw new Error(".nuee.json was not found. Run `nuee init` first.");
+      throw new Error(".bolerish.json was not found. Run `bolerish init` first.");
     }
     throw error;
   }
 }
 
-export async function writeConfig(projectDirectory: string, config: NueeConfig) {
+export async function writeConfig(projectDirectory: string, config: BolerishConfig) {
   const validatedConfig = validateConfig(config);
   const configPath = resolve(projectDirectory, configFileName);
   await writeFile(
     configPath,
-    `${JSON.stringify({ $schema: "./node_modules/@nuee/ui/configuration_schema.json", ...validatedConfig }, null, 2)}\n`,
+    `${JSON.stringify({ $schema: "./node_modules/@bolerish/ui/configuration_schema.json", ...validatedConfig }, null, 2)}\n`,
     "utf8",
   );
   return configPath;

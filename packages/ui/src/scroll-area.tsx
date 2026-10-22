@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
-import { colorVars, motionVars, radiusVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, motionVars, radiusVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import type { ComponentProps, ReactNode } from "react";
 

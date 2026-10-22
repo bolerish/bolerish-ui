@@ -1,4 +1,4 @@
-import { spacingVars } from "@nuee/tokens/semantic.stylex";
+import { spacingVars } from "@bolerish/tokens/semantic.stylex";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import * as stylex from "@stylexjs/stylex";
 import { type ComponentType, lazy, Suspense } from "react";

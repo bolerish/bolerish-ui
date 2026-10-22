@@ -1,11 +1,11 @@
-import { colorPaletteGroups } from "@nuee/tokens/color-palette";
+import { colorPaletteGroups } from "@bolerish/tokens/color-palette";
 import {
   colorVars,
   radiusVars,
   sizeVars,
   spacingVars,
   typographyVars,
-} from "@nuee/tokens/semantic.stylex";
+} from "@bolerish/tokens/semantic.stylex";
 import { DocsContext } from "@storybook/addon-docs/blocks";
 import * as stylex from "@stylexjs/stylex";
 import { useContext, useLayoutEffect, useRef, useState } from "react";

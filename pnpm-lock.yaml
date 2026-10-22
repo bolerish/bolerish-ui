@@ -59,10 +59,10 @@ importers:
 
   docs:
     dependencies:
-      '@nuee/tokens':
+      '@bolerish/tokens':
         specifier: workspace:*
         version: link:../packages/tokens
-      '@nuee/ui':
+      '@bolerish/ui':
         specifier: workspace:*
         version: link:../packages/ui
       '@phosphor-icons/react':
@@ -129,7 +129,7 @@ importers:
       '@babel/types':
         specifier: 7.29.8
         version: 7.29.8
-      '@nuee/registry':
+      '@bolerish/registry':
         specifier: workspace:*
         version: link:../registry
       get-tsconfig:
@@ -166,10 +166,10 @@ importers:
 
   packages/ui:
     dependencies:
-      '@nuee/cli':
+      '@bolerish/cli':
         specifier: workspace:*
         version: link:../cli
-      '@nuee/tokens':
+      '@bolerish/tokens':
         specifier: workspace:*
         version: link:../tokens
     devDependencies:

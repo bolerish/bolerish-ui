@@ -14,4 +14,4 @@ Use `Select` for a predefined value when users can recognize the option by readi
 
 Name the field independently of its current value. Use a placeholder to prompt a choice, not to replace the label. Choose a default only when it is a valid, useful starting value; do not silently select consent or a costly option.
 
-> `SelectTrigger` has no @nuee/ui `size` or `variant` prop. Keep its built-in control sizing instead of passing `Button` props to it.
+> `SelectTrigger` has no @bolerish/ui `size` or `variant` prop. Keep its built-in control sizing instead of passing `Button` props to it.

@@ -1,4 +1,4 @@
-import { typographyVars, sizeVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { typographyVars, sizeVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Separator } from "@/components/ui/separator";

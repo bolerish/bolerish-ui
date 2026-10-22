@@ -1,6 +1,6 @@
 "use client";
 
-import { sizeVars, spacingRoleVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars, spacingRoleVars } from "@bolerish/tokens/semantic.stylex";
 import { CaretLeftIcon, CaretRightIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 import useEmblaCarousel from "embla-carousel-react";

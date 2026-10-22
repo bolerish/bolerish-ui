@@ -1,4 +1,4 @@
-import { colorVars, sizeVars, spacingVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { colorVars, sizeVars, spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
 

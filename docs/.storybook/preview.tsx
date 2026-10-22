@@ -3,8 +3,8 @@ import {
   darkShadowTheme,
   lightColorTheme,
   lightShadowTheme,
-} from "@nuee/tokens/themes.stylex";
-import { colorVars, spacingVars, typo } from "@nuee/tokens/tokens.stylex";
+} from "@bolerish/tokens/themes.stylex";
+import { colorVars, spacingVars, typo } from "@bolerish/tokens/tokens.stylex";
 import {
   DocsContainer,
   TableOfContents,
@@ -12,7 +12,7 @@ import {
 } from "@storybook/addon-docs/blocks";
 import type { Preview } from "@storybook/react-vite";
 
-import "@nuee/ui/global.css";
+import "@bolerish/ui/global.css";
 import "./preview.css";
 import * as stylex from "@stylexjs/stylex";
 import { type ReactNode, useLayoutEffect, useEffect, useState } from "react";

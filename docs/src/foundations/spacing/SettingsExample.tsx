@@ -1,4 +1,4 @@
-import { layoutVars, spacingRoleVars, typo } from "@nuee/tokens/semantic.stylex";
+import { layoutVars, spacingRoleVars, typo } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Button } from "@/components/ui/button";
@@ -48,7 +48,7 @@ export default function SettingsExample() {
           </Field>
           <Field>
             <FieldLabel>Project</FieldLabel>
-            <Input placeholder="@nuee/ui" />
+            <Input placeholder="@bolerish/ui" />
           </Field>
         </FieldGroup>
         <div {...stylex.props(styles.row)}>

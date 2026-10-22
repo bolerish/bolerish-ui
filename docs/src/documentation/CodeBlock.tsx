@@ -4,8 +4,8 @@ import {
   sizeVars,
   spacingVars,
   typographyVars,
-} from "@nuee/tokens/semantic.stylex";
-import { Button } from "@nuee/ui/button";
+} from "@bolerish/tokens/semantic.stylex";
+import { Button } from "@bolerish/ui/button";
 import { CheckIcon, CopyIcon } from "@phosphor-icons/react";
 import { DocsContext } from "@storybook/addon-docs/blocks";
 import * as stylex from "@stylexjs/stylex";

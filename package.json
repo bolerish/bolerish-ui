@@ -1,17 +1,17 @@
 {
-  "name": "nuee-ui",
+  "name": "bolerish-ui",
   "version": "0.9.1",
   "private": true,
-  "description": "@nuee/ui design system monorepo.",
+  "description": "@bolerish/ui design system monorepo.",
   "license": "Apache-2.0",
   "author": "Minyeong Jeong",
   "type": "module",
   "scripts": {
-    "build:docs": "pnpm --filter @nuee/docs build-storybook",
-    "build:ui": "pnpm --filter @nuee/ui build",
+    "build:docs": "pnpm --filter @bolerish/docs build-storybook",
+    "build:ui": "pnpm --filter @bolerish/ui build",
     "check": "pnpm lint && pnpm format:check && pnpm typecheck",
-    "cli": "pnpm --filter @nuee/ui build && node packages/ui/dist/cli.js",
-    "dev:docs": "pnpm --filter @nuee/docs storybook",
+    "cli": "pnpm --filter @bolerish/ui build && node packages/ui/dist/cli.js",
+    "dev:docs": "pnpm --filter @bolerish/docs storybook",
     "format:check": "pnpm oxfmt --check .",
     "format:write": "pnpm oxfmt .",
     "lint": "pnpm oxlint .",
@@ -19,9 +19,9 @@
     "prepare": "lefthook install",
     "release": "pnpm check && pnpm test && pnpm build:ui && pnpm pack:check && pnpm build:docs && node --experimental-strip-types scripts/publish.ts",
     "test": "pnpm test:cli && pnpm test:ui",
-    "test:cli": "pnpm --filter @nuee/cli test",
-    "test:ui": "pnpm --filter @nuee/ui test",
-    "typecheck": "pnpm --filter @nuee/tokens typecheck && pnpm --filter @nuee/registry build && pnpm --filter @nuee/cli typecheck && pnpm --filter @nuee/ui typecheck && pnpm --filter @nuee/docs typecheck"
+    "test:cli": "pnpm --filter @bolerish/cli test",
+    "test:ui": "pnpm --filter @bolerish/ui test",
+    "typecheck": "pnpm --filter @bolerish/tokens typecheck && pnpm --filter @bolerish/registry build && pnpm --filter @bolerish/cli typecheck && pnpm --filter @bolerish/ui typecheck && pnpm --filter @bolerish/docs typecheck"
   },
   "devDependencies": {
     "lefthook": "2.1.10",

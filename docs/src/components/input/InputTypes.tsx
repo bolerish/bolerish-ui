@@ -1,4 +1,4 @@
-import { sizeVars, spacingVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { sizeVars, spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import { Input } from "@/components/ui/input";

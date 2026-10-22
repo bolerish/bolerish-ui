@@ -14,6 +14,6 @@ test("docs prints the component installation contract", () => {
     console.log = write;
   }
 
-  assert.match(output.join("\n"), /pnpm dlx @nuee\/ui add button/);
+  assert.match(output.join("\n"), /pnpm dlx @bolerish\/ui add button/);
   assert.match(output.join("\n"), /@base-ui\/react/);
 });

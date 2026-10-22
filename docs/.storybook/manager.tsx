@@ -103,7 +103,7 @@ addons.setConfig({
   },
   theme: create({
     base: "light",
-    brandTitle: "@nuee/ui",
+    brandTitle: "@bolerish/ui",
     brandUrl: "?path=/docs/getting-started--docs",
     colorPrimary: "#171717",
     colorSecondary: "#171717",

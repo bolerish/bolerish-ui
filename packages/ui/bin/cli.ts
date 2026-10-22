@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { run } from "@nuee/cli";
+import { run } from "@bolerish/cli";
 
 if (!(await run())) process.exitCode = 1;

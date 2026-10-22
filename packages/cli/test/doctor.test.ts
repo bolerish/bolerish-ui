@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 
-import { registryVersion } from "@nuee/registry";
+import { registryVersion } from "@bolerish/registry";
 
 import { defaultConfig, writeConfig } from "../dist/config.js";
 import { doctor } from "../dist/doctor.js";
@@ -46,7 +46,7 @@ for (const version of [registryVersion, "0.0.0", undefined, null]) {
         ...defaultConfig,
         components: { button: version ?? null },
       });
-      const configPath = join(directory, ".nuee.json");
+      const configPath = join(directory, ".bolerish.json");
       const before = await readFile(configPath, "utf8");
       const messages: string[] = [];
       t.mock.method(console, "log", (message: string) => messages.push(message));

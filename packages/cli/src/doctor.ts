@@ -1,7 +1,7 @@
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-import { registryVersion } from "@nuee/registry";
+import { registryVersion } from "@bolerish/registry";
 
 import { hasConfig, readConfig, resolveConfigAlias } from "./config.js";
 import { inspectViteConfig } from "./source.js";
@@ -95,8 +95,8 @@ async function inspectLocalConfiguration(projectDirectory: string): Promise<Chec
   if (!(await hasConfig(projectDirectory))) {
     return [
       {
-        detail: "Run `nuee init` to configure UI and styles aliases.",
-        name: ".nuee.json",
+        detail: "Run `bolerish init` to configure UI and styles aliases.",
+        name: ".bolerish.json",
         status: "warn",
       },
     ];
@@ -119,7 +119,7 @@ async function inspectLocalConfiguration(projectDirectory: string): Promise<Chec
             status: "pass",
           }
         : {
-            detail: `Create local token sources in ${config.aliases.styles} with \`nuee init --force\`.`,
+            detail: `Create local token sources in ${config.aliases.styles} with \`bolerish init --force\`.`,
             name: "Local tokens",
             status: "warn",
           };
@@ -171,7 +171,7 @@ export async function doctor(projectDirectory: string) {
   } else {
     checks.push({
       detail:
-        "It is installed automatically by the first `nuee add`. Use --skip-dependencies to skip installation.",
+        "It is installed automatically by the first `bolerish add`. Use --skip-dependencies to skip installation.",
       name: "StyleX runtime",
       status: "warn",
     });
@@ -186,7 +186,7 @@ export async function doctor(projectDirectory: string) {
   } else {
     checks.push({
       detail:
-        "Could not verify a Vite StyleX compiler. Other bundlers require manual verification. Vite users can run `nuee init --vite`.",
+        "Could not verify a Vite StyleX compiler. Other bundlers require manual verification. Vite users can run `bolerish init --vite`.",
       name: "StyleX compiler",
       status: "warn",
     });

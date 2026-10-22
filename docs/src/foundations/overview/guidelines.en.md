@@ -1,6 +1,6 @@
-# @nuee/ui Foundations
+# @bolerish/ui Foundations
 
-@nuee/ui shares recurring interface decisions so people can predict what to do next. Compose components and tokens around a consistent view of task priority, information relationships, and recovery from failure.
+@bolerish/ui shares recurring interface decisions so people can predict what to do next. Compose components and tokens around a consistent view of task priority, information relationships, and recovery from failure.
 
 ## Work in this order
 

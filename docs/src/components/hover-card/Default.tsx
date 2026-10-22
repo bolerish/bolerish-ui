@@ -1,4 +1,4 @@
-import { spacingVars, typographyVars } from "@nuee/tokens/semantic.stylex";
+import { spacingVars, typographyVars } from "@bolerish/tokens/semantic.stylex";
 import * as stylex from "@stylexjs/stylex";
 
 import {
@@ -28,7 +28,7 @@ export default function Default() {
         <HoverCardContent align="start">
           <ContentRow size="sm">
             <ContentRowContent>
-              <ContentRowTitle>@nuee/ui</ContentRowTitle>
+              <ContentRowTitle>@bolerish/ui</ContentRowTitle>
               <ContentRowDescription>
                 A calm, consistent design system for product experiences
               </ContentRowDescription>

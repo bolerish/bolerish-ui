@@ -1,4 +1,4 @@
-import { typographyVars, spacingVars } from "@nuee/tokens/semantic.stylex";
+import { typographyVars, spacingVars } from "@bolerish/tokens/semantic.stylex";
 import { FolderIcon } from "@phosphor-icons/react";
 import * as stylex from "@stylexjs/stylex";
 

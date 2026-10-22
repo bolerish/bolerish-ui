@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "@nuee/ui configuration",
+  "title": "@bolerish/ui configuration",
   "type": "object",
   "required": ["aliases"],
   "additionalProperties": false,
@@ -56,7 +56,7 @@
     "theme": {
       "type": "object",
       "additionalProperties": false,
-      "description": "Generated defaults. Apply changes with nuee init --force.",
+      "description": "Generated defaults. Apply changes with bolerish init --force.",
       "properties": {
         "density": {
           "anyOf": [

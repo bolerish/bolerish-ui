@@ -13,7 +13,7 @@ const execFile = promisify(execFileCallback);
 const cliPath = fileURLToPath(new URL("../dist/cli.js", import.meta.url));
 const testDirectory = dirname(fileURLToPath(import.meta.url));
 
-test("@nuee/ui CLI builds every added component in a Vite app", async () => {
+test("@bolerish/ui CLI builds every added component in a Vite app", async () => {
   const projectDirectory = await mkdtemp(join(testDirectory, ".vite-app-"));
 
   try {
@@ -94,8 +94,8 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
       projectDirectory,
     ]);
     const packageJson = JSON.parse(await readFile(join(projectDirectory, "package.json"), "utf8"));
-    assert.equal(packageJson.dependencies?.["@nuee/ui"], undefined);
-    assert.equal(packageJson.devDependencies?.["@nuee/ui"], undefined);
+    assert.equal(packageJson.dependencies?.["@bolerish/ui"], undefined);
+    assert.equal(packageJson.devDependencies?.["@bolerish/ui"], undefined);
     const { stdout } = await execFile(process.execPath, [cliPath, "list"]);
     const componentNames = stdout.trim().split("\n");
     await execFile(process.execPath, [
@@ -182,7 +182,7 @@ test("@nuee/ui CLI builds every added component in a Vite app", async () => {
   }
 });
 
-test("@nuee/ui CLI keeps the UI package out of a generated Vite app", async () => {
+test("@bolerish/ui CLI keeps the UI package out of a generated Vite app", async () => {
   const projectDirectory = await mkdtemp(join(testDirectory, ".vite-app-"));
 
   try {
@@ -241,8 +241,8 @@ test("@nuee/ui CLI keeps the UI package out of a generated Vite app", async () =
     ]);
 
     const packageJson = JSON.parse(await readFile(join(projectDirectory, "package.json"), "utf8"));
-    assert.equal(packageJson.dependencies?.["@nuee/ui"], undefined);
-    assert.equal(packageJson.devDependencies?.["@nuee/ui"], undefined);
+    assert.equal(packageJson.dependencies?.["@bolerish/ui"], undefined);
+    assert.equal(packageJson.devDependencies?.["@bolerish/ui"], undefined);
     await access(join(projectDirectory, "src/components/ui/message.tsx"));
     await build({ configFile: join(projectDirectory, "vite.config.ts"), root: projectDirectory });
     await access(join(projectDirectory, "dist/index.html"));
@@ -251,8 +251,8 @@ test("@nuee/ui CLI keeps the UI package out of a generated Vite app", async () =
   }
 });
 
-test("@nuee/ui CLI initializes a project and adds a card", async () => {
-  const projectDirectory = await mkdtemp(join(tmpdir(), "nuee-ui-cli-"));
+test("@bolerish/ui CLI initializes a project and adds a card", async () => {
+  const projectDirectory = await mkdtemp(join(tmpdir(), "bolerish-ui-cli-"));
 
   try {
     await writeFile(
