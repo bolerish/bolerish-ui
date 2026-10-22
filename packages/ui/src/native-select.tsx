@@ -34,7 +34,7 @@ const styles = stylex.create({
     transitionTimingFunction: motionVars.easingStandard,
     width: "100%",
     ":hover:not(:disabled):not(:user-invalid):not(:focus-visible)": {
-      borderColor: colorVars.strokeAction,
+      borderColor: colorVars.strokeStrong,
     },
     ":focus-visible": {
       borderColor: colorVars.strokeFocus,

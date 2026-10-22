@@ -41,11 +41,11 @@ export const colorVars = stylex.defineVars({
   fgFeedbackError: colorPalette.redFeedback,
   strokeDefault: colorPalette.fog,
   /** Emphasized grouping boundary, including menu separators. */
-  strokeControl: colorPalette.steel,
+  strokeControl: colorPalette.neutral450,
   strokeStrong: colorPalette.steel,
   /** Exact insertion position during drag; pair with a position label. */
   strokeDropIndicator: colorPalette.carbon,
-  strokeFocus: colorPalette.carbon,
+  strokeFocus: colorPalette.iron,
   strokeAction: colorPalette.carbon,
   strokeFeedbackInfo: colorPalette.blueMuted,
   strokeFeedbackSuccess: colorPalette.greenMuted,
@@ -60,7 +60,7 @@ export const colorVars = stylex.defineVars({
   /** Raised selection inside bgSubtle; pair with fgPrimary and shadowVars.subtle. */
   interactionSelected: colorPalette.white,
   interactionDisabled: colorPalette.alphaBlack8,
-  interactionFocus: colorPalette.carbon,
+  interactionFocus: colorPalette.iron,
 });
 
 export const spacingVars = stylex.defineVars({

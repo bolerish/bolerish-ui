@@ -32,7 +32,7 @@ const styles = stylex.create({
     width: "100%",
     "::placeholder": { color: colorVars.fgTertiary },
     ":hover:not(:disabled):not([aria-invalid='true']):not(:user-invalid):not(:focus-visible)": {
-      borderColor: colorVars.strokeAction,
+      borderColor: colorVars.strokeStrong,
     },
     ":focus-visible": {
       borderColor: colorVars.strokeFocus,

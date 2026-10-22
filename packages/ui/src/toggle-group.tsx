@@ -78,7 +78,7 @@ const styles = stylex.create({
 
   softPressed: {
     backgroundColor: colorVars.interactionSelected,
-    boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeAction}`,
+    boxShadow: `inset 0 0 0 ${sizeVars.stroke} ${colorVars.strokeStrong}`,
   },
   itemPressed: {
     backgroundColor: colorVars.bgSelected,

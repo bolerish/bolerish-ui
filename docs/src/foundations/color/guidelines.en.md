@@ -48,11 +48,13 @@ Use subtly cool Zinc grays for surfaces, text, boundaries and primary actions. E
 | Chalk    | #F4F4F5 | Light canvas, inverse text and action         |
 | Fog      | #E4E4E7 | Light grouping and decorative dividers        |
 | Silver   | #A1A1AA | Inverse descriptions                          |
-| Steel    | #71717A | Control boundaries, unavailable text          |
+| Steel    | #71717A | Strong boundaries, unavailable text           |
 | Iron     | #52525B | Light descriptions, inverse dividers          |
 | Graphite | #27272A | Primary hover, inverse surfaces               |
 | Carbon   | #09090B | Light text and primary action                 |
 
-Use `strokeControl` (Steel) for inputs on White or Chalk. Use `strokeAction` for selected outlines on grouped Fog surfaces. `strokeDefault` is decorative. Text targets 4.5:1 and essential control/focus boundaries target 3:1 in the tested pairings.
+Use `strokeControl` (Zinc 450, #85858F) for inputs on White or Chalk. Use `strokeAction` for selected outlines on grouped Fog surfaces. `strokeDefault` is decorative. Text targets 4.5:1 and essential control/focus boundaries target 3:1 in the tested pairings.
 
 The dark canvas uses Zinc 900 (`#18181B`) with Graphite (`#27272A`) surfaces for a gentler tone step. Existing information/success/warning/error colors remain unchanged. Primary buttons use `bgActionPrimaryHover` on hover; other state layers retain their established roles.
+
+Resting control boundaries use Zinc 450 in light mode and Steel in dark mode. Decorative dark dividers use Zinc 700. Hover uses `strokeStrong`; focus uses Iron/Silver, preserving contrast for essential boundaries, focus and errors.

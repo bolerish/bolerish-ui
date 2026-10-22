@@ -86,4 +86,4 @@ Tabs는 연결된 패널을 전환하고 Toggle Group은 값을 선택합니다.
 아래 예제는 실제 목록 이동과 동일한 “앞에 이동” 버튼을 제공합니다. 외부 파일과
 목록 밖의 드래그는 받지 않으며, 원래 항목에 놓으면 순서가 바뀌지 않습니다.
 
-주요 버튼은 모노크롬 호버에 `bgActionPrimaryHover`를 사용합니다. Segmented Tabs와 soft Toggle Group은 선택 면에 `strokeAction` 경계를 더해 묶음 배경과 반전 표면에서도 선택을 구별합니다.
+주요 버튼은 모노크롬 호버에 `bgActionPrimaryHover`를 사용합니다. Segmented Tabs와 soft Toggle Group은 선택 면에 `strokeStrong` 경계를 더해 묶음 배경과 반전 표면에서도 선택을 구별합니다.

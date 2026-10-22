@@ -82,4 +82,4 @@ menus for keyboard and touch users. Clear temporary indicators on cancel and com
 The example below moves real items and offers equivalent “Move before” buttons. It ignores external
 files and drags from outside the list; dropping on the source does not change the order.
 
-Primary buttons use `bgActionPrimaryHover` for their monochrome hover state. Segmented Tabs and soft Toggle Group add a `strokeAction` inset boundary to the selected surface so selection remains identifiable on grouped and inverse backgrounds.
+Primary buttons use `bgActionPrimaryHover` for their monochrome hover state. Segmented Tabs and soft Toggle Group add a `strokeStrong` inset boundary to the selected surface so selection remains identifiable on grouped and inverse backgrounds.

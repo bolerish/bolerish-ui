@@ -128,7 +128,7 @@ for (const mode of ["light", "dark"]) {
         assert.ok(ratio >= 3, `${boundary}/${surface}: ${ratio.toFixed(2)} < 3`);
       }
     }
-    // Steel controls sit on canvas/surface; grouped Fog uses the action boundary.
+    // Essential controls sit on canvas/surface; grouped selections use stronger boundaries.
     assert.ok(contrast(rgba(theme.strokeAction), rgba(theme.bgSubtle)) >= 3);
     assert.ok(contrast(rgba(theme.strokeAction), rgba(theme.interactionSelected)) >= 3);
   });

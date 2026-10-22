@@ -38,7 +38,7 @@ const styles = stylex.create({
       color: colorVars.fgTertiary,
     },
     ":hover:not(:disabled):not([aria-invalid='true']):not(:user-invalid):not(:focus-visible)": {
-      borderColor: colorVars.strokeAction,
+      borderColor: colorVars.strokeStrong,
     },
     ":focus-visible": {
       outlineColor: colorVars.strokeFocus,

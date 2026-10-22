@@ -38,10 +38,10 @@ export const lightColorTheme = stylex.createTheme(colorVars, {
   fgFeedbackWarning: colorPalette.yellowFeedback,
   fgFeedbackError: colorPalette.redFeedback,
   strokeDefault: colorPalette.fog,
-  strokeControl: colorPalette.steel,
+  strokeControl: colorPalette.neutral450,
   strokeStrong: colorPalette.steel,
   strokeDropIndicator: colorPalette.carbon,
-  strokeFocus: colorPalette.carbon,
+  strokeFocus: colorPalette.iron,
   strokeAction: colorPalette.carbon,
   strokeFeedbackInfo: colorPalette.blueMuted,
   strokeFeedbackSuccess: colorPalette.greenMuted,
@@ -54,7 +54,7 @@ export const lightColorTheme = stylex.createTheme(colorVars, {
   interactionSolidPressed: colorPalette.alphaWhite20,
   interactionSelected: colorPalette.white,
   interactionDisabled: colorPalette.alphaBlack8,
-  interactionFocus: colorPalette.carbon,
+  interactionFocus: colorPalette.iron,
 });
 
 export const darkColorTheme = stylex.createTheme(colorVars, {
@@ -91,11 +91,11 @@ export const darkColorTheme = stylex.createTheme(colorVars, {
   fgFeedbackSuccess: colorPalette.greenContrastDark,
   fgFeedbackWarning: colorPalette.yellowContrastDark,
   fgFeedbackError: colorPalette.redContrastDark,
-  strokeDefault: colorPalette.iron,
+  strokeDefault: colorPalette.neutral700,
   strokeControl: colorPalette.steel,
   strokeStrong: colorPalette.steel,
   strokeDropIndicator: colorPalette.chalk,
-  strokeFocus: colorPalette.chalk,
+  strokeFocus: colorPalette.silver,
   strokeAction: colorPalette.chalk,
   strokeFeedbackInfo: colorPalette.blueMutedDark,
   strokeFeedbackSuccess: colorPalette.greenMutedDark,
@@ -108,7 +108,7 @@ export const darkColorTheme = stylex.createTheme(colorVars, {
   interactionSolidPressed: colorPalette.alphaBlack20,
   interactionSelected: colorPalette.graphite,
   interactionDisabled: colorPalette.neutral700,
-  interactionFocus: colorPalette.chalk,
+  interactionFocus: colorPalette.silver,
 });
 
 export const lightShadowTheme = stylex.createTheme(shadowVars, {
